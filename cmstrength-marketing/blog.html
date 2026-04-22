@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Blog | Bench Specialization & Strength Training Guides</title>
+  <meta
+    name="description"
+    content="Blog posts about adaptive strength training, periodization, and programming insights from Center Mass Strength."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-elevated: #0d1320;
+      --bg-card: rgba(13, 17, 23, 0.4);
+      --border: rgba(56, 189, 248, 0.08);
+      --text: #ffffff;
+      --muted: #8899a6;
+      --blue: #0ea5e9;
+      --blue-glow: rgba(14, 165, 233, 0.12);
+      --radius: 24px;
+      --font: 'Inter', sans-serif;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 40px var(--blue-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 140px 0 100px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      margin-bottom: 24px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .card:hover {
+      border-color: rgba(14, 165, 233, 0.2);
+      background: rgba(13, 17, 23, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .card-date {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-cta {
+      color: var(--blue);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-cta::after {
+      content: "→";
+      transition: transform 0.2s;
+    }
+
+    .card:hover .card-cta::after {
+      transform: translateX(4px);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+      position: relative;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-brand .brand {
+      font-size: 1.2rem;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 250px;
+    }
+
+    .footer-heading {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue);
+    }
+
+    .footer-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(14, 165, 233, 0.08);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer-social a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-social a:hover {
+      color: var(--blue);
+    }
+
+    .footer-social a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-head {
+        margin-bottom: 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 0 1rem;
+        height: 70px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        padding: 100px 0 80px;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      footer {
+        padding: 60px 0 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .footer-social {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <header>
+    <nav class="nav shell">
+      <a class="brand" href="/landing.html">Center <span>Mass</span> Strength</a>
+      <div class="nav-links">
+        <a href="/landing.html#programs">Programs</a>
+        <a href="/landing.html#engines">Engines</a>
+        <a href="/blog.html">Blog</a>
+      </div>
+      <a class="btn btn-primary" href="/app">Launch App</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <span class="eyebrow">Training Insights</span>
+        <h1>The Strength Blog</h1>
+        <p>
+          Deep dives into adaptive programming, periodization, and the science behind getting stronger.
+          Written by people who actually lift.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="section-head">
+          <span class="tag">Latest Posts</span>
+          <h2>What We're Writing About</h2>
+        </div>
+
+        <div class="grid">
+          <a href="/blog/program-comparison.html" class="card">
+            <span class="tag">Programs</span>
+            <h3>Program Comparison</h3>
+            <p>
+              Understand the differences between Bench Specialization, Jacked & Strong, and SBD. Find the program that matches your goals.
+            </p>
+            <span class="card-cta">Read Post</span>
+          </a>
+
+          <a href="/blog/macrocycle-explained.html" class="card">
+            <span class="tag">Programming</span>
+            <h3>How Macrocycles Work</h3>
+            <p>
+              The science behind competition-date aware periodization. Why working backward from meet day changes everything.
+            </p>
+            <span class="card-cta">Read Post</span>
+          </a>
+
+          <a href="/blog/submaximal-training.html" class="card">
+            <span class="tag">Training</span>
+            <h3>Why You Don't Max Out All The Time</h3>
+            <p>
+              Heavy weights build fatigue that sabotages progress. Learn why submaximal training, managed fatigue, and strategic periodization build real strength.
+            </p>
+            <span class="card-cta">Read Post</span>
+          </a>
+
+          <a href="/blog/heavy-lifting-after-50.html" class="card">
+            <span class="tag">Training After 50</span>
+            <h3>Heavy Lifting After 50: Your Real Recovery Cycle</h3>
+            <p>
+              Stop comparing your cycle to a 25-year-old's. Understand the 5 phases older lifters actually move through between sessions — and program accordingly.
+            </p>
+            <span class="card-cta">Read Post</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-content">
+      <!-- FOOTER GRID -->
+      <div class="footer-grid">
+        <!-- COLUMN 1: BRAND + CTA -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <a href="/landing.html" class="brand">Center <span>Mass</span> Strength</a>
+            <p class="footer-tagline">Adaptive programming for serious lifters.</p>
+          </div>
+          <a href="/app" class="btn btn-primary" style="width: fit-content;">Open App</a>
+        </div>
+
+        <!-- COLUMN 2: PRODUCT -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="/landing.html#programs">Programs</a></li>
+            <li><a href="/landing.html#engines">Engines</a></li>
+            <li><a href="/landing.html#faq">FAQ</a></li>
+            <li><a href="/app">Launch App</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3: COMPANY -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/support">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 4: LEGAL -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy.html">Privacy</a></li>
+            <li><a href="/terms.html">Terms</a></li>
+            <li><a href="/cookies">Cookies</a></li>
+            <li><a href="/status">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOOTER BOTTOM -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Center Mass Strength. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://twitter.com/centermassstr" title="Twitter" aria-label="Twitter">𝕏</a>
+          <a href="https://instagram.com/centermassstr" title="Instagram" aria-label="Instagram">IG</a>
+          <a href="https://discord.gg/centermassstr" title="Discord" aria-label="Discord">DC</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

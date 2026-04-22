@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Center Mass Strength</title>
+  <meta name="description" content="Get in touch with Center Mass Strength. Questions about adaptive strength programming, pricing, or features? We'd love to hear from you." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .section-divider {
+      @apply my-16 border-t border-zinc-800;
+    }
+
+    .contact-grid {
+      @apply grid grid-cols-1 md:grid-cols-3 gap-8 my-12;
+    }
+
+    .contact-card {
+      @apply bg-zinc-900/30 border border-zinc-800 rounded-lg p-6;
+    }
+
+    .contact-icon {
+      @apply text-2xl mb-4;
+    }
+
+    .contact-title {
+      @apply font-black uppercase text-white mb-2;
+    }
+
+    .contact-text {
+      @apply text-zinc-400 text-sm;
+    }
+
+    /* Form Styling */
+    .form-container {
+      @apply mt-12 bg-zinc-900/30 border border-zinc-800 rounded-xl p-8 md:p-12;
+    }
+
+    .form-group {
+      @apply mb-6;
+    }
+
+    .form-group label {
+      @apply block text-white font-semibold mb-3 text-sm uppercase tracking-wide;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      @apply w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition;
+    }
+
+    .form-group textarea {
+      @apply resize-none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      @apply text-zinc-500;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      @apply border-red-500 ring-2 ring-red-500/20;
+    }
+
+    .form-row {
+      @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+    }
+
+    .submit-btn {
+      @apply w-full bg-red-600 hover:bg-red-700 text-white font-black uppercase py-4 px-8 rounded-lg transition-all active:scale-95 tracking-wider cursor-pointer;
+    }
+
+    .submit-btn:disabled {
+      @apply bg-zinc-700 cursor-not-allowed opacity-50;
+    }
+
+    .form-message {
+      @apply mt-6 p-4 rounded-lg text-center font-semibold;
+    }
+
+    .form-message.success {
+      @apply bg-green-600/20 border border-green-600/30 text-green-400;
+    }
+
+    .form-message.error {
+      @apply bg-red-600/20 border border-red-600/30 text-red-400;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <article class="min-h-screen">
+
+    <!-- Hero Header -->
+    <div class="bg-gradient-to-b from-zinc-900 via-black to-black py-16 px-6 mb-12">
+      <div class="max-w-3xl mx-auto">
+        <span class="text-red-600 text-xs font-black uppercase tracking-widest block mb-4">Get in Touch</span>
+        <h1 class="text-5xl md:text-6xl font-black italic uppercase leading-tight mb-6">
+          Contact Us
+        </h1>
+        <p class="text-lg text-zinc-400">
+          Have questions about our programs or training philosophy? We'd love to hear from you.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-6 pb-20">
+
+      <!-- Contact Methods -->
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div class="contact-title">Email</div>
+          <div class="contact-text">
+            <a href="mailto:hello@centermassstrength.com" class="text-red-500 hover:text-red-400">
+              hello@centermassstrength.com
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">🐦</div>
+          <div class="contact-title">Social</div>
+          <div class="contact-text">
+            Follow us on <a href="https://twitter.com/centermassstr" class="text-red-500 hover:text-red-400">Twitter</a> and <a href="https://instagram.com/centermassstr" class="text-red-500 hover:text-red-400">Instagram</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <div class="contact-title">Discord</div>
+          <div class="contact-text">
+            Join our community on <a href="https://discord.gg/centermassstr" class="text-red-500 hover:text-red-400">Discord</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- Contact Form -->
+      <div>
+        <h2 class="text-3xl font-black uppercase italic mb-2 text-white">Send us a Message</h2>
+        <p class="text-zinc-400 mb-8">Fill out the form below and we'll get back to you as soon as possible.</p>
+
+        <div class="form-container">
+          <form id="contactForm" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your full name"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="your@email.com"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="What is this about?"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell us more..."
+                rows="6"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Send Message
+            </button>
+
+            <div id="formMessage" class="form-message" style="display: none;"></div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-zinc-800 mt-20">
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <a href="/landing.html" class="text-xl font-black italic text-white mb-2 block">
+            Center <span class="text-blue-500">Mass</span> Strength
+          </a>
+          <p class="text-zinc-500 text-sm">Adaptive programming for serious lifters.</p>
+        </div>
+
+        <div>
+          <h4 class="font-black uppercase text-xs text-zinc-400 mb-4 tracking-widest">Product</h4>
+          <ul class="space-y-2 text-sm text-zinc-500">
+            <li><a href="/landing.html#programs" class="hover:text-blue-500">Programs</a></li>
+            <li><a href="/landing.html#engines" class="hover:text-blue-500">Engines</a></li>
+            <li><a href="/landing.html#faq" class="hover:text-blue-500">FAQ</a></li>
+            <li><a href="/app" class="hover:text-blue-500">Launch App</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-black uppercase text-xs text-zinc-400 mb-4 tracking-widest">Company</h4>
+          <ul class="space-y-2 text-sm text-zinc-500">
+            <li><a href="/about" class="hover:text-blue-500">About</a></li>
+            <li><a href="/blog.html" class="hover:text-blue-500">Blog</a></li>
+            <li><a href="/contact.html" class="hover:text-blue-500">Contact</a></li>
+            <li><a href="/support" class="hover:text-blue-500">Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-black uppercase text-xs text-zinc-400 mb-4 tracking-widest">Legal</h4>
+          <ul class="space-y-2 text-sm text-zinc-500">
+            <li><a href="/privacy.html" class="hover:text-blue-500">Privacy</a></li>
+            <li><a href="/terms.html" class="hover:text-blue-500">Terms</a></li>
+            <li><a href="/cookies" class="hover:text-blue-500">Cookies</a></li>
+            <li><a href="/status" class="hover:text-blue-500">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-zinc-600 text-sm">&copy; 2026 Center Mass Strength. All rights reserved.</p>
+        <div class="flex gap-6 text-zinc-500">
+          <a href="https://twitter.com/centermassstr" class="hover:text-blue-500">𝕏</a>
+          <a href="https://instagram.com/centermassstr" class="hover:text-blue-500">IG</a>
+          <a href="https://discord.gg/centermassstr" class="hover:text-blue-500">DC</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      try {
+        // Send to Supabase Edge Function (you'll need to create this)
+        const response = await fetch('/api/send-contact-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          // Success
+          formMessage.classList.remove('error');
+          formMessage.classList.add('success');
+          formMessage.textContent = '✓ Message sent! We\'ll get back to you soon.';
+          formMessage.style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error('Failed to send message');
+        }
+      } catch (error) {
+        // Error
+        formMessage.classList.remove('success');
+        formMessage.classList.add('error');
+        formMessage.textContent = '✗ Something went wrong. Please try again or email us directly.';
+        formMessage.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
+    });
+  </script>
+
+</body>
+</html>                                                                                        

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program Comparison | Center Mass Strength Blog</title>
+  <meta
+    name="description"
+    content="Compare Bench Specialization, Jacked & Strong, and SBD programs to find the right fit for your training goals."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg: #050505;
+      --blue: #0ea5e9;
+      --muted: #8899a6;
+      --border: rgba(56, 189, 248, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.12), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shell { width: min(1200px, calc(100% - 3rem)); margin: 0 auto; }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 40px rgba(14, 165, 233, 0.12);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    /* HEADER */
+    .post-header {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .breadcrumb a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .post-header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      font-style: italic;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .post-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .post-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 0;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+      position: relative;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-brand .brand {
+      font-size: 1.2rem;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 250px;
+    }
+
+    .footer-heading {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue);
+    }
+
+    .footer-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(14, 165, 233, 0.08);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer-social a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-social a:hover {
+      color: var(--blue);
+    }
+
+    .footer-social a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 0 1rem;
+        height: 70px;
+      }
+
+      .post-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .post-content {
+        padding: 40px 0;
+      }
+
+      footer {
+        padding: 60px 0 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .footer-social {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <header>
+    <nav class="nav shell">
+      <a class="brand" href="/landing.html">Center <span>Mass</span> Strength</a>
+      <div class="nav-links">
+        <a href="/landing.html#programs">Programs</a>
+        <a href="/landing.html#engines">Engines</a>
+        <a href="/blog.html">Blog</a>
+      </div>
+      <a class="btn btn-primary" href="/app">Launch App</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="post-header">
+      <div class="shell">
+        <div class="breadcrumb">
+          <a href="/blog.html">Blog</a> / Program Comparison
+        </div>
+        <h1>Program Comparison</h1>
+        <p class="post-meta">Understand the differences between Bench Specialization, Jacked & Strong, and SBD</p>
+      </div>
+    </section>
+
+    <section class="post-content">
+      <div id="root"></div>
+
+      <script type="text/babel">
+        const Check = ({ className = "" }) => (
+            <svg className={`w-5 h-5 ${className}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+        );
+
+        const ProgramComparison = () => {
+            const programs = [
+                {
+                    id: 'bench-spec',
+                    name: 'Bench Specialization',
+                    subtitle: 'Pressing strength focused',
+                    description: 'For lifters who want pressing strength to move now.',
+                    blockStructure: [
+                        { name: 'Volume Block', weeks: 5, focus: 'Hypertrophy & technique' },
+                        { name: 'Strength Block', weeks: 4, focus: 'Intensity & max effort' },
+                        { name: 'Test Week', weeks: 1, focus: 'Competition lift' }
+                    ],
+                    features: [
+                        'Lockout, mid-range, and off-chest weakness logic',
+                        'Bench-centered block sequencing',
+                        'Accessory selection that serves the main lift',
+                        'Weak-point-aware exercise swaps',
+                        'Productive weeks with deload timing'
+                    ],
+                    ideal_for: 'Competitive powerlifters, bench press specialists'
+                },
+                {
+                    id: 'jacked-strong',
+                    name: 'Jacked & Strong',
+                    subtitle: 'Size + strength balance',
+                    description: 'Measurable barbell progress with hypertrophy work.',
+                    blockStructure: [
+                        { name: 'Hypertrophy Block', weeks: 5, focus: 'Volume & muscle building' },
+                        { name: 'Strength Block', weeks: 4, focus: 'Intensity & density' },
+                        { name: 'Deload', weeks: 1, focus: 'Recovery & prep' }
+                    ],
+                    features: [
+                        'Five-week hypertrophy blocks',
+                        'Four-week strength blocks',
+                        'Machine and accessory work that supports recovery',
+                        'Size and numbers at the same time',
+                        'Balanced approach to aesthetics and performance'
+                    ],
+                    ideal_for: 'Lifters wanting both strength gains and muscle growth'
+                },
+                {
+                    id: 'sbd',
+                    name: 'SBD',
+                    subtitle: 'Full meet prep',
+                    description: 'Built around a macrocycle engine that works backward from meet day.',
+                    blockStructure: [
+                        { name: 'Hypertrophy Block', weeks: 6, focus: 'Work capacity building' },
+                        { name: 'Strength Block', weeks: 5, focus: 'Intensity & competition lifts' },
+                        { name: 'Peak Block', weeks: 3, focus: 'Max effort singles' },
+                        { name: 'Taper', weeks: 2, focus: 'Meet day readiness' }
+                    ],
+                    features: [
+                        'Competition-date aware block sequencing',
+                        'Peak and taper logic that respects time to platform',
+                        'Single home for squat, bench, deadlift',
+                        'Meet-focused progression',
+                        'Calculated backward from meet day',
+                        'Macrocycle engine optimized for competition'
+                    ],
+                    ideal_for: 'Full powerlifters preparing for competition'
+                }
+            ];
+
+            const [selectedProgram, setSelectedProgram] = React.useState('bench-spec');
+            const selected = programs.find(p => p.id === selectedProgram);
+
+            return (
+                <div>
+                    {/* PROGRAM TABS */}
+                    <div className="mb-12">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+                            {programs.map((program) => (
+                                <button
+                                    key={program.id}
+                                    onClick={() => setSelectedProgram(program.id)}
+                                    className={`p-6 rounded-xl border-2 transition-all text-left ${
+                                        selectedProgram === program.id
+                                            ? 'border-blue-500 bg-blue-500/10'
+                                            : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
+                                    }`}
+                                >
+                                    <h3 className="text-lg font-bold mb-1">{program.name}</h3>
+                                    <p className="text-sm text-slate-400">{program.subtitle}</p>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* DETAILED VIEW */}
+                    {selected && (
+                        <div>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                                {/* LEFT: Program Details */}
+                                <div>
+                                    <div className="mb-8">
+                                        <h2 className="text-3xl font-bold mb-2">{selected.name}</h2>
+                                        <p className="text-slate-400 text-lg">{selected.description}</p>
+                                    </div>
+
+                                    {/* Block Structure */}
+                                    <div className="mb-8">
+                                        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                                            <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                            Block Structure
+                                        </h3>
+                                        <div className="space-y-3">
+                                            {selected.blockStructure.map((block, idx) => (
+                                                <div key={idx} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                                                    <div className="flex justify-between items-start mb-2">
+                                                        <h4 className="font-semibold">{block.name}</h4>
+                                                        <span className="text-sm bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full">
+                                                            {block.weeks}w
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-sm text-slate-400">{block.focus}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Ideal For */}
+                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                                        <p className="text-sm text-slate-300">
+                                            <span className="font-semibold text-blue-400">Best for:</span> {selected.ideal_for}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT: Features */}
+                                <div>
+                                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                        What's Included
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {selected.features.map((feature, idx) => (
+                                            <div key={idx} className="flex gap-3 items-start">
+                                                <Check className="text-blue-500 flex-shrink-0" />
+                                                <span className="text-slate-300">{feature}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* CTA */}
+                                    <div className="mt-8">
+                                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                                            Start With {selected.name}
+                                        </button>
+                                        <p className="text-center text-sm text-slate-500 mt-3">
+                                            Free during beta. No credit card required.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* COMPARISON TABLE */}
+                            <div className="mt-16">
+                                <h2 className="text-3xl font-bold mb-8">Quick Comparison</h2>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm border-collapse">
+                                        <thead>
+                                            <tr className="border-b border-slate-700">
+                                                <th className="text-left py-4 px-4 font-semibold text-slate-300">Feature</th>
+                                                {programs.map(p => (
+                                                    <th key={p.id} className="text-center py-4 px-4 font-semibold text-slate-300">
+                                                        {p.name}
+                                                    </th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="border-b border-slate-700/50">
+                                                <td className="py-4 px-4 text-slate-400">Focus</td>
+                                                <td className="text-center py-4 px-4">Bench Press</td>
+                                                <td className="text-center py-4 px-4">Size + Strength</td>
+                                                <td className="text-center py-4 px-4">Full Meet</td>
+                                            </tr>
+                                            <tr className="border-b border-slate-700/50">
+                                                <td className="py-4 px-4 text-slate-400">Typical Duration</td>
+                                                <td className="text-center py-4 px-4">12 weeks</td>
+                                                <td className="text-center py-4 px-4">12 weeks</td>
+                                                <td className="text-center py-4 px-4">Adaptive*</td>
+                                            </tr>
+                                            <tr className="border-b border-slate-700/50">
+                                                <td className="py-4 px-4 text-slate-400">Weak Point Logic</td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td className="py-4 px-4 text-slate-400">Readiness Adaptation</td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                                <td className="text-center py-4 px-4"><Check className="text-blue-500 mx-auto" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p className="text-xs text-slate-500 mt-4">
+                                    *SBD duration is adaptive based on your competition date. CMS calculates the macrocycle backward from meet day to ensure optimal periodization.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ProgramComparison />);
+      </script>
+
+      <div class="reading-width mx-auto px-6 pb-12">
+        <div class="section-divider"></div>
+        <div class="content-section">
+          <h2>Ready to Pick Your Program?</h2>
+          <p>Each program is built on the same adaptive engine, but optimized for different training goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/landing.html#programs" style="color: var(--blue); font-weight: 600; text-decoration: underline;">CMS has a program tailored to your goals.</a></p>
+          <p>Start training with real algorithms today.</p>
+        </div>
+
+        <!-- Blog Navigation -->
+        <div style="border-top: 1px solid #27272a; margin-top: 3rem; padding-top: 3rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Previous Post -->
+            <a href="/blog/macrocycle-explained.html" style="text-decoration: none; color: inherit;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: #71717a; font-size: 0.875rem; margin-bottom: 0.75rem; transition: color 0.2s;">
+                <span>←</span>
+                <span>Previous Post</span>
+              </div>
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: #fff; transition: color 0.2s; line-height: 1.4;">
+                What is a Macrocycle?
+              </h4>
+            </a>
+
+            <!-- Next Post -->
+            <a href="/blog/submaximal-training.html" style="text-decoration: none; color: inherit; text-align: right;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; color: #71717a; font-size: 0.875rem; margin-bottom: 0.75rem; transition: color 0.2s;">
+                <span>Next Post</span>
+                <span>→</span>
+              </div>
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: #fff; transition: color 0.2s; line-height: 1.4;">
+                Why You Don't Max Out All The Time
+              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-content">
+      <!-- FOOTER GRID -->
+      <div class="footer-grid">
+        <!-- COLUMN 1: BRAND + CTA -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <a href="/landing.html" class="brand">Center <span>Mass</span> Strength</a>
+            <p class="footer-tagline">Adaptive programming for serious lifters.</p>
+          </div>
+          <a href="/app" class="btn btn-primary" style="width: fit-content;">Open App</a>
+        </div>
+
+        <!-- COLUMN 2: PRODUCT -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="/landing.html#programs">Programs</a></li>
+            <li><a href="/landing.html#engines">Engines</a></li>
+            <li><a href="/landing.html#faq">FAQ</a></li>
+            <li><a href="/app">Launch App</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3: COMPANY -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="mailto:hello@centermassstrength.com">Contact</a></li>
+            <li><a href="/support">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 4: LEGAL -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/cookies">Cookies</a></li>
+            <li><a href="/status">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOOTER BOTTOM -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Center Mass Strength. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://twitter.com/centermassstr" title="Twitter" aria-label="Twitter">𝕏</a>
+          <a href="https://instagram.com/centermassstr" title="Instagram" aria-label="Instagram">IG</a>
+          <a href="https://discord.gg/centermassstr" title="Discord" aria-label="Discord">DC</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

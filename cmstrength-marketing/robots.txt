@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /app
+Disallow: /app/
+Disallow: /.env
+Disallow: /.env.local
+
+Sitemap: https://centermassstrenght.vercel.app/sitemap.xml

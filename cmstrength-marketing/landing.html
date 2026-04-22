@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS: Adaptive Powerlifting Programming App</title>
+  <meta
+    name="description"
+    content="Center Mass Strength (CMS) is the adaptive powerlifting app with specialized programs: Bench Specialization, Jacked & Strong, and SBD. Real programming engines, not recycled templates."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-elevated: #0d1320;
+      --bg-card: rgba(13, 17, 23, 0.4);
+      --border: rgba(56, 189, 248, 0.08);
+      --text: #ffffff;
+      --muted: #8899a6;
+      --blue: #0ea5e9;
+      --blue-glow: rgba(14, 165, 233, 0.12);
+      --radius: 24px;
+      --font: 'Inter', sans-serif;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* THE FEATHERED GRADIENT BACKGROUND */
+    .ambient-glow {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a.active {
+      color: var(--blue);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 40px var(--blue-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(13, 17, 23, 0.8);
+      color: #fff;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(13, 17, 23, 0.95);
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 140px 0 100px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      margin-bottom: 24px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(14, 165, 233, 0.2);
+      background: rgba(13, 17, 23, 0.6);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .card p + p {
+      margin-top: 1rem;
+    }
+
+    .card .accent {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .bullet-list li {
+      color: #d7deec;
+      padding-left: 1.4rem;
+      position: relative;
+      font-size: 0.95rem;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.12);
+    }
+
+    .cta-box {
+      background: linear-gradient(180deg, rgba(14, 165, 233, 0.05) 0%, rgba(5, 5, 5, 1) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 80px 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 24px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-size: 1.05rem;
+    }
+
+    /* SPLIT SECTIONS */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .split-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+    }
+
+    .split-content h3 {
+      margin-bottom: 1rem;
+    }
+
+    .split-content p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .split-content p + p {
+      margin-top: 1rem;
+    }
+
+    /* FOOTER DESIGN */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+      position: relative;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(14, 165, 233, 0.08);
+      padding-top: 1.5rem;
+    }
+
+    .footer-row p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .grid,
+      .split-section {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-head {
+        margin-bottom: 40px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 0 1rem;
+        height: 70px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        padding: 100px 0 80px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .card,
+      .split-content,
+      .cta-box {
+        padding: 1.5rem;
+      }
+
+      .cta-box {
+        padding: 2rem 1.5rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .footer-row {
+        flex-direction: column;
+        align-items: start;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <header>
+    <nav class="nav shell">
+      <a class="brand" href="#top">CMS<span>.fit</span></a>
+      <div class="nav-links">
+        <a href="#programs">Programs</a>
+        <a href="#engines">Engines</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn btn-primary" href="/app">Launch App</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <span class="eyebrow">Adaptive Programming Built In</span>
+        <h1>The Center Mass Method: Elite Strength Programming</h1>
+        <p>
+          Center Mass Strength gives serious lifters a cleaner way to run Bench Specialization,
+          Jacked and Strong, and full SBD prep without living inside spreadsheets. The app looks
+          sharp, tracks what matters, and runs on real training engines that react to readiness,
+          fatigue, weak points, and the calendar.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/app">Start Training</a>
+          <a class="btn btn-secondary" href="#engines">See The Engines</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs">
+      <div class="shell">
+        <div class="section-head">
+          <span class="tag">Programs</span>
+          <h2>Three lanes. One serious system.</h2>
+          <p>
+            CMS is not one generic template in a new coat of paint. Each track has its own purpose,
+            training feel, and engine behavior.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Bench Specialization</h3>
+            <p>
+              This is for lifters who want pressing strength to move now. CMS supports focused bench work,
+              weak-point-aware exercise swaps, and a cleaner path from volume to strength to test week.
+            </p>
+            <ul class="bullet-list">
+              <li>Lockout, mid-range, and off-chest weakness logic</li>
+              <li>Bench-centered block sequencing with productive weeks and deload timing</li>
+              <li>Accessory selection that serves the main lift instead of distracting from it</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Jacked & Strong</h3>
+            <p>
+              Jacked and Strong hits a sweet spot a lot of lifters want:
+              measurable barbell progress and enough hypertrophy work to actually build a physique.
+            </p>
+            <ul class="bullet-list">
+              <li>Five-week hypertrophy and four-week strength blocks</li>
+              <li>Machine and accessory work that supports recovery instead of burying it</li>
+              <li>Size and numbers at the same time</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>SBD</h3>
+            <p>
+              SBD in CMS is built around a macrocycle engine that works backward from meet day. Hypertrophy,
+              strength, peak, and taper phases are laid out based on the calendar so prep feels intentional.
+            </p>
+            <ul class="bullet-list">
+              <li>Competition-date aware block sequencing</li>
+              <li>Peak and taper logic that respects time to the platform</li>
+              <li>A single home for squat, bench, deadlift, and meet-focused progression</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="engines">
+      <div class="shell">
+        <div class="section-head">
+          <span class="tag">Engines</span>
+          <h2>The part most apps never build.</h2>
+          <p>
+            CMS is strong because the logic underneath it is strong. These engines give the app
+            its edge and make the promise believable.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Macrocycle Engine</h3>
+            <p>
+              CMS calculates how far out a competition is, then assembles the training flow from there.
+              Hypertrophy, strength, peak, and taper blocks are not hand-waved. <span class="accent">They are built from time-to-meet.</span>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Load Engine</h3>
+            <p>
+              Baseline percentages are adjusted by readiness score and lift-specific joint feedback before
+              final working weights are assigned. <span class="accent">The app is actually listening when the day is off.</span>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Readiness Engine</h3>
+            <p>
+              We built a check-in system that turns session feedback into practical load changes.
+              <span class="accent">Simple enough to use consistently and useful enough to matter.</span>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Weak Point Engine</h3>
+            <p>
+              CMS carries weakness-specific alternates for common sticking points, so substitutions are not random.
+              <span class="accent">Close-grip, board press, Spoto — tied to actual weak-link logic.</span>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>e1RM Tracking</h3>
+            <p>
+              Every completed set is logged with weight and reps. The system calculates e1RM trends
+              and uses them to <span class="accent">refresh training maxes before test week.</span>
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Block Progression</h3>
+            <p>
+              Training cycles aren't guessed. The system manages <span class="accent">volume, intensification, and deload</span>
+              phases based on cumulative fatigue and block-completion patterns.
+            </p>
+          </article>
+        </div>
+
+        <div class="cta-box">
+          <span class="eyebrow">Ready to Train Smarter</span>
+          <h2>Put real programming behind your next training block.</h2>
+          <p>
+            Bench Specialization, Jacked and Strong, and SBD are already built in. Your program will adapt as you train.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/app">Open The App</a>
+            <a class="btn btn-secondary" href="#programs">View Programs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="shell">
+        <div class="section-head">
+          <span class="tag">FAQ</span>
+          <h2>Questions lifters are going to ask.</h2>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Is CMS only for one kind of lifter?</h3>
+            <p>
+              No. CMS supports three clear lanes right now: Bench Specialization, Jacked and Strong, and full SBD.
+              That gives lifters a reason to join whether they care most about bench, size plus strength, or meet prep.
+            </p>
+          </article>
+          <article class="card">
+            <h3>What makes the programming different?</h3>
+            <p>
+              The engines. CMS uses competition-date macrocycle logic, readiness-based load adjustments, and lift-specific
+              joint penalties to shape training instead of leaving everything static.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Does the app actually adapt?</h3>
+            <p>
+              Yes. Feedback from check-ins changes assigned training loads, and the system already includes logic for
+              block progression and weak-point-aware exercise alternatives.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Can I track progress over time?</h3>
+            <p>
+              Yes. The analytics page shows e1RM trends for every lift, block-by-block progression, and a full training history.
+              You can see exactly how you're moving week to week.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Is there a free trial?</h3>
+            <p>
+              CMS is free to use while in Beta. Create an account, pick a program, and start training. No cards required, no paywall.
+              We encourage feedback through our suggestions card.
+            </p>
+          </article>
+          <article class="card">
+            <h3>How do weak points work?</h3>
+            <p>
+              Tell the app where you're weak (lockout, mid-range, off-chest, or none), and it swaps exercises intelligently.
+              Lockout weak? Smart lifters address weakness.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <p>Center Mass Strength</p>
+      <p>Never Give Up.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+  

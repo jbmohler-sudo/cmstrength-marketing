@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is a Macrocycle? | Center Mass Strength Blog</title>
+  <meta
+    name="description"
+    content="Understand macrocycles in strength training. Learn how competition-date aware periodization works and why it matters for your programming."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --bg: #050505;
+      --blue: #0ea5e9;
+      --muted: #8899a6;
+      --border: rgba(56, 189, 248, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.12), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shell { width: min(1200px, calc(100% - 3rem)); margin: 0 auto; }
+
+    /* NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .brand span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-size: 0.9rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #000;
+      box-shadow: 0 0 40px rgba(14, 165, 233, 0.12);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    /* HEADER */
+    .post-header {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .breadcrumb a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .post-header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      font-style: italic;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .post-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .post-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 0;
+    }
+
+    .content-section {
+      margin-bottom: 4rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    .content-section p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .content-section li {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      padding: 80px 0 40px;
+      position: relative;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-brand .brand {
+      font-size: 1.2rem;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 250px;
+    }
+
+    .footer-heading {
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--blue);
+    }
+
+    .footer-links a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(14, 165, 233, 0.08);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer-social a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-social a:hover {
+      color: var(--blue);
+    }
+
+    .footer-social a:focus {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 0 1rem;
+        height: 70px;
+      }
+
+      .post-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .post-content {
+        padding: 40px 0;
+      }
+
+      footer {
+        padding: 60px 0 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .footer-social {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <header>
+    <nav class="nav shell">
+      <a class="brand" href="/landing.html">Center <span>Mass</span> Strength</a>
+      <div class="nav-links">
+        <a href="/landing.html#programs">Programs</a>
+        <a href="/landing.html#engines">Engines</a>
+        <a href="/blog.html">Blog</a>
+      </div>
+      <a class="btn btn-primary" href="/app">Launch App</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="post-header">
+      <div class="shell">
+        <div class="breadcrumb">
+          <a href="/blog.html">Blog</a> / How Macrocycles Work
+        </div>
+        <h1>How Macrocycles Work</h1>
+        <p class="post-meta">Understanding competition-date aware periodization and why it matters</p>
+      </div>
+    </section>
+
+    <section class="post-content">
+      <div class="shell">
+        <!-- INTRO -->
+        <div class="content-section">
+          <p>
+            A <strong>macrocycle</strong> is the overall training structure that spans several weeks or months, typically leading up to a competition or training goal. Instead of guessing how to structure your training, a macrocycle works <strong>backward from your target date</strong>, ensuring every training phase builds toward peak performance on the platform.
+          </p>
+          <p>
+            In Center Mass Strength, the <a href="/landing.html#engines" style="color: var(--blue); text-decoration: underline;">Macrocycle Engine</a> calculates how far out your competition is, then automatically assembles the training flow with the right sequence of blocks: Hypertrophy → Strength → Peak → Taper.
+          </p>
+        </div>
+
+        <!-- WHY IT MATTERS -->
+        <div class="content-section">
+          <h2>Why Does Your Training Structure Matter More Than Your Effort?</h2>
+          <p>
+            Most lifters either:
+          </p>
+          <ul>
+            <li>Follow a generic 12-week program regardless of when their meet is</li>
+            <li>Wing it week-to-week without a structured path to competition</li>
+            <li>Manually plan blocks and constantly second-guess the structure</li>
+          </ul>
+          <p>
+            The problem? <strong>There's no intentional relationship between your training and your goal date.</strong> You might finish a strength block 3 weeks before the meet (bad timing) or reach peak readiness after you've already competed.
+          </p>
+          <p>
+            A properly structured macrocycle ensures your nervous system, work capacity, and technical skill all peak at the right moment—not before, not after.
+          </p>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="content-section">
+          <h2>What Are the Four Phases of a Macrocycle?</h2>
+          <p>
+            A standard SBD macrocycle breaks into four blocks:
+          </p>
+          <ul>
+            <li><strong>Hypertrophy Block:</strong> Build work capacity and muscle. Higher reps (6-10), moderate intensity, more volume. This is the "foundation" phase.</li>
+            <li><strong>Strength Block:</strong> Move to heavier loads with lower reps (3-5). Intensity increases, volume stays moderate. Build max strength.</li>
+            <li><strong>Peak Block:</strong> Heavy singles and doubles. Lower volume, maximum intensity. Train exactly how you'll compete.</li>
+            <li><strong>Taper:</strong> Reduce volume dramatically while maintaining intensity. Let accumulated fatigue dissipate. Arrive fresh and strong on meet day.</li>
+          </ul>
+        </div>
+
+        <!-- INTERACTIVE TIMELINE -->
+        <div class="content-section">
+          <h2>What Does a Real Macrocycle Look Like?</h2>
+          <p>
+            Here's an interactive timeline showing what a 16-week macrocycle looks like. Pick your meet date and watch the blocks adjust:
+          </p>
+        </div>
+
+        <div id="timeline-root" style="margin: 3rem 0;"></div>
+
+        <!-- BENEFITS -->
+        <div class="content-section">
+          <h2>How Does CMS Automate This Process?</h2>
+          <ul>
+            <li><strong>Competition-date aware:</strong> You set your meet date once. The system works backward from there, calculating the total weeks available and allocating them to blocks algorithmically (typically 35% hypertrophy, 35% strength, 20% peak, 10% taper).</li>
+            <li><strong>Automatic block sequencing:</strong> No guessing about how many weeks for each phase. It's calculated from your timeline. The algorithm also suggests lift variations for weak points and rotates exercises to prevent accommodation.</li>
+            <li><strong>Readiness adaptation:</strong> Within each block, loads adjust based on how you're feeling. <a href="/landing.html#programs" style="color: var(--blue); text-decoration: underline;">The structure is set</a>, but the execution is flexible. RPE-based autoregulation monitors your session performance and recalculates intensity for the next session.</li>
+            <li><strong>No wasted weeks:</strong> Every phase has a purpose relative to your competition date. The engine tracks time-to-peak and prevents premature peaking.</li>
+          </ul>
+        </div>
+
+        <!-- CONCLUSION -->
+        <div class="content-section">
+          <h2>The Bottom Line</h2>
+          <p>
+            Macrocycles aren't complicated—they're just <strong>intentional</strong>. Instead of hoping your training peaks at the right time, a macrocycle ensures it does. CMS automates this so you can focus on the actual training.
+          </p>
+          <p style="margin-top: 2rem;">
+            Ready to train with a real macrocycle engine? <a href="/app" style="color: var(--blue); text-decoration: underline;">Start with Center Mass Strength.</a>
+          </p>
+        </div>
+
+        <!-- Blog Navigation -->
+        <div style="border-top: 1px solid #27272a; margin-top: 4rem; padding-top: 3rem;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Previous Post -->
+            <a href="/blog/program-comparison.html" style="text-decoration: none; color: inherit;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: #71717a; font-size: 0.875rem; margin-bottom: 0.75rem; transition: color 0.2s;">
+                <span>←</span>
+                <span>Previous Post</span>
+              </div>
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: #fff; transition: color 0.2s; line-height: 1.4;">
+                Program Comparison
+              </h4>
+            </a>
+
+            <!-- Next Post -->
+            <a href="/blog/heavy-lifting-after-50.html" style="text-decoration: none; color: inherit; text-align: right;">
+              <div style="display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; color: #71717a; font-size: 0.875rem; margin-bottom: 0.75rem; transition: color 0.2s;">
+                <span>Next Post</span>
+                <span>→</span>
+              </div>
+              <h4 style="font-size: 1.125rem; font-weight: 700; color: #fff; transition: color 0.2s; line-height: 1.4;">
+                Heavy Lifting After 50
+              </h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="text/babel">
+    const MacrocycleTimeline = () => {
+      const [meetDate, setMeetDate] = React.useState('2026-07-18');
+      const [blocks, setBlocks] = React.useState([]);
+
+      React.useEffect(() => {
+        // Calculate blocks based on meet date
+        if (!meetDate) return;
+
+        const meet = new Date(meetDate);
+        const now = new Date();
+
+        // Calculate weeks from now to meet
+        const weeksToMeet = Math.ceil((meet - now) / (7 * 24 * 60 * 60 * 1000));
+
+        // Standard block structure (can be adjusted)
+        const blockStructure = [
+          { name: 'Hypertrophy', weeks: Math.ceil(weeksToMeet * 0.35), color: 'bg-blue-600', description: 'Build work capacity' },
+          { name: 'Strength', weeks: Math.ceil(weeksToMeet * 0.35), color: 'bg-blue-500', description: 'Heavy loads' },
+          { name: 'Peak', weeks: Math.ceil(weeksToMeet * 0.20), color: 'bg-blue-400', description: 'Competition simulation' },
+          { name: 'Taper', weeks: Math.ceil(weeksToMeet * 0.10), color: 'bg-blue-300', description: 'Recovery & readiness' }
+        ];
+
+        setBlocks(blockStructure);
+      }, [meetDate]);
+
+      const totalWeeks = blocks.reduce((sum, block) => sum + block.weeks, 0);
+
+      return (
+        <div className="space-y-6">
+          {/* DATE PICKER */}
+          <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700">
+            <label className="block text-sm font-semibold mb-2 text-slate-300">Select Your Meet Date</label>
+            <input
+              type="date"
+              value={meetDate}
+              onChange={(e) => setMeetDate(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2 text-white focus:border-blue-500 focus:outline-none"
+            />
+            <p className="text-xs text-slate-400 mt-2">Total macrocycle: {totalWeeks} weeks</p>
+          </div>
+
+          {/* TIMELINE BARS */}
+          <div className="space-y-4">
+            {blocks.map((block, idx) => (
+              <div key={idx}>
+                <div className="flex justify-between mb-2">
+                  <h4 className="font-bold text-white">{block.name}</h4>
+                  <span className="text-sm text-slate-400">{block.weeks} weeks</span>
+                </div>
+                <div className="h-12 rounded-lg overflow-hidden border border-slate-700 flex">
+                  <div
+                    className={`${block.color} flex items-center justify-center text-white font-semibold`}
+                    style={{ width: `${(block.weeks / totalWeeks) * 100}%` }}
+                  >
+                    {block.weeks > 2 && <span className="text-sm">{block.name}</span>}
+                  </div>
+                  <div className="flex-1 bg-slate-800/30 flex items-center px-3">
+                    <p className="text-xs text-slate-400">{block.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* MEET DATE INDICATOR */}
+          <div className="mt-8 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+            <p className="text-sm text-slate-300">
+              <span className="font-semibold text-blue-400">Meet Day:</span> {new Date(meetDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </p>
+          </div>
+
+          {/* EXPLANATION */}
+          <div className="mt-6 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+            <p className="text-sm text-slate-300 leading-relaxed">
+              The timeline above shows how CMS structures your training backward from your meet date. Each block has a specific purpose: hypertrophy builds the foundation, strength develops max effort capability, peak trains you to perform, and taper ensures you're fresh when it matters.
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('timeline-root'));
+    root.render(<MacrocycleTimeline />);
+  </script>
+
+  <footer>
+    <div class="shell footer-content">
+      <!-- FOOTER GRID -->
+      <div class="footer-grid">
+        <!-- COLUMN 1: BRAND + CTA -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <a href="/landing.html" class="brand">Center <span>Mass</span> Strength</a>
+            <p class="footer-tagline">Adaptive programming for serious lifters.</p>
+          </div>
+          <a href="/app" class="btn btn-primary" style="width: fit-content;">Open App</a>
+        </div>
+
+        <!-- COLUMN 2: PRODUCT -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="/landing.html#programs">Programs</a></li>
+            <li><a href="/landing.html#engines">Engines</a></li>
+            <li><a href="/landing.html#faq">FAQ</a></li>
+            <li><a href="/app">Launch App</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 3: COMPANY -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="mailto:hello@centermassstrength.com">Contact</a></li>
+            <li><a href="/support">Support</a></li>
+          </ul>
+        </div>
+
+        <!-- COLUMN 4: LEGAL -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/cookies">Cookies</a></li>
+            <li><a href="/status">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FOOTER BOTTOM -->
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Center Mass Strength. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://twitter.com/centermassstr" title="Twitter" aria-label="Twitter">𝕏</a>
+          <a href="https://instagram.com/centermassstr" title="Instagram" aria-label="Instagram">IG</a>
+          <a href="https://discord.gg/centermassstr" title="Discord" aria-label="Discord">DC</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
