@@ -189,12 +189,62 @@
       margin-left: auto;
     }
 
+    .footer-vault {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-vault h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .footer-vault ul {
+      list-style: none;
+    }
+
+    .footer-vault li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-vault a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-vault a:hover {
+      color: var(--blue);
+    }
+
+    .footer-vault .app-link {
+      color: var(--blue);
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
     footer {
       border-top: 1px solid var(--border);
-      padding: 2rem 0;
-      text-align: center;
+      padding: 3rem 0 2rem;
       color: var(--muted);
       font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+      .footer-vault {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
     }
 
     @media (max-width: 768px) {
@@ -210,6 +260,19 @@
 
       main {
         padding: 40px 0;
+      }
+
+      .footer-vault {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .links-list {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -295,19 +358,44 @@
     </section>
 
     <div class="links-section">
-      <h3>Explore More</h3>
+      <h3>Explore The Methodology Vault</h3>
       <ul class="links-list">
+        <li><a href="/methodology/">Methodology Index</a></li>
+        <li><a href="/methodology/macrocycle.html">Macrocycle Architecture</a></li>
+        <li><a href="/methodology/the-load-engine.html">The Load Engine</a></li>
+        <li><a href="/methodology/readiness-and-rpee.html">Readiness & RPE</a></li>
+        <li><a href="/methodology/weak-point-analysis.html">Weak Point Analysis</a></li>
+        <li><a href="/methodology/joint-health-and-longevity.html">Joint Health & Longevity</a></li>
+        <li><a href="/methodology/program-architectures.html">Program Architectures</a></li>
         <li><a href="/">Start Training</a></li>
-        <li><a href="/blog/program-comparison.html">Compare Programs</a></li>
-        <li><a href="/blog/macrocycle-explained.html">Macrocycle Explained</a></li>
-        <li><a href="/blog/submaximal-training.html">Why Submaximal Training</a></li>
-        <li><a href="/blog.html">All Blog Posts</a></li>
-        <li><a href="/contact.html">Contact Us</a></li>
       </ul>
     </div>
   </main>
 
   <footer class="shell">
+    <div class="footer-vault">
+      <div>
+        <h4>Core Engines</h4>
+        <ul>
+          <li><a href="/methodology/macrocycle.html">Macrocycle Architecture</a></li>
+          <li><a href="/methodology/the-load-engine.html">The Load Engine</a></li>
+          <li><a href="/methodology/readiness-and-rpee.html">Readiness & RPE</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Optimization</h4>
+        <ul>
+          <li><a href="/methodology/weak-point-analysis.html">Weak Point Analysis</a></li>
+          <li><a href="/methodology/joint-health-and-longevity.html">Joint Health & Longevity</a></li>
+          <li><a href="/methodology/program-architectures.html">Program Architectures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The App</h4>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem;">Ready to train smarter? Launch the app and start your adaptive training journey.</p>
+        <a href="https://app.cmstrength.fit" class="app-link">Launch Training App →</a>
+      </div>
+    </div>
     <p>&copy; 2026 Center Mass Strength. Built for serious lifters.</p>
   </footer>
 </body>

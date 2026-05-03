@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the macrocycle architecture of CMS: 13-week periodized bench specialization, Jacked & Strong, and adjustable SBD programs.">
+  <title>Macrocycle Architecture | CMS Technical Methodology</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      color: var(--primary-light);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 50px 0;
+      padding: 20px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-bar a {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .nav-bar a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: var(--text-primary);
+    }
+
+    .content-block {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .key-point {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .key-point strong {
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/methodology/">← Back to Methodology</a>
+    </div>
+
+    <header>
+      <h1>Macrocycle Architecture</h1>
+      <p class="subtitle">The Framework: Periodization, Block Gates, and Intelligent Transitions</p>
+    </header>
+
+    <div class="nav-bar">
+      <a href="/methodology/">Index</a>
+      <a href="/methodology/the-load-engine.html">Load Engine</a>
+      <a href="/methodology/readiness-and-rpee.html">Readiness</a>
+      <a href="/methodology/weak-point-analysis.html">Weak Point</a>
+      <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
+      <a href="/methodology/program-architectures.html">Programs</a>
+    </div>
+
+    <h2>What Is a Macrocycle?</h2>
+    <p>A macrocycle is the highest-level organizational unit in periodized training. It's a long-term progression plan spanning multiple weeks, organized into distinct training blocks, each with a specific physiological goal.</p>
+
+    <p>CMS employs a <strong>4-block macrocycle structure</strong>:</p>
+    <ul>
+      <li><strong>Skill Block (Weeks 1–4)</strong> — Work capacity, movement quality, technique refinement</li>
+      <li><strong>Strength Block (Weeks 5–8)</strong> — Increased volume + load, neural adaptations</li>
+      <li><strong>Peak Block (Weeks 9–12)</strong> — Intensity emphasis, competition-specific simulation</li>
+      <li><strong>Test Week (Week 13)</strong> — Meet attempt or max effort test</li>
+    </ul>
+
+    <p>Each block is <strong>4 weeks long</strong> (except Test Week, which is 1 week), and week 4 of each block serves as a <strong>deload week</strong> to allow recovery and prevent overtraining.</p>
+
+    <h2>The Block Structure</h2>
+
+    <div class="content-block">
+      <h3>Deload Weeks (Weeks 4, 8, 12)</h3>
+      <p>Deload weeks automatically reduce volume and intensity across all lifts. RPE targets drop by 1–1.5 points, and sets/reps for accessory work are halved. This allows the nervous system and joints to recover while maintaining training stimulus.</p>
+
+      <p><strong>Why Deload?</strong> Without planned recovery, cumulative fatigue leads to stagnation or injury. CMS automates this process—no user guesswork required.</p>
+    </div>
+
+    <h2>Specialty Programs vs. General SBD</h2>
+
+    <table>
+      <tr>
+        <th>Program Type</th>
+        <th>Duration</th>
+        <th>Focus</th>
+        <th>Best For</th>
+      </tr>
+      <tr>
+        <td>Bench Specialization</td>
+        <td>13 weeks</td>
+        <td>Maximize bench press 1RM only</td>
+        <td>Bench-focused competitors, single-lift PRs</td>
+      </tr>
+      <tr>
+        <td>Jacked & Strong</td>
+        <td>12 weeks</td>
+        <td>Balanced strength + hypertrophy</td>
+        <td>Accessory-focused, body composition</td>
+      </tr>
+      <tr>
+        <td>SBD Full Power</td>
+        <td>Adjustable (12–16 weeks)</td>
+        <td>All three lifts, balanced approach</td>
+        <td>Full powerlifting meets</td>
+      </tr>
+    </table>
+
+    <h2>The 13-Week Progression: Bench Specialization Example</h2>
+
+    <div class="content-block">
+      <h3>Week 1–4: Skill Block</h3>
+      <p><strong>Goal:</strong> Build movement quality and work capacity.</p>
+      <ul>
+        <li>Secondary lift: Larsen Press (or weak-point specific alternative)</li>
+        <li>RPE targets: 6–7 on top sets</li>
+        <li>Volume emphasis: 3–4 sets per lift</li>
+        <li>Deload Week (Week 4): RPE 5–6, reduced volume</li>
+      </ul>
+
+      <h3>Week 5–8: Strength Block</h3>
+      <p><strong>Goal:</strong> Increase load and neural adaptations.</p>
+      <ul>
+        <li>Secondary lift: Competition Bench Variation (Close Grip, Paused)</li>
+        <li>RPE targets: 7–8 on top sets</li>
+        <li>Volume emphasis: 4–5 sets per lift</li>
+        <li>Deload Week (Week 8): RPE 6–7, reduced volume</li>
+      </ul>
+
+      <h3>Week 9–12: Peak Block</h3>
+      <p><strong>Goal:</strong> Maximize intensity and competition readiness.</p>
+      <ul>
+        <li>Secondary lift: Heavy specialty press (board press, pin bench)</li>
+        <li>RPE targets: 8–9 on top sets</li>
+        <li>Volume emphasis: 3–4 sets per lift (lower, heavier)</li>
+        <li>Deload Week (Week 12): RPE 7–8, minimal volume</li>
+      </ul>
+
+      <h3>Week 13: Test Week</h3>
+      <p><strong>Goal:</strong> Compete or test 1RM.</p>
+      <ul>
+        <li>3 attempts at competition lift (Opener, Second, Final)</li>
+        <li>No prescribed weight—lifter chooses attempts</li>
+        <li>Successful meet prep or max-effort testing</li>
+      </ul>
+    </div>
+
+    <div class="key-point">
+      <strong>Key Insight:</strong> The 4-week block length is not arbitrary. Research shows that 4 weeks is optimal for neural adaptation in strength athletes. Shorter blocks don't allow sufficient adaptation; longer blocks risk accumulated fatigue without strategic deload.
+    </div>
+
+    <h2>Intelligent Block Transitions</h2>
+
+    <p>When a lifter completes Block 1 (Skill), the system doesn't just move to Block 2—it applies a <strong>block gate</strong>. The gate asks:</p>
+
+    <ul>
+      <li>Has the lifter completed all sessions in the block?</li>
+      <li>Is readiness adequate to advance?</li>
+      <li>Are there any joint health flags that suggest modifying the weak point?</li>
+    </ul>
+
+    <p>If the answer to any question is "no," the lifter may repeat or modify the block. This prevents jamming into a new block unprepared.</p>
+
+    <div class="key-point">
+      <strong>Weak Point Re-Assessment:</strong> At the end of each block (after Week 4, 8, 12), the lifter can optionally reassess their weak point. This allows CMS to adapt secondary lift selection based on recent performance data.
+    </div>
+
+    <h2>Post-Cycle Management</h2>
+
+    <p>After Test Week, CMS offers two paths:</p>
+
+    <ul>
+      <li><strong>Restart (Recommended)</strong> — Begin a new 13-week cycle with updated 1RM baseline</li>
+      <li><strong>Deload Week Extension</strong> — Take 1–2 extra recovery weeks before the next cycle</li>
+    </ul>
+
+    <p>The lifter's e1RM (estimated 1RM) is automatically recalculated based on all session data from the completed cycle. This becomes the new baseline for the next cycle's load calculations.</p>
+
+    <h2>Why This Matters</h2>
+
+    <p>A well-structured macrocycle prevents burnout, manages fatigue intelligently, and ensures that every training session serves a specific physiological purpose. CMS automates the periodization logic so you can focus on execution.</p>
+
+    <div class="footer">
+      <p class="footer-text">Ready to experience scientifically-backed periodization?</p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>

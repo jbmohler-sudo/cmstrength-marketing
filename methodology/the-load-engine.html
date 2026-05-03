@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover the Load Engine: algorithmic weight selection using RPE, movement history, and readiness adjustments instead of static percentages.">
+  <title>Load Engine | CMS Technical Methodology</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      color: var(--primary-light);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 50px 0;
+      padding: 20px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-bar a {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .nav-bar a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: var(--text-primary);
+    }
+
+    .content-block {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .key-point {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .key-point strong {
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    .algorithm-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--primary);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 20px 0;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/methodology/">← Back to Methodology</a>
+    </div>
+
+    <header>
+      <h1>Load Engine</h1>
+      <p class="subtitle">The Math: Algorithmic Weight Selection Beyond Static Percentages</p>
+    </header>
+
+    <div class="nav-bar">
+      <a href="/methodology/">Index</a>
+      <a href="/methodology/macrocycle.html">Macrocycle</a>
+      <a href="/methodology/readiness-and-rpee.html">Readiness</a>
+      <a href="/methodology/weak-point-analysis.html">Weak Point</a>
+      <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
+      <a href="/methodology/program-architectures.html">Programs</a>
+    </div>
+
+    <h2>Beyond Static Percentages</h2>
+    <p>Traditional periodization uses fixed percentages: 70% for a 5-rep set, 80% for a 3-rep set, etc. These are one-size-fits-all prescriptions that ignore individual variation, fatigue state, and training history.</p>
+
+    <p><strong>CMS rejects this approach.</strong> Instead, it uses RPE (Rate of Perceived Exertion) as the primary metric and calculates actual load dynamically based on your estimated 1RM (e1RM), recent performance, and readiness score.</p>
+
+    <h2>The Load Calculation Algorithm (4-Step Process)</h2>
+
+    <div class="content-block">
+      <h3>Step 1: Determine e1RM (Estimated 1 Rep Max)</h3>
+      <p>CMS uses the <strong>Brzycki formula</strong> to estimate your 1RM based on your last successful heavy lift:</p>
+      
+      <div class="algorithm-box">
+        e1RM = Weight ÷ (1.0278 − 0.0278 × Reps)
+      </div>
+
+      <p><strong>Example:</strong> If you lifted 315 lbs for 3 reps, your e1RM = 315 ÷ (1.0278 − 0.0834) = 315 ÷ 0.9444 = <strong>333.5 lbs</strong></p>
+
+      <p>This e1RM is recalculated after every top set logged in the app. It's your current strength ceiling.</p>
+
+      <h3>Step 2: RPE → Percent Conversion</h3>
+      <p>Your prescribed RPE (e.g., RPE 7) is converted to a percentage of e1RM using a standard table:</p>
+
+      <table>
+        <tr>
+          <th>RPE</th>
+          <th>1 Rep</th>
+          <th>2 Reps</th>
+          <th>3 Reps</th>
+          <th>5 Reps</th>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>85%</td>
+          <td>82%</td>
+          <td>80%</td>
+          <td>76%</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>90%</td>
+          <td>87%</td>
+          <td>85%</td>
+          <td>81%</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>93%</td>
+          <td>91%</td>
+          <td>88%</td>
+          <td>85%</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>97%</td>
+          <td>95%</td>
+          <td>92%</td>
+          <td>90%</td>
+        </tr>
+      </table>
+
+      <h3>Step 3: Calculate Raw Weight</h3>
+      <p>Multiply the RPE-derived percent by your e1RM:</p>
+      <div class="algorithm-box">
+        Raw Weight = e1RM × Percent
+      </div>
+
+      <p><strong>Example:</strong> e1RM = 333.5 lbs, RPE 8 for 3 reps = 88% → 333.5 × 0.88 = <strong>293.5 lbs</strong></p>
+
+      <h3>Step 4: Round to Nearest 5 lbs</h3>
+      <p>All prescribed weights are rounded to the nearest 5 lbs for loading convenience. 293.5 lbs becomes <strong>295 lbs</strong> (or 290 lbs, depending on direction).</p>
+    </div>
+
+    <div class="key-point">
+      <strong>Why 5-lb Increments?</strong> Most commercial barbells and gym setups use 5-lb plates. Rounding to 5-lb increments ensures your prescribed load is loadable without fractions or improvisation.
+    </div>
+
+    <h2>Load Selection by Block Type</h2>
+
+    <table>
+      <tr>
+        <th>Block</th>
+        <th>Top Set RPE</th>
+        <th>Backdown RPE</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td>Skill</td>
+        <td>6–7</td>
+        <td>6–6.5</td>
+        <td>Work capacity, technique</td>
+      </tr>
+      <tr>
+        <td>Strength</td>
+        <td>7–8</td>
+        <td>7–7.5</td>
+        <td>Volume + load</td>
+      </tr>
+      <tr>
+        <td>Peak</td>
+        <td>8–9</td>
+        <td>7–8</td>
+        <td>Intensity, competition prep</td>
+      </tr>
+      <tr>
+        <td>Test</td>
+        <td>Variable</td>
+        <td>N/A</td>
+        <td>Max attempt</td>
+      </tr>
+    </table>
+
+    <h2>Real-Time Recalculation: Backdown Logic</h2>
+
+    <p>After you complete your top set, the app recalculates the backdown sets based on your <strong>actual top set weight</strong>, not the prescribed weight.</p>
+
+    <div class="content-block">
+      <h3>Example Scenario</h3>
+      <p><strong>Prescribed Top Set:</strong> 295 lbs × 3 reps @ RPE 8</p>
+      <p><strong>What You Actually Lifted:</strong> 300 lbs × 3 reps @ RPE 7 (felt easier)</p>
+      <p><strong>Backdown Prescription (RPE 7):</strong> 300 × 0.85 = 255 lbs</p>
+
+      <p>The app recalculates your backdowns using the actual 300 lbs, not the prescribed 295 lbs. This ensures backdowns are responsive to real performance, not stale prescriptions.</p>
+    </div>
+
+    <h2>Movement-Specific History</h2>
+
+    <p>CMS tracks performance on every exercise independently. Your bench press e1RM is separate from your dumbbell flye e1RM. When you return to an exercise after a layoff, the app remembers your prior peak performance and uses that as a starting point—not a reset to zero.</p>
+
+    <h2>Traditional vs. CMS Comparison</h2>
+
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Traditional Periodization</th>
+        <th>CMS Load Engine</th>
+      </tr>
+      <tr>
+        <td>Weight Selection</td>
+        <td>Fixed percentage (80% of preset max)</td>
+        <td>RPE-based, e1RM-derived</td>
+      </tr>
+      <tr>
+        <td>Adaptation to Fatigue</td>
+        <td>Manual adjustment by lifter</td>
+        <td>Automatic adjustment via readiness score</td>
+      </tr>
+      <tr>
+        <td>Backdown Adjustment</td>
+        <td>Pre-prescribed, fixed</td>
+        <td>Recalculated after top set</td>
+      </tr>
+      <tr>
+        <td>Exercise History</td>
+        <td>Rarely tracked per movement</td>
+        <td>Complete history per movement</td>
+      </tr>
+      <tr>
+        <td>User Burden</td>
+        <td>Manual % calculation</td>
+        <td>Prescribed automatically</td>
+      </tr>
+    </table>
+
+    <h2>Key Takeaways</h2>
+
+    <ul>
+      <li>Load = RPE → Percent → e1RM × Percent → Round to 5 lbs</li>
+      <li>e1RM updates after every top set based on Brzycki formula</li>
+      <li>Backdowns recalculate in real-time based on actual top set weight</li>
+      <li>Each exercise tracked independently—no cross-movement assumptions</li>
+      <li>All math is transparent and auditable in your session data</li>
+    </ul>
+
+    <div class="footer">
+      <p class="footer-text">Let algorithms handle the math. You focus on lifting.</p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>

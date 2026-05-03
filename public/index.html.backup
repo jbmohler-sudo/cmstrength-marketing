@@ -3,17 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Center Mass Strength | Adaptive Bench Specialization Programming</title>
-  <meta name="description" content="Adaptive strength programming for serious lifters. Real algorithms, RPE-based autoregulation, weak point analysis, and competition-date aware periodization.">
+  <title>CMS: Adaptive Powerlifting Programming App</title>
+  <meta
+    name="description"
+    content="Center Mass Strength (CMS) is the adaptive powerlifting app with specialized programs: Bench Specialization, Jacked & Strong, and SBD. Real programming engines, not recycled templates."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  <!-- Wireboard Analytics -->
+  <script type="text/javascript">
+  ;(function(w,i,r,e,b,oar,d){if(!w[b]){w.WireBoardNamespace=w.WireBoardNamespace||[];
+  w.WireBoardNamespace.push(b);w[b]=function(){(w[b].q=w[b].q||[]).push(arguments)};
+  w[b].q=w[b].q||[];oar=i.createElement(r);d=i.getElementsByTagName(r)[0];oar.async=1;
+  oar.src=e;d.parentNode.insertBefore(oar,d)}}(window,document,"script","https://static.wireboard.io/wireboard.js","wireboard"));
+  wireboard('newTracker', 'wb', 'pipeline-0.collector.wireboard.io', {
+      appId: 'EkJytRHD',
+      forceSecureTracker: true,
+      contexts: {
+        performanceTiming: true,
+      }
+  });
+  window.wireboard('enableActivityTracking', 5, 10);
+  var customContext=[{schema:'wb:io.wireboard/publisher',data:{publisher:'6d27be88-5ba4-49e0-88c8-8dc1e43ead59'}}];
+  window.wireboard('trackPageView', null, customContext);
+  </script>
+
   <style>
     :root {
-      --bg: #000;
+      --bg: #050505;
       --bg-elevated: #0d1320;
       --bg-card: rgba(13, 17, 23, 0.4);
       --border: rgba(56, 189, 248, 0.08);
       --text: #ffffff;
       --muted: #8899a6;
       --blue: #0ea5e9;
+      --blue-glow: rgba(14, 165, 233, 0.12);
       --radius: 24px;
       --font: 'Inter', sans-serif;
       --max: 1200px;
@@ -30,51 +56,52 @@
       overflow-x: hidden;
     }
 
+    /* THE FEATHERED GRADIENT BACKGROUND */
     .ambient-glow {
       position: fixed;
-      top: 0;
-      left: 50%;
-      width: 1200px;
-      height: 800px;
-      background: radial-gradient(ellipse at center, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
-      transform: translateX(-50%);
+      top: -10%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 70%);
       pointer-events: none;
-      z-index: 0;
+      z-index: -1;
     }
 
     .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
 
+    /* NAVIGATION */
     header {
       position: sticky;
       top: 0;
       backdrop-filter: blur(12px);
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(5, 5, 5, 0.8);
       border-bottom: 1px solid var(--border);
       z-index: 100;
     }
 
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
-      padding: 1.5rem;
       height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
     }
 
     .brand {
       font-weight: 900;
+      letter-spacing: -0.02em;
       font-style: italic;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: #fff;
       text-decoration: none;
     }
-
     .brand span { color: var(--blue); }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
+      align-items: center;
       color: var(--muted);
       font-size: 0.95rem;
     }
@@ -89,125 +116,137 @@
       color: #fff;
     }
 
+    .nav-links a.active {
+      color: var(--blue);
+    }
+
+    /* BUTTONS */
     .btn {
-      padding: 0.7rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-style: italic;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      font-size: 0.9rem;
     }
 
     .btn-primary {
       background: var(--blue);
       color: #000;
+      box-shadow: 0 0 40px var(--blue-glow);
     }
 
     .btn-primary:hover {
-      background: #38bdf8;
       transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
     }
 
     .btn-secondary {
+      background: rgba(13, 17, 23, 0.8);
+      color: #fff;
       border: 1px solid var(--border);
-      color: var(--muted);
     }
 
     .btn-secondary:hover {
-      color: var(--blue);
-      border-color: var(--blue);
+      background: rgba(13, 17, 23, 0.95);
+      border-color: rgba(14, 165, 233, 0.3);
     }
 
-    main {
-      position: relative;
-      z-index: 1;
-      padding: 120px 0 80px;
+    /* HERO SECTION */
+    .hero {
+      padding: 140px 0 100px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      margin-bottom: 24px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5.5rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 48px;
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     section {
       padding: 100px 0;
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: 1.5rem;
+    .section-head {
+      margin-bottom: 60px;
+      text-align: center;
     }
 
-    h2 {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      font-weight: 900;
-      font-style: italic;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      margin: 2.5rem 0 1.5rem 0;
-      color: var(--blue);
+    .section-head h2 {
+      max-width: 600px;
+      margin: 0 auto 16px;
     }
 
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin: 1.5rem 0 1rem 0;
-    }
-
-    p {
+    .section-head p {
       color: var(--muted);
       font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      max-width: 800px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--blue);
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--blue);
-      font-weight: 900;
-      padding: 0.5rem 1rem;
-      background: rgba(14, 165, 233, 0.08);
-      border-radius: 20px;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero {
-      padding: 100px 0 80px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .section-head {
-      margin-bottom: 3rem;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      margin: 3rem 0;
     }
 
     .card {
@@ -216,69 +255,118 @@
       padding: 2rem;
       border-radius: var(--radius);
       backdrop-filter: blur(8px);
-      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
     .card:hover {
-      border-color: var(--blue);
-      transform: translateY(-4px);
-    }
-
-    .card h3 {
-      color: var(--text);
-      margin-top: 0;
+      border-color: rgba(14, 165, 233, 0.2);
+      background: rgba(13, 17, 23, 0.6);
     }
 
     .card p {
-      font-size: 0.95rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .card p + p {
+      margin-top: 1rem;
+    }
+
+    .card .accent {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      color: var(--blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       margin-bottom: 1rem;
     }
 
     .bullet-list {
       list-style: none;
-      padding: 0;
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
     }
 
     .bullet-list li {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-      padding-left: 1.5rem;
+      color: #d7deec;
+      padding-left: 1.4rem;
       position: relative;
+      font-size: 0.95rem;
     }
 
-    .bullet-list li:before {
-      content: "→";
+    .bullet-list li::before {
+      content: "";
       position: absolute;
       left: 0;
-      color: var(--blue);
-      font-weight: 800;
-    }
-
-    .accent {
-      color: var(--blue);
-    }
-
-    .split-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      margin: 3rem 0;
-    }
-
-    .split-content {
-      padding: 2rem;
+      top: 0.6rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.12);
     }
 
     .cta-box {
+      background: linear-gradient(180deg, rgba(14, 165, 233, 0.05) 0%, rgba(5, 5, 5, 1) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 80px 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 24px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-size: 1.05rem;
+    }
+
+    /* SPLIT SECTIONS */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .split-content {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 3rem;
+      padding: 2.5rem;
       border-radius: var(--radius);
       backdrop-filter: blur(8px);
-      margin-top: 3rem;
-      text-align: center;
+    }
+
+    .split-content h3 {
+      margin-bottom: 1rem;
+    }
+
+    .split-content p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .split-content p + p {
+      margin-top: 1rem;
     }
 
     /* FOOTER DESIGN */
@@ -459,7 +547,7 @@
           fatigue, weak points, and the calendar.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://app.cmstrength.fit">Start Training</a>
+          <a class="btn btn-primary" href="/app">Start Training</a>
           <a class="btn btn-secondary" href="#engines">See The Engines</a>
         </div>
       </div>
@@ -592,112 +680,4 @@
               Three distinct engines: Bench Specialization for focused pressing strength, Jacked & Strong for balanced development, and SBD for full powerlifting competition.
               <span class="accent">Choose your path. CMS guides you to the goal.</span>
             </p>
-            <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(14, 165, 233, 0.1);">
-              <a href="/methodology/program-architectures.html" style="color: var(--blue); text-decoration: none; font-size: 0.9rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem;">[ View Engine Specs → ]</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="cta-box">
-          <span class="eyebrow">Ready to Train Smarter</span>
-          <h2>Put real programming behind your next training block.</h2>
-          <p>
-            Bench Specialization, Jacked and Strong, and SBD are already built in. Your program will adapt as you train.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://app.cmstrength.fit">Open The App</a>
-            <a class="btn btn-secondary" href="#programs">View Programs</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="shell">
-        <div class="section-head">
-          <span class="tag">FAQ</span>
-          <h2>Questions lifters are going to ask.</h2>
-        </div>
-
-        <div class="grid">
-          <article class="card">
-            <h3>Is CMS only for one kind of lifter?</h3>
-            <p>
-              No. CMS supports three clear lanes right now: Bench Specialization, Jacked and Strong, and full SBD.
-              That gives lifters a reason to join whether they care most about bench, size plus strength, or meet prep.
-            </p>
-          </article>
-          <article class="card">
-            <h3>What makes the programming different?</h3>
-            <p>
-              The engines. CMS uses competition-date macrocycle logic, readiness-based load adjustments, and lift-specific
-              joint penalties to shape training instead of leaving everything static.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Does the app actually adapt?</h3>
-            <p>
-              Yes. Feedback from check-ins changes assigned training loads, and the system already includes logic for
-              block progression and weak-point-aware exercise alternatives.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Can I track progress over time?</h3>
-            <p>
-              Yes. The analytics page shows e1RM trends for every lift, block-by-block progression, and a full training history.
-              You can see exactly how you're moving week to week.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Is there a free trial?</h3>
-            <p>
-              CMS is free to use while in Beta. Create an account, pick a program, and start training. No cards required, no paywall.
-              We encourage feedback through our suggestions card.
-            </p>
-          </article>
-          <article class="card">
-            <h3>How do weak points work?</h3>
-            <p>
-              Tell the app where you're weak (lockout, mid-range, off-chest, or none), and it swaps exercises intelligently.
-              Lockout weak? Smart lifters address weakness.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="shell">
-      <div class="footer-vault">
-        <div>
-          <h4>Core Engines</h4>
-          <ul>
-            <li><a href="/methodology/macrocycle.html">Macrocycle Architecture</a></li>
-            <li><a href="/methodology/the-load-engine.html">The Load Engine</a></li>
-            <li><a href="/methodology/readiness-and-rpee.html">Readiness & RPE</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Optimization</h4>
-          <ul>
-            <li><a href="/methodology/weak-point-analysis.html">Weak Point Analysis</a></li>
-            <li><a href="/methodology/joint-health-and-longevity.html">Joint Health & Longevity</a></li>
-            <li><a href="/methodology/program-architectures.html">Program Architectures</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>The App</h4>
-          <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.2rem;">Ready to train smarter? Launch the app and start your adaptive training journey.</p>
-          <a href="https://app.cmstrength.fit" class="app-link">Launch Training App →</a>
-        </div>
-      </div>
-      <div class="footer-row">
-        <p>Center Mass Strength</p>
-        <p>Never Give Up.</p>
-      </div>
-    </div>
-  </footer>
-
-</body>
-</html>
+            <div style="margin-top: 1.5rem; padding

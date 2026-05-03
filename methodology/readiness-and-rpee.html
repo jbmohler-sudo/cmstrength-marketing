@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master autoregulation with RPE and the Daily Readiness Engine: how intensity adjusts in real-time based on sleep, stress, and training history.">
+  <title>Readiness & RPE | CMS Technical Methodology</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      color: var(--primary-light);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 50px 0;
+      padding: 20px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-bar a {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .nav-bar a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: var(--text-primary);
+    }
+
+    .content-block {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .key-point {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .key-point strong {
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/methodology/">← Back to Methodology</a>
+    </div>
+
+    <header>
+      <h1>Readiness & RPE</h1>
+      <p class="subtitle">Autoregulation: How Intensity Adapts in Real-Time to Your State</p>
+    </header>
+
+    <div class="nav-bar">
+      <a href="/methodology/">Index</a>
+      <a href="/methodology/macrocycle.html">Macrocycle</a>
+      <a href="/methodology/the-load-engine.html">Load Engine</a>
+      <a href="/methodology/weak-point-analysis.html">Weak Point</a>
+      <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
+      <a href="/methodology/program-architectures.html">Programs</a>
+    </div>
+
+    <h2>What Is RPE?</h2>
+    <p><strong>RPE (Rate of Perceived Exertion)</strong> is a 0-10 scale measuring how hard a set feels relative to your maximum effort:</p>
+
+    <table>
+      <tr>
+        <th>RPE</th>
+        <th>Meaning</th>
+        <th>Reps in Reserve (RIR)</th>
+      </tr>
+      <tr>
+        <td>5–6</td>
+        <td>Light, easy work</td>
+        <td>4–5 reps</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Moderate, controlled</td>
+        <td>3 reps</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Hard, challenging</td>
+        <td>2 reps</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Very hard, near max</td>
+        <td>1 rep</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Maximum effort, all-out</td>
+        <td>0 reps (true max)</td>
+      </tr>
+    </table>
+
+    <p>RPE is subjective—it relies on your perception—but that's precisely the point. Unlike percentages (which ignore fatigue), RPE naturally accounts for how your body feels on any given day.</p>
+
+    <h2>The Daily Readiness Engine</h2>
+
+    <p>Before each session, CMS asks you six questions about your physical state:</p>
+
+    <div class="content-block">
+      <ul>
+        <li><strong>Sleep (0–10):</strong> How well did you sleep last night?</li>
+        <li><strong>Stress (0–10):</strong> How stressed are you currently? (Higher = more stressed)</li>
+        <li><strong>Soreness (0–10):</strong> Muscle soreness from prior training</li>
+        <li><strong>Motivation (0–10):</strong> How motivated are you to train today?</li>
+        <li><strong>Mood (0–10):</strong> Overall mood and mental state</li>
+        <li><strong>Fatigue (0–10):</strong> General fatigue level</li>
+      </ul>
+
+      <p>These six inputs are averaged into a single <strong>Readiness Score (0–10)</strong>.</p>
+    </div>
+
+    <div class="key-point">
+      <strong>Why 6 Factors?</strong> Sleep, stress, soreness, motivation, mood, and fatigue capture the primary physiological and psychological levers affecting your capacity to train hard. This simplicity ensures quick check-in without becoming a burden.
+    </div>
+
+    <h2>The Readiness Score in Action</h2>
+
+    <table>
+      <tr>
+        <th>Readiness Score</th>
+        <th>Interpretation</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>8–10</td>
+        <td>Optimal (well-slept, low stress, motivated)</td>
+        <td>Proceed as prescribed; may push if feeling strong</td>
+      </tr>
+      <tr>
+        <td>6–7</td>
+        <td>Adequate (normal state)</td>
+        <td>Follow the plan exactly as written</td>
+      </tr>
+      <tr>
+        <td>4–5</td>
+        <td>Compromised (tired, stressed, sore)</td>
+        <td>RPE targets reduced by 0.5–1 point</td>
+      </tr>
+      <tr>
+        <td>0–3</td>
+        <td>Severely compromised (illness, injury, extreme stress)</td>
+        <td>Skip session or do minimal work; reassess next day</td>
+      </tr>
+    </table>
+
+    <h2>The RPE Adjustment Pivot</h2>
+
+    <p>Based on your readiness score, CMS automatically adjusts the prescribed RPE on the fly:</p>
+
+    <div class="content-block">
+      <h3>Example</h3>
+      <p><strong>Planned Top Set:</strong> 5 reps @ RPE 8</p>
+      <p><strong>Your Readiness Score:</strong> 4 (bad sleep, high stress)</p>
+      <p><strong>Adjusted RPE:</strong> 7.5 (reduced by 0.5 points)</p>
+      <p><strong>Adjusted Weight:</strong> Recalculated based on RPE 7.5 instead of RPE 8</p>
+
+      <p>You still get a meaningful session, but with reduced intensity demands that match your actual capacity. Over time, this prevents overtraining and burnout.</p>
+    </div>
+
+    <h2>The Feedback Loop: Session Difficulty</h2>
+
+    <p>After every session, you rate how hard it was on a 5-10 scale:</p>
+
+    <ul>
+      <li><strong>5–6:</strong> Too easy, felt light</li>
+      <li><strong>7–8:</strong> Just right, appropriately challenging</li>
+      <li><strong>9–10:</strong> Too hard, struggled</li>
+    </ul>
+
+    <p>If you consistently rate sessions as 9–10, the system learns that the current RPE prescriptions are too aggressive. On your next session, target RPE is reduced by 0.5 points automatically. Conversely, if sessions are 5–6, RPE increases by 0.5.</p>
+
+    <div class="key-point">
+      <strong>Closed-Loop Feedback:</strong> This creates a self-correcting system. Over 2–3 weeks, the app "learns" your true capacity and converges on the right intensity level. No manual tweaking required.
+    </div>
+
+    <h2>Real-Time Pivot: The Game-Changer</h2>
+
+    <p>Here's where CMS differs from static programs: <strong>readiness adjustments happen in real-time, during your session</strong>, not weeks later.</p>
+
+    <p>Your readiness is not locked in at the start. As you warm up, you get a live view of your adjusted RPE targets. If you feel unexpectedly strong, you can push. If you feel sluggish, you can dial back. The prescribed weight is always available; the decision to match or exceed it is yours.</p>
+
+    <h2>The Calibration Over Time</h2>
+
+    <p>During <strong>Cycle 1 (first 13 weeks)</strong>, the system may over- or under-estimate your capacity. You might rate sessions as 5 or 9 frequently. This is expected.</p>
+
+    <p>By <strong>Cycle 2</strong>, after gathering 10+ weeks of session feedback, the app has a clear model of your RPE-to-difficulty relationship. Session ratings cluster around 7–8 (appropriately hard), and you feel "dialed in."</p>
+
+    <p>By <strong>Cycle 3+</strong>, the system is calibrated to your neuromuscular characteristics and you enter a flow state where prescribed intensity feels just right, every session.</p>
+
+    <h2>Key Takeaways</h2>
+
+    <ul>
+      <li>RPE is subjective but powerful: it auto-accounts for fatigue</li>
+      <li>Readiness score (sleep, stress, soreness, motivation, mood, fatigue) adjusts RPE in real-time</li>
+      <li>Session difficulty feedback creates a closed-loop that auto-calibrates intensity</li>
+      <li>After 10+ sessions, the system learns your true capacity and converges on perfect intensity</li>
+      <li>No manual tweaking required—the algorithm adapts for you</li>
+    </ul>
+
+    <div class="footer">
+      <p class="footer-text">Train hard, recover smart. Readiness-driven autoregulation does both.</p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>

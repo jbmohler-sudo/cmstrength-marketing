@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Program Architectures: Compare three engines—Bench Spec, Jacked & Strong, SBD Full Power—and choose the path that fits your goals.">
+  <title>Program Architectures | CMS Technical Methodology</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      color: var(--primary-light);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 50px 0;
+      padding: 20px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-bar a {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .nav-bar a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: var(--text-primary);
+    }
+
+    .content-block {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .key-point {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .key-point strong {
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/methodology/">← Back to Methodology</a>
+    </div>
+
+    <header>
+      <h1>Program Architectures</h1>
+      <p class="subtitle">The Training Paths: Three Engines, One Goal—Your Best Strength</p>
+    </header>
+
+    <div class="nav-bar">
+      <a href="/methodology/">Index</a>
+      <a href="/methodology/macrocycle.html">Macrocycle</a>
+      <a href="/methodology/the-load-engine.html">Load Engine</a>
+      <a href="/methodology/readiness-and-rpee.html">Readiness</a>
+      <a href="/methodology/weak-point-analysis.html">Weak Point</a>
+      <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
+    </div>
+
+    <h2>The Three Paths</h2>
+
+    <p>CMS offers three distinct program architectures, each optimized for different goals and athlete profiles:</p>
+
+    <div class="content-block">
+      <h3>1. Bench Specialization (13 Weeks)</h3>
+      <p><strong>Focus:</strong> Maximize bench press 1RM only</p>
+      <p><strong>Best for:</strong> Bench-focused competitors, singles lifters, or those training between meets</p>
+      <p><strong>Philosophy:</strong> Every session is bench-centric. Secondary lifts and accessories exist to support bench press gains, nothing else.</p>
+
+      <h3>2. Jacked & Strong (12 Weeks)</h3>
+      <p><strong>Focus:</strong> Balanced strength + hypertrophy across all lifts</p>
+      <p><strong>Best for:</strong> Accessory enthusiasts, body composition goals, sustainability-focused lifters</p>
+      <p><strong>Philosophy:</strong> Strength on primary lifts meets meaningful hypertrophy on secondary/accessory work. Leads to muscular, capable athletes.</p>
+
+      <h3>3. SBD Full Power (Adjustable 12–16 Weeks)</h3>
+      <p><strong>Focus:</strong> Compete in all three lifts (squat, bench, deadlift)</p>
+      <p><strong>Best for:</strong> Full powerlifting meets, well-rounded strength athletes</p>
+      <p><strong>Philosophy:</strong> Rotates through focused blocks for each lift while maintaining baseline competency in others. Meet prep for the complete package.</p>
+    </div>
+
+    <h2>How the Engines Differ by Path</h2>
+
+    <table>
+      <tr>
+        <th>Engine Aspect</th>
+        <th>Bench Spec</th>
+        <th>Jacked & Strong</th>
+        <th>SBD</th>
+      </tr>
+      <tr>
+        <td>Primary Lift</td>
+        <td>Bench Press</td>
+        <td>All three (rotating)</td>
+        <td>All three (cycling)</td>
+      </tr>
+      <tr>
+        <td>Secondary Lifts</td>
+        <td>1 (weak-point-specific bench variant)</td>
+        <td>2–3 (varied, accessory-heavy)</td>
+        <td>1 per lift (squat, bench, dead variants)</td>
+      </tr>
+      <tr>
+        <td>Accessory Volume</td>
+        <td>Low (support bench only)</td>
+        <td>High (hypertrophy focus)</td>
+        <td>Moderate (balanced across lifts)</td>
+      </tr>
+      <tr>
+        <td>RPE Range</td>
+        <td>6–9 (intensity emphasis)</td>
+        <td>6–8 (moderate, sustainable)</td>
+        <td>6–9 (block-dependent)</td>
+      </tr>
+      <tr>
+        <td>Meet Readiness</td>
+        <td>Bench competition only</td>
+        <td>General strength (no meet prep)</td>
+        <td>Full three-lift competition</td>
+      </tr>
+    </table>
+
+    <h2>Program Comparison Matrix</h2>
+
+    <table>
+      <tr>
+        <th>Aspect</th>
+        <th>Bench Spec</th>
+        <th>Jacked & Strong</th>
+        <th>SBD</th>
+      </tr>
+      <tr>
+        <td>Cycle Length</td>
+        <td>Fixed 13 weeks</td>
+        <td>Fixed 12 weeks</td>
+        <td>Adjustable 12–16 weeks</td>
+      </tr>
+      <tr>
+        <td>Weekly Sessions</td>
+        <td>3, 4, or 5 days</td>
+        <td>3, 4, or 5 days</td>
+        <td>4 or 5 days</td>
+      </tr>
+      <tr>
+        <td>Deload Week Frequency</td>
+        <td>Every 4 weeks (weeks 4, 8, 12)</td>
+        <td>Every 4 weeks (weeks 4, 8, 12)</td>
+        <td>Every 4 weeks (block gates)</td>
+      </tr>
+      <tr>
+        <td>Joint Health Monitoring</td>
+        <td>Yes (shoulder, elbow, wrist)</td>
+        <td>Yes (all joints)</td>
+        <td>Yes (all joints)</td>
+      </tr>
+      <tr>
+        <td>Weak Point Routing</td>
+        <td>Bench-only specialization</td>
+        <td>Light weak-point focus</td>
+        <td>Per-lift specialization (squat, bench, dead)</td>
+      </tr>
+      <tr>
+        <td>Expected 1RM Gain</td>
+        <td>+15–30 lbs</td>
+        <td>+10–20 lbs (balanced)</td>
+        <td>+10–25 lbs (depends on main lift)</td>
+      </tr>
+    </table>
+
+    <h2>Real-World Example: SBD Meet Prep (16-Week Timeline)</h2>
+
+    <div class="content-block">
+      <h3>Athlete Profile</h3>
+      <p>Marcus, raw powerlifter: Bench 405, Squat 500, Deadlift 600. Total: 1505 lbs. Meet in 16 weeks.</p>
+
+      <h3>Week 1–4: Squat Block (Skill)</h3>
+      <p>Focus: Squat technique and positioning. Bench and deadlift maintained at moderate volume.</p>
+      <ul>
+        <li>Main: Squat 3×5 @ RPE 6–7</li>
+        <li>Secondary: Box Squat (weak-point-specific) 3×5 @ RPE 6.5</li>
+        <li>Bench: 2×4 @ RPE 6 (maintenance)</li>
+        <li>Deadlift: 1×5 @ RPE 6 (maintenance)</li>
+      </ul>
+
+      <h3>Week 5–8: Bench Block (Strength)</h3>
+      <p>Focus: Bench press strength and volume. Squat and deadlift maintained.</p>
+      <ul>
+        <li>Main: Bench 3×4 @ RPE 7–8</li>
+        <li>Secondary: Incline Bench (weak-point-specific) 3×4 @ RPE 7.5</li>
+        <li>Squat: 2×3 @ RPE 6.5 (maintenance)</li>
+        <li>Deadlift: 1×3 @ RPE 6.5 (maintenance)</li>
+      </ul>
+
+      <h3>Week 9–12: Deadlift Block (Peak)</h3>
+      <p>Focus: Deadlift intensity and competition readiness. Squat and bench taper slightly.</p>
+      <ul>
+        <li>Main: Deadlift 2×3, 1×1 @ RPE 8–9</li>
+        <li>Secondary: Speed Deadlift 3×2 @ RPE 7</li>
+        <li>Squat: 2×2 @ RPE 7 (taper)</li>
+        <li>Bench: 2×2 @ RPE 7 (taper)</li>
+      </ul>
+
+      <h3>Week 13–14: Deload + Final Taper</h3>
+      <p>Recovery week. All RPE 5–6, reduced volume. Prepare body for opener attempts.</p>
+
+      <h3>Week 15–16: Meet Week</h3>
+      <p>Opener attempts on all three lifts. Attempt selection based on readiness and recent performance.</p>
+
+      <h3>Result</h3>
+      <p>Marcus arrives at the meet with a balanced, periodized build: Squat +20 lbs (520), Bench +15 lbs (420), Deadlift +25 lbs (625). Total: 1565 lbs (+60 lbs from baseline).</p>
+    </div>
+
+    <h2>How to Choose Your Path</h2>
+
+    <div class="content-block">
+      <h3>Choose Bench Specialization If:</h3>
+      <ul>
+        <li>You compete (or want to compete) in bench-only competitions</li>
+        <li>Your primary goal is a bigger bench press</li>
+        <li>You have limited training time (3 days/week) and want to maximize bench progress</li>
+        <li>You're willing to sacrifice squat/deadlift development for bench gains</li>
+      </ul>
+
+      <h3>Choose Jacked & Strong If:</h3>
+      <ul>
+        <li>You want balanced strength + muscle growth across all lifts</li>
+        <li>You prioritize body composition and aesthetics alongside strength</li>
+        <li>You enjoy variety in exercises and don't have a specific meet goal</li>
+        <li>You want a sustainable, long-term training path without peaking</li>
+      </ul>
+
+      <h3>Choose SBD Full Power If:</h3>
+      <ul>
+        <li>You compete in full powerlifting (or want to prepare for it)</li>
+        <li>You want competitive totals in all three lifts</li>
+        <li>You like periodized blocks with clear phases for each lift</li>
+        <li>You have 4–5 days per week to train</li>
+      </ul>
+    </div>
+
+    <h2>Switching Programs Mid-Cycle</h2>
+
+    <p>You can switch programs at block gates (end of week 4, 8, 12). When you switch:</p>
+
+    <ul>
+      <li><strong>Current 1RMs are preserved:</strong> Your estimated maxes carry over, so load calculations continue logically</li>
+      <li><strong>Block progression resets:</strong> You start the new program at Block 1 (Skill) of the new architecture</li>
+      <li><strong>Weak point re-assessment is recommended:</strong> Different programs have different weak-point routing, so reassess if switching to SBD</li>
+    </ul>
+
+    <div class="key-point">
+      <strong>Example:</strong> You finish a Bench Specialization cycle (Bench +25 lbs). You want to try Jacked & Strong. At the block gate, you switch. Your bench 1RM carries over, and you begin Jacked & Strong Block 1 with new exercise variety and higher accessory volume.
+    </div>
+
+    <h2>Key Takeaways</h2>
+
+    <ul>
+      <li>Three program architectures: Bench Spec (bench-focused), Jacked & Strong (balanced), SBD (full powerlifting)</li>
+      <li>Each program uses the same adaptive engines (load, readiness, weak point, joint health)</li>
+      <li>Choose based on your goals, training frequency, and competition style</li>
+      <li>Switch programs at block gates without losing progress</li>
+      <li>All programs include autoregulation, joint monitoring, and intelligent adaptation</li>
+    </ul>
+
+    <div class="footer">
+      <p class="footer-text">Choose your path. CMS guides you to the goal line.</p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>

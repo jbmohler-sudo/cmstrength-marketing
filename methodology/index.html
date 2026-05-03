@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Methodology | Technical Deep Dive</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      background: rgba(31, 41, 55, 0.6);
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: translateY(-4px);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-light);
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-icon {
+      font-size: 20px;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .card-link {
+      display: inline-block;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--primary-light);
+    }
+
+    .card-link:hover {
+      transform: translateX(4px);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / Methodology
+    </div>
+
+    <header>
+      <h1>Technical Methodology Vault</h1>
+      <p class="subtitle">
+        Six pillars of the CMS adaptive engine architecture. Explore the science, math, and logic behind adaptive bench press programming.
+      </p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">📐</span>
+          The Framework
+        </div>
+        <h2 class="card-title">Macrocycle Architecture</h2>
+        <p class="card-desc">
+          Structured frameworks for specialty programs. Explore how CMS intelligently manages periodization blocks, adjustable phases, and program transitions.
+        </p>
+        <a href="macrocycle.html" class="card-link">Explore Framework →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">⚙️</span>
+          The Math
+        </div>
+        <h2 class="card-title">Load Engine</h2>
+        <p class="card-desc">
+          Algorithmic weight selection based on movement-specific history and real-time readiness. Static percentages have met their match.
+        </p>
+        <a href="the-load-engine.html" class="card-link">Study the Algorithm →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">🎯</span>
+          Autoregulation
+        </div>
+        <h2 class="card-title">Readiness & RPE</h2>
+        <p class="card-desc">
+          The RPEE metric and Daily Readiness Engine. See how intensity adjusts in real-time based on sleep, stress, and training history.
+        </p>
+        <a href="readiness-and-rpee.html" class="card-link">Master Autoregulation →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">🔬</span>
+          The Specialization
+        </div>
+        <h2 class="card-title">Weak Point Analysis</h2>
+        <p class="card-desc">
+          Identify "off the chest" vs. "lockout" failures. Learn how the app selects specific builders (JM Presses, Rolling Extensions) to fix your sticking points.
+        </p>
+        <a href="weak-point-analysis.html" class="card-link">Diagnose Your Weakness →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">💪</span>
+          The Pivot Logic
+        </div>
+        <h2 class="card-title">Joint Health & Longevity</h2>
+        <p class="card-desc">
+          The Joint Feedback system monitors shoulder/elbow health and pivots protocols in real-time. Train hard, stay healthy, lift forever.
+        </p>
+        <a href="joint-health-and-longevity.html" class="card-link">Protect Your Joints →</a>
+      </div>
+
+      <div class="card">
+        <div class="card-label">
+          <span class="card-icon">🚀</span>
+          The Training Paths
+        </div>
+        <h2 class="card-title">Program Architectures</h2>
+        <p class="card-desc">
+          Compare three core engines in action: Bench Spec, Jacked & Strong, SBD Full Power. See how engines prioritize different outcomes.
+        </p>
+        <a href="program-architectures.html" class="card-link">Choose Your Path →</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        Ready to experience adaptive bench press programming backed by engineering and science?
+      </p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>

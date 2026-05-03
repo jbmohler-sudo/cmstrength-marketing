@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Weak Point Analysis: Identify your sticking point and let CMS route exercises to fix it with surgical precision.">
+  <title>Weak Point Analysis | CMS Technical Methodology</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-light: #60a5fa;
+      --secondary: #1f2937;
+      --surface: #111827;
+      --surface-light: #1f2937;
+      --surface-lighter: #374151;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.15);
+      --border: rgba(59, 130, 246, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      color: var(--primary-light);
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 30px 0 15px 0;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .breadcrumb a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .nav-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 50px 0;
+      padding: 20px;
+      background: rgba(31, 41, 55, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .nav-bar a {
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .nav-bar a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--primary);
+      color: var(--text-primary);
+    }
+
+    .content-block {
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .key-point {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .key-point strong {
+      color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 40px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--accent);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/methodology/">← Back to Methodology</a>
+    </div>
+
+    <header>
+      <h1>Weak Point Analysis</h1>
+      <p class="subtitle">The Specialization: Surgical Exercise Routing Based on Your Sticking Point</p>
+    </header>
+
+    <div class="nav-bar">
+      <a href="/methodology/">Index</a>
+      <a href="/methodology/macrocycle.html">Macrocycle</a>
+      <a href="/methodology/the-load-engine.html">Load Engine</a>
+      <a href="/methodology/readiness-and-rpee.html">Readiness</a>
+      <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
+      <a href="/methodology/program-architectures.html">Programs</a>
+    </div>
+
+    <h2>The Three Weak Points</h2>
+
+    <p>Every bench presser has a sticking point—a range where the bar slows or stops. CMS categorizes these into three archetypal weak points:</p>
+
+    <div class="content-block">
+      <h3>1. Off-Chest (Bottom Position)</h3>
+      <p>The bar stalls immediately after leaving the chest. You lack the explosive power from the bottom, or your chest/front delts aren't driving hard enough.</p>
+      <p><strong>Secondary Lift:</strong> Spoto Press (paused, 1 inch off chest)</p>
+      <p><strong>Accessory:</strong> Dumbbell Flyes 2×12 (pec activation, range of motion)</p>
+
+      <h3>2. Mid-Range (Stall Midway)</h3>
+      <p>The bar moves well off the chest, but stalls 2–4 inches up. You lack midrange strength or scapular stability.</p>
+      <p><strong>Secondary Lift:</strong> Pause Bench (2 sec pause midway) or 2″ Board Press</p>
+      <p><strong>Accessory:</strong> Seal Rows 2×10 (scapular stability, back strength)</p>
+
+      <h3>3. Lockout (Top Position)</h3>
+      <p>The bar moves well until near the top, then stalls. Your triceps and front delts lack lockout strength.</p>
+      <p><strong>Secondary Lift:</strong> Close-Grip Bench Press (triceps emphasis)</p>
+      <p><strong>Accessory:</strong> Skull Crushers 2×10 (triceps isolation, lockout strength)</p>
+    </div>
+
+    <div class="key-point">
+      <strong>No Weak Point?</strong> If you're balanced across all ranges, CMS defaults to the Larsen Press (a neutral-grip strength builder) with no specific accessory.
+    </div>
+
+    <h2>The Weak Point Selection Flow</h2>
+
+    <p>You identify your weak point during <strong>onboarding</strong> (Week 1 of your first program). CMS asks you to describe where the bar stalls, then maps your answer to one of the three categories.</p>
+
+    <p>After the first block, you can <strong>reassess</strong> at a block gate. Did your off-chest weakness improve? Switch to mid-range focus. This flexibility allows CMS to adapt to your progress.</p>
+
+    <h2>How CMS Routes Exercises</h2>
+
+    <p>The weak point directly determines exercise selection in two ways:</p>
+
+    <div class="content-block">
+      <h3>1. Secondary Lift Selection (Skill & Strength Blocks)</h3>
+      <p>Your secondary lift rotates based on weak point and block type:</p>
+
+      <table>
+        <tr>
+          <th>Weak Point</th>
+          <th>Skill Block Secondary</th>
+          <th>Strength Block Secondary</th>
+        </tr>
+        <tr>
+          <td>Off-Chest</td>
+          <td>Spoto Press</td>
+          <td>Competition Bench</td>
+        </tr>
+        <tr>
+          <td>Mid-Range</td>
+          <td>Pause Bench (2 sec)</td>
+          <td>2″ Board Press</td>
+        </tr>
+        <tr>
+          <td>Lockout</td>
+          <td>Close-Grip Bench</td>
+          <td>Close-Grip Bench</td>
+        </tr>
+      </table>
+
+      <h3>2. Accessory Selection</h3>
+      <p>Accessories are paired with the secondary lift to reinforce weak-point-specific adaptation:</p>
+      <ul>
+        <li><strong>Off-chest:</strong> Flyes (chest range)</li>
+        <li><strong>Mid-range:</strong> Rows (scapular stability)</li>
+        <li><strong>Lockout:</strong> Skull Crushers (triceps)</li>
+      </ul>
+    </div>
+
+    <h2>Real-World Example: Off-Chest Case Study</h2>
+
+    <div class="content-block">
+      <h3>Lifter Profile</h3>
+      <p>Jake, bench press 1RM: 315 lbs. Bar stalls 1–2 inches off the chest.</p>
+
+      <h3>Week 1 (Skill Block)</h3>
+      <ul>
+        <li>Main: Bench Press 5×5 @ RPE 6–7</li>
+        <li>Secondary: Spoto Press (paused 1 inch off chest) 4×5 @ RPE 6.5</li>
+        <li>Accessory: Dumbbell Flyes 2×12 @ RPE 5–6</li>
+      </ul>
+
+      <p>The Spoto Press trains the bottom-range explosiveness. Flyes activate the pecs through a larger range of motion.</p>
+
+      <h3>Week 5 (Strength Block)</h3>
+      <ul>
+        <li>Main: Bench Press 4×4 @ RPE 7–8</li>
+        <li>Secondary: Competition Bench (full range) 3×3 @ RPE 7.5</li>
+        <li>Accessory: Dumbbell Flyes 2×12 @ RPE 5–6</li>
+      </ul>
+
+      <p>By now, Spoto Press weakness has mostly resolved. The program shifts to competition bench at higher intensity, maintaining flyes for pec drive and resilience.</p>
+
+      <h3>Week 9 (Peak Block)</h3>
+      <ul>
+        <li>Main: Bench Press 3×3, 1×1 @ RPE 8–9</li>
+        <li>Secondary: Heavy Bench Competition Variation 2×2 @ RPE 8.5</li>
+        <li>Accessory: Dumbbell Flyes 2×8 (heavier weight) @ RPE 6–7</li>
+      </ul>
+
+      <p>The focus shifts to meet-specific intensity. Off-chest strength is now solid; CMS reinforces it with heavier flyes to maintain pec resilience.</p>
+
+      <h3>Result</h3>
+      <p>After 13 weeks, Jake's competition bench (bottom-range drive + full-range power) improved from 315 to 330 lbs—a 15-lb PR specifically in the weak point area.</p>
+    </div>
+
+    <h2>Why This Works</h2>
+
+    <ul>
+      <li><strong>Specificity:</strong> Each weak point has a unique secondary lift that directly targets the sticking point range</li>
+      <li><strong>Consistency:</strong> You address the same weakness every session (secondary lift + accessory), allowing adaptation</li>
+      <li><strong>Data-Driven:</strong> Weak point routing is informed by bench press biomechanics research, not guesswork</li>
+      <li><strong>Progressive Overload:</strong> As weakness improves, the program shifts focus, preventing plateau</li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+
+    <ul>
+      <li>Three archetypal weak points: off-chest, mid-range, lockout</li>
+      <li>Each weak point has a specific secondary lift + accessory pairing</li>
+      <li>Weak point selection happens at onboarding and can be reassessed at block gates</li>
+      <li>Secondary lifts and accessories are automatically routed based on your weak point</li>
+      <li>Specialization accelerates improvement in your specific sticking point</li>
+    </ul>
+
+    <div class="footer">
+      <p class="footer-text">Fix your sticking point. Everything else follows.</p>
+      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+    </div>
+  </div>
+</body>
+</html>
