@@ -23,6 +23,8 @@
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
+      --blue: #3b82f6;
+      --blue-glow: rgba(59, 130, 246, 0.1);
     }
 
     * {
@@ -226,6 +228,20 @@
       color: var(--accent);
       font-size: 13px;
     }
+    .lifters-note {
+      background: var(--blue-glow);
+      border-left: 4px solid var(--blue);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 4px 12px 12px 4px;
+    }
+
+    .lifters-note p {
+      font-style: italic;
+      font-weight: 500;
+      margin: 0;
+      color: var(--text-secondary);
+    }
   </style>
 </head>
 <body>
@@ -246,6 +262,10 @@
       <a href="/methodology/readiness-and-rpee.html">Readiness</a>
       <a href="/methodology/joint-health-and-longevity.html">Joint Health</a>
       <a href="/methodology/program-architectures.html">Programs</a>
+    </div>
+
+    <div class="lifters-note">
+      <p>"Everyone stalls. This engine identifies exactly where your lift is failing and automatically swaps in the movements proven to blast through that specific plateau."</p>
     </div>
 
     <h2>The Three Weak Points</h2>
