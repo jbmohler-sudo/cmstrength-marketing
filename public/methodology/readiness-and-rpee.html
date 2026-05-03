@@ -36,7 +36,7 @@
     html, body {
       height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: linear-gradient(135deg, var(--surface) 0%, #0f172a 100%);
+      background: #000000;
       color: var(--text-primary);
       line-height: 1.6;
     }
@@ -242,13 +242,61 @@
       margin: 0;
       color: var(--text-secondary);
     }
+
+    /* ── Site nav header ── */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0 32px 0;
+      border-bottom: 1px solid rgba(6, 182, 212, 0.15);
+      margin-bottom: 40px;
+    }
+
+    .site-header .logo-svg {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .launch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .launch-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.55);
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="breadcrumb">
-      <a href="/methodology/">← Back to Methodology</a>
-    </div>
+    <nav class="site-header">
+      <a href="/" aria-label="Center Mass Strength home">
+        <svg class="logo-svg" viewBox="0 0 260 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="38" cy="26" rx="38" ry="22" fill="rgba(6,182,212,0.07)"/>
+          <text x="6" y="38" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="38" font-weight="800" fill="white" style="filter:drop-shadow(0 0 8px rgba(6,182,212,0.6))">CM</text>
+          <rect x="84" y="6" width="2.5" height="40" rx="1.25" fill="#06b6d4"/>
+          <text x="94" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="1">STRENGTH</text>
+          <rect x="96" y="35" width="52" height="14" rx="3" fill="#1a1a1a" stroke="#444" stroke-width="0.8"/>
+          <text x="122" y="46" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="10" font-weight="700" fill="#06b6d4" text-anchor="middle" letter-spacing="0.5">.FIT</text>
+        </svg>
+      </a>
+      <a href="https://app.cmstrength.fit" class="launch-btn">Launch App ↗</a>
+    </nav>
 
     <header>
       <h1>Readiness & RPE</h1>
@@ -414,6 +462,7 @@
     <div class="footer">
       <p class="footer-text">Train hard, recover smart. Readiness-driven autoregulation does both.</p>
       <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+      <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(6,182,212,0.5);margin-top:12px;font-weight:600;">Center Mass Strength &nbsp;·&nbsp; Never Give Up</p>
     </div>
   </div>
 </body>
