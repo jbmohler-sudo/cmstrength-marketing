@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.next/
+dist/
+build/
+.cache/
+*.log
+*.zip
+*.png
+*.jpg
+*.mp4
