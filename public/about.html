@@ -53,12 +53,19 @@
       text-decoration: none;
       display: flex;
       align-items: center;
+      overflow: hidden;
+      height: 60px;
     }
 
     .brand img {
-      height: 64px;
+      height: 200px;
       width: auto;
       display: block;
+      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      padding: 0;
+      object-fit: contain;
     }
 
     .btn-launch {
