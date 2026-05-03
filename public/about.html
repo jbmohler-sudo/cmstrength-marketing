@@ -52,14 +52,19 @@
 
     .brand {
       text-decoration: none;
-      display: flex;
-      align-items: center;
+      display: block;
+      width: 170px;
+      height: 36px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .brand img {
-      height: 48px;
+      height: 200px;
       width: auto;
       display: block;
+      margin-top: -76px;
+      margin-left: -28px;
     }
 
     .btn-launch {
@@ -303,8 +308,8 @@
 <body>
   <header>
     <nav class="nav">
-      <a href="/" class="brand" aria-label="Center Mass Strength home">
-        <img src="/images/logo.png" alt="CM Strength .fit">
+      <a href="./index.html" class="brand" aria-label="Center Mass Strength home">
+        <img src="./images/logo.png" alt="CM Strength .fit">
       </a>
       <div class="nav-links">
         <a href="/landing.html">Home</a>

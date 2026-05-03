@@ -64,14 +64,19 @@
 
     .brand {
       text-decoration: none;
-      display: flex;
-      align-items: center;
+      display: block;
+      width: 170px;
+      height: 36px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .brand img {
-      height: 48px;
+      height: 200px;
       width: auto;
       display: block;
+      margin-top: -76px;
+      margin-left: -28px;
     }
 
     .nav-links {
@@ -440,7 +445,7 @@
   <header>
     <nav class="nav shell">
       <a class="brand" href="#top" aria-label="Center Mass Strength home">
-        <img src="/images/logo.png" alt="CM Strength .fit">
+        <img src="./images/logo.png" alt="CM Strength .fit">
       </a>
       <div class="nav-links">
         <a href="#programs">Programs</a>
