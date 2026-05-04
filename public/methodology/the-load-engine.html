@@ -266,10 +266,21 @@
       margin-bottom: 40px;
     }
 
-    .site-header .logo-img {
-      height: 48px;
+    .brand {
+      text-decoration: none;
+      display: block;
+      width: 170px;
+      height: 36px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .brand img {
+      height: 200px;
       width: auto;
       display: block;
+      margin-top: -76px;
+      margin-left: -28px;
+      filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.4));
     }
 
     .launch-btn {
@@ -277,31 +288,34 @@
       align-items: center;
       gap: 6px;
       padding: 10px 22px;
-      background: linear-gradient(135deg, #00FFFF 0%, #00FFFF 100%);
-      color: #fff;
+      background: #00FFFF;
+      color: #000;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 700;
       font-size: 13px;
       letter-spacing: 0.3px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.35);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
       transition: all 0.25s ease;
       white-space: nowrap;
     }
 
     .launch-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.55);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      background: #E0FFFF;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <nav class="site-header">
-      <a href="/" aria-label="Center Mass Strength home">
-        <img class="logo-img" src="../images/logo.png" alt="CM Strength .fit">
-      </a>
-      <a href="https://app.cmstrength.fit" class="launch-btn">Launch App ↗</a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a class="brand" href="/index.html" aria-label="Center Mass Strength home">
+          <img src="../images/logo.png" alt="CM Strength .fit">
+        </a>
+      </div>
+      <a href="/index.html#join-beta" class="launch-btn">CLAIM BETA SLOT</a>
     </nav>
 
     <header>
