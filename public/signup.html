@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Granted — Center Mass Strength</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --bg-card: rgba(13, 17, 23, 0.6);
+      --border: rgba(0, 255, 255, 0.15);
+      --text: #ffffff;
+      --muted: #8899a6;
+      --blue: #00FFFF;
+      --blue-glow: rgba(0, 255, 255, 0.15);
+      --font: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: var(--font);
+      color: var(--text);
+    }
+
+    /* ─── Ambient Background ─── */
+    .ambient-glow {
+      position: fixed;
+      top: -10%; left: -10%;
+      width: 60%; height: 60%;
+      background: radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Page Shell ─── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      backdrop-filter: blur(12px);
+    }
+
+    /* ─── Typography ─── */
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--blue);
+      margin-bottom: 1.75rem;
+      opacity: 0.8;
+    }
+
+    /* The massive welcome headline — program name in full cyan */
+    .welcome-headline {
+      font-size: clamp(2.4rem, 8vw, 3.8rem);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--blue);
+      text-shadow:
+        0 0 30px rgba(0, 255, 255, 0.6),
+        0 0 80px rgba(0, 255, 255, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .sub-headline {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ─── CTA Button ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 18px 32px;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-weight: 800;
+      font-style: italic;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* High-glow primary — more aggressive than the marketing site */
+    .btn-primary {
+      background: var(--blue);
+      color: #000;
+      box-shadow:
+        0 0 30px rgba(0, 255, 255, 0.5),
+        0 0 80px rgba(0, 255, 255, 0.25),
+        0 0 120px rgba(0, 255, 255, 0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.08);
+      box-shadow:
+        0 0 40px rgba(0, 255, 255, 0.7),
+        0 0 100px rgba(0, 255, 255, 0.35),
+        0 0 160px rgba(0, 255, 255, 0.15);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--blue);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 255, 255, 0.05);
+    }
+
+    /* ─── Loading State ─── */
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 255, 255, 0.12);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1.5rem;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #state-loading p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ─── Error State ─── */
+    .error-headline {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    #state-error p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── Utility ─── */
+    .hidden { display: none !important; }
+
+    @media (max-width: 480px) {
+      .card { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <div class="page">
+    <div class="card">
+
+      <!-- ① Loading: visible by default while the SDK exchanges the token -->
+      <div id="state-loading">
+        <div class="spinner"></div>
+        <p>Verifying your access link&hellip;</p>
+      </div>
+
+      <!-- ② Authenticated: massive cyan welcome + high-glow launch button -->
+      <div id="state-ready" class="hidden">
+        <span class="eyebrow">Beta Access Confirmed</span>
+        <!-- e.g. "WELCOME, BENCH SPECIALIST." injected by JS -->
+        <h1 class="welcome-headline" id="welcome-headline"></h1>
+        <p class="sub-headline">
+          Your account is live and your program is queued up.
+          Hit the button to enter the app and start your first session.
+        </p>
+        <a id="app-link" href="#" class="btn btn-primary">ENTER THE APP &rarr;</a>
+      </div>
+
+      <!-- ③ Error: bad or expired magic link -->
+      <div id="state-error" class="hidden">
+        <span class="eyebrow">Access Denied</span>
+        <h2 class="error-headline">Link expired.</h2>
+        <p>
+          Magic links are single-use and expire after 24 hours.
+          Head back and request a new one — takes five seconds.
+        </p>
+        <a href="/#join-beta" class="btn btn-secondary">GET A NEW LINK</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function () {
+      var SUPABASE_URL      = 'https://jxwrlegxmekzjtqoldah.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4d3JsZWd4bWVremp0cW9sZGFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTY1MjgsImV4cCI6MjA4NzM3MjUyOH0.-6C9BtsGpcGmj9hiAZvv504vek0LsSIK3xJfKUdffoU';
+
+      // UPDATE: wherever the app should launch after onboarding
+      var APP_URL = 'https://app.cmstrength.fit';
+
+      // Maps DB value → display label for the welcome headline
+      var PROGRAM_LABELS = {
+        'sbd':              'SBD ATHLETE',
+        'bench-spec':       'BENCH SPECIALIST',
+        'jacked-and-strong':'JACKED & STRONG'
+      };
+
+      var client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // ── Helpers ──────────────────────────────────────────────────
+      var STATES = ['state-loading', 'state-ready', 'state-error'];
+      function show(id) {
+        STATES.forEach(function (s) {
+          document.getElementById(s).classList.toggle('hidden', s !== id);
+        });
+      }
+
+      // ── Scenario ①②③: Session Catch + Metadata Hand-off + Handoff ──
+      function onAuthenticated(session) {
+        var meta    = (session.user && session.user.user_metadata) || {};
+        var program = meta.program_interest || '';
+        var label   = PROGRAM_LABELS[program] || 'YOUR PROGRAM';
+
+        // Massive cyan headline: "WELCOME, BENCH SPECIALIST."
+        document.getElementById('welcome-headline').textContent = 'WELCOME, ' + label + '.';
+
+        // Final handoff button → app dashboard
+        document.getElementById('app-link').href = APP_URL;
+
+        show('state-ready');
+      }
+
+      // ── Scenario ①: Smooth Catch via onAuthStateChange ──────────
+      // Supabase SDK automatically parses the access_token from the URL
+      // hash. onAuthStateChange fires SIGNED_IN once the session is live.
+      client.auth.onAuthStateChange(function (event, session) {
+        if (event === 'SIGNED_IN' && session) {
+          onAuthenticated(session);
+        }
+      });
+
+      // ── Fallback: already has a session (page re-visit) ──────────
+      client.auth.getSession().then(function (result) {
+        var session = result.data && result.data.session;
+        if (session) {
+          // Already authenticated — no need to wait for onAuthStateChange
+          onAuthenticated(session);
+        } else if (!window.location.hash.includes('access_token')) {
+          // No token in URL and no existing session — bad/expired link
+          show('state-error');
+        }
+        // If hash is present but session isn't ready yet, onAuthStateChange handles it
+      });
+
+    })();
+  </script>
+</body>
+</html>

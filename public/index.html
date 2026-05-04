@@ -517,7 +517,10 @@
         </a>
         <span class="tag" style="margin: 0; font-size: 0.7rem; padding: 0.3rem 0.6rem; letter-spacing: 0.05em; border-color: rgba(0, 255, 255, 0.3);">BETA STATUS: 200 SLOTS TOTAL</span>
       </div>
-      <a class="btn btn-primary" href="#join-beta">CLAIM BETA SLOT</a>
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <a class="btn btn-secondary" href="https://app.cmstrength.fit" style="padding: 10px 20px; border-color: rgba(0, 255, 255, 0.4); color: var(--blue);">OPEN APP</a>
+        <a class="btn btn-primary" href="#join-beta">CLAIM BETA SLOT</a>
+      </div>
     </nav>
   </header>
 
@@ -529,6 +532,7 @@
         <div class="hero-actions" style="margin-top: 48px;">
           <a class="btn btn-primary" href="#join-beta" style="box-shadow: 0 0 50px rgba(0, 255, 255, 0.4); font-size: 1.1rem; padding: 18px 36px;">CLAIM BETA SLOT</a>
           <a class="btn btn-secondary" href="#programs" style="font-size: 1.1rem; padding: 18px 36px;">VIEW PROGRAMS</a>
+          <a class="btn btn-secondary" href="https://app.cmstrength.fit" style="font-size: 1.1rem; padding: 18px 36px; border-color: rgba(0, 255, 255, 0.4); color: var(--blue);">OPEN APP →</a>
         </div>
       </div>
     </section>
@@ -734,26 +738,27 @@
           Secure your spot below.
         </p>
         
-        <form id="beta-form" onsubmit="event.preventDefault(); document.getElementById('beta-form').style.display='none'; document.getElementById('beta-success').style.display='block';" style="text-align: left; display: flex; flex-direction: column; gap: 1.2rem;">
+        <form id="beta-form" style="text-align: left; display: flex; flex-direction: column; gap: 1.2rem;">
           <div>
-            <label for="email" style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Email Address</label>
-            <input type="email" id="email" required placeholder="lifter@example.com" style="width: 100%; padding: 14px 16px; background: rgba(13, 17, 23, 0.8); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 8px; color: #fff; font-family: var(--font); font-size: 1rem; outline: none; transition: border-color 0.2s;">
+            <label for="beta-email" style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Email Address</label>
+            <input type="email" id="beta-email" required placeholder="lifter@example.com" style="width: 100%; padding: 14px 16px; background: rgba(13, 17, 23, 0.8); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 8px; color: #fff; font-family: var(--font); font-size: 1rem; outline: none; transition: border-color 0.2s;">
           </div>
           <div>
-            <label for="track" style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Select Your Goal</label>
-            <select id="track" required style="width: 100%; padding: 14px 16px; background: rgba(13, 17, 23, 0.8); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 8px; color: #fff; font-family: var(--font); font-size: 1rem; outline: none; appearance: none; transition: border-color 0.2s;">
+            <label for="beta-track" style="display: block; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem;">Select Your Goal</label>
+            <select id="beta-track" required style="width: 100%; padding: 14px 16px; background: rgba(13, 17, 23, 0.8); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 8px; color: #fff; font-family: var(--font); font-size: 1rem; outline: none; appearance: none; transition: border-color 0.2s;">
               <option value="" disabled selected>Choose a program...</option>
               <option value="sbd">SBD Prep</option>
-              <option value="bench">Bench Specialist</option>
-              <option value="hypertrophy">Jacked & Strong</option>
+              <option value="bench-spec">Bench Specialist</option>
+              <option value="jacked-and-strong">Jacked &amp; Strong</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; font-size: 1.1rem; padding: 18px; box-shadow: 0 0 40px rgba(0, 255, 255, 0.3); border: none; cursor: pointer;">SECURE MY SLOT</button>
+          <div id="beta-error" style="display: none; color: #f87171; font-size: 0.9rem; text-align: center;"></div>
+          <button type="submit" id="beta-submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem; font-size: 1.1rem; padding: 18px; box-shadow: 0 0 40px rgba(0, 255, 255, 0.3); border: none; cursor: pointer;">SECURE MY SLOT</button>
         </form>
 
         <div id="beta-success" style="display: none; padding: 40px 20px; border: 1px solid rgba(0, 255, 255, 0.5); border-radius: 12px; background: rgba(0, 255, 255, 0.05); margin: 0 auto;">
           <h3 style="color: var(--blue); margin-bottom: 10px;">SLOT SECURED.</h3>
-          <p style="margin: 0; color: #fff; font-weight: 500;">CHECK YOUR EMAIL FOR ONBOARDING.</p>
+          <p style="margin: 0; color: #fff; font-weight: 500;">CHECK YOUR INBOX. YOUR ACCESS LINK IS ON THE WAY.</p>
         </div>
       </div>
     </section>
@@ -789,6 +794,68 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function () {
+      var SUPABASE_URL     = 'https://jxwrlegxmekzjtqoldah.supabase.co';
+      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4d3JsZWd4bWVremp0cW9sZGFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTY1MjgsImV4cCI6MjA4NzM3MjUyOH0.-6C9BtsGpcGmj9hiAZvv504vek0LsSIK3xJfKUdffoU';
+      var REDIRECT_URL     = 'https://cmstrength.fit/signup.html';
+
+      var client  = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      var form    = document.getElementById('beta-form');
+      var success = document.getElementById('beta-success');
+      var errorEl = document.getElementById('beta-error');
+      var submit  = document.getElementById('beta-submit');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+        submit.textContent = 'LOCKING IN...';
+        submit.disabled = true;
+
+        var email   = document.getElementById('beta-email').value.trim();
+        var program = document.getElementById('beta-track').value;
+
+        try {
+          // Guard: validate program against DB constraint before touching anything
+          var VALID_PROGRAMS = ['sbd', 'bench-spec', 'jacked-and-strong'];
+          if (!VALID_PROGRAMS.includes(program)) {
+            throw new Error('Invalid program selection: ' + program);
+          }
+
+          // Step 1: Intent log — write to beta_signups regardless of prior signups
+          var { error: dbError } = await client
+            .from('beta_signups')
+            .insert({ email: email, program_interest: program });
+
+          // 23505 = unique_violation (duplicate email) — not a blocker, continue
+          if (dbError && dbError.code !== '23505') throw dbError;
+
+          // Step 2: Magic link — creates the user account if new, sends the link either way
+          var { error: authError } = await client.auth.signInWithOtp({
+            email: email,
+            options: {
+              emailRedirectTo: REDIRECT_URL,
+              data: { program_interest: program }
+            }
+          });
+
+          if (authError) throw authError;
+
+          // Both succeeded — show confirmation
+          form.style.display = 'none';
+          success.style.display = 'block';
+
+        } catch (err) {
+          console.error('[beta-signup]', err);
+          errorEl.textContent = 'Something went wrong — try again or email us directly.';
+          errorEl.style.display = 'block';
+          submit.textContent = 'SECURE MY SLOT';
+          submit.disabled = false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
   
