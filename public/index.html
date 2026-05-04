@@ -8,6 +8,8 @@
     name="description"
     content="Center Mass Strength (CMS) is the adaptive powerlifting app with specialized programs: Bench Specialization, Jacked & Strong, and SBD. Real programming engines, not recycled templates."
   >
+  <link rel="icon" type="image/png" href="/images/cms-favicon.png">
+  <link rel="apple-touch-icon" href="/images/cms-favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -70,14 +72,21 @@
     }
 
     .brand {
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      font-style: italic;
-      font-size: 1.4rem;
-      color: #fff;
       text-decoration: none;
+      display: block;
+      width: 170px;
+      height: 36px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
-    .brand span { color: var(--blue); }
+    .brand img {
+      height: 200px;
+      width: auto;
+      display: block;
+      margin-top: -76px;
+      margin-left: -28px;
+      filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.4));
+    }
 
     .nav-links {
       display: flex;
@@ -353,9 +362,47 @@
     /* FOOTER DESIGN */
     footer {
       background: #000;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--blue);
       padding: 80px 0 40px;
       position: relative;
+    }
+
+    .footer-vault {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+    }
+
+    .footer-vault h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .footer-vault ul {
+      list-style: none;
+    }
+
+    .footer-vault li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-vault a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .footer-vault a:hover {
+      color: var(--blue);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
 
     .footer-row {
@@ -363,7 +410,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      border-top: 1px solid rgba(14, 165, 233, 0.08);
       padding-top: 1.5rem;
     }
 
@@ -372,11 +418,25 @@
       font-size: 0.9rem;
     }
 
+    .footer-motto {
+      color: var(--blue);
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+      letter-spacing: 0.05em;
+      font-size: 1.1rem;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .grid,
       .split-section {
         grid-template-columns: 1fr;
+      }
+
+      .footer-vault {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .nav-links {
@@ -393,6 +453,11 @@
     }
 
     @media (max-width: 720px) {
+      .footer-vault {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
       .nav {
         padding: 0 1rem;
         height: 70px;
@@ -447,7 +512,9 @@
   <header>
     <nav class="nav shell">
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <a class="brand" href="#top">CMS<span>.fit</span></a>
+        <a class="brand" href="#top" aria-label="Center Mass Strength home">
+          <img src="./images/logo.png" alt="CM Strength .fit">
+        </a>
         <span class="tag" style="margin: 0; font-size: 0.7rem; padding: 0.3rem 0.6rem; letter-spacing: 0.05em; border-color: rgba(0, 255, 255, 0.3);">BETA STATUS: 200 SLOTS TOTAL</span>
       </div>
       <a class="btn btn-primary" href="/app">CLAIM BETA SLOT</a>
@@ -676,9 +743,32 @@
   </main>
 
   <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>The Engines</h4>
+        <ul>
+          <li><a href="/methodology/macrocycle.html">Macrocycle Architecture</a></li>
+          <li><a href="/methodology/the-load-engine.html">The Load Engine</a></li>
+          <li><a href="/methodology/readiness-and-rpee.html">Readiness & RPE</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Optimization</h4>
+        <ul>
+          <li><a href="/methodology/weak-point-analysis.html">Weak Point Analysis</a></li>
+          <li><a href="/methodology/joint-health-and-longevity.html">Joint Health & Longevity</a></li>
+          <li><a href="/methodology/program-architectures.html">Program Architectures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem;">Ready to train smarter? Join the exclusive beta.</p>
+        <a href="/app" style="color: var(--blue); font-weight: 700; display: inline-block; margin-top: 0.5rem; text-decoration: none; transition: all 0.2s;">Claim Your Beta Slot →</a>
+      </div>
+    </div>
     <div class="shell footer-row">
-      <p>Center Mass Strength</p>
-      <p>Never Give Up.</p>
+      <p>&copy; 2026 CENTER MASS STRENGTH</p>
+      <p class="footer-motto">NEVER GIVE UP</p>
     </div>
   </footer>
 
