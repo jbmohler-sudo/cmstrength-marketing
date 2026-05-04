@@ -257,6 +257,83 @@
       box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
       background: #E0FFFF;
     }
+      /* FOOTER DESIGN */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--blue);
+      padding: 80px 0 40px;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    .footer-vault {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+    }
+
+    .footer-vault h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .footer-vault ul {
+      list-style: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .footer-vault li {
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-vault a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .footer-vault a:hover {
+      color: var(--blue);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.5rem;
+    }
+
+    .footer-row p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .footer-motto {
+      color: var(--blue) !important;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+      letter-spacing: 0.05em;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-vault {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -351,14 +428,39 @@
       </div>
     </div>
 
-    <div class="footer">
-      <p class="footer-text">
-        Ready to experience adaptive bench press programming backed by engineering and science?
-      </p>
-      <a href="/index.html#join-beta" class="cta-button">Secure Beta Slot</a>
-      <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(6,182,212,0.5);margin-top:12px;font-weight:600;">Center Mass Strength &nbsp;·&nbsp; Never Give Up</p>
+      </div> <!-- End container -->
+
+  <footer>
+    <div class="container" style="padding-top: 0; padding-bottom: 0;">
+      <div class="footer-vault">
+        <div>
+          <h4>The Engines</h4>
+          <ul>
+            <li><a href="/methodology/macrocycle.html">Macrocycle Architecture</a></li>
+            <li><a href="/methodology/the-load-engine.html">The Load Engine</a></li>
+            <li><a href="/methodology/readiness-and-rpee.html">Readiness & RPE</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Optimization</h4>
+          <ul>
+            <li><a href="/methodology/weak-point-analysis.html">Weak Point Analysis</a></li>
+            <li><a href="/methodology/joint-health-and-longevity.html">Joint Health & Longevity</a></li>
+            <li><a href="/methodology/program-architectures.html">Program Architectures</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Launch</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem;">Ready to train smarter? Join the exclusive beta.</p>
+          <a href="/index.html#join-beta" style="color: var(--blue); font-weight: 700; display: inline-block; margin-top: 0.5rem; text-decoration: none; transition: all 0.2s;">Claim Your Beta Slot →</a>
+        </div>
+      </div>
+      <div class="footer-row">
+        <p>&copy; 2026 CENTER MASS STRENGTH</p>
+        <p class="footer-motto">NEVER GIVE UP</p>
+      </div>
     </div>
-  </div>
+  </footer>
   <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
     <a href="/index.html#join-beta" style="display: flex; align-items: center; gap: 8px; background: #000; border: 1px solid #00FFFF; color: #00FFFF; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.4)'; this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.boxShadow='0 0 20px rgba(0, 255, 255, 0.2)'; this.style.background='#000';">
       Return to Beta Signup &rarr;
