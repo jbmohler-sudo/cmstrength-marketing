@@ -7,9 +7,9 @@
   <title>Readiness & RPE | CMS Technical Methodology</title>
   <style>
     :root {
-      --primary: #3b82f6;
-      --primary-dark: #1e40af;
-      --primary-light: #60a5fa;
+      --primary: #00FFFF;
+      --primary-dark: #008B8B;
+      --primary-light: #E0FFFF;
       --secondary: #1f2937;
       --surface: #111827;
       --surface-light: #1f2937;
@@ -17,13 +17,13 @@
       --text-primary: #f3f4f6;
       --text-secondary: #d1d5db;
       --text-tertiary: #9ca3af;
-      --accent: #06b6d4;
-      --accent-glow: rgba(6, 182, 212, 0.15);
-      --border: rgba(59, 130, 246, 0.2);
+      --accent: #00FFFF;
+      --accent-glow: rgba(0, 255, 255, 0.15);
+      --border: rgba(0, 255, 255, 0.2);
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
-      --blue: #3b82f6;
+      --blue: #00FFFF;
       --blue-glow: rgba(59, 130, 246, 0.1);
     }
 
@@ -129,7 +129,7 @@
     }
 
     .nav-bar a:hover {
-      background: rgba(59, 130, 246, 0.2);
+      background: rgba(0, 255, 255, 0.2);
       border-color: var(--primary);
       color: var(--text-primary);
     }
@@ -202,12 +202,12 @@
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
-      box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
     }
 
     .cta-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
     }
 
     ul {
@@ -249,7 +249,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 0 32px 0;
-      border-bottom: 1px solid rgba(6, 182, 212, 0.15);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.15);
       margin-bottom: 40px;
     }
 
@@ -264,21 +264,21 @@
       align-items: center;
       gap: 6px;
       padding: 10px 22px;
-      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      background: linear-gradient(135deg, #00FFFF 0%, #00FFFF 100%);
       color: #fff;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 700;
       font-size: 13px;
       letter-spacing: 0.3px;
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.35);
       transition: all 0.25s ease;
       white-space: nowrap;
     }
 
     .launch-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(6, 182, 212, 0.55);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.55);
     }
   </style>
 </head>
@@ -454,9 +454,15 @@
 
     <div class="footer">
       <p class="footer-text">Train hard, recover smart. Readiness-driven autoregulation does both.</p>
-      <a href="https://app.cmstrength.fit" class="cta-button">Launch App</a>
+      <a href="/index.html#join-beta" class="cta-button">Secure Beta Slot</a>
       <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(6,182,212,0.5);margin-top:12px;font-weight:600;">Center Mass Strength &nbsp;·&nbsp; Never Give Up</p>
     </div>
   </div>
+  <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
+    <a href="/index.html#join-beta" style="display: flex; align-items: center; gap: 8px; background: #000; border: 1px solid #00FFFF; color: #00FFFF; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 0 20px rgba(0, 255, 255, 0.2); transition: all 0.2s;" onmouseover="this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.4)'; this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.boxShadow='0 0 20px rgba(0, 255, 255, 0.2)'; this.style.background='#000';">
+      Return to Beta Signup &rarr;
+    </a>
+  </div>
 </body>
 </html>
+
