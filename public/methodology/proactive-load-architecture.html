@@ -49,7 +49,22 @@
       margin-bottom: 72px;
     }
 
-    .brand img { height: 36px; display: block; }
+    .brand {
+      display: block;
+      width: 170px;
+      height: 36px;
+      overflow: hidden;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .brand img {
+      height: 200px;
+      width: auto;
+      display: block;
+      margin-top: -76px;
+      margin-left: -28px;
+      filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.4));
+    }
 
     .launch-btn {
       display: inline-block;
