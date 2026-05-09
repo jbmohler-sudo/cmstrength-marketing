@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Experience | CMS</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    :root {
+      --blue: #00FFFF;
+      --blue-dark: #008B8B;
+      --blue-light: #E0FFFF;
+      --surface-light: #1f2937;
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-tertiary: #9ca3af;
+      --accent-glow: rgba(0, 255, 255, 0.15);
+      --border: rgba(0, 255, 255, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #000;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* ── NAV ── */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 72px;
+    }
+
+    .brand img { height: 36px; display: block; }
+
+    .launch-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+    }
+    .launch-btn:hover {
+      background: var(--accent-glow);
+      box-shadow: 0 0 16px rgba(0,255,255,0.25);
+    }
+
+    .method-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 64px;
+    }
+    .method-nav a {
+      padding: 6px 14px;
+      border: 1px solid rgba(0,255,255,0.2);
+      border-radius: 20px;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    .method-nav a:hover, .method-nav a.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--accent-glow);
+    }
+
+    /* ── HERO ── */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 0%, var(--blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.7;
+      margin-bottom: 80px;
+    }
+
+    /* ── FLOW SECTION ── */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 80px;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 24px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+
+    /* vertical connector line */
+    .flow-step:not(:last-child) .step-num::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 48px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(0,255,255,0.3), rgba(0,255,255,0.05));
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--blue);
+      flex-shrink: 0;
+      background: rgba(0,255,255,0.04);
+      position: relative;
+    }
+
+    .step-body { padding-top: 10px; }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .step-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .step-desc strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .step-desc em {
+      font-style: normal;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ── PROGRAMS SECTION ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 32px;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .prog-card {
+      padding: 28px 24px;
+      background: rgba(31,41,55,0.4);
+      border: 1px solid rgba(0,255,255,0.15);
+      border-radius: 10px;
+      transition: all 0.25s;
+    }
+
+    .prog-card:hover {
+      border-color: var(--blue);
+      background: rgba(31,41,55,0.7);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .prog-tag {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .prog-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .prog-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── DIFFERENCE SECTION ── */
+    .diff-section {
+      margin-bottom: 80px;
+    }
+
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .diff-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .diff-table th:first-child { color: var(--text-tertiary); }
+    .diff-table th:nth-child(2) { color: var(--text-tertiary); }
+    .diff-table th:nth-child(3) { color: var(--blue); }
+
+    .diff-table td {
+      padding: 14px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .diff-table td:first-child {
+      color: var(--text-tertiary);
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .diff-table td:nth-child(2) {
+      color: var(--text-secondary);
+    }
+
+    .diff-table td:nth-child(3) {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .diff-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      text-align: center;
+      padding: 64px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cta-block h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-block p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 36px;
+      background: var(--blue);
+      color: #000;
+      font-weight: 800;
+      font-size: 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--blue-light);
+      box-shadow: 0 0 30px rgba(0,255,255,0.4);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding: 48px 0 32px;
+    }
+
+    .footer-vault {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0,255,255,0.12);
+    }
+
+    .footer-vault h4 {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .footer-vault ul { list-style: none; }
+    .footer-vault li { margin-bottom: 10px; }
+    .footer-vault a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-vault a:hover { color: var(--blue); }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-row p { color: var(--text-tertiary); font-size: 13px; }
+    .footer-motto {
+      color: var(--blue) !important;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 15px;
+      text-shadow: 0 0 12px rgba(0,255,255,0.5);
+    }
+
+    .fixed-cta {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+    }
+
+    .fixed-cta a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0,255,255,0.2);
+      transition: all 0.2s;
+    }
+
+    .fixed-cta a:hover {
+      background: rgba(0,255,255,0.08);
+      box-shadow: 0 0 30px rgba(0,255,255,0.35);
+    }
+
+    @media (max-width: 640px) {
+      .flow-step { grid-template-columns: 36px 1fr; gap: 16px; }
+      .footer-vault { grid-template-columns: 1fr; }
+      .diff-table td:nth-child(2) { display: none; }
+      .diff-table th:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="site-header">
+    <a class="brand" href="/index.html" aria-label="Center Mass Strength home">
+      <img src="../images/logo.png" alt="CM Strength">
+    </a>
+    <a href="/index.html#join-beta" class="launch-btn">CLAIM BETA SLOT</a>
+  </nav>
+
+  <nav class="method-nav">
+    <a href="/methodology/proactive-load-architecture.html">Architecture</a>
+    <a href="/methodology/the-experience.html" class="active">The Experience</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="eyebrow">How It Feels</div>
+  <h1>The Experience</h1>
+  <p class="hero-sub">
+    From your first check-in to your opener on meet day, every session inside CMS is shaped by the engines working behind it. Here's what that looks like in practice.
+  </p>
+
+  <!-- USER FLOW -->
+  <section style="margin-bottom: 80px;">
+    <div class="section-label">Session to Session</div>
+    <div class="flow">
+
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">You check in. The system reads you.</div>
+          <div class="step-desc">
+            Before every session, a quick pre-workout check-in captures sleep, stress, soreness, and readiness. <strong>The app doesn't ask how you feel so it can note it — it asks so it can act on it.</strong> Readiness shapes the session that's about to load.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Your session arrives already adjusted.</div>
+          <div class="step-desc">
+            Weights and volume are prescribed based on your current 1RM estimates, the block phase, and your readiness tier. <em>Nothing is static.</em> A rough night's sleep compresses the load. A peak readiness day opens the prescription up. The program meets you where you are.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">The exercise may have already rotated.</div>
+          <div class="step-desc">
+            If joint load trending data flagged a risk before you opened the app, <strong>CMS has already swapped the exercise</strong>. You see the new movement with a note explaining why. No alarm. No decision required. The rotation happened automatically to protect your training continuity.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">You train. The system watches.</div>
+          <div class="step-desc">
+            Log each set as you go. Every completed rep contributes to your joint stress accumulation, your e1RM trend, your block compliance score. <em>The data builds while you lift.</em> You don't have to think about any of it.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">The deload arrives when it's earned.</div>
+          <div class="step-desc">
+            Deloads aren't scheduled on a fixed calendar. <strong>They're triggered by the data.</strong> When fatigue accumulation, joint stress trajectory, and training response all point to the same conclusion, the system calls it. You get a deload week that's actually necessary — not one that arrived on week 4 by habit.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title">The next block is shaped by this one.</div>
+          <div class="step-desc">
+            At the end of every block, CMS runs an assessment: volume response, intensity trend, joint debt carried forward, compliance rate. <em>The next block is generated from your actual data</em> — not a generic template. Six months in, the program is genuinely yours.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <div class="step-title">Meet day. The system steps back.</div>
+          <div class="step-desc">
+            Your competition date anchors every decision the system made for the last six months. As you step onto the platform, <strong>joint load has been managed, peak timing is precise, openers are calculated.</strong> CMS got you here. The rest is yours.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs" style="margin-bottom: 80px;">
+    <div class="section-label">Choose Your Path</div>
+    <div class="programs-grid">
+
+      <div class="prog-card" id="bench">
+        <div class="prog-tag">Bench Specialist</div>
+        <div class="prog-name">2 &amp; 3 Day Bench</div>
+        <div class="prog-desc">
+          Built for lifters whose primary goal is a bigger bench. Joint load management centers on elbow and shoulder health through pressing-heavy volume blocks.
+        </div>
+      </div>
+
+      <div class="prog-card" id="jacked">
+        <div class="prog-tag">General Strength</div>
+        <div class="prog-name">Jacked &amp; Strong</div>
+        <div class="prog-desc">
+          Strength and size in balance. Less meet-specific, more athlete-focused. Structured blocks with full adaptive engine coverage across all movement patterns.
+        </div>
+      </div>
+
+      <div class="prog-card" id="sbd">
+        <div class="prog-tag">Competition Prep</div>
+        <div class="prog-name">SBD Full Power</div>
+        <div class="prog-desc">
+          Macrocycle anchored to your competition date. Squat, bench, and deadlift all managed simultaneously — joint load tracked across five joints, every block.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DIFFERENCE TABLE -->
+  <section class="diff-section">
+    <div class="section-label">CMS vs. Everything Else</div>
+    <table class="diff-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Standard Apps</th>
+          <th>CMS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Load prescription</td>
+          <td>Fixed percentages</td>
+          <td>Readiness-adjusted, e1RM-driven</td>
+        </tr>
+        <tr>
+          <td>Joint health</td>
+          <td>React to pain reports</td>
+          <td>Track trajectory, rotate before pain</td>
+        </tr>
+        <tr>
+          <td>Deload timing</td>
+          <td>Every 4 weeks by default</td>
+          <td>Triggered by actual fatigue data</td>
+        </tr>
+        <tr>
+          <td>Block progression</td>
+          <td>Same template, next cycle</td>
+          <td>Generated from your block assessment</td>
+        </tr>
+        <tr>
+          <td>Competition prep</td>
+          <td>Fixed 12-week program</td>
+          <td>Macrocycle anchored to your meet date</td>
+        </tr>
+        <tr>
+          <td>Carry-in debt</td>
+          <td>Not tracked</td>
+          <td>Measured, carried forward, managed</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Ready to train inside a system that adapts?</h2>
+    <p>Beta access is limited. Early members shape the product.</p>
+    <a href="/index.html#join-beta" class="cta-btn">Claim Your Beta Slot →</a>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="container" style="padding-top: 0; padding-bottom: 0;">
+    <div class="footer-vault">
+      <div>
+        <h4>Philosophy</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture.html">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience.html">The Experience</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/methodology/the-experience.html#bench">Bench Specialist</a></li>
+          <li><a href="/methodology/the-experience.html#jacked">Jacked &amp; Strong</a></li>
+          <li><a href="/methodology/the-experience.html#sbd">SBD Competition Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">Ready to train smarter? Join the exclusive beta.</p>
+        <a href="/index.html#join-beta" style="color: var(--blue); font-weight: 700; text-decoration: none;">Claim Your Beta Slot →</a>
+      </div>
+    </div>
+    <div class="footer-row">
+      <p>&copy; 2026 CENTER MASS STRENGTH</p>
+      <p class="footer-motto">NEVER GIVE UP</p>
+    </div>
+  </div>
+</footer>
+
+<div class="fixed-cta">
+  <a href="/index.html#join-beta">Return to Beta Signup &rarr;</a>
+</div>
+
+</body>
+</html>
