@@ -18,8 +18,8 @@
   <style>
     :root {
       --bg: #050505;
-      --blue: #0ea5e9;
-      --muted: #8899a6;
+      --accent: #D4A24C;
+      --muted: #a0aec0;
       --border: rgba(56, 189, 248, 0.08);
     }
 
@@ -40,7 +40,7 @@
       left: -10%;
       width: 60%;
       height: 60%;
-      background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.12), transparent 70%);
+      background: radial-gradient(circle at 20% 20%, rgba(212, 162, 76, 0.1), transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
@@ -73,7 +73,7 @@
       color: #fff;
       text-decoration: none;
     }
-    .brand span { color: var(--blue); }
+    .brand span { color: var(--accent); }
 
     .nav-links {
       display: flex;
@@ -94,7 +94,7 @@
     }
 
     .nav-links a:focus {
-      outline: 2px solid var(--blue);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
@@ -115,19 +115,19 @@
     }
 
     .btn-primary {
-      background: var(--blue);
+      background: var(--accent);
       color: #000;
-      box-shadow: 0 0 40px rgba(14, 165, 233, 0.12);
+      box-shadow: 0 0 40px rgba(212, 162, 76, 0.1);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
       filter: brightness(1.1);
-      box-shadow: 0 0 50px rgba(14, 165, 233, 0.3);
+      box-shadow: 0 0 50px rgba(212, 162, 76, 0.2);
     }
 
     .btn-primary:focus {
-      outline: 2px solid var(--blue);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
@@ -146,7 +146,7 @@
     }
 
     .breadcrumb a {
-      color: var(--blue);
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -240,11 +240,11 @@
     }
 
     .footer-links a:hover {
-      color: var(--blue);
+      color: var(--accent);
     }
 
     .footer-links a:focus {
-      outline: 2px solid var(--blue);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
@@ -282,11 +282,11 @@
     }
 
     .footer-social a:hover {
-      color: var(--blue);
+      color: var(--accent);
     }
 
     .footer-social a:focus {
-      outline: 2px solid var(--blue);
+      outline: 2px solid var(--accent);
       outline-offset: 2px;
     }
 
@@ -589,7 +589,7 @@
         <div class="section-divider"></div>
         <div class="content-section">
           <h2>Ready to Pick Your Program?</h2>
-          <p>Each program is built on the same adaptive engine, but optimized for different training goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/landing.html#programs" style="color: var(--blue); font-weight: 600; text-decoration: underline;">CMS has a program tailored to your goals.</a></p>
+          <p>Each program is built on the same adaptive engine, but optimized for different training goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/landing.html#programs" style="color: var(--accent); font-weight: 600; text-decoration: underline;">CMS has a program tailored to your goals.</a></p>
           <p>Start training with real algorithms today.</p>
         </div>
 

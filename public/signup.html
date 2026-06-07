@@ -11,11 +11,11 @@
     :root {
       --bg: #000000;
       --bg-card: rgba(13, 17, 23, 0.6);
-      --border: rgba(0, 255, 255, 0.15);
+      --border: rgba(212, 162, 76, 0.15);
       --text: #ffffff;
-      --muted: #8899a6;
-      --blue: #00FFFF;
-      --blue-glow: rgba(0, 255, 255, 0.15);
+      --muted: #a0aec0;
+      --accent: #D4A24C;
+      --accent-glow: rgba(212, 162, 76, 0.15);
       --font: 'Inter', sans-serif;
     }
 
@@ -33,7 +33,7 @@
       position: fixed;
       top: -10%; left: -10%;
       width: 60%; height: 60%;
-      background: radial-gradient(circle at 20% 20%, var(--blue-glow), transparent 70%);
+      background: radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -68,7 +68,7 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.3em;
-      color: var(--blue);
+      color: var(--accent);
       margin-bottom: 1.75rem;
       opacity: 0.8;
     }
@@ -81,10 +81,10 @@
       text-transform: uppercase;
       letter-spacing: -0.04em;
       line-height: 1.0;
-      color: var(--blue);
+      color: var(--accent);
       text-shadow:
-        0 0 30px rgba(0, 255, 255, 0.6),
-        0 0 80px rgba(0, 255, 255, 0.2);
+        0 0 30px rgba(212, 162, 76, 0.4),
+        0 0 80px rgba(212, 162, 76, 0.15);
       margin-bottom: 1.5rem;
     }
 
@@ -118,39 +118,39 @@
 
     /* High-glow primary — more aggressive than the marketing site */
     .btn-primary {
-      background: var(--blue);
+      background: var(--accent);
       color: #000;
       box-shadow:
-        0 0 30px rgba(0, 255, 255, 0.5),
-        0 0 80px rgba(0, 255, 255, 0.25),
-        0 0 120px rgba(0, 255, 255, 0.1);
+        0 0 30px rgba(212, 162, 76, 0.35),
+        0 0 80px rgba(212, 162, 76, 0.2),
+        0 0 120px rgba(212, 162, 76, 0.08);
     }
 
     .btn-primary:hover {
       transform: translateY(-3px);
       filter: brightness(1.08);
       box-shadow:
-        0 0 40px rgba(0, 255, 255, 0.7),
-        0 0 100px rgba(0, 255, 255, 0.35),
-        0 0 160px rgba(0, 255, 255, 0.15);
+        0 0 40px rgba(212, 162, 76, 0.5),
+        0 0 100px rgba(212, 162, 76, 0.25),
+        0 0 160px rgba(212, 162, 76, 0.15);
     }
 
     .btn-secondary {
       background: transparent;
-      color: var(--blue);
-      border: 1px solid rgba(0, 255, 255, 0.3);
+      color: var(--accent);
+      border: 1px solid rgba(212, 162, 76, 0.25);
     }
 
     .btn-secondary:hover {
-      background: rgba(0, 255, 255, 0.05);
+      background: rgba(212, 162, 76, 0.04);
     }
 
     /* ─── Loading State ─── */
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid rgba(0, 255, 255, 0.12);
-      border-top-color: var(--blue);
+      border: 3px solid rgba(212, 162, 76, 0.1);
+      border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 1.5rem;
