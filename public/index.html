@@ -10,6 +10,7 @@
   >
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="./images/hero-deadlift.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -153,6 +154,23 @@
     .hero {
       padding: 140px 0 100px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('./images/hero-deadlift.webp') center 30% / cover no-repeat;
+      opacity: 0.25;
+      mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black 30%, transparent 75%);
+    }
+
+    .hero .shell {
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
@@ -526,6 +544,7 @@
 
   <main id="top">
     <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
       <div class="shell">
         <span class="eyebrow">Adaptive Programming Built In</span>
         <h1>THE STRENGTH OPERATING SYSTEM.</h1>
