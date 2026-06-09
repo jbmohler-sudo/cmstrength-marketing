@@ -3,7 +3,7 @@
 
   <!-- Homepage (highest priority) -->
   <url>
-    <loc>https://www.cmstrength.fit/</loc>
+    <loc>https://cmstrength.fit/</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- Blog Hub -->
   <url>
-    <loc>https://www.cmstrength.fit/blog.html</loc>
+    <loc>https://cmstrength.fit/blog.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -19,7 +19,7 @@
 
   <!-- Blog Post: Program Comparison -->
   <url>
-    <loc>https://www.cmstrength.fit/blog/program-comparison.html</loc>
+    <loc>https://cmstrength.fit/blog/program-comparison.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -27,7 +27,7 @@
 
   <!-- Blog Post: Macrocycle Explained -->
   <url>
-    <loc>https://www.cmstrength.fit/blog/macrocycle-explained.html</loc>
+    <loc>https://cmstrength.fit/blog/macrocycle-explained.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -35,7 +35,7 @@
 
   <!-- Blog Post: Submaximal Training -->
   <url>
-    <loc>https://www.cmstrength.fit/blog/submaximal-training.html</loc>
+    <loc>https://cmstrength.fit/blog/submaximal-training.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -43,7 +43,7 @@
 
   <!-- Blog Post: Heavy Lifting After 50 -->
   <url>
-    <loc>https://www.cmstrength.fit/blog/heavy-lifting-after-50.html</loc>
+    <loc>https://cmstrength.fit/blog/heavy-lifting-after-50.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -51,7 +51,7 @@
 
   <!-- Contact Page -->
   <url>
-    <loc>https://www.cmstrength.fit/contact.html</loc>
+    <loc>https://cmstrength.fit/contact.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -59,7 +59,7 @@
 
   <!-- Privacy Policy -->
   <url>
-    <loc>https://www.cmstrength.fit/privacy.html</loc>
+    <loc>https://cmstrength.fit/privacy.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -67,7 +67,7 @@
 
   <!-- Terms of Service -->
   <url>
-    <loc>https://www.cmstrength.fit/terms.html</loc>
+    <loc>https://cmstrength.fit/terms.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
