@@ -4,420 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CMS Methodology | How It Works</title>
+  <meta name="description" content="How Center Mass Strength works — proactive load architecture and the training experience, without the fluff.">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <style>
-    :root {
-      --primary: #D4A24C;
-      --primary-dark: #008B8B;
-      --primary-light: #E0FFFF;
-      --secondary: #1f2937;
-      --surface: #111827;
-      --surface-light: #1f2937;
-      --surface-lighter: #374151;
-      --text-primary: #f3f4f6;
-      --text-secondary: #d1d5db;
-      --text-tertiary: #9ca3af;
-      --accent: #D4A24C;
-      --accent-glow: rgba(212, 162, 76, 0.15);
-      --border: rgba(212, 162, 76, 0.15);
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: #000000;
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    header {
-      margin-bottom: 60px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
-    }
-
-    .card {
-      background: rgba(31, 41, 55, 0.4);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: var(--primary);
-      background: rgba(31, 41, 55, 0.6);
-      box-shadow: 0 0 20px var(--accent-glow);
-      transform: translateY(-4px);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--primary-light);
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-icon {
-      font-size: 20px;
-    }
-
-    .card-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-    }
-
-    .card-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-
-    .card-link {
-      display: inline-block;
-      padding: 10px 16px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 13px;
-      transition: all 0.3s ease;
-      border: 1px solid var(--primary-light);
-    }
-
-    .card-link:hover {
-      transform: translateX(4px);
-      box-shadow: 0 0 15px rgba(212, 162, 76, 0.3);
-    }
-
-    .footer {
-      border-top: 1px solid var(--border);
-      padding-top: 40px;
-      margin-top: 60px;
-      text-align: center;
-    }
-
-    .footer-text {
-      font-size: 14px;
-      color: var(--text-tertiary);
-      margin-bottom: 20px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 30px rgba(212, 162, 76, 0.25);
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(212, 162, 76, 0.35);
-    }
-
-    .breadcrumb {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-bottom: 40px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .breadcrumb a {
-      color: var(--primary-light);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .breadcrumb a:hover {
-      color: var(--accent);
-    }
-
-    /* ── Site nav header ── */
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0 32px 0;
-      border-bottom: 1px solid rgba(212, 162, 76, 0.15);
-      margin-bottom: 40px;
-    }
-
-    .brand {
-      text-decoration: none;
-      display: block;
-      width: 170px;
-      height: 36px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .brand img {
-      height: 200px;
-      width: auto;
-      display: block;
-      margin-top: -76px;
-      margin-left: -28px;
-      
-    }
-
-    .launch-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 22px;
-      background: #D4A24C;
-      color: #000;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.3px;
-      box-shadow: 0 0 20px rgba(212, 162, 76, 0.15);
-      transition: all 0.25s ease;
-      white-space: nowrap;
-    }
-
-    .launch-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(212, 162, 76, 0.35);
-      background: #E0FFFF;
-    }
-      /* FOOTER DESIGN */
-    footer {
-      background: #000;
-      border-top: 1px solid var(--accent);
-      padding: 80px 0 40px;
-      position: relative;
-      margin-top: 60px;
-    }
-
-    .footer-vault {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(212, 162, 76, 0.15);
-    }
-
-    .footer-vault h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .footer-vault ul {
-      list-style: none;
-      padding-left: 0;
-      margin-left: 0;
-    }
-
-    .footer-vault li {
-      margin-bottom: 0.7rem;
-    }
-
-    .footer-vault a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-    }
-
-    .footer-vault a:hover {
-      color: var(--accent);
-      
-    }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1.5rem;
-    }
-
-    .footer-row p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .footer-motto {
-      color: var(--accent) !important;
-      font-weight: 900;
-      font-style: italic;
-      text-transform: uppercase;
-      
-      letter-spacing: 0.05em;
-      font-size: 1.1rem;
-    }
-
-    @media (max-width: 768px) {
-      .footer-vault {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
 </head>
 <body>
-  <div class="container">
-    <nav class="site-header">
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <a class="brand" href="/index.html" aria-label="Center Mass Strength home">
-          <img src="../images/logo.png" alt="CM Strength .fit">
-        </a>
+
+  <!-- ambient layers -->
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index.html#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index.html#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
       </div>
-      <a href="/index.html#join-beta" class="launch-btn">CLAIM BETA SLOT</a>
     </nav>
+  </header>
 
-    <header>
-      <h1>How CMS Works</h1>
-      <p class="subtitle">
-        Two pages. Everything you need to understand what makes this different — without the fluff.
-      </p>
-    </header>
-
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); max-width: 840px; margin: 0 auto 60px;">
-      <div class="card">
-        <div class="card-label">
-          <span class="card-icon">⚡</span>
-          The Philosophy
-        </div>
-        <h2 class="card-title">Proactive Load Architecture</h2>
-        <p class="card-desc">
-          Most apps react to your pain. CMS tracks the trajectory before it becomes a problem. Understand how joint load accumulation shapes every session — and why approaching the ceiling is the goal, not the warning sign.
-        </p>
-        <a href="/methodology/proactive-load-architecture.html" class="card-link">Read the Philosophy →</a>
-      </div>
-
-      <div class="card">
-        <div class="card-label">
-          <span class="card-icon">🎯</span>
-          The Flow
-        </div>
-        <h2 class="card-title">The Experience</h2>
-        <p class="card-desc">
-          From your first check-in to meet day — a walkthrough of how CMS shapes your training in real time. Seven steps, three programs, one system that actually adapts.
-        </p>
-        <a href="/methodology/the-experience.html" class="card-link">See the Experience →</a>
-      </div>
+  <main>
+    <div class="page-hero">
+      <a class="back-link" href="/index.html" style="margin-bottom:26px;">&larr; Back to home</a>
+      <span class="eyebrow">THE METHODOLOGY</span>
+      <h1>How CMS<br><span class="accent">Works</span>.</h1>
+      <p class="hero-sub">Two pages. Everything you need to understand what makes this different — without the fluff.</p>
     </div>
 
-      </div> <!-- End container -->
+    <section class="block" style="padding-top:0;">
+      <div class="grid-2" style="max-width:900px; margin-left:auto; margin-right:auto;">
+        <article class="card reveal">
+          <span class="tag">THE PHILOSOPHY</span>
+          <h3>Proactive Load Architecture</h3>
+          <p>Most apps react to your pain. CMS tracks the trajectory before it becomes a problem. Understand how joint load accumulation shapes every session — and why approaching the ceiling is the goal, not the warning sign.</p>
+          <a class="card-link" href="/methodology/proactive-load-architecture.html">Read the Philosophy &rarr;</a>
+        </article>
+        <article class="card reveal">
+          <span class="tag">THE FLOW</span>
+          <h3>The Experience</h3>
+          <p>From your first check-in to meet day — a walkthrough of how CMS shapes your training in real time. Seven steps, three programs, one system that actually adapts.</p>
+          <a class="card-link" href="/methodology/the-experience.html">See the Experience &rarr;</a>
+        </article>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="container" style="padding-top: 0; padding-bottom: 0;">
-      <div class="footer-vault">
-        <div>
-          <h4>Methodology</h4>
-          <ul>
-            <li><a href="/methodology/proactive-load-architecture.html">Proactive Load Architecture</a></li>
-            <li><a href="/methodology/the-experience.html">The Experience</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Programs</h4>
-          <ul>
-            <li><a href="/index.html#programs">Bench Specialist</a></li>
-            <li><a href="/index.html#programs">Jacked &amp; Strong</a></li>
-            <li><a href="/index.html#programs">SBD Full Power</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Launch</h4>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.8rem;">Ready to train smarter? Join the exclusive beta.</p>
-          <a href="/index.html#join-beta" style="color: var(--accent); font-weight: 700; display: inline-block; margin-top: 0.5rem; text-decoration: none; transition: all 0.2s;">Claim Your Beta Slot →</a>
-        </div>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture.html">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience.html">The Experience</a></li>
+        </ul>
       </div>
-      <div class="footer-row">
-        <p>&copy; 2026 CENTER MASS STRENGTH</p>
-        <p class="footer-motto">NEVER GIVE UP</p>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/index.html#programs">Bench Specialist</a></li>
+          <li><a href="/index.html#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index.html#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Join the beta.</p>
+        <a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
       </div>
     </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
   </footer>
-  <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
-    <a href="/index.html#join-beta" style="display: flex; align-items: center; gap: 8px; background: #000; border: 1px solid #D4A24C; color: #D4A24C; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; box-shadow: 0 0 20px rgba(212, 162, 76, 0.15); transition: all 0.2s;" onmouseover="this.style.boxShadow='none'; this.style.background='rgba(212, 162, 76, 0.08)';" onmouseout="this.style.boxShadow='0 0 20px rgba(212, 162, 76, 0.15)'; this.style.background='#000';">
-      Return to Beta Signup &rarr;
-    </a>
-  </div>
+
+  <script src="/cms-motion.js"></script>
 </body>
 </html>
-
-

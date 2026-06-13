@@ -4,607 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proactive Load Architecture | CMS</title>
+  <meta name="description" content="How Center Mass Strength treats joint load as a managed variable — tracked, trended, and acted on before you feel anything.">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <style>
-    :root {
-      --accent: #D4A24C;
-      --accent-dark: #B8862D;
-      --accent-light: #FFF8EB;
-      --surface: #111827;
-      --surface-light: #1f2937;
-      --surface-lighter: #374151;
-      --text-primary: #f3f4f6;
-      --text-secondary: #d1d5db;
-      --text-tertiary: #9ca3af;
-      --accent-glow: rgba(212, 162, 76, 0.15);
-      --border: rgba(212, 162, 76, 0.15);
-      --orange: #f97316;
-      --orange-dim: rgba(249, 115, 22, 0.7);
-      --pink: #ec4899;
-      --pink-dim: rgba(236, 72, 153, 0.7);
-      --grey-dim: rgba(156, 163, 175, 0.4);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: #000;
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
-
-    /* ── NAV ── */
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 72px;
-    }
-
-    .brand {
-      display: block;
-      width: 170px;
-      height: 36px;
-      overflow: hidden;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-    .brand img {
-      height: 200px;
-      width: auto;
-      display: block;
-      margin-top: -76px;
-      margin-left: -28px;
-      
-    }
-
-    .launch-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      transition: all 0.2s;
-    }
-    .launch-btn:hover {
-      background: var(--accent-glow);
-      box-shadow: 0 0 16px rgba(0,255,255,0.25);
-    }
-
-    /* ── NAV PILLS ── */
-    .method-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 64px;
-    }
-    .method-nav a {
-      padding: 6px 14px;
-      border: 1px solid rgba(0,255,255,0.2);
-      border-radius: 20px;
-      color: var(--text-tertiary);
-      font-size: 12px;
-      text-decoration: none;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
-    .method-nav a:hover, .method-nav a.active {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-glow);
-    }
-
-    /* ── HERO ── */
-    .eyebrow {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: clamp(36px, 6vw, 56px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 0%, var(--accent-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 620px;
-      line-height: 1.7;
-      margin-bottom: 64px;
-    }
-
-    /* ── TRAJECTORY SECTION ── */
-    .section { margin-bottom: 72px; }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 32px;
-    }
-
-    .trajectory-block {
-      border-left: 2px solid var(--border);
-      padding-left: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .traj-line {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    .traj-line em {
-      font-style: normal;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .traj-line strong {
-      color: var(--text-primary);
-      font-weight: 700;
-    }
-
-    .traj-payoff {
-      margin-top: 8px;
-      padding: 20px 24px;
-      background: rgba(0,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 17px;
-      color: var(--text-primary);
-      line-height: 1.7;
-    }
-
-    .traj-payoff em {
-      font-style: normal;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* ── CAPABILITIES ── */
-    .capabilities {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .cap-row {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      align-items: start;
-    }
-
-    .cap-row:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
-
-    .cap-label {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      padding-top: 2px;
-    }
-
-    .cap-text {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    .cap-text strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* ── CHART MOCKUP ── */
-    .chart-section {
-      margin-bottom: 72px;
-    }
-
-    .chart-wrapper {
-      background: #0d1117;
-      border: 1px solid rgba(0,255,255,0.15);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .chart-header {
-      padding: 20px 24px 0;
-    }
-
-    .coach-read-label {
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 10px;
-    }
-
-    .coach-read-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .coach-read-body {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .chart-body {
-      padding: 24px 24px 8px;
-    }
-
-    .chart-title-row {
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
-      margin-bottom: 24px;
-    }
-
-    .bars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .bar-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .bar-stack {
-      width: 100%;
-      height: 180px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-    }
-
-    /* Ceiling line */
-    .bar-stack::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: rgba(255,255,255,0.15);
-      border-top: 1px dashed rgba(255,255,255,0.2);
-    }
-
-    .bar-segment {
-      width: 100%;
-      border-radius: 2px 2px 0 0;
-      transition: opacity 0.2s;
-    }
-
-    .bar-segment.headroom {
-      background: rgba(156, 163, 175, 0.25);
-      border: 1px solid rgba(156,163,175,0.2);
-    }
-
-    .bar-segment.stress {
-      background: var(--orange-dim);
-      border-top: 1px solid var(--orange);
-    }
-
-    .bar-segment.debt {
-      background: var(--pink-dim);
-      border-top: 1px solid var(--pink);
-    }
-
-    .bar-label {
-      font-size: 11px;
-      color: var(--text-tertiary);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-
-    .chart-legend {
-      display: flex;
-      gap: 20px;
-      padding: 12px 0 20px;
-      justify-content: center;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-tertiary);
-    }
-
-    .legend-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 2px;
-    }
-
-    .chart-caption {
-      margin-top: 16px;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      text-align: center;
-      font-style: italic;
-    }
-
-    /* ── CTA ── */
-    .cta-block {
-      text-align: center;
-      padding: 64px 24px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .cta-block h2 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .cta-block p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 16px 36px;
-      background: var(--accent);
-      color: #000;
-      font-weight: 800;
-      font-size: 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: all 0.2s;
-    }
-
-    .cta-btn:hover {
-      background: var(--accent-light);
-      box-shadow: 0 0 30px rgba(0,255,255,0.4);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #000;
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-      padding: 48px 0 32px;
-    }
-
-    .footer-vault {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-bottom: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid rgba(0,255,255,0.12);
-    }
-
-    .footer-vault h4 {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .footer-vault ul { list-style: none; }
-    .footer-vault li { margin-bottom: 10px; }
-    .footer-vault a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-    .footer-vault a:hover { color: var(--accent); }
-
-    .footer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 4px;
-    }
-
-    .footer-row p { color: var(--text-tertiary); font-size: 13px; }
-    .footer-motto {
-      color: var(--accent) !important;
-      font-weight: 900;
-      font-style: italic;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-size: 15px;
-      text-shadow: 0 0 12px rgba(0,255,255,0.5);
-    }
-
-    /* fixed CTA */
-    .fixed-cta {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 9999;
-    }
-
-    .fixed-cta a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #000;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 13px;
-      padding: 12px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 0 20px rgba(0,255,255,0.2);
-      transition: all 0.2s;
-    }
-
-    .fixed-cta a:hover {
-      background: rgba(0,255,255,0.08);
-      box-shadow: 0 0 30px rgba(0,255,255,0.35);
-    }
-
-    @media (max-width: 640px) {
-      .cap-row { grid-template-columns: 1fr; gap: 8px; }
-      .footer-vault { grid-template-columns: 1fr; }
-      .bars { gap: 8px; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
 </head>
 <body>
 
-<div class="container">
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
 
-  <nav class="site-header">
-    <a class="brand" href="/index.html" aria-label="Center Mass Strength home">
-      <img src="../images/logo.png" alt="CM Strength">
-    </a>
-    <a href="/index.html#join-beta" class="launch-btn">CLAIM BETA SLOT</a>
-  </nav>
-
-  <nav class="method-nav">
-    <a href="/methodology/proactive-load-architecture.html" class="active">Architecture</a>
-    <a href="/methodology/the-experience.html">The Experience</a>
-  </nav>
-
-  <!-- HERO -->
-  <div class="eyebrow">The CMS Philosophy</div>
-  <h1>Proactive Load<br>Architecture</h1>
-  <p class="hero-sub">
-    Every adaptive training platform on the market reacts to pain. CMS is the first to treat joint load as a managed variable — tracked, trended, and acted on before you feel anything.
-  </p>
-
-  <!-- TRAJECTORY -->
-  <section class="section">
-    <div class="section-label">The Problem We Named</div>
-    <div class="trajectory-block">
-      <p class="traj-line">
-        The industry treats joint pain as a <strong>red flag event</strong> — CMS treats it as an <em>alterable trajectory</em>.
-      </p>
-      <p class="traj-line">
-        Joint stress accumulates silently across a macrocycle. No program currently tracks it. No program names it.
-      </p>
-      <p class="traj-line">
-        Approaching the ceiling used to be <em>inevitable</em>. The deload was the <em>hopeful</em> reset — reduce load, cross your fingers, get back to it.
-      </p>
-      <div class="traj-payoff">
-        CMS makes the trajectory visible. <em>Approaching it becomes the goal.</em> The deload becomes the guaranteed reset.
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index.html#system">THE SYSTEM</a>
+        <a class="nav-link" href="/methodology/index.html">METHODOLOGY</a>
+        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
       </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <a class="back-link" href="/methodology/index.html" style="margin-bottom:26px;">&larr; Methodology</a>
+      <span class="eyebrow">THE CMS PHILOSOPHY</span>
+      <h1>Proactive Load<br><span class="accent">Architecture</span>.</h1>
+      <p class="hero-sub">Every adaptive training platform on the market reacts to pain. CMS is the first to treat joint load as a managed variable — tracked, trended, and acted on before you feel anything.</p>
     </div>
-  </section>
 
-  <!-- CAPABILITIES -->
-  <section class="section">
-    <div class="section-label">How We Accomplish It</div>
-    <div class="capabilities">
-      <div class="cap-row">
-        <div class="cap-label">Joint Load</div>
-        <div class="cap-text">
-          <strong>CMS tracks joint stress as a running variable across your entire macrocycle</strong> — not session-by-session pain, but cumulative load against a personal ceiling. The system knows where you are in the block before you pick up a bar.
-        </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-label">Learned Ceiling</div>
-        <div class="cap-text">
-          <strong>Your ceiling isn't fixed — it's learned.</strong> The engine starts with population baselines and shifts toward your personal threshold with every block completed. At six months in, the system knows your joints better than any coach who hasn't watched your training log.
-        </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-label">Carry-In Debt</div>
-        <div class="cap-text">
-          <strong>Stress doesn't fully reset at the deload.</strong> CMS carries forward unresolved joint load into the next block, compressing your effective ceiling. You don't start fresh — you start accurately.
-        </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-label">Auto-Rotation</div>
-        <div class="cap-text">
-          <strong>When the trend demands it, the program rotates automatically.</strong> No flag to review, no decision to make. The exercise changes before the joint signals distress. You keep training. The system keeps managing.
-        </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-label">Comp Anchor</div>
-        <div class="cap-text">
-          <strong>Every block is shaped by your competition date.</strong> The macrocycle contracts or expands to land the peak exactly where it needs to be — and joint load is managed with that runway in mind.
-        </div>
-      </div>
+    <nav class="method-nav" style="margin-bottom:48px;">
+      <a href="/methodology/proactive-load-architecture.html" class="active">Architecture</a>
+      <a href="/methodology/the-experience.html">The Experience</a>
+    </nav>
+
+    <div class="prose">
+      <span class="section-label">The Problem We Named</span>
+      <p>The industry treats joint pain as a <strong>red flag event</strong> — CMS treats it as an <em>alterable trajectory</em>.</p>
+      <p>Joint stress accumulates silently across a macrocycle. No program currently tracks it. No program names it.</p>
+      <p>Approaching the ceiling used to be <em>inevitable</em>. The deload was the <em>hopeful</em> reset — reduce load, cross your fingers, get back to it.</p>
+      <blockquote>CMS makes the trajectory visible. <em>Approaching it becomes the goal.</em> The deload becomes the guaranteed reset.</blockquote>
     </div>
-  </section>
 
-  <!-- CHART — REAL SCREENSHOT -->
-  <section class="chart-section">
-    <div class="section-label">What It Looks Like</div>
-    <div style="border: 1px solid rgba(0,255,255,0.2); border-radius: 12px; overflow: hidden; box-shadow: 0 0 40px rgba(0,255,255,0.06);">
-      <img
-        src="../images/filmroom1.png"
-        alt="Joint Load — Block vs. Ceiling chart showing Elbow, Shoulder, Wrist, Knee, and Lower Back bars with carry-in debt, block stress, and headroom against each joint's MRJV ceiling"
-        style="width: 100%; display: block;"
-      >
+    <section class="block" style="padding-top:0; max-width:720px;">
+      <span class="section-label" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.34em; color:var(--accent); text-transform:uppercase; display:block; margin-bottom:8px;">How We Accomplish It</span>
+      <div class="capabilities">
+        <div class="cap-row">
+          <div class="cap-label">Joint Load</div>
+          <div class="cap-text"><strong>CMS tracks joint stress as a running variable across your entire macrocycle</strong> — not session-by-session pain, but cumulative load against a personal ceiling. The system knows where you are in the block before you pick up a bar.</div>
+        </div>
+        <div class="cap-row">
+          <div class="cap-label">Learned Ceiling</div>
+          <div class="cap-text"><strong>Your ceiling isn't fixed — it's learned.</strong> The engine starts with population baselines and shifts toward your personal threshold with every block completed. At six months in, the system knows your joints better than any coach who hasn't watched your training log.</div>
+        </div>
+        <div class="cap-row">
+          <div class="cap-label">Carry-In Debt</div>
+          <div class="cap-text"><strong>Stress doesn't fully reset at the deload.</strong> CMS carries forward unresolved joint load into the next block, compressing your effective ceiling. You don't start fresh — you start accurately.</div>
+        </div>
+        <div class="cap-row">
+          <div class="cap-label">Auto-Rotation</div>
+          <div class="cap-text"><strong>When the trend demands it, the program rotates automatically.</strong> No flag to review, no decision to make. The exercise changes before the joint signals distress. You keep training. The system keeps managing.</div>
+        </div>
+        <div class="cap-row">
+          <div class="cap-label">Comp Anchor</div>
+          <div class="cap-text"><strong>Every block is shaped by your competition date.</strong> The macrocycle contracts or expands to land the peak exactly where it needs to be — and joint load is managed with that runway in mind.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:0; max-width:900px;">
+      <span class="section-label" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.34em; color:var(--accent); text-transform:uppercase; display:block; margin-bottom:18px;">What It Looks Like</span>
+      <div class="shot-frame">
+        <img src="../images/filmroom1.png" alt="Joint Load — Block vs. Ceiling chart showing Elbow, Shoulder, Wrist, Knee, and Lower Back bars with carry-in debt, block stress, and headroom against each joint's MRJV ceiling">
+      </div>
+      <p class="chart-caption">No other training platform has ever built this view. The ceiling is real. The debt is real. The rotation is automatic.</p>
+    </section>
+
+    <div class="cta-block">
+      <h2>Train with a system that sees the whole trajectory.</h2>
+      <p>Beta access is limited. Early members shape the product.</p>
+      <a href="/index.html#join-beta" class="btn btn-primary">Claim Your Beta Slot &rarr;</a>
     </div>
-    <p class="chart-caption">No other training platform has ever built this view. The ceiling is real. The debt is real. The rotation is automatic.</p>
-  </section>
+  </main>
 
-  <!-- CTA -->
-  <div class="cta-block">
-    <h2>Train with a system that sees the whole trajectory.</h2>
-    <p>Beta access is limited. Early members shape the product.</p>
-    <a href="/index.html#join-beta" class="cta-btn">Claim Your Beta Slot →</a>
-  </div>
-
-</div><!-- /container -->
-
-<footer>
-  <div class="container" style="padding-top: 0; padding-bottom: 0;">
-    <div class="footer-vault">
+  <footer>
+    <div class="shell footer-vault">
       <div>
         <h4>Philosophy</h4>
         <ul>
@@ -622,20 +123,26 @@
       </div>
       <div>
         <h4>Launch</h4>
-        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">Ready to train smarter? Join the exclusive beta.</p>
-        <a href="/index.html#join-beta" style="color: var(--accent); font-weight: 700; text-decoration: none;">Claim Your Beta Slot →</a>
+        <p>Ready to train smarter? Join the beta.</p>
+        <a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
       </div>
     </div>
-    <div class="footer-row">
-      <p>&copy; 2026 CENTER MASS STRENGTH</p>
-      <p class="footer-motto">NEVER GIVE UP</p>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
     </div>
+  </footer>
+
+  <div class="fixed-cta">
+    <a href="/index.html#join-beta">Return to Beta Signup &rarr;</a>
   </div>
-</footer>
 
-<div class="fixed-cta">
-  <a href="/index.html#join-beta">Return to Beta Signup &rarr;</a>
-</div>
-
+  <script src="/cms-motion.js"></script>
 </body>
 </html>

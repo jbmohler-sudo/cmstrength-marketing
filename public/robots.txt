@@ -4,5 +4,7 @@ Disallow: /app
 Disallow: /app/
 Disallow: /.env
 Disallow: /.env.local
+Disallow: /backburner/
+Disallow: /methodology/backburner/
 
 Sitemap: https://cmstrength.fit/sitemap.xml
