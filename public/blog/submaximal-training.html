@@ -125,8 +125,32 @@
       @apply inline-block bg-red-600 hover:bg-red-700 text-white font-black py-3 px-6 rounded-lg transition-all;
     }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* CMS chrome bridge — shared nav/footer override the post's old chrome */
+    body { padding-top: 0; }
+    header.cms-chrome { position: fixed; top:0; left:0; right:0; z-index:50; }
+    main, article { position: relative; z-index: 3; }
+    article.min-h-screen, body > article { padding-top: 90px; }
+  </style>
 </head>
 <body class="bg-black text-white">
+  <header class="cms-chrome">
+    <nav class="nav">
+      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
+        <div class="sprocket"><div class="ring-out"></div><div class="ring-in"></div><div class="cross-v"></div><div class="cross-h"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/blog.html">BLOG</a>
+        <a class="nav-link" href="/index.html#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
+      </div>
+    </nav>
+  </header>
 
   <article class="min-h-screen">
 
@@ -243,7 +267,7 @@
         </div>
 
         <p class="text-zinc-300 leading-relaxed mt-8">
-          This is why <a href="/landing.html#engines" style="color: var(--red-500); font-weight: 600; text-decoration: underline;">CMS's readiness engine</a> exists—it measures your CNS readiness before each session and adjusts intensity automatically. Instead of guessing whether you're recovered enough for a heavy day, the algorithm detects subtle signs of fatigue (sleep quality, HRV, perceived exertion) and adjusts your session intensity in real time. You stay in the productive 65-85% zone even when you're fatigued, protecting your CNS and preventing bad patterns.
+          This is why <a href="/index.html#engines" style="color: var(--red-500); font-weight: 600; text-decoration: underline;">CMS's readiness engine</a> exists—it measures your CNS readiness before each session and adjusts intensity automatically. Instead of guessing whether you're recovered enough for a heavy day, the algorithm detects subtle signs of fatigue (sleep quality, HRV, perceived exertion) and adjusts your session intensity in real time. You stay in the productive 65-85% zone even when you're fatigued, protecting your CNS and preventing bad patterns.
         </p>
 
         <div class="section-divider"></div>
@@ -390,7 +414,7 @@
         </p>
 
         <p class="text-zinc-300 leading-relaxed mt-6 mb-6">
-          This is exactly how <a href="/landing.html#programs" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's block periodization engine</a> works—rotating through phases designed to build different qualities while managing fatigue systematically.
+          This is exactly how <a href="/index.html#programs" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's block periodization engine</a> works—rotating through phases designed to build different qualities while managing fatigue systematically.
         </p>
 
         <div class="section-divider"></div>
@@ -438,7 +462,7 @@
         </p>
 
         <p class="text-zinc-300 leading-relaxed mt-6 mb-6">
-          <a href="/landing.html#engines" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's autoregulation engine</a> tracks these exact metrics in real time, adjusting your training intensity based on your actual readiness rather than predetermined percentages. The algorithm monitors bar speed, rep counts, and recovery signals, then recalculates your session intensity day-by-day. Miss a few reps because you're fatigued? The system scales back intensity for the next session. Crushing reps with speed to spare? It auto-increases loading. This keeps you in the strength-building zone without the guesswork.
+          <a href="/index.html#engines" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's autoregulation engine</a> tracks these exact metrics in real time, adjusting your training intensity based on your actual readiness rather than predetermined percentages. The algorithm monitors bar speed, rep counts, and recovery signals, then recalculates your session intensity day-by-day. Miss a few reps because you're fatigued? The system scales back intensity for the next session. Crushing reps with speed to spare? It auto-increases loading. This keeps you in the strength-building zone without the guesswork.
         </p>
 
         <div class="section-divider"></div>
@@ -521,5 +545,27 @@
 
   </article>
 
+  <footer class="cms-chrome">
+    <div class="shell footer-vault">
+      <div><h4>Product</h4><ul>
+        <li><a href="/index.html#programs">Programs</a></li>
+        <li><a href="/index.html#engines">Engines</a></li>
+        <li><a href="/methodology/index.html">Methodology</a></li>
+        <li><a href="https://app.cmstrength.fit">Launch App</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Join the beta.</p><a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a></div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini"><div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div></div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
 </body>
 </html>

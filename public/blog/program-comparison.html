@@ -335,20 +335,33 @@
       }
     }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* CMS chrome bridge — shared nav/footer override the post's old chrome */
+    body { padding-top: 0; }
+    header.cms-chrome { position: fixed; top:0; left:0; right:0; z-index:50; }
+    main, article { position: relative; z-index: 3; }
+    article.min-h-screen, body > article { padding-top: 90px; }
+  </style>
 </head>
 <body>
 
   <div class="ambient-glow"></div>
 
-  <header>
-    <nav class="nav shell">
-      <a class="brand" href="/landing.html">Center <span>Mass</span> Strength</a>
-      <div class="nav-links">
-        <a href="/landing.html#programs">Programs</a>
-        <a href="/landing.html#engines">Engines</a>
-        <a href="/blog.html">Blog</a>
+    <header class="cms-chrome">
+    <nav class="nav">
+      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
+        <div class="sprocket"><div class="ring-out"></div><div class="ring-in"></div><div class="cross-v"></div><div class="cross-h"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/blog.html">BLOG</a>
+        <a class="nav-link" href="/index.html#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
       </div>
-      <a class="btn btn-primary" href="/app">Launch App</a>
     </nav>
   </header>
 
@@ -589,7 +602,7 @@
         <div class="section-divider"></div>
         <div class="content-section">
           <h2>Ready to Pick Your Program?</h2>
-          <p>Each program is built on the same adaptive engine, but optimized for different training goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/landing.html#programs" style="color: var(--accent); font-weight: 600; text-decoration: underline;">CMS has a program tailored to your goals.</a></p>
+          <p>Each program is built on the same adaptive engine, but optimized for different training goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/index.html#programs" style="color: var(--accent); font-weight: 600; text-decoration: underline;">CMS has a program tailored to your goals.</a></p>
           <p>Start training with real algorithms today.</p>
         </div>
 
@@ -623,62 +636,26 @@
     </section>
   </main>
 
-  <footer>
-    <div class="shell footer-content">
-      <!-- FOOTER GRID -->
-      <div class="footer-grid">
-        <!-- COLUMN 1: BRAND + CTA -->
-        <div class="footer-col">
-          <div class="footer-brand">
-            <a href="/landing.html" class="brand">Center <span>Mass</span> Strength</a>
-            <p class="footer-tagline">Adaptive programming for serious lifters.</p>
-          </div>
-          <a href="/app" class="btn btn-primary" style="width: fit-content;">Open App</a>
-        </div>
-
-        <!-- COLUMN 2: PRODUCT -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Product</h4>
-          <ul class="footer-links">
-            <li><a href="/landing.html#programs">Programs</a></li>
-            <li><a href="/landing.html#engines">Engines</a></li>
-            <li><a href="/landing.html#faq">FAQ</a></li>
-            <li><a href="/app">Launch App</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMN 3: COMPANY -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Company</h4>
-          <ul class="footer-links">
-            <li><a href="/about">About</a></li>
-            <li><a href="/blog.html">Blog</a></li>
-            <li><a href="mailto:hello@centermassstrength.com">Contact</a></li>
-            <li><a href="/support">Support</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMN 4: LEGAL -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Legal</h4>
-          <ul class="footer-links">
-            <li><a href="/privacy">Privacy</a></li>
-            <li><a href="/terms">Terms</a></li>
-            <li><a href="/cookies">Cookies</a></li>
-            <li><a href="/status">Status</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- FOOTER BOTTOM -->
-      <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2026 Center Mass Strength. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="https://twitter.com/centermassstr" title="Twitter" aria-label="Twitter">𝕏</a>
-          <a href="https://instagram.com/centermassstr" title="Instagram" aria-label="Instagram">IG</a>
-          <a href="https://discord.gg/centermassstr" title="Discord" aria-label="Discord">DC</a>
-        </div>
-      </div>
+    <footer class="cms-chrome">
+    <div class="shell footer-vault">
+      <div><h4>Product</h4><ul>
+        <li><a href="/index.html#programs">Programs</a></li>
+        <li><a href="/index.html#engines">Engines</a></li>
+        <li><a href="/methodology/index.html">Methodology</a></li>
+        <li><a href="https://app.cmstrength.fit">Launch App</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Join the beta.</p><a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a></div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini"><div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div></div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
     </div>
   </footer>
 

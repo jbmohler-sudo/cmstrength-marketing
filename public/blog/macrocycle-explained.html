@@ -365,20 +365,33 @@
       }
     }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* CMS chrome bridge — shared nav/footer override the post's old chrome */
+    body { padding-top: 0; }
+    header.cms-chrome { position: fixed; top:0; left:0; right:0; z-index:50; }
+    main, article { position: relative; z-index: 3; }
+    article.min-h-screen, body > article { padding-top: 90px; }
+  </style>
 </head>
 <body>
 
   <div class="ambient-glow"></div>
 
-  <header>
-    <nav class="nav shell">
-      <a class="brand" href="/landing.html">Center <span>Mass</span> Strength</a>
-      <div class="nav-links">
-        <a href="/landing.html#programs">Programs</a>
-        <a href="/landing.html#engines">Engines</a>
-        <a href="/blog.html">Blog</a>
+    <header class="cms-chrome">
+    <nav class="nav">
+      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
+        <div class="sprocket"><div class="ring-out"></div><div class="ring-in"></div><div class="cross-v"></div><div class="cross-h"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/blog.html">BLOG</a>
+        <a class="nav-link" href="/index.html#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
       </div>
-      <a class="btn btn-primary" href="/app">Launch App</a>
     </nav>
   </header>
 
@@ -401,7 +414,7 @@
             A <strong>macrocycle</strong> is the overall training structure that spans several weeks or months, typically leading up to a competition or training goal. Instead of guessing how to structure your training, a macrocycle works <strong>backward from your target date</strong>, ensuring every training phase builds toward peak performance on the platform.
           </p>
           <p>
-            In Center Mass Strength, the <a href="/landing.html#engines" style="color: var(--accent); text-decoration: underline;">Macrocycle Engine</a> calculates how far out your competition is, then automatically assembles the training flow with the right sequence of blocks: Hypertrophy → Strength → Peak → Taper.
+            In Center Mass Strength, the <a href="/index.html#engines" style="color: var(--accent); text-decoration: underline;">Macrocycle Engine</a> calculates how far out your competition is, then automatically assembles the training flow with the right sequence of blocks: Hypertrophy → Strength → Peak → Taper.
           </p>
         </div>
 
@@ -454,7 +467,7 @@
           <ul>
             <li><strong>Competition-date aware:</strong> You set your meet date once. The system works backward from there, calculating the total weeks available and allocating them to blocks algorithmically (typically 35% hypertrophy, 35% strength, 20% peak, 10% taper).</li>
             <li><strong>Automatic block sequencing:</strong> No guessing about how many weeks for each phase. It's calculated from your timeline. The algorithm also suggests lift variations for weak points and rotates exercises to prevent accommodation.</li>
-            <li><strong>Readiness adaptation:</strong> Within each block, loads adjust based on how you're feeling. <a href="/landing.html#programs" style="color: var(--accent); text-decoration: underline;">The structure is set</a>, but the execution is flexible. RPE-based autoregulation monitors your session performance and recalculates intensity for the next session.</li>
+            <li><strong>Readiness adaptation:</strong> Within each block, loads adjust based on how you're feeling. <a href="/index.html#programs" style="color: var(--accent); text-decoration: underline;">The structure is set</a>, but the execution is flexible. RPE-based autoregulation monitors your session performance and recalculates intensity for the next session.</li>
             <li><strong>No wasted weeks:</strong> Every phase has a purpose relative to your competition date. The engine tracks time-to-peak and prevents premature peaking.</li>
           </ul>
         </div>
@@ -466,7 +479,7 @@
             Macrocycles aren't complicated—they're just <strong>intentional</strong>. Instead of hoping your training peaks at the right time, a macrocycle ensures it does. CMS automates this so you can focus on the actual training.
           </p>
           <p style="margin-top: 2rem;">
-            Ready to train with a real macrocycle engine? <a href="/app" style="color: var(--accent); text-decoration: underline;">Start with Center Mass Strength.</a>
+            Ready to train with a real macrocycle engine? <a href="https://app.cmstrength.fit" style="color: var(--accent); text-decoration: underline;">Start with Center Mass Strength.</a>
           </p>
         </div>
 
@@ -586,62 +599,26 @@
     root.render(<MacrocycleTimeline />);
   </script>
 
-  <footer>
-    <div class="shell footer-content">
-      <!-- FOOTER GRID -->
-      <div class="footer-grid">
-        <!-- COLUMN 1: BRAND + CTA -->
-        <div class="footer-col">
-          <div class="footer-brand">
-            <a href="/landing.html" class="brand">Center <span>Mass</span> Strength</a>
-            <p class="footer-tagline">Adaptive programming for serious lifters.</p>
-          </div>
-          <a href="/app" class="btn btn-primary" style="width: fit-content;">Open App</a>
-        </div>
-
-        <!-- COLUMN 2: PRODUCT -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Product</h4>
-          <ul class="footer-links">
-            <li><a href="/landing.html#programs">Programs</a></li>
-            <li><a href="/landing.html#engines">Engines</a></li>
-            <li><a href="/landing.html#faq">FAQ</a></li>
-            <li><a href="/app">Launch App</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMN 3: COMPANY -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Company</h4>
-          <ul class="footer-links">
-            <li><a href="/about">About</a></li>
-            <li><a href="/blog.html">Blog</a></li>
-            <li><a href="mailto:hello@centermassstrength.com">Contact</a></li>
-            <li><a href="/support">Support</a></li>
-          </ul>
-        </div>
-
-        <!-- COLUMN 4: LEGAL -->
-        <div class="footer-col">
-          <h4 class="footer-heading">Legal</h4>
-          <ul class="footer-links">
-            <li><a href="/privacy">Privacy</a></li>
-            <li><a href="/terms">Terms</a></li>
-            <li><a href="/cookies">Cookies</a></li>
-            <li><a href="/status">Status</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- FOOTER BOTTOM -->
-      <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2026 Center Mass Strength. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="https://twitter.com/centermassstr" title="Twitter" aria-label="Twitter">𝕏</a>
-          <a href="https://instagram.com/centermassstr" title="Instagram" aria-label="Instagram">IG</a>
-          <a href="https://discord.gg/centermassstr" title="Discord" aria-label="Discord">DC</a>
-        </div>
-      </div>
+    <footer class="cms-chrome">
+    <div class="shell footer-vault">
+      <div><h4>Product</h4><ul>
+        <li><a href="/index.html#programs">Programs</a></li>
+        <li><a href="/index.html#engines">Engines</a></li>
+        <li><a href="/methodology/index.html">Methodology</a></li>
+        <li><a href="https://app.cmstrength.fit">Launch App</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Join the beta.</p><a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a></div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini"><div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div></div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
     </div>
   </footer>
 
