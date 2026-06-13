@@ -213,6 +213,17 @@ footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,
 .footer-row .meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--faint); }
 .footer-motto { font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
 
+
+/* ===== LEGAL PAGES (privacy / terms) ===== */
+.legal-toc { border: 1px solid var(--border); background: var(--bg-card); padding: clamp(20px,3vw,28px); margin: 0 0 2.4em; }
+.legal-toc .toc-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
+.legal-toc .toc-links { display: grid; gap: 8px; }
+.legal-toc .toc-links a { color: var(--accent); border: none; font-size: 0.95rem; }
+.legal-toc .toc-links a:hover { color: var(--accent-bright); }
+.callout { border-left: 2px solid var(--accent); background: rgba(226,69,42,0.06); padding: 1em 1.4em; margin: 1.6em 0; }
+.callout p { margin: 0; color: var(--bone); }
+.callout strong { color: var(--bone); }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
