@@ -1,76 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage (highest priority) -->
   <url>
-    <loc>https://cmstrength.fit/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Blog Hub -->
   <url>
-    <loc>https://cmstrength.fit/blog.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/blog</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.cmstrength.fit/blog/powerlifting-over-50-readiness</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Blog Post: Program Comparison -->
   <url>
-    <loc>https://cmstrength.fit/blog/program-comparison.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/blog/joint-load-management-mrjv</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.cmstrength.fit/blog/heavy-lifting-after-50</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Blog Post: Macrocycle Explained -->
   <url>
-    <loc>https://cmstrength.fit/blog/macrocycle-explained.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/blog/submaximal-training</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Blog Post: Submaximal Training -->
   <url>
-    <loc>https://cmstrength.fit/blog/submaximal-training.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/blog/macrocycle-explained</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Blog Post: Heavy Lifting After 50 -->
   <url>
-    <loc>https://cmstrength.fit/blog/heavy-lifting-after-50.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/blog/program-comparison</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Contact Page -->
   <url>
-    <loc>https://cmstrength.fit/contact.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/methodology/index</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.cmstrength.fit/methodology/proactive-load-architecture</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.cmstrength.fit/methodology/the-experience</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
-  <!-- Privacy Policy -->
   <url>
-    <loc>https://cmstrength.fit/privacy.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/contact</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.cmstrength.fit/privacy</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
-  <!-- Terms of Service -->
   <url>
-    <loc>https://cmstrength.fit/terms.html</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://www.cmstrength.fit/terms</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
 </urlset>
