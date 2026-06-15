@@ -3,569 +3,294 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why You Don't Max Out All The Time — Center Mass Strength</title>
+
+  <title>Why You Don't Max Out All The Time | Center Mass Strength</title>
   <meta name="description" content="Learn why submaximal training is the foundation of productive strength training. Discover how RPE-based autoregulation prevents injury and maximizes gains." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
+  <meta name="keywords" content="submaximal training, RPE autoregulation, CNS fatigue, why not to max out, strength training fatigue management, periodization, training intensity" />
 
-    .reading-width {
-      max-width: 720px;
-    }
+  <link rel="canonical" href="https://cmstrength.fit/blog/submaximal-training" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
 
-    .section-divider {
-      @apply my-16 border-t border-zinc-800;
-    }
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Why You Don't Max Out All The Time" />
+  <meta property="og:description" content="Heavy weights build fatigue that sabotages your progress. Here's the science of submaximal training — and the strategy." />
+  <meta property="og:url" content="https://cmstrength.fit/blog/submaximal-training" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta property="article:author" content="Center Mass Strength" />
+  <meta property="article:section" content="Training Science" />
+  <meta property="article:tag" content="submaximal training" />
+  <meta property="article:tag" content="RPE autoregulation" />
+  <meta property="article:tag" content="CNS fatigue" />
 
-    .stat-stack {
-      @apply flex flex-col gap-2;
-    }
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why You Don't Max Out All The Time" />
+  <meta name="twitter:description" content="Heavy weights build fatigue that sabotages progress. The science of submaximal training, and the strategy." />
 
-    .stat-item {
-      @apply flex items-center gap-3 p-3 bg-zinc-900/50 rounded-lg border border-zinc-800;
-    }
+  <!-- JSON-LD Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why You Don't Max Out All The Time",
+    "description": "Learn why submaximal training is the foundation of productive strength training, and how RPE-based autoregulation prevents injury and maximizes gains.",
+    "author": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://cmstrength.fit" },
+    "publisher": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://cmstrength.fit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://cmstrength.fit/blog/submaximal-training.html" },
+    "keywords": "submaximal training, RPE autoregulation, CNS fatigue, periodization, training intensity",
+    "articleSection": "Training Science"
+  }
+  </script>
 
-    .stat-number {
-      @apply text-2xl font-black text-red-500 min-w-fit;
-    }
-
-    .stat-label {
-      @apply text-sm text-zinc-400;
-    }
-
-    .key-point {
-      @apply bg-red-600/10 border-l-4 border-red-500 pl-6 py-4 my-6;
-    }
-
-    .key-point-title {
-      @apply font-black text-red-400 mb-2 uppercase text-sm tracking-wide;
-    }
-
-    .key-point-text {
-      @apply text-zinc-300 leading-relaxed;
-    }
-
-    .comparison-table {
-      @apply w-full my-8 border-collapse;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-      @apply px-4 py-3 text-left border border-zinc-800;
-    }
-
-    .comparison-table th {
-      @apply bg-zinc-900/50 font-black uppercase text-xs text-zinc-400;
-    }
-
-    .comparison-table td {
-      @apply text-zinc-300;
-    }
-
-    .comparison-table tr:hover td {
-      @apply bg-zinc-900/30;
-    }
-
-    .feature-grid {
-      @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-8;
-    }
-
-    .feature-card {
-      @apply bg-zinc-900/30 border border-zinc-800 rounded-lg p-4;
-    }
-
-    .feature-icon {
-      @apply text-red-500 font-black text-2xl mb-2;
-    }
-
-    .feature-title {
-      @apply font-bold text-white mb-1;
-    }
-
-    .feature-text {
-      @apply text-sm text-zinc-400;
-    }
-
-    .timeline {
-      @apply relative my-8 ml-4;
-    }
-
-    .timeline-item {
-      @apply mb-8 pl-8 relative;
-    }
-
-    .timeline-item::before {
-      content: "•";
-      @apply absolute left-0 top-0 text-red-500 font-black text-2xl;
-    }
-
-    .timeline-item-title {
-      @apply font-bold text-white mb-1;
-    }
-
-    .timeline-item-desc {
-      @apply text-sm text-zinc-400;
-    }
-
-    .cta-banner {
-      @apply bg-gradient-to-r from-red-600/20 to-transparent border border-red-600/30 rounded-lg p-8 my-16;
-    }
-
-    .cta-banner h3 {
-      @apply text-2xl font-black mb-3 text-white;
-    }
-
-    .cta-banner p {
-      @apply text-zinc-300 mb-4;
-    }
-
-    .btn-cta {
-      @apply inline-block bg-red-600 hover:bg-red-700 text-white font-black py-3 px-6 rounded-lg transition-all;
-    }
-  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cms.css">
+
   <style>
-    /* CMS chrome bridge — shared nav/footer override the post's old chrome */
-    body { padding-top: 0; }
-    header.cms-chrome { position: fixed; top:0; left:0; right:0; z-index:50; }
-    main, article { position: relative; z-index: 3; }
-    article.min-h-screen, body > article { padding-top: 90px; }
+    /* Page-local helpers — built ON cms.css tokens, no overrides */
+    .post-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-top: 22px; display: flex; gap: 14px; }
+    .stat-stack { display: flex; flex-direction: column; gap: 10px; margin: 1.8em 0; }
+    .stat-item { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--border); background: var(--bg-card); }
+    .stat-number { font-family: var(--font-display); font-weight: 900; font-size: 1.5rem; color: var(--accent); min-width: fit-content; }
+    .stat-label { font-size: 0.92rem; color: var(--muted); line-height: 1.5; }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { position: relative; padding-left: 1.6em; margin-top: 0.6em; color: var(--muted); }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    .silo-next { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px) clamp(50px, 7vw, 80px); }
+    .silo-next .silo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; }
+    @media (max-width: 600px) { .silo-next .silo-grid { grid-template-columns: 1fr; } }
+    .silo-next .silo-card { border: 1px solid var(--border); background: var(--bg-card); padding: 24px; transition: border-color .2s, transform .2s; }
+    .silo-next .silo-card:hover { border-color: rgba(226,69,42,0.55); transform: translateY(-3px); }
+    .silo-next .silo-card h4 { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; color: var(--bone); line-height: 1.05; }
+    .silo-next .silo-card:hover h4 { color: var(--accent); }
+    .silo-next .silo-card p { color: var(--muted); font-size: 0.92rem; margin-top: 10px; line-height: 1.55; }
   </style>
 </head>
-<body class="bg-black text-white">
-  <header class="cms-chrome">
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
     <nav class="nav">
-      <a class="nav-brand" href="/index.html" aria-label="Center Mass Strength home">
-        <div class="sprocket"><div class="ring-out"></div><div class="ring-in"></div><div class="cross-v"></div><div class="cross-h"></div><div class="hub"><div class="hub-dot"></div></div></div>
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div><div class="ring-in"></div>
+          <div class="cross-v"></div><div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
         <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
       </a>
       <div class="nav-actions">
-        <a class="nav-link" href="/blog.html">BLOG</a>
-        <a class="nav-link" href="/index.html#programs">TRACKS</a>
-        <a class="btn btn-nav" href="/index.html#join-beta">CLAIM BETA SLOT</a>
+        <a class="nav-link" href="/blog">BLOG</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index#join-beta">CLAIM BETA SLOT</a>
       </div>
     </nav>
   </header>
 
-  <article class="min-h-screen">
+  <main>
 
-    <!-- Hero Header -->
-    <div class="bg-gradient-to-b from-zinc-900 via-black to-black py-16 px-6 mb-12">
-      <div class="reading-width mx-auto">
-        <span class="text-red-600 text-xs font-black uppercase tracking-widest block mb-4">Training Science</span>
-        <h1 class="text-5xl md:text-6xl font-black italic uppercase leading-tight mb-6">
-          Why You Don't Max Out All The Time
-        </h1>
-        <p class="text-lg text-zinc-400 mb-6">
-          Heavy weights build fatigue that sabotages your progress. Here's the science—and the strategy.
-        </p>
-        <div class="flex gap-4 text-sm text-zinc-500">
-          <span>Center Mass Strength</span>
-          <span>•</span>
-          <span>8 min read</span>
-        </div>
+    <!-- HERO -->
+    <div class="page-hero">
+      <a class="back-link" href="/blog" style="margin-bottom:26px;">&larr; The Strength Blog</a>
+      <span class="eyebrow">TRAINING SCIENCE</span>
+      <h1>Why You Don't <span class="accent">Max Out</span> All The Time.</h1>
+      <p class="hero-sub">Heavy weights build fatigue that sabotages your progress. Here's the science — and the strategy.</p>
+      <div class="post-meta"><span>Center Mass Strength</span><span>·</span><span>8 min read</span></div>
+    </div>
+
+    <!-- BODY -->
+    <article class="prose">
+
+      <p>You walk into the gym with a simple goal: <strong>get stronger.</strong> The logical path seems obvious — load more weight on the bar. If strength is the goal, shouldn't you always be chasing the heaviest load possible?</p>
+
+      <blockquote>This is where most lifters get it wrong.</blockquote>
+
+      <div class="callout">
+        <p><strong>The reality:</strong> Constant maximal effort is unsustainable and inefficient for natural athletes. Worse — it actively sabotages your progress.</p>
+      </div>
+
+      <hr>
+
+      <h2>Why Does Fatigue Matter?</h2>
+
+      <p>When you max out on the squat on Monday, you're not just taxing your muscles. You're accumulating systemic fatigue that impacts everything — deadlifts on Wednesday, bench on Friday, even your ability to recover and perform in daily life.</p>
+
+      <div class="stat-stack">
+        <div class="stat-item"><div class="stat-number">48h</div><div class="stat-label">Recovery time needed after a 95% effort</div></div>
+        <div class="stat-item"><div class="stat-number">7–10d</div><div class="stat-label">Recovery time needed after a 100% effort (a true PR)</div></div>
+      </div>
+
+      <p>This timeline isn't arbitrary. When you lift maximally, you create <strong>central nervous system (CNS) fatigue</strong> — a state where your nervous system can't maintain optimal drive to your muscles. <em>One heavy session can compromise your entire training week.</em></p>
+
+      <hr>
+
+      <h2>What's CNS Fatigue Doing to Your Lifts?</h2>
+
+      <p>CNS fatigue is more insidious than muscle fatigue. It's the inability of your nervous system to maintain optimal nerve impulse transmission and neural drive. When you're CNS fatigued, you experience:</p>
+
+      <div class="grid-2" style="margin-top:1.6em;">
+        <div class="card"><h3>Decreased Force</h3><p>Maximum effort yields less strength.</p></div>
+        <div class="card"><h3>Compromised Coordination</h3><p>Movement quality degrades under fatigue.</p></div>
+        <div class="card"><h3>Loss of Explosiveness</h3><p>Power output plummets.</p></div>
+        <div class="card"><h3>Reduced Fast-Twitch Access</h3><p>You can't recruit the muscle fibers you need.</p></div>
+      </div>
+
+      <div class="callout">
+        <p><strong>The vicious cycle:</strong> You grind a lift when fatigued &rarr; technique degrades &rarr; more fatigue accumulates &rarr; less strength stimulus &rarr; worse progress. You're not building strength; you're drilling bad patterns under fatigue.</p>
+      </div>
+
+      <p>This is why <a href="/index#engines">CMS's readiness engine</a> exists — it measures your CNS readiness before each session and adjusts intensity automatically. Instead of guessing whether you're recovered enough for a heavy day, the algorithm detects subtle signs of fatigue (sleep quality, perceived exertion, recent performance) and scales the session. You stay in the productive 65–85% zone even when fatigued, protecting your CNS and preventing bad patterns. For lifters over 50, where recovery is least predictable, this matters even more — see <a href="/blog/powerlifting-over-50-readiness">Powerlifting Over 50</a>.</p>
+
+      <hr>
+
+      <h2>How Does Submaximal Training Fix This?</h2>
+
+      <p>Submaximal training means working in the <strong>65–85% of 1RM range.</strong> This isn't weakness — it's strategic loading. When you train submaximal, you get:</p>
+
+      <ul>
+        <li><strong>More total volume.</strong> Accumulate higher reps with lower fatigue cost.</li>
+        <li><strong>More frequent training.</strong> Train the same lifts multiple times per week, fresh.</li>
+        <li><strong>Superior technique development.</strong> Practice patterns when your nervous system is sharp.</li>
+        <li><strong>Better neuromuscular efficiency.</strong> More reps = more practice = better motor patterns.</li>
+        <li><strong>Faster recovery.</strong> Ready to train hard again tomorrow, not next week.</li>
+      </ul>
+
+      <div class="callout">
+        <p><strong>The math:</strong> One maximal session — 2–3 near-max lifts plus 7 days of recovery. One week of submaximal training — 50+ quality reps, superior skill development, ready again tomorrow. <strong>Volume wins when recovery is factored in.</strong></p>
+      </div>
+
+      <hr>
+
+      <h2>Speed, Power, or Strength — Which Should You Prioritize?</h2>
+
+      <p>Strength, speed, and power aren't isolated qualities — they're interconnected. But they require different management.</p>
+
+      <table class="diff-table">
+        <thead><tr><th>Quality</th><th>Focus</th><th>Load</th><th>Reps</th><th>Recovery</th></tr></thead>
+        <tbody>
+          <tr><td>Strength</td><td>Progressive overload</td><td>80–90%</td><td>2–5</td><td>48–72h</td></tr>
+          <tr><td>Power</td><td>Rate of force development</td><td>30–60%</td><td>3–5</td><td>48h</td></tr>
+          <tr><td>Speed</td><td>Bar velocity</td><td>50–75%</td><td>3–6</td><td>24–48h</td></tr>
+          <tr><td>Hypertrophy</td><td>Volume accumulation</td><td>65–80%</td><td>6–12</td><td>24–48h</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>Strength is the foundation</strong> — and it adapts to progressive overload whether that's adding weight, adding volume, or improving technique. <strong>Power and speed require maximum intent</strong> but are neuromuscularly demanding. The solution? Train these qualities on different days or in different blocks.</p>
+
+      <div class="callout">
+        <p><strong>Strategic week example:</strong><br>
+        <strong>Monday (Strength):</strong> Heavy compounds 80–90%, fresh CNS<br>
+        <strong>Tuesday (Power):</strong> Explosive movements at moderate loads, maximized intent<br>
+        <strong>Wednesday (Volume):</strong> Higher reps 65–80%, submaximal, build capacity<br>
+        <strong>Thursday (Speed):</strong> Dynamic effort, bar speed focus, fresh again<br>
+        <em>Notice what's missing? Constant maximal grinding.</em></p>
+      </div>
+
+      <hr>
+
+      <h2>How Does Periodization Keep You Fresh?</h2>
+
+      <p>You can't operate at 100% intensity every session forever. Periodized training strategically cycles through phases, each serving a distinct purpose:</p>
+
+      <div class="grid-2" style="margin-top:1.6em;">
+        <div class="card"><h3>Hypertrophy Block</h3><p>6–8 weeks. Higher reps (6–12), moderate-heavy loads (70–80%). Build work capacity and muscle.</p></div>
+        <div class="card"><h3>Strength Block</h3><p>4–6 weeks. Lower reps (2–5), heavy loads (80–90%). Develop maximal strength.</p></div>
+        <div class="card"><h3>Power Block</h3><p>2–3 weeks. Explosive movements at moderate loads. Express what you've built.</p></div>
+        <div class="card"><h3>Deload Week</h3><p>Reduced volume and intensity. Let your CNS recover and adapt.</p></div>
+      </div>
+
+      <p>Within each block, you train submaximal most of the time. The occasional max effort lifts are <strong>strategic moments,</strong> not the foundation. This is exactly how <a href="/index#programs">CMS's block periodization engine</a> works — rotating through phases that build different qualities while managing fatigue systematically. The macrocycle that sequences these blocks toward a goal date is covered in <a href="/blog/macrocycle-explained">How Macrocycles Work</a>.</p>
+
+      <hr>
+
+      <h2>How Do You Know You're Actually Getting Stronger?</h2>
+
+      <p>If you're not maxing out all the time, when do you know you're progressing? <strong>You max out occasionally — during structured test weeks or competitions.</strong> In between, you track submaximal metrics that are far more reliable than weekly PRs:</p>
+
+      <div class="grid-2" style="margin-top:1.6em;">
+        <div class="card"><h3>Rep Increases</h3><p>More reps at 80%? Strength gained.</p></div>
+        <div class="card"><h3>Bar Speed</h3><p>Bar moving faster at the same load? Power and strength expression up.</p></div>
+        <div class="card"><h3>Technique Under Fatigue</h3><p>Form locked in late in a session? Quality = better adaptation.</p></div>
+        <div class="card"><h3>Volume Increases</h3><p>More sets/reps at the same weight? Volume gain = strength gain.</p></div>
+      </div>
+
+      <p><a href="/index#engines">CMS's autoregulation engine</a> tracks these exact metrics, adjusting training intensity based on your actual readiness rather than predetermined percentages. Miss a few reps because you're fatigued? It scales back the next session. Crushing reps with speed to spare? It auto-increases loading. This keeps you in the strength-building zone without the guesswork.</p>
+
+      <hr>
+
+      <h2>The Bottom Line</h2>
+
+      <p>Maximal effort training has a place — but it's <strong>strategic, not constant.</strong> Heavy weights build fatigue, and that fatigue sabotages everything else if unmanaged. The strongest lifters aren't the ones who max out every week. They're the ones who:</p>
+
+      <ul class="checklist">
+        <li>Train smart, not just hard</li>
+        <li>Manage fatigue strategically</li>
+        <li>Build volume at submaximal loads</li>
+        <li>Allow adequate recovery between hard efforts</li>
+        <li>Periodize their training intentionally</li>
+        <li>View maximal testing as an occasional checkpoint, not a weekly event</li>
+      </ul>
+
+      <p><strong>Your strongest self isn't built in one day. It's built over years of smart training, managed fatigue, and respect for the recovery process. That's why you don't max out all the time.</strong></p>
+
+    </article>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <span class="section-label" style="margin-bottom:16px;">PUT IT INTO PRACTICE</span>
+      <h2>Ready to train smart?</h2>
+      <p>The CMS engine applies these principles to build personalized programs that manage fatigue while building strength systematically.</p>
+      <a href="/index#join-beta" class="btn btn-primary">Claim Your Beta Slot &rarr;</a>
+    </div>
+
+    <!-- IN-SILO NAVIGATION -->
+    <div class="silo-next">
+      <span class="section-label">KEEP READING</span>
+      <div class="silo-grid">
+        <a class="silo-card" href="/blog/powerlifting-over-50-readiness">
+          <h4>Powerlifting Over 50</h4>
+          <p>Why readiness changes everything — the masters pillar guide.</p>
+        </a>
+        <a class="silo-card" href="/blog/heavy-lifting-after-50">
+          <h4>Heavy Lifting After 50</h4>
+          <p>The five-phase recovery cycle older lifters actually move through between sessions.</p>
+        </a>
       </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="max-w-4xl mx-auto px-6 pb-20">
+  </main>
 
-      <div class="reading-width">
-
-        <!-- Opening -->
-        <div class="mb-12">
-          <p class="text-lg text-zinc-300 leading-relaxed mb-4">
-            You walk into the gym with a simple goal: <strong>get stronger.</strong>
-          </p>
-          <p class="text-lg text-zinc-300 leading-relaxed mb-4">
-            The logical path seems obvious—load more weight on the bar. If strength is the goal, shouldn't you always be chasing the heaviest load possible?
-          </p>
-          <p class="text-xl text-white font-bold leading-relaxed">
-            This is where most lifters get it wrong.
-          </p>
-        </div>
-
-        <div class="key-point">
-          <div class="key-point-title">The Reality</div>
-          <div class="key-point-text">
-            Constant maximal effort is unsustainable and inefficient for natural athletes. Worse—it actively sabotages your progress.
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- The Problem: Fatigue -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">Why Does Fatigue Matter?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          When you max out on the squat on Monday, you're not just taxing your muscles. You're accumulating systemic fatigue that impacts everything—deadlifts on Wednesday, bench work on Friday, even your ability to recover and perform in daily life.
-        </p>
-
-        <div class="stat-stack mb-8">
-          <div class="stat-item">
-            <div class="stat-number">48h</div>
-            <div class="stat-label">Recovery time needed after 95% effort</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">7-10d</div>
-            <div class="stat-label">Recovery time needed after 100% effort (PR)</div>
-          </div>
-        </div>
-
-        <p class="text-zinc-300 leading-relaxed mb-4">
-          This recovery timeline isn't arbitrary. When you lift maximally, you're creating <strong>central nervous system (CNS) fatigue</strong>—a state where your nervous system simply can't maintain optimal drive to your muscles.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          <em>"One heavy session can compromise your entire training week."</em>
-        </p>
-
-        <div class="section-divider"></div>
-
-        <!-- CNS Fatigue Deep Dive -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">What's CNS Fatigue Doing to Your Lifts?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          CNS fatigue is more insidious than muscle fatigue. It's the inability of your nervous system to maintain optimal nerve impulse transmission and neural drive.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed font-semibold mb-6">When you're CNS fatigued, you experience:</p>
-
-        <div class="feature-grid mb-8">
-          <div class="feature-card">
-            <div class="feature-icon">↓</div>
-            <div class="feature-title">Decreased Force Production</div>
-            <div class="feature-text">Maximum effort yields less strength</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">⚙️</div>
-            <div class="feature-title">Compromised Motor Coordination</div>
-            <div class="feature-text">Movement quality degrades under fatigue</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <div class="feature-title">Loss of Explosiveness</div>
-            <div class="feature-text">Power output plummets</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <div class="feature-title">Reduced Access to Fast-Twitch</div>
-            <div class="feature-text">Can't recruit the muscle fibers you need</div>
-          </div>
-        </div>
-
-        <div class="key-point">
-          <div class="key-point-title">The Vicious Cycle</div>
-          <div class="key-point-text">
-            You grind a lift when fatigued → technique degrades → more fatigue accumulates → less strength stimulus → worse progress. You're not building strength; you're drilling bad patterns under fatigue.
-          </div>
-        </div>
-
-        <p class="text-zinc-300 leading-relaxed mt-8">
-          This is why <a href="/index.html#engines" style="color: var(--red-500); font-weight: 600; text-decoration: underline;">CMS's readiness engine</a> exists—it measures your CNS readiness before each session and adjusts intensity automatically. Instead of guessing whether you're recovered enough for a heavy day, the algorithm detects subtle signs of fatigue (sleep quality, HRV, perceived exertion) and adjusts your session intensity in real time. You stay in the productive 65-85% zone even when you're fatigued, protecting your CNS and preventing bad patterns.
-        </p>
-
-        <div class="section-divider"></div>
-
-        <!-- The Solution -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">How Does Submaximal Training Fix This?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          Submaximal training means working in the <strong>65-85% of 1RM range.</strong> This isn't weakness—it's strategic loading.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed font-semibold mb-6">When you train submaximal, you get:</p>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-item-title">More Total Volume</div>
-            <div class="timeline-item-desc">Accumulate higher reps with lower fatigue cost</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-item-title">More Frequent Training</div>
-            <div class="timeline-item-desc">Train the same lifts multiple times per week fresh</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-item-title">Superior Technique Development</div>
-            <div class="timeline-item-desc">Practice movement patterns when your nervous system is sharp</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-item-title">Better Neuromuscular Efficiency</div>
-            <div class="timeline-item-desc">More reps = more practice = better motor patterns</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-item-title">Faster Recovery</div>
-            <div class="timeline-item-desc">Ready to train hard again tomorrow, not next week</div>
-          </div>
-        </div>
-
-        <div class="key-point">
-          <div class="key-point-title">The Math</div>
-          <div class="key-point-text">
-            One maximal session: 2-3 near-max lifts + 7 days recovery. One week of submaximal training: 50+ quality reps, superior skill development, ready to train again tomorrow. <strong>Volume wins when recovery is factored in.</strong>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Speed, Power, Strength -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">Which Should You Prioritize: Speed, Power, or Strength?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-8">
-          Strength, speed, and power aren't isolated qualities—they're interconnected. But they require different management.
-        </p>
-
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Quality</th>
-              <th>Focus</th>
-              <th>Load</th>
-              <th>Reps</th>
-              <th>Recovery</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="font-bold">Strength</td>
-              <td>Progressive overload</td>
-              <td>80-90%</td>
-              <td>2-5</td>
-              <td>48-72h</td>
-            </tr>
-            <tr>
-              <td class="font-bold">Power</td>
-              <td>Rate of force development</td>
-              <td>30-60%</td>
-              <td>3-5</td>
-              <td>48h</td>
-            </tr>
-            <tr>
-              <td class="font-bold">Speed</td>
-              <td>Bar velocity</td>
-              <td>50-75%</td>
-              <td>3-6</td>
-              <td>24-48h</td>
-            </tr>
-            <tr>
-              <td class="font-bold">Hypertrophy</td>
-              <td>Volume accumulation</td>
-              <td>65-80%</td>
-              <td>6-12</td>
-              <td>24-48h</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p class="text-zinc-300 leading-relaxed my-8">
-          <strong>Strength is the foundation.</strong> But here's the critical insight: strength adapts to progressive overload—whether that's adding weight, adding volume, or improving technique and movement quality.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mb-8">
-          <strong>Power and speed require maximum intent.</strong> But they're neuromuscularly demanding. The solution? Train these qualities on different days or in different blocks.
-        </p>
-
-        <div class="key-point">
-          <div class="key-point-title">Strategic Week Example</div>
-          <div class="key-point-text">
-            <strong>Monday (Strength):</strong> Heavy compounds 80-90%, fresh CNS<br>
-            <strong>Tuesday (Power):</strong> Explosive movements at moderate loads, maximized intent<br>
-            <strong>Wednesday (Volume):</strong> Higher reps 65-80%, submaximal, build capacity<br>
-            <strong>Thursday (Speed):</strong> Dynamic effort, bar speed focus, fresh again<br><br>
-            <em>Notice what's missing? Constant maximal grinding.</em>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Periodization -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">How Does Periodization Keep You Fresh?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-8">
-          You can't operate at 100% intensity every session forever. Periodized training strategically cycles through phases, each serving a distinct purpose:
-        </p>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-title">Hypertrophy Block</div>
-            <div class="feature-text">6-8 weeks. Higher reps (6-12), moderate-heavy loads (70-80%). Build work capacity and muscle.</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-title">Strength Block</div>
-            <div class="feature-text">4-6 weeks. Lower reps (2-5), heavy loads (80-90%). Develop maximal strength.</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-title">Power Block</div>
-            <div class="feature-text">2-3 weeks. Explosive movements at moderate loads. Express what you've built.</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-title">Deload Week</div>
-            <div class="feature-text">Reduced volume and intensity. Let your CNS recover and adapt.</div>
-          </div>
-        </div>
-
-        <p class="text-zinc-300 leading-relaxed mt-8">
-          Within each block, you're training submaximal most of the time. The occasional max effort lifts are <strong>strategic moments,</strong> not the foundation of your program.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mt-6 mb-6">
-          This is exactly how <a href="/index.html#programs" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's block periodization engine</a> works—rotating through phases designed to build different qualities while managing fatigue systematically.
-        </p>
-
-        <div class="section-divider"></div>
-
-        <!-- Testing Strength -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">How Do You Know You're Actually Getting Stronger?</h2>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          If you're not maxing out all the time, when do you know if you're actually getting stronger?
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed font-semibold mb-6">
-          <strong>You max out occasionally—during structured test weeks or competitions.</strong>
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mb-8">
-          In between, you track submaximal performance metrics that are far more reliable than weekly PRs:
-        </p>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <div class="feature-title">Rep Increases</div>
-            <div class="feature-text">How many reps at 80%? Getting more reps = strength gained</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <div class="feature-title">Bar Speed</div>
-            <div class="feature-text">How quickly does the bar move? Speed = power = strength expression</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <div class="feature-title">Technique Under Fatigue</div>
-            <div class="feature-text">Is your form locked in? Quality = better adaptation</div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📈</div>
-            <div class="feature-title">Volume Increases</div>
-            <div class="feature-text">More sets/reps at the same weight? Volume gain = strength gain</div>
-          </div>
-        </div>
-
-        <p class="text-zinc-300 leading-relaxed mt-8">
-          These metrics tell you whether your program is actually working—without the volatility of weekly maxes.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mt-6 mb-6">
-          <a href="/index.html#engines" class="text-red-500 hover:text-red-400 underline font-semibold">CMS's autoregulation engine</a> tracks these exact metrics in real time, adjusting your training intensity based on your actual readiness rather than predetermined percentages. The algorithm monitors bar speed, rep counts, and recovery signals, then recalculates your session intensity day-by-day. Miss a few reps because you're fatigued? The system scales back intensity for the next session. Crushing reps with speed to spare? It auto-increases loading. This keeps you in the strength-building zone without the guesswork.
-        </p>
-
-        <div class="section-divider"></div>
-
-        <!-- Conclusion -->
-        <h2 class="text-3xl font-black uppercase italic mb-6 text-white">The Bottom Line</h2>
-
-        <p class="text-lg text-zinc-300 leading-relaxed mb-8">
-          Maximal effort training has a place—but it's <strong>strategic, not constant.</strong> Heavy weights do build fatigue, and that fatigue sabotages everything else if unmanaged.
-        </p>
-
-        <p class="text-zinc-300 leading-relaxed mb-6">
-          The strongest lifters aren't the ones who max out every week. They're the ones who:
-        </p>
-
-        <ul class="space-y-2 text-zinc-300 mb-8">
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>Train smart, not just hard</span></li>
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>Manage fatigue strategically</span></li>
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>Build volume at submaximal loads</span></li>
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>Allow adequate recovery between hard efforts</span></li>
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>Periodize their training intentionally</span></li>
-          <li class="flex gap-3"><span class="text-red-500 font-black">✓</span> <span>View maximal testing as an occasional checkpoint, not a weekly event</span></li>
-        </ul>
-
-        <p class="text-lg text-white font-semibold leading-relaxed">
-          Your strongest self isn't built in one day. It's built over years of smart training, managed fatigue, and respect for the recovery process.
-        </p>
-
-        <p class="text-lg text-white font-black italic mt-8">
-          That's why you don't max out all the time.
-        </p>
-
-      </div>
-
-    </div>
-
-    <!-- CTA Banner -->
-    <div class="mt-20 pt-12 border-t border-zinc-800 px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-red-600/10 border border-red-600/20 rounded-xl p-8 md:p-12">
-          <h3 class="text-3xl font-black uppercase italic mb-4 text-white">Ready to Train Smart?</h3>
-          <p class="text-zinc-300 text-lg mb-6 leading-relaxed max-w-2xl">
-            The CMS Engine applies these principles to build personalized programs that manage fatigue while building strength systematically.
-          </p>
-          <a href="/landing" class="inline-block bg-red-600 hover:bg-red-700 text-white font-black uppercase py-4 px-8 rounded-lg transition-all active:scale-95 tracking-wider">
-            Learn More →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog Navigation -->
-    <div class="border-t border-zinc-800 px-6 py-12">
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-2 gap-6">
-          <!-- Previous Post -->
-          <a href="/blog/heavy-lifting-after-50.html" class="group">
-            <div class="flex items-center gap-2 text-zinc-500 text-sm mb-3 group-hover:text-zinc-300 transition-colors">
-              <span>←</span>
-              <span>Previous Post</span>
-            </div>
-            <h4 class="text-lg font-bold text-white group-hover:text-red-500 transition-colors leading-snug">
-              Heavy Lifting After 50
-            </h4>
-          </a>
-
-          <!-- Next Post -->
-          <a href="/blog/program-comparison.html" class="group text-right">
-            <div class="flex items-center justify-end gap-2 text-zinc-500 text-sm mb-3 group-hover:text-zinc-300 transition-colors">
-              <span>Next Post</span>
-              <span>→</span>
-            </div>
-            <h4 class="text-lg font-bold text-white group-hover:text-red-500 transition-colors leading-snug">
-              Program Comparison
-            </h4>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </article>
-
-  <footer class="cms-chrome">
+  <footer>
     <div class="shell footer-vault">
       <div><h4>Product</h4><ul>
-        <li><a href="/index.html#programs">Programs</a></li>
-        <li><a href="/index.html#engines">Engines</a></li>
-        <li><a href="/methodology/index.html">Methodology</a></li>
+        <li><a href="/index#programs">Programs</a></li>
+        <li><a href="/index#engines">Engines</a></li>
+        <li><a href="/methodology/index">Methodology</a></li>
         <li><a href="https://app.cmstrength.fit">Launch App</a></li>
       </ul></div>
       <div><h4>Company</h4><ul>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
       </ul></div>
-      <div><h4>Launch</h4><p>Ready to train smarter? Join the beta.</p><a href="/index.html#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Join the beta.</p><a href="/index#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a></div>
     </div>
     <div class="shell footer-row">
-      <div class="brand-mini"><div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
-        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div></div>
+      <div class="brand-mini">
+        <div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div>
+      </div>
       <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
     </div>
   </footer>
+
+  <script src="/cms-motion.js"></script>
 </body>
 </html>
