@@ -10,6 +10,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* Photo-card treatment for blog hub — built on cms.css tokens */
+    .card.photo-card { padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+    .card.photo-card .card-photo { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,#1a1410,#0a0a0c); }
+    .card.photo-card .card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92) contrast(1.02); transition: transform .4s ease; }
+    .card.photo-card:hover .card-photo img { transform: scale(1.04); }
+    .card.photo-card .card-body { padding: clamp(22px,3vw,30px); display: flex; flex-direction: column; flex: 1; }
+    .card.photo-card .card-body .tag { margin-bottom: 14px; }
+    .card.photo-card .card-body .card-link { margin-top: auto; padding-top: 16px; }
+    /* placeholder when a photo isn't ready yet */
+    .card-photo.placeholder { display: flex; align-items: center; justify-content: center; position: relative; }
+    .card-photo.placeholder::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 90% at 30% 20%, rgba(226,69,42,0.22), transparent 60%); }
+    .card-photo.placeholder span { position: relative; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--dim); text-transform: uppercase; }
+  </style>
 </head>
 <body>
 
@@ -46,41 +60,59 @@
 
     <section class="block" style="padding-top:0;">
       <div class="grid-3">
-        <a class="card" href="/blog/powerlifting-over-50-readiness">
-          <span class="tag">MASTERS · PILLAR</span>
-          <h3>Powerlifting Over 50</h3>
-          <p>Why readiness changes everything. The complete guide to programming around recovery after 50 — and the anchor for every masters article.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/powerlifting-over-50-readiness">
+          <div class="card-photo"><img src="/images/blog/hero-masters.jpg" alt="Masters powerlifter chalked and set up over a barbell in a dark gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">MASTERS · PILLAR</span>
+            <h3>Powerlifting Over 50</h3>
+            <p>Why readiness changes everything. The complete guide to programming around recovery after 50 — and the anchor for every masters article.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
-        <a class="card" href="/blog/joint-load-management-mrjv">
-          <span class="tag">LOAD MGMT · PILLAR</span>
-          <h3>Your Joints Are the Real Limit</h3>
-          <p>Soreness tracks muscle — but joints are what break down. How MRJV and per-joint load tracking prevent overuse injury before you feel it.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/joint-load-management-mrjv">
+          <div class="card-photo"><img src="/images/blog/joints-mrjv.jpg" alt="Close-up of a lifter's chalked forearm and elbow under heavy load" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">LOAD MGMT · PILLAR</span>
+            <h3>Your Joints Are the Real Limit</h3>
+            <p>Soreness tracks muscle — but joints are what break down. How MRJV and per-joint load tracking prevent overuse injury before you feel it.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
-        <a class="card" href="/blog/program-comparison">
-          <span class="tag">PROGRAMS</span>
-          <h3>Program Comparison</h3>
-          <p>Understand the differences between Bench Specialization, Jacked &amp; Strong, and SBD. Find the program that matches your goals.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/heavy-lifting-after-50">
+          <div class="card-photo"><img src="/images/blog/heavy-after-50.jpg" alt="Masters athlete mid-squat in a gritty garage gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING AFTER 50</span>
+            <h3>Heavy Lifting After 50</h3>
+            <p>Stop comparing your cycle to a 25-year-old's. Understand the 5 phases older lifters actually move through between sessions — and program accordingly.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
-        <a class="card" href="/blog/macrocycle-explained">
-          <span class="tag">PROGRAMMING</span>
-          <h3>How Macrocycles Work</h3>
-          <p>The science behind competition-date aware periodization. Why working backward from meet day changes everything.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/submaximal-training">
+          <div class="card-photo"><img src="/images/blog/submaximal.jpg" alt="Lifter performing a controlled submaximal barbell rep" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING</span>
+            <h3>Why You Don't Max Out All The Time</h3>
+            <p>Heavy weights build fatigue that sabotages progress. Learn why submaximal training, managed fatigue, and strategic periodization build real strength.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
-        <a class="card" href="/blog/submaximal-training">
-          <span class="tag">TRAINING</span>
-          <h3>Why You Don't Max Out All The Time</h3>
-          <p>Heavy weights build fatigue that sabotages progress. Learn why submaximal training, managed fatigue, and strategic periodization build real strength.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/macrocycle-explained">
+          <div class="card-photo"><img src="/images/blog/macrocycle.jpg" alt="Chalk, straps and a handwritten training plan on a gym bench" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">PROGRAMMING</span>
+            <h3>How Macrocycles Work</h3>
+            <p>The science behind competition-date aware periodization. Why working backward from meet day changes everything.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
-        <a class="card" href="/blog/heavy-lifting-after-50">
-          <span class="tag">TRAINING AFTER 50</span>
-          <h3>Heavy Lifting After 50</h3>
-          <p>Stop comparing your cycle to a 25-year-old's. Understand the 5 phases older lifters actually move through between sessions — and program accordingly.</p>
-          <span class="card-link">Read Post &rarr;</span>
+        <a class="card photo-card" href="/blog/program-comparison">
+          <div class="card-photo placeholder"><span>Photo coming soon</span></div>
+          <div class="card-body">
+            <span class="tag">PROGRAMS</span>
+            <h3>Program Comparison</h3>
+            <p>Understand the differences between Bench Specialization, Jacked &amp; Strong, and SBD. Find the program that matches your goals.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
         </a>
       </div>
     </section>
