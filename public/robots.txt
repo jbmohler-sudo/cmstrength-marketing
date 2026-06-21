@@ -7,4 +7,4 @@ Disallow: /.env.local
 Disallow: /backburner/
 Disallow: /methodology/backburner/
 
-Sitemap: https://www.cmstrength.fit/sitemap.xml
+Sitemap: https://www.cmstrength.fit/sitemap-main.xml
