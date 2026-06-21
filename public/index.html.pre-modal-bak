@@ -8,25 +8,156 @@
     name="description"
     content="Center Mass Strength (CMS) is the adaptive powerlifting app with specialized programs: Bench Specialization, Jacked & Strong, and SBD. Real programming engines, not recycled templates."
   >
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/cms.css">
   <style>
-    /* ===== HOMEPAGE-ONLY COMPONENTS (shared base in /cms.css) ===== */
-    section.block { position: relative; z-index: 3; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px); max-width: var(--max); margin: 0 auto; }
-    .grid-engines { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 22px); margin-top: clamp(36px, 5vw, 56px); }
-    .program-card { display: flex; flex-direction: column; }
-    .program-card .body { flex-grow: 1; }
-    .program-card .btn { width: 100%; justify-content: center; margin-top: 2rem; }
+    :root {
+      --bg: #0A0A0C;
+      --bg-elevated: #121216;
+      --bg-card: rgba(18, 18, 22, 0.55);
+      --accent: #E2452A;
+      --accent-bright: #F2502F;
+      --bone: #ECE7DB;
+      --muted: #B6B1A6;
+      --dim: #918C80;
+      --faint: #7d7a72;
+      --border: rgba(236, 231, 219, 0.1);
+      --border-strong: rgba(236, 231, 219, 0.22);
+      --text: #ECE7DB;
+      --font-display: 'Saira Condensed', system-ui, sans-serif;
+      --font-body: 'Saira', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --max: 1280px;
+    }
 
-/* ===== HERO C — DATA READOUT ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+
+    .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
+
+    /* ===== KEYFRAMES (ported from prototype) ===== */
+    @keyframes cms-spin { to { transform: rotate(360deg); } }
+    @keyframes cms-spin-rev { to { transform: rotate(-360deg); } }
+    @keyframes cms-mql { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes cms-mqr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    @keyframes cms-meter { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes cms-sweep { from { background-position: -40% 0; } to { background-position: 140% 0; } }
+    @keyframes cms-pulse { 0%, 100% { opacity: .3; } 50% { opacity: .85; } }
+    @keyframes cms-grain {
+      0% { transform: translate(0, 0); } 20% { transform: translate(-3%, -2%); }
+      40% { transform: translate(2%, 1%); } 60% { transform: translate(-1%, 2%); }
+      80% { transform: translate(2%, -1%); } 100% { transform: translate(0, 0); }
+    }
+    @keyframes cms-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes cms-blink { 0%, 100% { opacity: 1; } 50% { opacity: .15; } }
+    @keyframes cms-beam { 0%, 100% { opacity: .5; } 50% { opacity: .8; } }
+    @keyframes cms-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== AMBIENT LAYERS ===== */
+    #cms-dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    #cms-glow {
+      position: fixed; top: 0; left: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(226,69,42,0.16), rgba(226,69,42,0.05) 45%, transparent 70%);
+      z-index: 2; pointer-events: none; opacity: 0; transition: opacity .6s ease; will-change: transform;
+    }
+    .cms-vignette {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(120% 90% at 50% 30%, transparent 35%, rgba(10,10,12,0.55) 78%, rgba(10,10,12,0.9) 100%);
+    }
+    .cms-grain {
+      position: fixed; inset: -12%; width: 124%; height: 124%; z-index: 40; pointer-events: none;
+      opacity: 0.07; mix-blend-mode: overlay; animation: cms-grain 7s steps(6) infinite;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ===== SPROCKET LOGO ===== */
+    .sprocket { position: relative; flex: none; }
+    .sprocket .ring-out {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: repeating-conic-gradient(from 0deg, var(--bone) 0deg 1.4deg, transparent 1.4deg 9deg);
+      -webkit-mask: radial-gradient(closest-side, transparent 68%, #000 71%);
+      mask: radial-gradient(closest-side, transparent 68%, #000 71%);
+      animation: cms-spin 16s linear infinite; opacity: .8;
+    }
+    .sprocket .ring-in {
+      position: absolute; inset: 13%; border-radius: 50%;
+      background: repeating-conic-gradient(from 0deg, rgba(226,69,42,0.95) 0deg .9deg, transparent .9deg 7deg);
+      -webkit-mask: radial-gradient(closest-side, transparent 74%, #000 77%);
+      mask: radial-gradient(closest-side, transparent 74%, #000 77%);
+      animation: cms-spin-rev 10s linear infinite;
+    }
+    .sprocket .cross-v { position: absolute; left: 50%; top: 6%; bottom: 6%; width: 1.5px; background: rgba(236,231,219,0.45); transform: translateX(-50%); }
+    .sprocket .cross-h { position: absolute; top: 50%; left: 6%; right: 6%; height: 1.5px; background: rgba(236,231,219,0.45); transform: translateY(-50%); }
+    .sprocket .hub {
+      position: absolute; inset: 32%; border-radius: 50%; border: 1.5px solid rgba(236,231,219,0.6);
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+    }
+    .sprocket .hub-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* ===== NAV ===== */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(10,10,12,0.82), rgba(10,10,12,0.0));
+      border-bottom: 1px solid rgba(236,231,219,0.06);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px clamp(20px, 4vw, 56px);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand .sprocket { width: 38px; height: 38px; }
+    .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+    .nav-wordmark .name { font-family: var(--font-display); font-weight: 900; font-size: 18px; letter-spacing: 0.14em; white-space: nowrap; }
+    .nav-wordmark .sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.34em; color: var(--dim); margin-top: 3px; white-space: nowrap; }
+    .nav-actions { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+    .nav-actions .nav-link {
+      font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-actions .nav-link:hover { color: var(--bone); }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-display); font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+      transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-primary {
+      background: var(--accent); color: var(--bg); padding: 16px 30px; font-size: 17px;
+      clip-path: polygon(0 0, 100% 0, 100% 68%, calc(100% - 13px) 100%, 0 100%);
+      border: none;
+    }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
+    .btn-secondary {
+      border: 1px solid var(--border-strong); color: var(--bone); padding: 16px 30px; font-size: 17px;
+      background: transparent;
+    }
+    .btn-secondary:hover { border-color: var(--bone); background: rgba(236,231,219,0.06); }
+    .btn-nav {
+      background: var(--accent); color: var(--bg); padding: 11px 20px; font-size: 13px; letter-spacing: 0.14em;
+      clip-path: polygon(0 0, 100% 0, 100% 70%, calc(100% - 10px) 100%, 0 100%);
+    }
+    .btn-nav:hover { background: var(--accent-bright); }
+
+    /* ===== HERO C — DATA READOUT ===== */
     .hero {
       position: relative; z-index: 3; min-height: 100vh; display: flex; flex-direction: column;
       justify-content: center; padding: 120px clamp(20px, 5vw, 72px) 70px; overflow: hidden;
@@ -73,15 +204,8 @@
     .readout .foot .swap .blink { animation: cms-blink 1.6s infinite; }
 
     .hero-actions { position: relative; z-index: 4; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: clamp(36px, 5vw, 52px); }
-    .hero-inside-link { position: relative; z-index: 4; text-align: center; margin-top: 22px; }
-    .inside-textlink {
-      background: none; border: none; cursor: pointer; padding: 6px 2px;
-      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--dim); border-bottom: 1px solid transparent; transition: color .2s ease, border-color .2s ease;
-    }
-    .inside-textlink:hover { color: var(--bone); border-bottom-color: var(--accent); }
 
-/* ===== MARQUEE BANNER ===== */
+    /* ===== MARQUEE BANNER ===== */
     .marquee-banner {
       position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,0.08);
       border-bottom: 1px solid rgba(236,231,219,0.08); background: rgba(13,13,16,0.6); padding: 26px 0; overflow: hidden;
@@ -96,7 +220,23 @@
     .marquee-banner .mqv-inner .solid { color: var(--bone); }
     .marquee-banner .mqv-inner .outline { -webkit-text-stroke: 1px rgba(236,231,219,0.4); color: transparent; }
 
-/* ===== LOOP STRIP ===== */
+    /* ===== GENERIC SECTION ===== */
+    section.block { position: relative; z-index: 3; padding: clamp(70px, 11vw, 140px) clamp(20px, 5vw, 72px); max-width: var(--max); margin: 0 auto; }
+    section.banded { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,0.08); background: rgba(13,13,16,0.5); padding: clamp(70px, 11vw, 140px) clamp(20px, 5vw, 72px); }
+    section.banded .inner { max-width: var(--max); margin: 0 auto; }
+
+    .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); }
+    .kicker.dim { color: var(--dim); }
+    h2.display {
+      font-family: var(--font-display); font-weight: 900; font-size: clamp(38px, 6vw, 82px);
+      line-height: 0.9; letter-spacing: -0.01em; margin: 16px 0 0; text-transform: uppercase;
+    }
+    h2.display .accent { color: var(--accent); }
+    .lede { max-width: 640px; margin: 24px 0 0; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.6; color: var(--muted); }
+
+    .reveal { animation: cms-rise both linear; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+
+    /* ===== LOOP STRIP ===== */
     .loop-wrap { position: relative; margin-top: clamp(44px, 6vw, 72px); }
     .loop-line {
       position: absolute; left: 0; right: 0; top: 21px; height: 2px;
@@ -112,7 +252,7 @@
     }
     .loop-step .label { font-family: var(--font-display); font-weight: 700; font-size: clamp(11px, 1.1vw, 15px); letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone); }
 
-/* ===== PILLARS ===== */
+    /* ===== PILLARS ===== */
     .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.6vw, 22px); margin-top: clamp(44px, 6vw, 72px); }
     .pillar {
       position: relative; border: 1px solid var(--border); background: var(--bg-card);
@@ -123,62 +263,74 @@
     .pillar h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.6vw, 34px); line-height: 1; margin: 14px 0 0; text-transform: uppercase; }
     .pillar p { margin: 14px 0 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.6; color: var(--muted); }
 
-/* ===== STATS ===== */
+    /* ===== STATS ===== */
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 28px); margin-top: 30px; }
     .stat { border-left: 2px solid rgba(226,69,42,0.6); padding-left: 18px; }
     .stat .val { font-family: var(--font-display); font-weight: 900; font-size: clamp(44px, 6.5vw, 88px); line-height: 0.9; letter-spacing: -0.01em; }
     .stat .lab { font-family: var(--font-display); font-weight: 700; font-size: clamp(13px, 1.3vw, 17px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone); margin-top: 8px; }
     .stat .sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--faint); margin-top: 6px; }
 
-/* ===== CAROUSEL ===== */
+    /* ===== CAROUSEL ===== */
+    .carousel-head { margin-bottom: 40px; }
+.carousel-track {
+      position: relative; overflow: visible; aspect-ratio: 16 / 9;
+      background: transparent;
+      -webkit-mask-image: radial-gradient(ellipse 92% 88% at 50% 50%, #000 60%, transparent 96%);
+      mask-image: radial-gradient(ellipse 92% 88% at 50% 50%, #000 60%, transparent 96%);
+    }
+    .carousel-track img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+      background: rgba(8, 8, 10, 0.55); opacity: 0; transition: opacity 0.6s ease;
+    }
+    .carousel-track img.active { opacity: 1; }
+    .carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+    .carousel-dots button {
+      width: 10px; height: 10px; border: 1px solid var(--border-strong); background: transparent;
+      cursor: pointer; transition: all 0.2s; padding: 0;
+    }
+    .carousel-dots button.active { background: var(--accent); border-color: var(--accent); width: 28px; }
+    .carousel-caption { text-align: center; margin-top: 16px; color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; min-height: 1.5em; }
 
-/* ===== INSIDE MODAL ===== */
-    .nav-inside { background: none; border: none; cursor: pointer; font: inherit; padding: 0; }
-    .inside-overlay {
-      position: fixed; inset: 0; z-index: 100; display: none;
-      background: rgba(6, 6, 8, 0.86); backdrop-filter: blur(10px);
-      opacity: 0; transition: opacity .35s ease;
+    /* ===== CARD GRIDS (programs / engines / faq) ===== */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 22px); margin-top: clamp(36px, 5vw, 56px); }
+    .card {
+      position: relative; border: 1px solid var(--border); background: var(--bg-card);
+      padding: clamp(26px, 3vw, 38px); overflow: hidden; transition: all .3s ease;
     }
-    .inside-overlay.open { display: block; opacity: 1; }
-    .inside-overlay.open .inside-panel { transform: translateY(0); opacity: 1; }
-    .inside-scroll { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .inside-panel {
-      max-width: 1100px; margin: 0 auto; padding: clamp(72px, 10vw, 120px) clamp(20px, 5vw, 64px) clamp(60px, 8vw, 100px);
-      transform: translateY(24px); opacity: 0; transition: transform .45s cubic-bezier(0.4,0,0.2,1) .05s, opacity .45s ease .05s;
-    }
-    .inside-close {
-      position: fixed; top: 22px; right: clamp(20px, 4vw, 48px); z-index: 102;
-      width: 46px; height: 46px; border: 1px solid var(--border-strong); background: rgba(18,18,22,0.7);
-      color: var(--bone); font-size: 22px; line-height: 1; cursor: pointer; backdrop-filter: blur(6px);
-      display: flex; align-items: center; justify-content: center; transition: all .2s ease;
-    }
-    .inside-close:hover { border-color: var(--bone); background: rgba(236,231,219,0.08); }
-    .inside-head { margin-bottom: clamp(40px, 6vw, 72px); }
-    .inside-head .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); }
-    .inside-head h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(38px, 6vw, 72px); line-height: 0.9; letter-spacing: -0.01em; margin: 16px 0 0; text-transform: uppercase; }
-    .inside-row {
-      display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(24px, 4vw, 56px);
-      align-items: center; margin-bottom: clamp(48px, 7vw, 96px);
-    }
-    .inside-row:last-child { margin-bottom: 0; }
-    .inside-row.flip .inside-shot { order: 2; }
-    .inside-row.flip .inside-copy { order: 1; }
-    .inside-shot {
-      border: 1px solid var(--border); background: #000; overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
-    .inside-shot img { display: block; width: 100%; height: auto; }
-    .inside-copy .n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); }
-    .inside-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(22px, 2.8vw, 34px); line-height: 1.02; margin: 12px 0 0; text-transform: uppercase; }
-    .inside-copy p { margin: 12px 0 0; font-size: clamp(14px, 1.2vw, 16px); line-height: 1.6; color: var(--muted); }
-    @media (max-width: 760px) {
-      .inside-row { grid-template-columns: 1fr; gap: 18px; margin-bottom: 56px; }
-      .inside-row.flip .inside-shot { order: 0; }
-      .inside-row.flip .inside-copy { order: 0; }
-    }
+    .card:hover { border-color: rgba(226,69,42,0.55); transform: translateY(-4px); }
+    .card .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--accent); display: block; margin-bottom: 18px; }
+    .card h3 { font-family: var(--font-display); font-weight: 900; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.02; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.005em; }
+    .card h3 a { transition: color .2s; }
+    .card h3 a:hover { color: var(--accent); }
+    .card p { font-size: clamp(14px, 1.2vw, 16px); line-height: 1.6; color: var(--muted); }
+    .card p .accent { color: var(--accent); font-weight: 600; }
 
-/* ===== BETA SIGNUP ===== */
-    .beta { position: relative; z-index: 3; padding: clamp(64px, 9vw, 104px) clamp(20px, 5vw, 72px); text-align: center; overflow: hidden; }
+    .program-card { display: flex; flex-direction: column; }
+    .program-card .body { flex-grow: 1; }
+    .bullet-list { list-style: none; display: grid; gap: 0.7rem; margin-top: 1rem; }
+    .bullet-list li { color: #d7d2c6; padding-left: 1.4rem; position: relative; font-size: 0.95rem; line-height: 1.5; }
+    .bullet-list li::before { content: ""; position: absolute; left: 0; top: 0.55rem; width: 0.4rem; height: 0.4rem; background: var(--accent); }
+    .program-card .btn { width: 100%; justify-content: center; margin-top: 2rem; }
+
+    .grid-engines { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.6vw, 22px); margin-top: clamp(36px, 5vw, 56px); }
+
+    /* ===== CTA BOX ===== */
+    .cta-box {
+      position: relative; text-align: center; margin-top: 60px; padding: clamp(50px, 8vw, 90px) 40px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .cta-box .glow {
+      position: absolute; top: 50%; left: 50%; width: min(80vw, 760px); height: min(80vw, 760px);
+      transform: translate(-50%, -50%); border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(226,69,42,0.14), transparent 70%);
+      pointer-events: none; animation: cms-pulse 6s ease-in-out infinite;
+    }
+    .cta-box h2 { position: relative; }
+    .cta-box p { position: relative; color: var(--muted); max-width: 600px; margin: 24px auto 32px; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; }
+    .cta-box .hero-actions { margin-top: 0; }
+
+    /* ===== BETA SIGNUP ===== */
+    .beta { position: relative; z-index: 3; padding: clamp(80px, 13vw, 140px) clamp(20px, 5vw, 72px); text-align: center; overflow: hidden; }
     .beta .glow {
       position: absolute; top: 50%; left: 50%; width: min(80vw, 700px); height: min(80vw, 700px);
       transform: translate(-50%, -50%); border-radius: 50%;
@@ -205,20 +357,52 @@
     #beta-success h3 { color: var(--accent); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; }
     #beta-success p { margin: 0; color: var(--bone); font-weight: 500; }
 
-/* ===== RESPONSIVE ===== */
+    /* ===== FOOTER ===== */
+    footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,0.08); padding: 80px 0 40px; }
+    .footer-vault {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;
+      padding-bottom: 2rem; border-bottom: 1px solid rgba(236,231,219,0.06);
+    }
+    .footer-vault h4 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem; }
+    .footer-vault ul { list-style: none; }
+    .footer-vault li { margin-bottom: 0.7rem; }
+    .footer-vault a { color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-vault a:hover { color: var(--bone); }
+    .footer-vault p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem; }
+    .footer-vault .cta-link { color: var(--accent); font-weight: 600; display: inline-block; margin-top: 0.5rem; font-family: var(--font-display); letter-spacing: 0.05em; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; }
+    .footer-row .brand-mini { display: flex; align-items: center; gap: 13px; }
+    .footer-row .brand-mini .sprocket { width: 30px; height: 30px; }
+    .footer-row .brand-mini .name { font-family: var(--font-display); font-weight: 900; font-size: 15px; letter-spacing: 0.12em; }
+    .footer-row .brand-mini .tagline { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
+    .footer-row .meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--faint); }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; }
       .readout { max-width: 480px; }
       .pillars { grid-template-columns: 1fr; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .grid-engines { grid-template-columns: 1fr; }
+      .grid-3, .grid-engines { grid-template-columns: 1fr; }
+      .footer-vault { grid-template-columns: repeat(2, 1fr); }
+      .nav-actions .nav-link { display: none; }
       .loop-steps { grid-template-columns: repeat(4, 1fr); gap: 18px; }
       .loop-line { display: none; }
     }
     @media (max-width: 720px) {
+      .footer-vault { grid-template-columns: 1fr; gap: 1.5rem; }
       .stats { grid-template-columns: 1fr; }
       .loop-steps { grid-template-columns: repeat(2, 1fr); }
+      .nav { padding: 14px 20px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .carousel-track { aspect-ratio: 4 / 3; }
+      .footer-row { flex-direction: column; align-items: start; gap: 1.5rem; }
       .marquee-banner .mqv-inner { font-size: 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+      #cms-dust, .cms-grain { display: none; }
     }
   </style>
 </head>
@@ -248,9 +432,7 @@
       <div class="nav-actions">
         <a class="nav-link" href="#system">THE SYSTEM</a>
         <a class="nav-link" href="#programs">TRACKS</a>
-        <button class="nav-link nav-inside" type="button" data-inside-open>INSIDE</button>
         <a class="nav-link" href="#proof">PROOF</a>
-        <a class="nav-link" href="/blog">BLOG</a>
         <a class="btn btn-nav" href="https://app.cmstrength.fit">OPEN APP &rarr;</a>
       </div>
     </nav>
@@ -307,9 +489,6 @@
         <a class="btn btn-primary" href="#join-beta">Claim Beta Slot &rarr;</a>
         <a class="btn btn-secondary" href="#system">See the System</a>
         <a class="btn btn-secondary" href="https://app.cmstrength.fit">Open Web App &rarr;</a>
-      </div>
-      <div class="hero-inside-link">
-        <button type="button" class="inside-textlink" data-inside-open>See inside the app &rarr;</button>
       </div>
     </section>
 
@@ -396,6 +575,23 @@
       </div>
     </section>
 
+    <!-- ===== INSIDE THE APP / CAROUSEL ===== -->
+    <section class="block" id="inside">
+      <div class="carousel-head reveal">
+        <span class="kicker">INSIDE THE APP</span>
+        <h2 class="display">See what you're<br>training with.</h2>
+      </div>
+      <div class="carousel-track" id="carousel">
+        <img src="./images/carousel/dashboard.webp" alt="CMS Dashboard — training overview, readiness score, weekly plan" class="active">
+        <img src="./images/carousel/joint-load.webp" alt="Joint Load chart — block stress vs ceiling across all joints">
+        <img src="./images/carousel/readiness-volume.webp" alt="Readiness score, e1RM tracking, and weekly volume curves">
+        <img src="./images/carousel/joint-status.webp" alt="Per-joint status — elbow, shoulder, wrist stress levels">
+        <img src="./images/carousel/film-room.webp" alt="Film Room — session and set analytics dashboard">
+        <img src="./images/carousel/film-detail.webp" alt="Film Room detail — coach read and block analysis">
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <p class="carousel-caption" id="carousel-caption"></p>
+    </section>
 
     <!-- ===== PROGRAMS / TRACKS ===== -->
     <section class="block" id="programs">
@@ -459,27 +655,27 @@
 
       <div class="grid-engines">
         <article class="card reveal">
-          <h3><a href="/methodology/proactive-load-architecture">Macrocycle Engine</a></h3>
+          <h3><a href="/methodology/proactive-load-architecture.html">Macrocycle Engine</a></h3>
           <p>CMS calculates how far out a competition is, then assembles the training flow from there. Hypertrophy, strength, peak, and taper blocks are not hand-waved. <span class="accent">They are built from time-to-meet.</span></p>
         </article>
         <article class="card reveal">
-          <h3><a href="/methodology/proactive-load-architecture">Load Engine</a></h3>
+          <h3><a href="/methodology/proactive-load-architecture.html">Load Engine</a></h3>
           <p>Baseline percentages are adjusted by readiness score and lift-specific joint feedback before final working weights are assigned. <span class="accent">The app is actually listening when the day is off.</span></p>
         </article>
         <article class="card reveal">
-          <h3><a href="/methodology/the-experience">Readiness Engine</a></h3>
+          <h3><a href="/methodology/the-experience.html">Readiness Engine</a></h3>
           <p>We built a check-in system that turns session feedback into practical load changes. <span class="accent">Simple enough to use consistently and useful enough to matter.</span></p>
         </article>
         <article class="card reveal">
-          <h3><a href="/methodology/the-experience">Weak Point Engine</a></h3>
+          <h3><a href="/methodology/the-experience.html">Weak Point Engine</a></h3>
           <p>CMS carries weakness-specific alternates for common sticking points, so substitutions are not random. <span class="accent">Close-grip, board press, Spoto — tied to actual weak-link logic.</span></p>
         </article>
         <article class="card reveal">
-          <h3><a href="/methodology/proactive-load-architecture">e1RM Tracking</a></h3>
+          <h3><a href="/methodology/proactive-load-architecture.html">e1RM Tracking</a></h3>
           <p>Every completed set is logged with weight and reps. The system calculates e1RM trends and uses them to <span class="accent">refresh training maxes before test week.</span></p>
         </article>
         <article class="card reveal">
-          <h3><a href="/methodology/the-experience">Block Progression</a></h3>
+          <h3><a href="/methodology/the-experience.html">Block Progression</a></h3>
           <p>Training cycles aren't guessed. The system manages <span class="accent">volume, intensification, and deload</span> phases based on cumulative fatigue and block-completion patterns.</p>
         </article>
       </div>
@@ -502,7 +698,7 @@
           <span class="kicker">QUESTIONS LIFTERS ASK</span>
           <h2 class="display">Built for the long haul.</h2>
         </div>
-        <div class="grid-3">
+        <div class="grid-3" style="grid-template-columns:repeat(3,1fr);">
           <article class="card reveal">
             <h3>Is CMS only for one kind of lifter?</h3>
             <p>No. CMS supports three clear lanes right now: Bench Specialization, Jacked and Strong, and full SBD. That gives lifters a reason to join whether they care most about bench, size plus strength, or meet prep.</p>
@@ -563,44 +759,6 @@
         </div>
       </div>
     </section>
-    <!-- ===== INSIDE THE APP — MODAL ===== -->
-    <div class="inside-overlay" id="inside-overlay" role="dialog" aria-modal="true" aria-labelledby="inside-title" aria-hidden="true">
-      <button class="inside-close" type="button" data-inside-close aria-label="Close">&times;</button>
-      <div class="inside-scroll">
-        <div class="inside-panel">
-          <div class="inside-head">
-            <span class="kicker">INSIDE THE APP</span>
-            <h2 id="inside-title">See what you're<br>training with.</h2>
-          </div>
-
-          <div class="inside-row">
-            <div class="inside-shot"><img src="./images/carousel/dashboard.webp" alt="CMS Dashboard — training overview, readiness score, weekly plan"></div>
-            <div class="inside-copy"><span class="n">01</span><h3>Dashboard</h3><p>Your training at a glance — today's mission, readiness score, target focus, and the week laid out in front of you.</p></div>
-          </div>
-          <div class="inside-row flip">
-            <div class="inside-shot"><img src="./images/carousel/joint-load.webp" alt="Joint Load chart — block stress vs ceiling across all joints"></div>
-            <div class="inside-copy"><span class="n">02</span><h3>Joint Load</h3><p>Cumulative stress per joint plotted against its ceiling across the whole block — the read that drives pre-session rotations.</p></div>
-          </div>
-          <div class="inside-row">
-            <div class="inside-shot"><img src="./images/carousel/readiness-volume.webp" alt="Readiness score, e1RM tracking, and weekly volume curves"></div>
-            <div class="inside-copy"><span class="n">03</span><h3>Readiness &amp; Trends</h3><p>Readiness, e1RM, and weekly volume curves tracked together so you can see exactly how you're moving week to week.</p></div>
-          </div>
-          <div class="inside-row flip">
-            <div class="inside-shot"><img src="./images/carousel/joint-status.webp" alt="Per-joint status — elbow, shoulder, wrist stress levels"></div>
-            <div class="inside-copy"><span class="n">04</span><h3>Per-Joint Status</h3><p>Elbow, shoulder, wrist — each joint's current stress level, so substitutions are never random guesswork.</p></div>
-          </div>
-          <div class="inside-row">
-            <div class="inside-shot"><img src="./images/carousel/film-room.webp" alt="Film Room — session and set analytics dashboard"></div>
-            <div class="inside-copy"><span class="n">05</span><h3>Film Room</h3><p>Session and set analytics in one place — what you did, how it went, and what it means for the next session.</p></div>
-          </div>
-          <div class="inside-row flip">
-            <div class="inside-shot"><img src="./images/carousel/film-detail.webp" alt="Film Room detail — coach read and block analysis"></div>
-            <div class="inside-copy"><span class="n">06</span><h3>Coach Read</h3><p>Block-level analysis — the system reading your completed work and telling you what the next block should be.</p></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
   </main>
 
   <footer>
@@ -608,17 +766,16 @@
       <div>
         <h4>Methodology</h4>
         <ul>
-          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
-          <li><a href="/methodology/the-experience">The Experience</a></li>
-          <li><a href="/blog">The Strength Blog</a></li>
+          <li><a href="/methodology/proactive-load-architecture.html">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience.html">The Experience</a></li>
         </ul>
       </div>
       <div>
         <h4>Programs</h4>
         <ul>
-          <li><a href="/index#programs">Bench Specialist</a></li>
-          <li><a href="/index#programs">Jacked &amp; Strong</a></li>
-          <li><a href="/index#programs">SBD Full Power</a></li>
+          <li><a href="/index.html#programs">Bench Specialist</a></li>
+          <li><a href="/index.html#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index.html#programs">SBD Full Power</a></li>
         </ul>
       </div>
       <div>
@@ -645,43 +802,48 @@
   <!-- CMS MOTION (dust / glow / counters / marquee skew) -->
   <script src="./cms-motion.js"></script>
 
-  <!-- INSIDE MODAL -->
+  <!-- CAROUSEL -->
   <script>
     (function () {
-      var overlay = document.getElementById('inside-overlay');
-      if (!overlay) return;
-      var scroll = overlay.querySelector('.inside-scroll');
-      var lastFocus = null;
+      var track = document.getElementById('carousel');
+      var dotsEl = document.getElementById('carousel-dots');
+      var capEl = document.getElementById('carousel-caption');
+      if (!track) return;
 
-      function open() {
-        lastFocus = document.activeElement;
-        overlay.classList.add('open');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        if (scroll) scroll.scrollTop = 0;
-        var closeBtn = overlay.querySelector('[data-inside-close]');
-        if (closeBtn) closeBtn.focus();
-      }
-      function close() {
-        overlay.classList.remove('open');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        if (lastFocus && lastFocus.focus) lastFocus.focus();
-      }
+      var imgs = track.querySelectorAll('img');
+      var captions = [
+        'Dashboard — your training at a glance',
+        'Joint Load — block stress vs ceiling',
+        'Readiness, e1RM, and volume trends',
+        'Per-joint status breakdown',
+        'Film Room — session analytics',
+        'Coach Read — block-level analysis'
+      ];
+      var current = 0;
+      var timer;
 
-      document.querySelectorAll('[data-inside-open]').forEach(function (b) {
-        b.addEventListener('click', open);
+      imgs.forEach(function (_, i) {
+        var btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Slide ' + (i + 1));
+        if (i === 0) btn.classList.add('active');
+        btn.addEventListener('click', function () { goTo(i); });
+        dotsEl.appendChild(btn);
       });
-      document.querySelectorAll('[data-inside-close]').forEach(function (b) {
-        b.addEventListener('click', close);
-      });
-      // click on scrim (but not the panel content) closes
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay || e.target === scroll) close();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
-      });
+
+      capEl.textContent = captions[0];
+
+      function goTo(index) {
+        imgs[current].classList.remove('active');
+        dotsEl.children[current].classList.remove('active');
+        current = index;
+        imgs[current].classList.add('active');
+        dotsEl.children[current].classList.add('active');
+        capEl.textContent = captions[current] || '';
+        resetTimer();
+      }
+      function advance() { goTo((current + 1) % imgs.length); }
+      function resetTimer() { clearInterval(timer); timer = setInterval(advance, 4000); }
+      resetTimer();
     })();
   </script>
 
@@ -691,7 +853,7 @@
     (function () {
       var SUPABASE_URL     = 'https://jxwrlegxmekzjtqoldah.supabase.co';
       var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4d3JsZWd4bWVremp0cW9sZGFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTY1MjgsImV4cCI6MjA4NzM3MjUyOH0.-6C9BtsGpcGmj9hiAZvv504vek0LsSIK3xJfKUdffoU';
-      var REDIRECT_URL     = 'https://www.cmstrength.fit/signup.html';
+      var REDIRECT_URL     = 'https://cmstrength.fit/signup.html';
 
       var client  = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       var form    = document.getElementById('beta-form');
