@@ -3,22 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMS Methodology | How It Works</title>
-  <meta name="description" content="How Center Mass Strength works — proactive load architecture and the training experience, without the fluff.">
+  <title>Strength Tools — Center Mass Strength</title>
+  <meta name="description" content="Free powerlifting calculators from Center Mass Strength. DOT score calculator, one rep max estimator, and more tools for serious lifters.">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/cms.css">
+  <style>
+    .tools-hub {
+      position: relative; z-index: 3;
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    }
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .tool-card {
+      border: 1px solid var(--border); background: var(--bg-card);
+      padding: clamp(32px, 4vw, 48px);
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color .3s ease, transform .2s ease;
+      text-decoration: none; color: inherit;
+    }
+    .tool-card:hover {
+      border-color: var(--accent); transform: translateY(-4px);
+    }
+    .tool-card .tool-kicker {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .tool-card h2 {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(24px, 3vw, 36px); line-height: 0.95;
+      text-transform: uppercase; margin: 0;
+    }
+    .tool-card p {
+      color: var(--muted); font-size: 15px; line-height: 1.6;
+      margin: 0; flex: 1;
+    }
+    .tool-card .card-arrow {
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-top: 8px;
+    }
+    @media (max-width: 760px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ambient layers -->
   <canvas id="cms-dust"></canvas>
   <div id="cms-glow"></div>
   <div class="cms-vignette" aria-hidden="true"></div>
@@ -48,27 +87,29 @@
   </header>
 
   <main>
-    <div class="page-hero">
+    <div class="page-hero" style="padding-top: 140px;">
       <a class="back-link" href="/index" style="margin-bottom:26px;">&larr; Back to home</a>
-      <span class="eyebrow">THE METHODOLOGY</span>
-      <h1>How CMS<br><span class="accent">Works</span>.</h1>
-      <p class="hero-sub">Two pages. Everything you need to understand what makes this different — without the fluff.</p>
+      <p class="kicker">TOOLBOX</p>
+      <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        STRENGTH <span class="accent">TOOLS</span>
+      </h1>
+      <p class="lede" style="max-width:560px;margin-top:20px;">Free calculators for lifters who care about the numbers.</p>
     </div>
 
-    <section class="block" style="padding-top:0;">
-      <div class="grid-2" style="max-width:900px; margin-left:auto; margin-right:auto;">
-        <article class="card reveal">
-          <span class="tag">THE PHILOSOPHY</span>
-          <h3>Proactive Load Architecture</h3>
-          <p>Most apps react to your pain. CMS tracks the trajectory before it becomes a problem. Understand how joint load accumulation shapes every session — and why approaching the ceiling is the goal, not the warning sign.</p>
-          <a class="card-link" href="/methodology/proactive-load-architecture">Read the Philosophy &rarr;</a>
-        </article>
-        <article class="card reveal">
-          <span class="tag">THE FLOW</span>
-          <h3>The Experience</h3>
-          <p>From your first check-in to meet day — a walkthrough of how CMS shapes your training in real time. Seven steps, three programs, one system that actually adapts.</p>
-          <a class="card-link" href="/methodology/the-experience">See the Experience &rarr;</a>
-        </article>
+    <section class="tools-hub">
+      <div class="tools-grid">
+        <a class="tool-card" href="/tools/dot-score">
+          <span class="tool-kicker">CALCULATOR</span>
+          <h2>DOT SCORE <span class="accent">CALCULATOR</span></h2>
+          <p>Compare powerlifting strength across weight classes. Enter your squat, bench, and deadlift to see your DOT coefficient and how you rank.</p>
+          <span class="card-arrow">CALCULATE YOUR DOT &rarr;</span>
+        </a>
+        <a class="tool-card" href="/tools/1rm-calculator">
+          <span class="tool-kicker">CALCULATOR</span>
+          <h2><span class="accent">1RM</span> CALCULATOR</h2>
+          <p>Estimate your one rep max from any working set. Enter weight and reps for squat, bench, and deadlift — Epley formula does the rest.</p>
+          <span class="card-arrow">ESTIMATE YOUR 1RM &rarr;</span>
+        </a>
       </div>
     </section>
   </main>
@@ -80,6 +121,7 @@
         <ul>
           <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
           <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
         </ul>
       </div>
       <div>
@@ -96,11 +138,12 @@
           <li><a href="/tools/dot-score">DOT Score Calculator</a></li>
           <li><a href="/tools/1rm-calculator">1RM Calculator</a></li>
         </ul>
+        <p style="color:var(--dim);font-size:0.8rem;margin-top:0.8rem;">More tools coming soon.</p>
       </div>
       <div>
         <h4>Launch</h4>
         <p>Ready to train smarter? Join the beta.</p>
-        <a href="/index#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
+        <a href="#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
       </div>
     </div>
     <div class="shell footer-row">

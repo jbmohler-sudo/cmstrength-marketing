@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOT Score Calculator — Center Mass Strength</title>
+  <meta name="description" content="Free DOT score calculator for powerlifters. Enter your squat, bench, deadlift, and bodyweight to calculate your DOT coefficient and see how you rank. Male and female supported.">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* ===== DOT SCORE PAGE ===== */
+    .tool-section {
+      position: relative; z-index: 3;
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    }
+
+    /* --- Toggle pills --- */
+    .toggle-row {
+      display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; align-items: center;
+    }
+    .toggle-group {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toggle-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .toggle-pill {
+      display: flex; border: 1px solid var(--border-strong); overflow: hidden; cursor: pointer;
+    }
+    .toggle-pill button {
+      background: transparent; border: none; color: var(--muted); cursor: pointer;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 18px; transition: all .2s;
+    }
+    .toggle-pill button.active {
+      background: var(--accent); color: var(--bg);
+    }
+    .toggle-pill button:hover:not(.active) {
+      background: rgba(236,231,219,0.06); color: var(--bone);
+    }
+
+    /* --- Input grid --- */
+    .dot-inputs {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-bottom: 40px;
+    }
+    .input-block { display: flex; flex-direction: column; gap: 8px; }
+    .input-block label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .input-block input {
+      background: rgba(18,18,22,0.72); border: 1px solid var(--border-strong);
+      color: var(--bone); font-family: var(--font-display); font-weight: 800;
+      font-size: 28px; padding: 14px 16px; text-align: center;
+      transition: border-color .2s;
+      -moz-appearance: textfield;
+    }
+    .input-block input::-webkit-outer-spin-button,
+    .input-block input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .input-block input:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .input-block .unit-hint {
+      font-family: var(--font-mono); font-size: 10px; color: var(--faint);
+      text-align: center; letter-spacing: 0.1em;
+    }
+
+    /* --- Calculate button --- */
+    .calc-row { text-align: center; margin-bottom: 48px; }
+
+    /* --- Result area --- */
+    .dot-result {
+      display: flex; flex-direction: column; align-items: center;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .dot-result.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* --- Weight graphic --- */
+    .weight-wrap {
+      position: relative; width: 280px; height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+    }
+    .weight-wrap img {
+      width: 100%; height: 100%; object-fit: contain;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6));
+    }
+    .weight-total {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -38%);
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 42px; line-height: 1; color: var(--bone);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.5);
+      text-align: center;
+      pointer-events: none;
+    }
+    .weight-total .total-unit {
+      display: block; font-size: 14px; color: var(--dim);
+      font-family: var(--font-mono); font-weight: 400;
+      letter-spacing: 0.15em; margin-top: 2px;
+    }
+
+    /* --- DOT score --- */
+    .dot-score-display {
+      text-align: center; margin-top: 12px;
+    }
+    .dot-score-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .dot-score-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(64px, 10vw, 96px); line-height: 1;
+      color: var(--bone); margin-top: 4px;
+    }
+    .dot-score-value .decimal {
+      font-size: 0.5em; color: var(--dim);
+    }
+    .dot-rating {
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em;
+      color: var(--accent); margin-top: 10px; text-transform: uppercase;
+    }
+
+    /* --- Lift breakdown --- */
+    .lift-breakdown {
+      display: flex; gap: 32px; margin-top: 32px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--dim);
+    }
+    .lift-breakdown .lift-item {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .lift-breakdown .lift-val {
+      font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--muted);
+    }
+
+    /* --- What is DOT --- */
+    .dot-explainer {
+      margin-top: 64px; border-top: 1px solid var(--border);
+      padding-top: 40px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .dot-explainer h3 {
+      font-family: var(--font-display); font-weight: 900; font-size: 22px;
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+    .dot-explainer p {
+      color: var(--muted); font-size: 15px; line-height: 1.65; margin-bottom: 12px;
+    }
+    .dot-explainer .accent { color: var(--accent); font-weight: 600; }
+
+    /* --- Cross-link card --- */
+    .cross-link {
+      margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cross-link a {
+      font-family: var(--font-display); font-weight: 700; font-size: 15px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .cross-link a:hover {
+      color: var(--accent);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 760px) {
+      .dot-inputs { grid-template-columns: repeat(2, 1fr); }
+      .weight-wrap { width: 220px; height: 220px; }
+      .weight-total { font-size: 34px; }
+      .lift-breakdown { gap: 20px; }
+    }
+    @media (max-width: 480px) {
+      .dot-inputs { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index#join-beta">CLAIM BETA SLOT</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero" style="padding-top: 140px;">
+      <a class="back-link" href="/tools" style="margin-bottom:26px;">&larr; Back to tools</a>
+      <p class="kicker">POWERLIFTING CALCULATOR</p>
+      <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        <span class="accent">DOT SCORE</span> CALCULATOR
+      </h1>
+      <p class="lede" style="max-width:560px;margin-top:20px;">The modern standard for comparing powerlifting strength across weight classes. Enter your numbers and see where you stand.</p>
+    </div>
+
+    <section class="tool-section">
+      <!-- DOT Calculator -->
+      <div style="border:1px solid var(--border);background:var(--bg-card);padding:clamp(28px,4vw,48px);margin-bottom:48px;">
+        <span class="kicker" style="display:block;margin-bottom:18px;">CALCULATOR</span>
+        <h2 style="font-family:var(--font-display);font-weight:900;font-size:clamp(28px,4vw,44px);line-height:0.95;text-transform:uppercase;margin-bottom:8px;">
+          WHAT'S YOUR <span class="accent">DOT</span> SCORE?
+        </h2>
+        <p style="color:var(--muted);font-size:15px;line-height:1.6;max-width:520px;margin-bottom:32px;">
+          Enter your best lifts and bodyweight. We'll tell you how strong you really are.
+        </p>
+
+        <!-- Toggles -->
+        <div class="toggle-row">
+          <div class="toggle-group">
+            <span class="toggle-label">SEX</span>
+            <div class="toggle-pill" id="sex-toggle">
+              <button class="active" data-val="male">MALE</button>
+              <button data-val="female">FEMALE</button>
+            </div>
+          </div>
+          <div class="toggle-group">
+            <span class="toggle-label">UNITS</span>
+            <div class="toggle-pill" id="unit-toggle">
+              <button class="active" data-val="lb">LB</button>
+              <button data-val="kg">KG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inputs -->
+        <div class="dot-inputs">
+          <div class="input-block">
+            <label for="bodyweight">BODYWEIGHT</label>
+            <input type="number" id="bodyweight" placeholder="—" min="0" step="0.1">
+            <span class="unit-hint" id="bw-unit">LB</span>
+          </div>
+          <div class="input-block">
+            <label for="squat">SQUAT</label>
+            <input type="number" id="squat" placeholder="—" min="0" step="0.1">
+            <span class="unit-hint" id="sq-unit">LB</span>
+          </div>
+          <div class="input-block">
+            <label for="bench">BENCH</label>
+            <input type="number" id="bench" placeholder="—" min="0" step="0.1">
+            <span class="unit-hint" id="bp-unit">LB</span>
+          </div>
+          <div class="input-block">
+            <label for="deadlift">DEADLIFT</label>
+            <input type="number" id="deadlift" placeholder="—" min="0" step="0.1">
+            <span class="unit-hint" id="dl-unit">LB</span>
+          </div>
+        </div>
+
+        <!-- Calculate -->
+        <div class="calc-row">
+          <button class="btn btn-primary" id="calc-btn" onclick="calculateDOT()">
+            CALCULATE DOT SCORE
+          </button>
+        </div>
+
+        <!-- Result -->
+        <div class="dot-result" id="dot-result">
+          <div class="weight-wrap">
+            <img src="/bigweight.png" alt="Iron weight">
+            <div class="weight-total">
+              <span id="total-number">0</span>
+              <span class="total-unit" id="total-unit">TOTAL LB</span>
+            </div>
+          </div>
+
+          <div class="dot-score-display">
+            <div class="dot-score-label">YOUR DOT SCORE</div>
+            <div class="dot-score-value">
+              <span id="dot-whole">0</span><span class="decimal" id="dot-decimal">.00</span>
+            </div>
+            <div class="dot-rating" id="dot-rating"></div>
+          </div>
+
+          <div class="lift-breakdown">
+            <div class="lift-item">
+              <span>SQ</span>
+              <span class="lift-val" id="breakdown-sq">—</span>
+            </div>
+            <div class="lift-item">
+              <span>BP</span>
+              <span class="lift-val" id="breakdown-bp">—</span>
+            </div>
+            <div class="lift-item">
+              <span>DL</span>
+              <span class="lift-val" id="breakdown-dl">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explainer -->
+      <div class="dot-explainer">
+        <h3>WHAT IS A <span class="accent">DOT</span> SCORE?</h3>
+        <p>
+          The DOT coefficient is the modern successor to the Wilks score, used to compare
+          powerlifting totals across different body weights and sexes. It answers the question:
+          <span class="accent">"Who's actually stronger, pound for pound?"</span>
+        </p>
+        <p>
+          A DOT score above <span class="accent">300</span> is solid intermediate territory.
+          Above <span class="accent">400</span> puts you in advanced/elite range.
+          Above <span class="accent">500</span>? You're competing at a national level.
+        </p>
+      </div>
+
+      <!-- Cross-link -->
+      <div class="cross-link">
+        <a href="/tools/1rm-calculator">Also check out our 1RM Calculator &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/index#programs">Bench Specialist</a></li>
+          <li><a href="/index#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/tools/dot-score" class="active-link">DOT Score Calculator</a></li>
+          <li><a href="/tools/1rm-calculator">1RM Calculator</a></li>
+        </ul>
+        <p style="color:var(--dim);font-size:0.8rem;margin-top:0.8rem;">More tools coming soon.</p>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Join the beta.</p>
+        <a href="/index#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
+      </div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script src="/cms-motion.js"></script>
+  <script>
+    /* ===== DOT CALCULATOR ===== */
+    var currentSex = 'male';
+    var currentUnit = 'lb';
+    var LB_TO_KG = 0.453592;
+
+    /* Toggle wiring */
+    document.querySelectorAll('.toggle-pill').forEach(function(pill) {
+      pill.querySelectorAll('button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          pill.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          if (pill.id === 'sex-toggle') currentSex = btn.dataset.val;
+          if (pill.id === 'unit-toggle') {
+            currentUnit = btn.dataset.val;
+            var u = btn.dataset.val.toUpperCase();
+            document.getElementById('bw-unit').textContent = u;
+            document.getElementById('sq-unit').textContent = u;
+            document.getElementById('bp-unit').textContent = u;
+            document.getElementById('dl-unit').textContent = u;
+          }
+        });
+      });
+    });
+
+    /* DOT coefficients — polynomial form */
+    /* DOT = total_kg * (500 / denominator)  */
+    /* Male:   denom = A*bw^4 + B*bw^3 + C*bw^2 + D*bw + E  (bw in kg) */
+    /* Female: same form, different constants */
+    var DOT_COEFF = {
+      male: {
+        A: -0.000001093,
+        B:  0.0007391293,
+        C: -0.1918759221,
+        D: 24.0900756,
+        E: -307.75076
+      },
+      female: {
+        A: -0.0000010706,
+        B:  0.0005158568,
+        C: -0.1126655495,
+        D: 13.6175032,
+        E: -57.96288
+      }
+    };
+
+    function dotDenominator(bwKg, sex) {
+      var c = DOT_COEFF[sex];
+      var bw = bwKg;
+      return c.A * Math.pow(bw, 4) + c.B * Math.pow(bw, 3) + c.C * Math.pow(bw, 2) + c.D * bw + c.E;
+    }
+
+    function getRating(dot) {
+      if (dot >= 500) return 'ELITE';
+      if (dot >= 400) return 'ADVANCED';
+      if (dot >= 350) return 'PROFICIENT';
+      if (dot >= 300) return 'INTERMEDIATE';
+      if (dot >= 200) return 'NOVICE';
+      return 'BEGINNER';
+    }
+
+    /* Animate a number counting up */
+    function animateValue(el, start, end, duration, isDecimal) {
+      function setFinal() {
+        if (isDecimal) {
+          el.textContent = '.' + ('0' + Math.round((end % 1) * 100)).slice(-2);
+        } else {
+          el.textContent = Math.round(end);
+        }
+      }
+      /* Guarantee final value even if rAF is throttled (tab unfocused) */
+      setTimeout(setFinal, duration + 50);
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
+        var current = start + (end - start) * eased;
+        if (isDecimal) {
+          el.textContent = '.' + ('0' + Math.round((current % 1) * 100)).slice(-2);
+        } else {
+          el.textContent = Math.floor(current);
+        }
+        if (progress < 1) requestAnimationFrame(step);
+        else setFinal();
+      }
+      requestAnimationFrame(step);
+    }
+
+    function calculateDOT() {
+      var bw = parseFloat(document.getElementById('bodyweight').value);
+      var sq = parseFloat(document.getElementById('squat').value) || 0;
+      var bp = parseFloat(document.getElementById('bench').value) || 0;
+      var dl = parseFloat(document.getElementById('deadlift').value) || 0;
+
+      if (!bw || bw <= 0) {
+        document.getElementById('bodyweight').style.borderColor = 'var(--accent)';
+        document.getElementById('bodyweight').focus();
+        return;
+      }
+
+      /* Convert to kg if in lbs */
+      var bwKg = currentUnit === 'lb' ? bw * LB_TO_KG : bw;
+      var sqKg = currentUnit === 'lb' ? sq * LB_TO_KG : sq;
+      var bpKg = currentUnit === 'lb' ? bp * LB_TO_KG : bp;
+      var dlKg = currentUnit === 'lb' ? dl * LB_TO_KG : dl;
+
+      var totalKg = sqKg + bpKg + dlKg;
+      var total = sq + bp + dl;
+
+      /* Clamp bodyweight to DOT valid range */
+      var bwClamped = Math.max(40, Math.min(bwKg, 210));
+      var denom = dotDenominator(bwClamped, currentSex);
+      var dotScore = totalKg * (500 / denom);
+
+      if (isNaN(dotScore) || !isFinite(dotScore) || dotScore < 0) dotScore = 0;
+
+      /* Show result */
+      var resultEl = document.getElementById('dot-result');
+      resultEl.classList.add('visible');
+
+      /* Animate total on weight */
+      var totalEl = document.getElementById('total-number');
+      animateValue(totalEl, 0, total, 800, false);
+      document.getElementById('total-unit').textContent = 'TOTAL ' + currentUnit.toUpperCase();
+
+      /* Animate DOT score */
+      var wholeEl = document.getElementById('dot-whole');
+      var decEl = document.getElementById('dot-decimal');
+      var dotWhole = Math.floor(dotScore);
+      var dotDec = dotScore - dotWhole;
+      animateValue(wholeEl, 0, dotWhole, 1000, false);
+      animateValue(decEl, 0, dotDec, 1000, true);
+
+      /* Rating */
+      document.getElementById('dot-rating').textContent = getRating(dotScore);
+
+      /* Breakdown */
+      var u = currentUnit.toUpperCase();
+      document.getElementById('breakdown-sq').textContent = sq ? Math.round(sq) + u : '—';
+      document.getElementById('breakdown-bp').textContent = bp ? Math.round(bp) + u : '—';
+      document.getElementById('breakdown-dl').textContent = dl ? Math.round(dl) + u : '—';
+
+      /* Scroll result into view */
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    /* Allow Enter key to trigger calculation */
+    document.querySelectorAll('.dot-inputs input').forEach(function(inp) {
+      inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') calculateDOT();
+      });
+    });
+  </script>
+</body>
+</html>

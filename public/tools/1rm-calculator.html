@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1RM Calculator — Estimate Your One Rep Max | Center Mass Strength</title>
+  <meta name="description" content="Free one rep max calculator for squat, bench press, and deadlift. Enter your weight and reps to estimate your 1RM using the Epley formula. Calculate your estimated powerlifting total.">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* ===== 1RM CALCULATOR PAGE ===== */
+    .tool-section {
+      position: relative; z-index: 3;
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    }
+
+    /* --- Toggle pills --- */
+    .toggle-row {
+      display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; align-items: center;
+    }
+    .toggle-group {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toggle-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .toggle-pill {
+      display: flex; border: 1px solid var(--border-strong); overflow: hidden; cursor: pointer;
+    }
+    .toggle-pill button {
+      background: transparent; border: none; color: var(--muted); cursor: pointer;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 18px; transition: all .2s;
+    }
+    .toggle-pill button.active {
+      background: var(--accent); color: var(--bg);
+    }
+    .toggle-pill button:hover:not(.active) {
+      background: rgba(236,231,219,0.06); color: var(--bone);
+    }
+
+    /* --- Input block --- */
+    .input-block { display: flex; flex-direction: column; gap: 8px; }
+    .input-block label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .input-block input {
+      background: rgba(18,18,22,0.72); border: 1px solid var(--border-strong);
+      color: var(--bone); font-family: var(--font-display); font-weight: 800;
+      font-size: 28px; padding: 14px 16px; text-align: center;
+      transition: border-color .2s;
+      -moz-appearance: textfield;
+    }
+    .input-block input::-webkit-outer-spin-button,
+    .input-block input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .input-block input:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .input-block .unit-hint {
+      font-family: var(--font-mono); font-size: 10px; color: var(--faint);
+      text-align: center; letter-spacing: 0.1em;
+    }
+
+    /* --- Calculate button --- */
+    .calc-row { text-align: center; margin-bottom: 48px; }
+
+    /* --- Result area --- */
+    .dot-result {
+      display: flex; flex-direction: column; align-items: center;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .dot-result.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* --- Score display --- */
+    .dot-score-display {
+      text-align: center; margin-top: 12px;
+    }
+    .dot-score-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .dot-score-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(64px, 10vw, 96px); line-height: 1;
+      color: var(--bone); margin-top: 4px;
+    }
+    .dot-score-value .decimal {
+      font-size: 0.5em; color: var(--dim);
+    }
+
+    /* --- 1RM grid --- */
+    .orm-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-bottom: 40px;
+    }
+    .orm-lift-card {
+      border: 1px solid var(--border); background: rgba(18,18,22,0.5);
+      padding: 24px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .orm-lift-card .lift-name {
+      font-family: var(--font-display); font-weight: 900; font-size: 20px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .orm-lift-card .lift-name .accent { color: var(--accent); }
+    .orm-input-row {
+      display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 10px;
+    }
+    .orm-input-row .input-block input {
+      font-size: 22px; padding: 12px 10px;
+    }
+    .orm-result-card {
+      border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px;
+      text-align: center; min-height: 80px;
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .orm-result-card.visible { opacity: 1; }
+    .orm-result-card .orm-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .orm-result-card .orm-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 44px; line-height: 1.1; color: var(--bone); margin-top: 4px;
+    }
+    .orm-result-card .orm-value .orm-unit {
+      font-size: 16px; color: var(--dim); font-family: var(--font-mono);
+      font-weight: 400; letter-spacing: 0.1em;
+    }
+
+    /* --- Cross-link card --- */
+    .cross-link {
+      margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cross-link a {
+      font-family: var(--font-display); font-weight: 700; font-size: 15px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .cross-link a:hover {
+      color: var(--accent);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 760px) {
+      .orm-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="/index#join-beta">CLAIM BETA SLOT</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero" style="padding-top: 140px;">
+      <a class="back-link" href="/tools" style="margin-bottom:26px;">&larr; Back to tools</a>
+      <p class="kicker">POWERLIFTING CALCULATOR</p>
+      <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        <span class="accent">1RM</span> CALCULATOR
+      </h1>
+      <p class="lede" style="max-width:560px;margin-top:20px;">Estimate your one rep max for squat, bench, and deadlift from any working set. Powered by the Epley formula.</p>
+    </div>
+
+    <section class="tool-section">
+      <div style="border:1px solid var(--border);background:var(--bg-card);padding:clamp(28px,4vw,48px);">
+
+        <!-- Unit toggle -->
+        <div class="toggle-row" style="margin-bottom:28px;">
+          <div class="toggle-group">
+            <span class="toggle-label">UNITS</span>
+            <div class="toggle-pill" id="orm-unit-toggle">
+              <button class="active" data-val="lb">LB</button>
+              <button data-val="kg">KG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Three lift cards -->
+        <div class="orm-grid">
+          <!-- SQUAT -->
+          <div class="orm-lift-card">
+            <div class="lift-name"><span class="accent">SQ</span> SQUAT</div>
+            <div class="orm-input-row">
+              <div class="input-block">
+                <label for="orm-sq-wt">WEIGHT</label>
+                <input type="number" id="orm-sq-wt" placeholder="—" min="0" step="0.1">
+              </div>
+              <div class="input-block">
+                <label for="orm-sq-reps">REPS</label>
+                <input type="number" id="orm-sq-reps" placeholder="—" min="1" max="30" step="1">
+              </div>
+            </div>
+            <div class="orm-result-card" id="orm-sq-result">
+              <div class="orm-label">ESTIMATED 1RM</div>
+              <div class="orm-value"><span id="orm-sq-val">—</span> <span class="orm-unit" id="orm-sq-unit">LB</span></div>
+            </div>
+          </div>
+
+          <!-- BENCH -->
+          <div class="orm-lift-card">
+            <div class="lift-name"><span class="accent">BP</span> BENCH</div>
+            <div class="orm-input-row">
+              <div class="input-block">
+                <label for="orm-bp-wt">WEIGHT</label>
+                <input type="number" id="orm-bp-wt" placeholder="—" min="0" step="0.1">
+              </div>
+              <div class="input-block">
+                <label for="orm-bp-reps">REPS</label>
+                <input type="number" id="orm-bp-reps" placeholder="—" min="1" max="30" step="1">
+              </div>
+            </div>
+            <div class="orm-result-card" id="orm-bp-result">
+              <div class="orm-label">ESTIMATED 1RM</div>
+              <div class="orm-value"><span id="orm-bp-val">—</span> <span class="orm-unit" id="orm-bp-unit">LB</span></div>
+            </div>
+          </div>
+
+          <!-- DEADLIFT -->
+          <div class="orm-lift-card">
+            <div class="lift-name"><span class="accent">DL</span> DEADLIFT</div>
+            <div class="orm-input-row">
+              <div class="input-block">
+                <label for="orm-dl-wt">WEIGHT</label>
+                <input type="number" id="orm-dl-wt" placeholder="—" min="0" step="0.1">
+              </div>
+              <div class="input-block">
+                <label for="orm-dl-reps">REPS</label>
+                <input type="number" id="orm-dl-reps" placeholder="—" min="1" max="30" step="1">
+              </div>
+            </div>
+            <div class="orm-result-card" id="orm-dl-result">
+              <div class="orm-label">ESTIMATED 1RM</div>
+              <div class="orm-value"><span id="orm-dl-val">—</span> <span class="orm-unit" id="orm-dl-unit">LB</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculate -->
+        <div class="calc-row">
+          <button class="btn btn-primary" id="orm-calc-btn" onclick="calculate1RM()">
+            ESTIMATE 1RM
+          </button>
+        </div>
+
+        <!-- Estimated total -->
+        <div class="dot-result" id="orm-total-result" style="margin-top:16px;">
+          <div class="dot-score-display">
+            <div class="dot-score-label">ESTIMATED TOTAL</div>
+            <div class="dot-score-value">
+              <span id="orm-total-val">0</span>
+              <span class="decimal" id="orm-total-unit" style="font-size:0.35em;"> LB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-link -->
+      <div class="cross-link">
+        <a href="/tools/dot-score">Also check out our DOT Score Calculator &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/index#programs">Bench Specialist</a></li>
+          <li><a href="/index#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/tools/dot-score">DOT Score Calculator</a></li>
+          <li><a href="/tools/1rm-calculator" class="active-link">1RM Calculator</a></li>
+        </ul>
+        <p style="color:var(--dim);font-size:0.8rem;margin-top:0.8rem;">More tools coming soon.</p>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Join the beta.</p>
+        <a href="/index#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
+      </div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script src="/cms-motion.js"></script>
+  <script>
+    /* ===== 1RM CALCULATOR ===== */
+    var ormUnit = 'lb';
+
+    /* Unit toggle */
+    var ormToggle = document.getElementById('orm-unit-toggle');
+    if (ormToggle) {
+      ormToggle.querySelectorAll('button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          ormToggle.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          ormUnit = btn.dataset.val;
+          var u = ormUnit.toUpperCase();
+          document.getElementById('orm-sq-unit').textContent = u;
+          document.getElementById('orm-bp-unit').textContent = u;
+          document.getElementById('orm-dl-unit').textContent = u;
+        });
+      });
+    }
+
+    /* Animate a number counting up */
+    function animateValue(el, start, end, duration, isDecimal) {
+      function setFinal() {
+        if (isDecimal) {
+          el.textContent = '.' + ('0' + Math.round((end % 1) * 100)).slice(-2);
+        } else {
+          el.textContent = Math.round(end);
+        }
+      }
+      /* Guarantee final value even if rAF is throttled (tab unfocused) */
+      setTimeout(setFinal, duration + 50);
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
+        var current = start + (end - start) * eased;
+        if (isDecimal) {
+          el.textContent = '.' + ('0' + Math.round((current % 1) * 100)).slice(-2);
+        } else {
+          el.textContent = Math.floor(current);
+        }
+        if (progress < 1) requestAnimationFrame(step);
+        else setFinal();
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* Epley: 1RM = w * (1 + r/30) — if reps=1, 1RM = weight */
+    function epley(weight, reps) {
+      if (!weight || weight <= 0 || !reps || reps <= 0) return 0;
+      if (reps === 1) return weight;
+      return weight * (1 + reps / 30);
+    }
+
+    function calculate1RM() {
+      var lifts = [
+        { wt: 'orm-sq-wt', reps: 'orm-sq-reps', val: 'orm-sq-val', result: 'orm-sq-result' },
+        { wt: 'orm-bp-wt', reps: 'orm-bp-reps', val: 'orm-bp-val', result: 'orm-bp-result' },
+        { wt: 'orm-dl-wt', reps: 'orm-dl-reps', val: 'orm-dl-val', result: 'orm-dl-result' }
+      ];
+
+      var total = 0;
+      var anyResult = false;
+
+      lifts.forEach(function(lift) {
+        var w = parseFloat(document.getElementById(lift.wt).value) || 0;
+        var r = parseInt(document.getElementById(lift.reps).value) || 0;
+        var orm = Math.round(epley(w, r));
+        var resultCard = document.getElementById(lift.result);
+        var valEl = document.getElementById(lift.val);
+
+        if (orm > 0) {
+          valEl.textContent = orm;
+          resultCard.classList.add('visible');
+          total += orm;
+          anyResult = true;
+        } else {
+          valEl.textContent = '—';
+          resultCard.classList.remove('visible');
+        }
+      });
+
+      /* Show total */
+      var totalResult = document.getElementById('orm-total-result');
+      if (anyResult) {
+        totalResult.classList.add('visible');
+        animateValue(document.getElementById('orm-total-val'), 0, total, 800, false);
+        document.getElementById('orm-total-unit').textContent = ' ' + ormUnit.toUpperCase();
+      }
+    }
+
+    /* Enter key for 1RM inputs */
+    document.querySelectorAll('.orm-lift-card input').forEach(function(inp) {
+      inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') calculate1RM();
+      });
+    });
+  </script>
+</body>
+</html>
