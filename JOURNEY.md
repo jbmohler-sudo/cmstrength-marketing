@@ -11,17 +11,21 @@
 ---
 
 ## Current State
-> Updated: 2026-06-15
+> Updated: 2026-07-14
 
 - **Phase / Stage:** Live at www.cmstrength.fit (Vercel, static HTML, main = production).
-  Blog is a real silo; SEO infra now documented + GSC fixed.
+  Blog is a real silo; SEO infra documented; GSC shows 11 indexed pages while the
+  old sitemap report remains stale.
 - **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, cyan-glow accent;
-  blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 7 posts organized
+  blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 8 posts organized
   as an editorial index (featured pillar + grouped sections: Masters / Programming / Fueling).
-  `docs/SEO.md` is the SEO source of truth. GSC fixed (Domain property).
+  `docs/SEO.md` is the SEO source of truth. GSC fixed (Domain property). `robots.txt`
+  now points to canonical `sitemap.xml`; `sitemap-main.xml` is kept in sync for the
+  previously submitted GSC entry.
 - **What's in progress:** Nothing active.
-- **What's next:** Request-index key www pages; let the sitemap status catch up. Optionally
-  add more "Fueling the Work" blog articles (only 1 so far).
+- **What's next:** Submit/request a fresh read of `https://www.cmstrength.fit/sitemap.xml`
+  in GSC after deploy; monitor indexed count vs sitemap status. Optionally add more
+  "Fueling the Work" blog articles (only 1 so far).
 - **Biggest open question:** none with teeth.
 
 ---
@@ -70,6 +74,26 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-07-14 - GSC sitemap cleanup and canonical sitemap alignment
+
+**Did:** Investigated GSC's stale "Sitemap could not be read" report for
+`https://www.cmstrength.fit/sitemap-main.xml`. Live Vercel headers/body verified
+healthy (`200 OK`, `application/xml`, 15 URL entries before cleanup), while GSC
+Page Indexing already showed 11 indexed pages, so the sitemap report was not blocking
+indexation. Updated `robots.txt` to advertise canonical `sitemap.xml`; added missing
+live crawlable URLs (`/blog/sled-drags`, `/tools/dot-score`, `/tools/1rm-calculator`);
+kept `sitemap-main.xml` byte-for-byte identical to `sitemap.xml` so the old submitted
+entry still resolves cleanly.
+**Decided:** Use `sitemap.xml` as the canonical sitemap name; keep `sitemap-main.xml`
+as a compatible duplicate until GSC no longer needs the old submitted entry.
+**Killed:** Duplicate sitemap naming as the primary robots signal.
+**Deferred:** Deploy/push and then submit/request fresh processing in GSC.
+**State after:** Both sitemap files validate as XML and contain 18 URLs; robots points
+to `https://www.cmstrength.fit/sitemap.xml`.
+**Next:** Deploy the change, then in GSC submit `https://www.cmstrength.fit/sitemap.xml`
+and optionally leave the old `sitemap-main.xml` entry alone until the new one reads
+successfully.
 
 ### 2026-06-15 — Nutrition blog article, blog restructure, link-purity, GSC fix, SEO doc
 
