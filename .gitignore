@@ -24,3 +24,5 @@ yarn-error.log*
 # OS files
 .DS_Store
 Thumbs.db
+# Local copy of the workspace gotchas doc - never commit (see scripts/sync-gotchas.ps1)
+UMBRELLA-GOTCHAS.md
