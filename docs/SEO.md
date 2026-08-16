@@ -83,9 +83,20 @@ near-replica sibling sites).
 - Every post earns its place against the No-BS rule.
 - Cite authority sources for any factual/scientific claim (PubMed-grade).
 - Internal-link within the silo (pillar ↔ spokes) + to the relevant engine
-  (/index#engines, /index#programs) + a beta/app CTA.
+  (/index#engines, /index#programs) + an app CTA.
 - FAQ + Article schema on posts where it fits.
 - Never reference sibling products.
+
+### Conversion funnel (since 2026-08-15)
+- The homepage beta funnel was replaced with a subscription funnel:
+  marketing CTA → `https://app.cmstrength.fit/signup` → onboarding → `/checkout`
+  → Stripe Checkout (14-day trial, no card) → app.
+- Pricing lives in the `#pricing` homepage section ($20/mo · $200/yr) — single
+  source, updated once.
+- The marketing site never touches Stripe or Supabase directly — no secrets, no
+  auth state; all billing is app-side (see `cms-completenew`). Stripe checkout
+  links are transactional, not editorial, so the authority-only outbound rule
+  is unaffected.
 
 ---
 

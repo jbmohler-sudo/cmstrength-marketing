@@ -11,21 +11,22 @@
 ---
 
 ## Current State
-> Updated: 2026-07-14
+> Updated: 2026-08-15
 
 - **Phase / Stage:** Live at www.cmstrength.fit (Vercel, static HTML, main = production).
   Blog is a real silo; SEO infra documented; GSC shows 11 indexed pages while the
   old sitemap report remains stale.
-- **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, cyan-glow accent;
+- **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, ember accent;
   blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 8 posts organized
   as an editorial index (featured pillar + grouped sections: Masters / Programming / Fueling).
   `docs/SEO.md` is the SEO source of truth. GSC fixed (Domain property). `robots.txt`
   now points to canonical `sitemap.xml`; `sitemap-main.xml` is kept in sync for the
   previously submitted GSC entry.
-- **What's in progress:** Nothing active.
-- **What's next:** Submit/request a fresh read of `https://www.cmstrength.fit/sitemap.xml`
-  in GSC after deploy; monitor indexed count vs sitemap status. Optionally add more
-  "Fueling the Work" blog articles (only 1 so far).
+- **What's in progress:** Subscription funnel (Aug 2026) — homepage beta framing
+  replaced with 14-day trial + $20/mo · $200/yr pricing (`#pricing`); mobile nav overlay
+  added; signup/terms reframed. App-side billing lives in `cms-completenew` (Stripe).
+- **What's next:** Push to origin/main (Vercel auto-deploys), then re-check GSC after
+  the homepage change settles. Optionally add more "Fueling the Work" blog articles.
 - **Biggest open question:** none with teeth.
 
 ---
@@ -74,6 +75,32 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-08-15 — Subscription funnel: beta framing → paid product
+
+**Did:** Replaced the beta funnel with a subscription funnel per the CMS Subscription
+Funnel plan (Phase 5, marketing side). Hero primary CTA `Claim Beta Slot` →
+`Start Free Trial` → app signup; all three track-card buttons → `Start Free Trial`;
+`#join-beta` section replaced with `#pricing` (Monthly $20/mo · Annual $200/yr with
+BEST VALUE highlight, "14-day free trial · No card required · Cancel anytime" line,
+feature strip, one lead CTA); deleted the Supabase beta-signup script block
+(no more `beta_signups` inserts from the marketing site); FAQ "free trial" answer
+rewritten + "Can I cancel anytime?" added; footer → "Start your 14-day trial" →
+`/index#pricing`; added mobile full-screen nav overlay (hamburger ≤1024px, active
+underline, Escape/scroll-lock/focus mgmt mirroring the INSIDE modal); signup.html
+reframed ("You're In", trial line, link-expired → app signup); terms.html updated
+(subscription pricing, 14-day trial, auto-renewal, cancel-anytime, no-refund-for-
+partial-periods, grandfathered-beta note, last-updated Aug 15 2026).
+**Decided:** (locked in plan Phase 0 by Jeff) D1 $20/mo · $200/yr, D2 no card during
+trial, D3 beta users grandfathered free-for-life, D4 single plan gates whole app,
+D5 past_due → 7-day grace → auto-lock.
+**Killed:** Beta signup form + Supabase JS on the homepage; all beta/join framing.
+**Deferred:** Push to origin/main (Vercel deploy) — held for go-live with the app.
+**State after:** Homepage reads as a subscription product; no user-facing "beta"
+copy remains (`grep -ri beta public/index.html` = CSS class reuse only); HTML
+validated (parser, no unclosed tags).
+**Next:** Go-live phase — push marketing + app together; live Stripe flip; $1 smoke
+test.
 
 ### 2026-07-14 - GSC sitemap cleanup and canonical sitemap alignment
 
