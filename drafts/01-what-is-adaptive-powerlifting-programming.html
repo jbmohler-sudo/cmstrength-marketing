@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>What Is Adaptive Powerlifting Programming? | CMS</title>
+  <meta name="description" content="Fixed percentages assume you're the same lifter every day. Adaptive powerlifting programming reads your readiness and adjusts the load — here's how it works and why it keeps PRs coming." />
+  <meta name="keywords" content="adaptive powerlifting programming, adaptive programming, readiness-based training, autoregulation powerlifting, RPE powerlifting, training max e1RM, powerlifting program that adapts" />
+
+  <link rel="canonical" href="https://www.cmstrength.fit/blog/what-is-adaptive-powerlifting-programming" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What Is Adaptive Powerlifting Programming?" />
+  <meta property="og:description" content="Adaptive powerlifting programming reads your readiness and adjusts daily load — instead of pretending every day is identical. The complete guide to how it works." />
+  <meta property="og:url" content="https://www.cmstrength.fit/blog/what-is-adaptive-powerlifting-programming" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta property="article:author" content="Center Mass Strength" />
+  <meta property="article:section" content="The Adaptive System" />
+  <meta property="article:tag" content="adaptive programming" />
+  <meta property="article:tag" content="autoregulation" />
+  <meta property="article:tag" content="readiness" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Is Adaptive Powerlifting Programming?" />
+  <meta name="twitter:description" content="The program that adapts to you — readiness, RPE, training max, joint load. How adaptive programming works and why fixed percentages fail." />
+
+  <!-- JSON-LD Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Is Adaptive Powerlifting Programming?",
+    "description": "Adaptive powerlifting programming reads your readiness and adjusts daily load — instead of pretending every day is identical. The complete guide to how it works.",
+    "author": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://www.cmstrength.fit" },
+    "publisher": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://www.cmstrength.fit" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.cmstrength.fit/blog/what-is-adaptive-powerlifting-programming.html" },
+    "keywords": "adaptive powerlifting programming, autoregulation, readiness-based training, RPE, training max",
+    "articleSection": "The Adaptive System"
+  }
+  </script>
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is adaptive powerlifting programming?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Adaptive powerlifting programming is a training system that adjusts load to your actual recovery state instead of following a fixed weekly percentage plan. Each session, the program reads inputs like sleep, stress, fatigue, and soreness, scores your readiness, and adjusts the day's prescribed weight up or down — typically within a roughly 5% band — so you train at the right intensity for the body you have that day." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is adaptive programming different from a fixed program?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A fixed program (like a spreadsheet 5/3/1) prescribes the same percentage on the same day every week and assumes your recovery is constant. Adaptive programming keeps the long-term structure — blocks, periodization, meet date — but lets daily execution flex: readiness adjusts load, RPE governs intensity, joint-load tracking rotates exercises before overuse, and in-session coaching adjusts remaining sets. The structure is fixed; the execution is flexible." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens on a bad day with adaptive programming?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You train — just smarter. A low readiness score lowers the day's prescribed load by up to roughly 5%, joint-pain flags add lift-specific penalties, and in-session coaching can hold weight and extend rest or trim remaining sets when performance doesn't match the prescription. The session stays productive instead of becoming a grind that takes a week to recover from." }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+
+  <style>
+    /* Page-local helpers — built ON cms.css tokens, no overrides */
+    .post-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-top: 22px; display: flex; gap: 14px; }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { position: relative; padding-left: 1.6em; margin-top: 0.6em; color: var(--muted); }
+    .checklist li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+    /* Lever blocks — the five adaptation levers */
+    .lever { display: flex; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .lever:last-of-type { border-bottom: none; }
+    .lever-num { font-family: var(--font-display); font-weight: 900; font-size: 2rem; line-height: 1; color: var(--accent); min-width: 44px; }
+    .lever-body h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; color: var(--bone); letter-spacing: 0.02em; margin: 2px 0 8px; }
+    .lever-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    .lever-body p + p { margin-top: 10px; }
+    /* Session walkthrough strip */
+    .day-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 1.8em 0; }
+    @media (max-width: 600px) { .day-strip { grid-template-columns: 1fr 1fr; } }
+    .day-cell { border: 1px solid var(--border); background: var(--bg-card); padding: 14px; }
+    .day-cell .dc-key { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--dim); text-transform: uppercase; }
+    .day-cell .dc-val { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--bone); margin-top: 5px; text-transform: uppercase; }
+    .day-cell .dc-note { font-size: 0.8rem; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+    .day-cell.bad { border-color: rgba(226,69,42,0.5); }
+    .day-cell.good { border-color: rgba(120,190,120,0.4); }
+    .silo-next { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px) clamp(50px, 7vw, 80px); }
+    .silo-next .silo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; }
+    @media (max-width: 600px) { .silo-next .silo-grid { grid-template-columns: 1fr; } }
+    .silo-next .silo-card { border: 1px solid var(--border); background: var(--bg-card); padding: 24px; transition: border-color .2s, transform .2s; }
+    .silo-next .silo-card:hover { border-color: rgba(226,69,42,0.55); transform: translateY(-3px); }
+    .silo-next .silo-card h4 { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; color: var(--bone); line-height: 1.05; }
+    .silo-next .silo-card:hover h4 { color: var(--accent); }
+    .silo-next .silo-card p { color: var(--muted); font-size: 0.92rem; margin-top: 10px; line-height: 1.55; }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div><div class="ring-in"></div>
+          <div class="cross-v"></div><div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/blog">BLOG</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="https://app.cmstrength.fit/signup">START FREE TRIAL</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <a class="back-link" href="/blog" style="margin-bottom:26px;">&larr; The Strength Blog</a>
+      <span class="eyebrow">THE ADAPTIVE SYSTEM · PILLAR GUIDE</span>
+      <h1>Adaptive Powerlifting <span class="accent">Programming</span>.</h1>
+      <p class="hero-sub">What it is, how it works, and why the fixed-percentage spreadsheet dies the moment real life shows up. This is the anchor of the Adaptive System — every lever below links to its own deep dive.</p>
+      <div class="post-meta"><span>Center Mass Strength</span><span>·</span><span>12 min read</span></div>
+    </div>
+
+    <!-- BODY -->
+    <article class="prose">
+
+      <p>The program that put forty pounds on your bench stopped working. Same lifts, same percentages, same order — and the bar stopped moving. So you did what every serious lifter does: blamed yourself. Sleep more. Grind harder. Eat cleaner. Still stalled.</p>
+
+      <p>The problem isn't you. It's the plan. A fixed-percentage program makes one giant assumption: that you're the <strong>same lifter every single day</strong>. Same recovery, same sleep, same stress, same joints. Nobody's life works that way — and after 40, your body stops pretending it does.</p>
+
+      <blockquote>Fixed programs fail not because they're too easy or too hard, but because they're blind. They can't see the day you walked in on.</blockquote>
+
+      <p>Adaptive powerlifting programming is the alternative: a training system that keeps the long-term structure — blocks, periodization, a meet date — but lets <em>daily execution</em> flex with your actual state. It reads how recovered you are, adjusts the day's load to match, and keeps you productive instead of burying you.</p>
+
+      <div class="callout">
+        <p><strong>What this guide covers:</strong> what adaptive programming actually is (and isn't), the five levers it pulls — readiness, RPE, training max, joint load, and in-session coaching — what a real session looks like after a bad night of sleep, why it matters most to masters lifters, and the honest limits of what it can and can't fix.</p>
+      </div>
+
+      <hr>
+
+      <h2>What Adaptive Programming Is — and Isn't</h2>
+
+      <p>Here's the cleanest way to draw the line. A static program is a <strong>prescription written in advance</strong>. Week one: 5×5 at 70%. Week four: 3×3 at 85%. Week seven: test. It assumes the body follows the calendar — that recovery lands where the spreadsheet put it.</p>
+
+      <p>Adaptive programming is a <strong>system with a built-in feedback loop</strong>. The skeleton is still periodized — hypertrophy builds work capacity, strength blocks raise the ceiling, a peak sharpens you for the platform. But inside that skeleton, the load for any given session is computed from data: how you slept, how stressed you are, how your joints feel, how the last set actually moved.</p>
+
+      <table class="diff-table">
+        <thead><tr><th></th><th>Static spreadsheet</th><th>Adaptive programming</th></tr></thead>
+        <tbody>
+          <tr><td>Today's weight</td><td>Fixed by the calendar</td><td>Computed from your readiness</td></tr>
+          <tr><td>Bad night of sleep</td><td>Grind the same 85%</td><td>Load drops to match — session stays useful</td></tr>
+          <tr><td>Recovered and fresh</td><td>Same 70%, wasted</td><td>Load rises — you bank the good day</td></tr>
+          <tr><td>Overloaded elbow</td><td>Same press, same angle</td><td>Exercise rotates before the joint signals distress</td></tr>
+          <tr><td>Missed a rep</td><td>Log it, move on</td><td>Remaining sets adjust in-session</td></tr>
+        </tbody>
+      </table>
+
+      <p>Notice what doesn't change: the <strong>structure</strong>. The macrocycle, the block sequence, the meet-date plan — that stays fixed, because structure is what makes the adaptation compound. What flexes is execution. That's the definition worth keeping: <em>adaptive programming is fixed structure, flexible execution.</em></p>
+
+      <hr>
+
+      <h2>The Five Levers of the Adaptive System</h2>
+
+      <p>An adaptive program is only as good as the signals it reads and the levers it can pull. Here are the five that matter — and exactly what the Center Mass Strength engine does with each one.</p>
+
+      <div class="lever">
+        <div class="lever-num">01</div>
+        <div class="lever-body">
+          <h3>Readiness — the daily load adjuster</h3>
+          <p>Before every session you answer a short check-in: sleep, stress, fatigue, soreness, motivation — each on a 1–5 scale. The engine scores it and adjusts the day's prescribed load by roughly <strong>±5%</strong>: a low score pulls weight down so a fatigued session stays productive, a high score lets you bank the extra capacity. Joint pain flags stack on top — a sore shoulder trims bench, a sore knee trims squat — and loads are clamped to a safe band so no single day can cascade into a junk session.</p>
+          <p>This is the core of the whole system, and it deserves the full treatment: <a href="/blog/readiness-scores">Readiness Scores: The Daily Signal That Makes Programming Honest</a>.</p>
+        </div>
+      </div>
+
+      <div class="lever">
+        <div class="lever-num">02</div>
+        <div class="lever-body">
+          <h3>RPE — the intensity governor</h3>
+          <p>Percentages tell you the weight. RPE tells you the <em>effort</em> — and effort is where the body actually lives. Main lifts are prescribed to an RPE target on a 1–10 scale, and the top set is an AMRAP capped at that RPE, so performance data comes from real reps at real effort, not from the plate math.</p>
+          <p>Research on resistance training consistently supports letting perceived exertion — specifically reps in reserve — drive load decisions over blind percentages (<a href="https://pubmed.ncbi.nlm.nih.gov/27531969/" target="_blank" rel="noopener">Helms et al., 2016</a>). Deep dive: <a href="/blog/rpe-for-powerlifting">RPE for Powerlifting: How to Use It Without Faking It</a>.</p>
+        </div>
+      </div>
+
+      <div class="lever">
+        <div class="lever-num">03</div>
+        <div class="lever-body">
+          <h3>Training max vs 1RM vs e1RM — the honest numbers</h3>
+          <p>Your true one-rep max is something you <em>know</em> on a good day and <em>guess</em> on every other. Adaptive systems don't train off a peak-day number — they train off a <strong>training max</strong>: a deliberately conservative working number derived from your estimated 1RM (e1RM), computed with the Epley formula from your logged reps. The training max updates at block transitions — never mid-block — so the program adapts to you <em>getting stronger</em>, not to a lucky single you hit once.</p>
+          <p>Full mechanics, including why the display number and the training number use different math: <a href="/blog/training-max-vs-1rm-vs-e1rm">Training Max vs 1RM vs e1RM: Which Number Actually Programs Your Training</a>.</p>
+        </div>
+      </div>
+
+      <div class="lever">
+        <div class="lever-num">04</div>
+        <div class="lever-body">
+          <h3>Joint-aware load — rotation before breakdown</h3>
+          <p>Muscle tells you it's tired. Joints just fail. Connective tissue adapts far slower than muscle and accumulates stress quietly — so the smart system tracks load at the <em>joint</em>, not just the muscle. CMS's Cumulative Load Model keeps a running stress figure for each joint across the whole macrocycle, compares it to a per-joint ceiling (MRJV), and when a joint's trend crosses the threshold, it <strong>auto-rotates the exercise before the joint signals distress</strong> — a pre-flight swap at session load, with the training intent preserved and the weight re-derived against the new movement.</p>
+          <p>The tendon research backs the premise: mechanical loading is what drives tendon adaptation, and it happens on a slower timeline than muscle (<a href="https://link.springer.com/article/10.1186/s40798-015-0009-9" target="_blank" rel="noopener">Bohm et al., 2015</a>). The full architecture lives in <a href="/blog/joint-load-management-mrjv">Your Joints Are the Real Limit</a>.</p>
+        </div>
+      </div>
+
+      <div class="lever">
+        <div class="lever-num">05</div>
+        <div class="lever-body">
+          <h3>In-session coaching — the plan that talks back</h3>
+          <p>The last lever is the one you feel mid-workout. After each main-set, the system compares what was <em>prescribed</em> against what you actually <em>did</em> — reps, RPE, bar speed — and adjusts the remaining sets. Slightly off target? It extends rest and holds weight. Clearly off? It scales the remaining sets' weight within a capped band. Grinding into a missed rep? It backs the session down instead of letting one bad set poison the next three.</p>
+          <p>Weak-point data also feeds exercise selection — a bench that dies off the chest gets different variations than one that dies at lockout. For the bad-day playbook specifically: <a href="/blog/bad-day-workout-adjustments">Bad-Day Workout Adjustments: How to Save a Session Without Quitting It</a>.</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>One Bad Night of Sleep, Two Different Sessions</h2>
+
+      <p>Here's the whole philosophy in one concrete walkthrough. Same lifter, same program, same week — two different bodies show up.</p>
+
+      <div class="day-strip">
+        <div class="day-cell good">
+          <div class="dc-key">Last night</div>
+          <div class="dc-val">7.5 hrs</div>
+          <div class="dc-note">Check-in scores high across the board.</div>
+        </div>
+        <div class="day-cell good">
+          <div class="dc-key">Readiness</div>
+          <div class="dc-val">High</div>
+          <div class="dc-note">Readiness score clears the top band — load adjusts up toward +4%.</div>
+        </div>
+        <div class="day-cell">
+          <div class="dc-key">Top set</div>
+          <div class="dc-val">RPE 8 × 4</div>
+          <div class="dc-note">Prescribed to RPE. You hit the reps, effort matches — full session, no changes.</div>
+        </div>
+        <div class="day-cell good">
+          <div class="dc-key">Banked</div>
+          <div class="dc-val">+4% day</div>
+          <div class="dc-note">You trained slightly heavier than the calendar said. That's the adaptation.</div>
+        </div>
+      </div>
+
+      <div class="day-strip">
+        <div class="day-cell bad">
+          <div class="dc-key">Last night</div>
+          <div class="dc-val">4 hrs</div>
+          <div class="dc-note">Kid up at 2am. Check-in shows it.</div>
+        </div>
+        <div class="day-cell bad">
+          <div class="dc-key">Readiness</div>
+          <div class="dc-val">Low</div>
+          <div class="dc-note">Score drops into the low band — prescribed load pulls down toward −5%.</div>
+        </div>
+        <div class="day-cell bad">
+          <div class="dc-key">Top set</div>
+          <div class="dc-val">RPE 8 × 3</div>
+          <div class="dc-note">Even at the reduced load, effort is high. Coaching holds weight, extends rest.</div>
+        </div>
+        <div class="day-cell">
+          <div class="dc-key">Still trained</div>
+          <div class="dc-val">Session saved</div>
+          <div class="dc-note">Volume in, technique in, CNS not buried. Tomorrow's session starts from real readiness, not a hangover.</div>
+        </div>
+      </div>
+
+      <p>The difference isn't effort — it's <strong>intelligence</strong>. The bad day still got training done at a load the body could actually absorb, instead of grinding a fixed 85% into accumulated fatigue that takes a week to clear. The sleep-loss evidence is unambiguous: losing sleep degrades physical performance and recovery across sports (<a href="https://pubmed.ncbi.nlm.nih.gov/25315456/" target="_blank" rel="noopener">Fullagar et al., 2015</a>). A program that can't see that is programming blind.</p>
+
+      <hr>
+
+      <h2>Why Adaptive Programming Matters Most After 40</h2>
+
+      <p>If you're under 35, the ±5% daily band is a refinement. Your recovery is predictable enough that a fixed program mostly works — until it doesn't. After 40 — and especially after 50 — the gap between what the calendar prescribed and what your body can absorb today is <strong>wider and it changes faster</strong>. The same 80% feels like 70% one day and 90% the next. CNS fatigue accumulates quicker and clears slower. Connective tissue falls further behind muscle with every passing year.</p>
+
+      <p>That's the exact failure mode adaptive programming was built to solve. The masters lifter who loads against readiness instead of the calendar keeps progressing — the IPF masters divisions run well past 90 and are filled with athletes who got <em>better</em> at programming as they aged (<a href="https://www.powerlifting.sport/" target="_blank" rel="noopener">IPF</a>). The full case, built for the over-50 lifter, is the anchor of the Masters Track: <a href="/blog/powerlifting-over-50-readiness">Powerlifting Over 50: Why Readiness Changes Everything</a>.</p>
+
+      <hr>
+
+      <h2>The Honest Limits</h2>
+
+      <p>Adaptive programming is powerful. It is not magic. Here's what it can and can't do — stated straight, because the No-BS rule applies to the product too.</p>
+
+      <ul class="checklist">
+        <li><strong>It can fix a stall caused by mismatched loading.</strong> If you're grinding fixed percentages into a hole, adapting the load to your readiness will stop the bleed and restart progress.</li>
+        <li><strong>It can keep bad days from becoming bad weeks.</strong> The ±5% band and in-session coaching are designed to keep a fatigued session productive instead of destructive.</li>
+        <li><strong>It can protect your joints from the silent accumulation of overuse</strong> — by rotating exercises on load trends, not pain reports.</li>
+        <li><strong>It cannot fix sleep you don't take.</strong> The readiness engine reads your state; it can't manufacture recovery. If chronic sleep debt is the problem, no load adjustment compensates.</li>
+        <li><strong>It cannot fix programming errors upstream.</strong> A bad block sequence, a wrong meet date, a nonsense volume target — no amount of daily adaptation repairs a broken structure. Structure is still the job.</li>
+        <li><strong>It cannot turn a missed week into a completed one.</strong> Adaptation compounds from training done. The system optimizes the work you do; it doesn't replace it.</li>
+      </ul>
+
+      <p>That last set of limits matters more than the hype does. Adaptive programming doesn't make you recover faster — it makes you stop <em>training faster than you recover</em>. Those are different jobs, and only one of them is a program's job.</p>
+
+      <hr>
+
+      <h2>Adaptive Powerlifting Programming: Common Questions</h2>
+
+      <h3>What is adaptive powerlifting programming?</h3>
+      <p>Adaptive powerlifting programming is a training system that adjusts load to your actual recovery state instead of following a fixed weekly percentage plan. Each session, the program reads inputs like sleep, stress, fatigue, and soreness, scores your readiness, and adjusts the day's prescribed weight up or down — typically within a roughly 5% band — so you train at the right intensity for the body you have that day.</p>
+
+      <h3>How is adaptive programming different from a fixed program?</h3>
+      <p>A fixed program prescribes the same percentage on the same day every week and assumes recovery is constant. Adaptive programming keeps the long-term structure — blocks, periodization, meet date — but lets daily execution flex: readiness adjusts load, RPE governs intensity, joint-load tracking rotates exercises before overuse, and in-session coaching adjusts remaining sets. The structure is fixed; the execution is flexible.</p>
+
+      <h3>What happens on a bad day with adaptive programming?</h3>
+      <p>You train — just smarter. A low readiness score lowers the day's prescribed load by up to roughly 5%, joint-pain flags add lift-specific penalties, and in-session coaching can hold weight and extend rest or trim remaining sets when performance doesn't match the prescription. The session stays productive instead of becoming a grind that takes a week to recover from.</p>
+
+    </article>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <span class="section-label" style="margin-bottom:16px;">LET THE PROGRAM ADAPT TO YOU</span>
+      <h2>Stop training a calendar. Train your body.</h2>
+      <p>CMS reads your readiness, adjusts your daily load, and manages your joints across the whole macrocycle. Start with the Bench Specialization or SBD track — free for 14 days.</p>
+      <a href="https://app.cmstrength.fit/signup" class="btn btn-primary">Start Free Trial &rarr;</a>
+    </div>
+
+    <!-- IN-SILO NAVIGATION -->
+    <div class="silo-next">
+      <span class="section-label">KEEP READING — THE ADAPTIVE SYSTEM</span>
+      <div class="silo-grid">
+        <a class="silo-card" href="/blog/readiness-scores">
+          <h4>Readiness Scores</h4>
+          <p>The daily signal that makes programming honest — and how to read it without overthinking it.</p>
+        </a>
+        <a class="silo-card" href="/blog/joint-load-management-mrjv">
+          <h4>Your Joints Are the Real Limit</h4>
+          <p>Muscle isn't your ceiling. How MRJV and per-joint load tracking prevent overuse before you feel it.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div><h4>Product</h4><ul>
+        <li><a href="/index#programs">Programs</a></li>
+        <li><a href="/index#engines">Engines</a></li>
+        <li><a href="/methodology/index">Methodology</a></li>
+        <li><a href="https://app.cmstrength.fit">Launch App</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul></div>
+      <div><h4>Tools</h4><ul><li><a href="/tools/dot-score">DOT Score Calculator</a></li><li><a href="/tools/1rm-calculator">1RM Calculator</a></li></ul></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Start your 14-day trial.</p><a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a></div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script src="/cms-motion.js"></script>
+</body>
+</html>
