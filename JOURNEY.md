@@ -11,9 +11,11 @@
 ---
 
 ## Current State
-> Updated: 2026-08-15
+> Updated: 2026-08-16
 
 - **Phase / Stage:** Live at www.cmstrength.fit (Vercel, static HTML, main = production).
+  Subscription funnel GO-LIVE complete: homepage reads as a paid product (14-day
+  trial + $20/mo · $200/yr), zero beta copy site-wide, all CTAs → app signup.
   Blog is a real silo; SEO infra documented; GSC shows 11 indexed pages while the
   old sitemap report remains stale.
 - **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, ember accent;
@@ -22,11 +24,9 @@
   `docs/SEO.md` is the SEO source of truth. GSC fixed (Domain property). `robots.txt`
   now points to canonical `sitemap.xml`; `sitemap-main.xml` is kept in sync for the
   previously submitted GSC entry.
-- **What's in progress:** Subscription funnel (Aug 2026) — homepage beta framing
-  replaced with 14-day trial + $20/mo · $200/yr pricing (`#pricing`); mobile nav overlay
-  added; signup/terms reframed. App-side billing lives in `cms-completenew` (Stripe).
-- **What's next:** Push to origin/main (Vercel auto-deploys), then re-check GSC after
-  the homepage change settles. Optionally add more "Fueling the Work" blog articles.
+- **What's in progress:** nothing blocking — funnel shipped, app billing live.
+- **What's next:** Re-check GSC after the homepage change settles. Optionally add
+  more "Fueling the Work" blog articles.
 - **Biggest open question:** none with teeth.
 
 ---
@@ -75,6 +75,21 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-08-16 — Beta copy sweep + go-live push
+
+**Did:** Killed the remaining beta framing that Phase 5 missed — every page outside
+`index.html` still carried `CLAIM BETA SLOT` nav buttons, `#join-beta` footer links,
+and beta CTA copy (16 files: blog posts, contact, privacy, tools, methodology
+subpages). Global exact-string sweep + targeted patches → all CTAs now
+`Start Free Trial` → `https://app.cmstrength.fit/signup`, footer copy → 14-day
+trial. Verified `grep -ri beta public/` = clean on live pages (backup files
+excluded). Pushed 3 unpushed funnel commits + sweep (9f2bef5 → origin/main);
+Vercel deployed. Live smoke test confirmed the whole funnel (app checkout →
+Stripe trial → webhook → `trialing` → portal cancel sync).
+**Decided:** none new — executed locked Phase 5/7.
+**Killed:** last `#join-beta` anchors and beta wording site-wide.
+**State after:** www.cmstrength.fit reads as a subscription product end-to-end.
 
 ### 2026-08-15 — Subscription funnel: beta framing → paid product
 
