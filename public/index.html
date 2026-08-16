@@ -177,7 +177,7 @@
       .inside-row.flip .inside-copy { order: 0; }
     }
 
-/* ===== BETA SIGNUP ===== */
+/* ===== PRICING (reuses .beta section shell) ===== */
     .beta { position: relative; z-index: 3; padding: clamp(64px, 9vw, 104px) clamp(20px, 5vw, 72px); text-align: center; overflow: hidden; }
     .beta .glow {
       position: absolute; top: 50%; left: 50%; width: min(80vw, 700px); height: min(80vw, 700px);
@@ -188,22 +188,55 @@
     .beta .inner { position: relative; max-width: 600px; margin: 0 auto; }
     .beta h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(46px, 9vw, 110px); line-height: 0.84; margin: 16px 0 0; text-transform: uppercase; }
     .beta .lede { max-width: 520px; margin: 26px auto 40px; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: var(--muted); }
-    #beta-form { text-align: left; display: flex; flex-direction: column; gap: 1.2rem; }
-    #beta-form label { display: block; font-family: var(--font-mono); font-weight: 400; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); margin-bottom: 0.5rem; }
-    #beta-form input, #beta-form select {
-      width: 100%; padding: 14px 16px; background: rgba(18,18,22,0.8); border: 1px solid var(--border-strong);
-      color: var(--bone); font-family: var(--font-body); font-size: 1rem; outline: none; transition: border-color 0.2s;
+    .pricing-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 1.6vw, 22px); max-width: 640px; margin: 0 auto; }
+    .pricing-card {
+      position: relative; border: 1px solid var(--border); background: var(--bg-card);
+      padding: clamp(24px, 3vw, 40px); text-align: left; display: flex; flex-direction: column; gap: 8px;
     }
-    #beta-form input:focus, #beta-form select:focus { border-color: var(--accent); }
-    #beta-form select { appearance: none; }
-    #beta-error { display: none; color: #f87171; font-size: 0.9rem; text-align: center; }
-    #beta-submit { width: 100%; justify-content: center; margin-top: 1rem; }
-    #beta-success {
-      display: none; padding: 40px 20px; border: 1px solid rgba(226,69,42,0.3);
-      background: rgba(226,69,42,0.05); margin: 0 auto;
+    .pricing-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px rgba(226,69,42,0.35), 0 30px 80px rgba(0,0,0,0.45); }
+    .pricing-card h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(18px, 2vw, 24px); text-transform: uppercase; color: var(--bone); margin: 0; }
+    .pricing-card .price { font-family: var(--font-display); font-weight: 900; font-size: clamp(48px, 6vw, 72px); line-height: 1; color: var(--bone); margin: 10px 0 4px; }
+    .pricing-card .price span { font-size: 0.35em; font-weight: 600; color: var(--dim); letter-spacing: 0.05em; }
+    .pricing-card .pricing-note { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+    .pricing-card .pricing-tag {
+      position: absolute; top: -12px; right: 16px; background: var(--accent); color: #fff;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; padding: 6px 12px;
     }
-    #beta-success h3 { color: var(--accent); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; }
-    #beta-success p { margin: 0; color: var(--bone); font-weight: 500; }
+    .pricing-card .btn { margin-top: 18px; justify-content: center; }
+    .pricing-features { list-style: none; margin: clamp(28px, 4vw, 44px) auto 0; padding: 0; max-width: 520px; display: grid; gap: 10px; }
+    .pricing-features li { font-size: clamp(14px, 1.2vw, 16px); color: var(--muted); }
+    .pricing-features li::before { content: "\2713"; color: var(--accent); margin-right: 10px; font-family: var(--font-mono); }
+    .pricing-trial { margin-top: 26px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+
+/* ===== MOBILE NAV OVERLAY ===== */
+    .nav-hamburger { display: none; background: none; border: 1px solid var(--border-strong); color: var(--bone); width: 44px; height: 44px; font-size: 18px; cursor: pointer; align-items: center; justify-content: center; }
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 200; background: #000;
+      display: none; flex-direction: column; padding: 24px clamp(20px, 6vw, 40px);
+      opacity: 0; transition: opacity .25s ease;
+    }
+    .nav-overlay.open { display: flex; opacity: 1; }
+    .nav-overlay-close {
+      position: absolute; top: 22px; right: clamp(20px, 6vw, 40px);
+      width: 44px; height: 44px; border: 1px solid var(--border-strong); background: rgba(18,18,22,0.7);
+      color: var(--bone); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-overlay-links { display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 8px; }
+    .nav-overlay-links a, .nav-overlay-links button {
+      font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 9vw, 56px);
+      text-transform: uppercase; color: var(--bone); text-decoration: none; padding: 10px 0;
+      background: none; border: none; text-align: left; cursor: pointer;
+    }
+    .nav-overlay-links a:hover, .nav-overlay-links a.active, .nav-overlay-links button:hover { color: var(--accent); }
+    .nav-overlay-links a.active::after, .nav-overlay-links button.active::after {
+      content: ""; display: block; width: 44px; height: 3px; background: var(--accent); margin-top: 6px;
+    }
+    .nav-overlay-actions { display: flex; gap: 12px; padding-bottom: 28px; }
+    .nav-overlay-actions .btn { flex: 1; justify-content: center; }
+    @media (max-width: 1024px) {
+      .nav-actions .nav-link, .nav-actions .btn-nav { display: none; }
+      .nav-hamburger { display: flex; }
+    }
 
 /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
@@ -248,12 +281,31 @@
       <div class="nav-actions">
         <a class="nav-link" href="#system">THE SYSTEM</a>
         <a class="nav-link" href="#programs">TRACKS</a>
+        <a class="nav-link" href="#pricing">PRICING</a>
         <button class="nav-link nav-inside" type="button" data-inside-open>INSIDE</button>
         <a class="nav-link" href="#proof">PROOF</a>
         <a class="nav-link" href="/blog">BLOG</a>
         <a class="btn btn-nav" href="https://app.cmstrength.fit">OPEN APP &rarr;</a>
+        <button class="nav-hamburger" type="button" id="nav-hamburger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">&#9776;</button>
       </div>
     </nav>
+
+    <!-- Mobile nav overlay -->
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+      <button class="nav-overlay-close" type="button" id="nav-overlay-close" aria-label="Close menu">&times;</button>
+      <div class="nav-overlay-links">
+        <a href="#top">Home</a>
+        <a href="#system">The System</a>
+        <a href="#programs">Tracks</a>
+        <a href="#pricing">Pricing</a>
+        <button type="button" data-inside-open>Inside</button>
+        <a href="/blog">Blog</a>
+      </div>
+      <div class="nav-overlay-actions">
+        <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
+        <a class="btn btn-secondary" href="https://app.cmstrength.fit/login">Log In</a>
+      </div>
+    </div>
   </header>
 
   <main id="top">
@@ -304,7 +356,7 @@
       </div>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#join-beta">Claim Beta Slot &rarr;</a>
+        <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial &rarr;</a>
         <a class="btn btn-secondary" href="#system">See the System</a>
         <a class="btn btn-secondary" href="https://app.cmstrength.fit">Open Web App &rarr;</a>
       </div>
@@ -416,7 +468,7 @@
               <li>Accessory selection that serves the main lift instead of distracting from it</li>
             </ul>
           </div>
-          <a class="btn btn-secondary" href="#join-beta">Select Track</a>
+          <a class="btn btn-secondary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
         </article>
 
         <article class="card program-card reveal">
@@ -430,7 +482,7 @@
               <li>Size and numbers at the same time</li>
             </ul>
           </div>
-          <a class="btn btn-secondary" href="#join-beta">Select Track</a>
+          <a class="btn btn-secondary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
         </article>
 
         <article class="card program-card reveal">
@@ -444,7 +496,7 @@
               <li>A single home for squat, bench, deadlift, and meet-focused progression</li>
             </ul>
           </div>
-          <a class="btn btn-secondary" href="#join-beta">Select Track</a>
+          <a class="btn btn-secondary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
         </article>
       </div>
     </section>
@@ -489,8 +541,8 @@
         <h2 class="display" style="font-size:clamp(32px,5vw,64px);">Put real programming behind<br>your next training block.</h2>
         <p>Bench Specialization, Jacked and Strong, and SBD are already built in. Your program will adapt as you train.</p>
         <div class="hero-actions" style="justify-content:center;">
-          <a class="btn btn-primary" href="#join-beta">Claim Beta Slot &rarr;</a>
-          <a class="btn btn-secondary" href="#programs">View Programs</a>
+          <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial &rarr;</a>
+          <a class="btn btn-secondary" href="#pricing">See Pricing</a>
         </div>
       </div>
     </section>
@@ -521,7 +573,11 @@
           </article>
           <article class="card reveal">
             <h3>Is there a free trial?</h3>
-            <p>CMS is free to use while in Beta. Create an account, pick a program, and start training. No cards required, no paywall. We encourage feedback through our suggestions card.</p>
+            <p>Yes — every account gets 14 days free. No card required. After the trial, membership is $20/month or $200/year.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Can I cancel anytime?</h3>
+            <p>Yes. Cancel from the Settings page or the Stripe billing portal — you keep access until the end of your paid period.</p>
           </article>
           <article class="card reveal">
             <h3>How do weak points work?</h3>
@@ -531,36 +587,38 @@
       </div>
     </section>
 
-    <!-- ===== BETA SIGNUP ===== -->
-    <section class="beta" id="join-beta">
+    <!-- ===== PRICING ===== -->
+    <section class="beta" id="pricing">
       <div class="glow"></div>
       <div class="inner">
-        <span class="kicker">BETA ACCESS CLOSING SOON</span>
-        <h2>Join the 200</h2>
-        <p class="lede">The Strength Operating System is currently limited to 200 beta slots. Secure your spot below.</p>
+        <span class="kicker">ONE PLAN &middot; EVERY TRACK</span>
+        <h2>Train the full system.</h2>
+        <p class="lede">All three tracks. The adaptive engine. Joint tracking, analytics, and Film Room. One membership unlocks all of it.</p>
 
-        <form id="beta-form">
-          <div>
-            <label for="beta-email">Email Address</label>
-            <input type="email" id="beta-email" required placeholder="lifter@example.com">
-          </div>
-          <div>
-            <label for="beta-track">Select Your Goal</label>
-            <select id="beta-track" required>
-              <option value="" disabled selected>Choose a program...</option>
-              <option value="sbd">SBD Prep</option>
-              <option value="bench-spec">Bench Specialist</option>
-              <option value="jacked-and-strong">Jacked &amp; Strong</option>
-            </select>
-          </div>
-          <div id="beta-error"></div>
-          <button type="submit" id="beta-submit" class="btn btn-primary">Secure My Slot</button>
-        </form>
-
-        <div id="beta-success">
-          <h3>Slot Secured.</h3>
-          <p>CHECK YOUR INBOX. YOUR ACCESS LINK IS ON THE WAY.</p>
+        <div class="pricing-cards">
+          <article class="pricing-card">
+            <h3>Monthly</h3>
+            <p class="price">$20<span>/mo</span></p>
+            <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
+          </article>
+          <article class="pricing-card featured">
+            <span class="pricing-tag">BEST VALUE</span>
+            <h3>Annual</h3>
+            <p class="price">$200<span>/yr</span></p>
+            <p class="pricing-note">~2 months free</p>
+            <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
+          </article>
         </div>
+
+        <ul class="pricing-features">
+          <li>All three tracks &mdash; Bench Spec, SBD, Jacked &amp; Strong</li>
+          <li>Adaptive load loop &amp; readiness engine</li>
+          <li>CLM joint tracking &amp; pre-flight swaps</li>
+          <li>Analytics &amp; Film Room</li>
+          <li>Cancel anytime</li>
+        </ul>
+
+        <p class="pricing-trial">14-day free trial &middot; No card required &middot; Cancel anytime</p>
       </div>
     </section>
     <!-- ===== INSIDE THE APP — MODAL ===== -->
@@ -630,8 +688,8 @@
       </div>
       <div>
         <h4>Launch</h4>
-        <p>Ready to train smarter? Join the beta.</p>
-        <a href="#join-beta" class="cta-link">Claim Your Beta Slot &rarr;</a>
+        <p>Ready to train smarter? Start your 14-day trial.</p>
+        <a href="/index#pricing" class="cta-link">Start Free Trial &rarr;</a>
       </div>
     </div>
     <div class="shell footer-row">
@@ -692,63 +750,46 @@
     })();
   </script>
 
-  <!-- BETA SIGNUP -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- MOBILE NAV OVERLAY -->
   <script>
     (function () {
-      var SUPABASE_URL     = 'https://jxwrlegxmekzjtqoldah.supabase.co';
-      var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4d3JsZWd4bWVremp0cW9sZGFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTY1MjgsImV4cCI6MjA4NzM3MjUyOH0.-6C9BtsGpcGmj9hiAZvv504vek0LsSIK3xJfKUdffoU';
-      var REDIRECT_URL     = 'https://www.cmstrength.fit/signup.html';
+      var overlay = document.getElementById('nav-overlay');
+      var hamburger = document.getElementById('nav-hamburger');
+      var closeBtn = document.getElementById('nav-overlay-close');
+      if (!overlay || !hamburger) return;
 
-      var client  = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      var form    = document.getElementById('beta-form');
-      var success = document.getElementById('beta-success');
-      var errorEl = document.getElementById('beta-error');
-      var submit  = document.getElementById('beta-submit');
+      function open() {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+        if (closeBtn) closeBtn.focus();
+      }
+      function close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
 
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        errorEl.style.display = 'none';
-        submit.textContent = 'LOCKING IN...';
-        submit.disabled = true;
+      hamburger.addEventListener('click', open);
+      if (closeBtn) closeBtn.addEventListener('click', close);
 
-        var email   = document.getElementById('beta-email').value.trim();
-        var program = document.getElementById('beta-track').value;
+      // Link clicks close the overlay (anchor links + inside modal)
+      overlay.querySelectorAll('a[href], button[data-inside-open]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          close();
+          // let the anchor/inside-open handler run after the overlay hides
+        });
+      });
 
-        try {
-          var VALID_PROGRAMS = ['sbd', 'bench-spec', 'jacked-and-strong'];
-          if (!VALID_PROGRAMS.includes(program)) {
-            throw new Error('Invalid program selection: ' + program);
-          }
-
-          var { error: dbError } = await client
-            .from('beta_signups')
-            .insert({ email: email, program_interest: program });
-
-          if (dbError && dbError.code !== '23505') throw dbError;
-
-          var { error: authError } = await client.auth.signInWithOtp({
-            email: email,
-            options: {
-              emailRedirectTo: REDIRECT_URL,
-              data: { program_interest: program }
-            }
-          });
-
-          if (authError) throw authError;
-
-          form.style.display = 'none';
-          success.style.display = 'block';
-
-        } catch (err) {
-          console.error('[beta-signup]', err);
-          errorEl.textContent = 'Something went wrong — try again or email us directly.';
-          errorEl.style.display = 'block';
-          submit.textContent = 'SECURE MY SLOT';
-          submit.disabled = false;
-        }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
       });
     })();
   </script>
+
+  <!-- BETA SIGNUP (removed — funnel moved to app signup + Stripe checkout) -->
 </body>
 </html>
