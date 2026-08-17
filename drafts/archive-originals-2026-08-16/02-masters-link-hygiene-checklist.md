@@ -2,9 +2,7 @@
 
 **Article:** `powerlifting-over-50-readiness` · "Powerlifting Over 50: Why Readiness Changes Everything"
 **File:** `public/blog/powerlifting-over-50-readiness.html`
-**Status:** Word-count claim corrected 2026-08-16 (was: "already qualifies, 2,052 words"). The 2,052 figure from `docs/cornerstone-briefs.md` Brief 2 could not be reproduced under any clean measure. Verified measure (re-run 2026-08-16): **1,319 stripped-HTML `<article>` words** — BELOW the 2,000-word cornerstone floor (briefs line 14). **Jeff decision 2026-08-16: floor waived for this established page — leave as-is, no expansion.**
-
-**Word-count method (2026-08-16, reproducible):** Python `html.parser` strip of the first `<article>` element (tags removed, entities unescaped, whitespace collapsed, split on whitespace = words). Log this method in `docs/SEO.md` before any future count is cited; the site's previously documented counts (2,052 here, 1,135 for `macrocycle-explained`) are not reproducible under it.
+**Status:** Cornerstone already qualifies (2,052 stripped-HTML words ≥ 2,000). **NO rewrite.**
 **Scope:** Link hygiene + optional hub copy only, per `docs/cornerstone-briefs.md` Brief 2 and `docs/silo-architecture.md`.
 
 Line references below are against the current file as of 2026-08-16. Verify each anchor after edits (lines shift).
@@ -46,12 +44,12 @@ Line references below are against the current file as of 2026-08-16. Verify each
 - [ ] `public/blog.html` line 90: featured card label reads "START HERE · THE MASTERS PILLAR". Per Decision 1, optionally re-word to present the Adaptive System as a sibling pillar (e.g. "START HERE · THE MASTERS PILLAR" → "START HERE · MASTERS + THE ADAPTIVE SYSTEM") once Adaptive has ≥3 posts. Do not do this before then — a 1-post pillar link is dead weight.
 
 ### 5. Verify at edit time (no code changes expected)
-- [ ] Re-run the corrected word-count measure (method in the Status block) after any edits. Note: the article currently measures 1,319 words — under the 2,000 floor — so link additions alone cannot qualify it; expansion is Jeff's call (see Status).
+- [ ] Re-run stripped-HTML word count ≥ 2,000 after any edits (link additions add words, never subtract).
 - [ ] Confirm no new outbound links leave the authority-only set (PubMed / .gov / .edu / peer-reviewed / recognized orgs).
 - [ ] No sibling-product links (WizeMeals, IronAtForty) — grep `public/blog/` for `wizemeals|ironatforty` after any edit.
 
 ---
 
 ## Out of scope here (tracked elsewhere)
-- Article 3 cornerstone (`the-complete-guide-to-powerlifting-periodization`): if Jeff approves the slug rename of `macrocycle-explained`, that page's canonical, `sitemap.xml`, and any links pointing at `/blog/macrocycle-explained` (inbound set verified 2026-08-16: `nutrition-is-a-skill.html` ×2, `program-comparison.html` ×2, `submaximal-training.html` ×1; this page links it 0×) must be updated in the same change.
+- Article 3 cornerstone (`the-complete-guide-to-powerlifting-periodization`): if Jeff approves the slug rename of `macrocycle-explained`, that page's canonical, `sitemap.xml`, and any links pointing at `/blog/macrocycle-explained` (this page links it once, nutrition links it twice) must be updated in the same change.
 - Blog hub group labels (SEO.md §3 taxonomy block + `blog.html` groups) — only after Adaptive has ≥3 posts (silo-architecture Decision 5).

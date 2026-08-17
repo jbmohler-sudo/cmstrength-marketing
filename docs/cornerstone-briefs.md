@@ -108,7 +108,8 @@ spokes (submaximal-training, program-comparison, sled-drags). Cross-link meet-we
 6. **Where adaptive adjustments override the plan** (readiness ±5%; cross-link Adaptive).
 7. **Big Three fold-in:** how squat/bench/deadlift programming slots into the macrocycle
    (signposts to the three lift-specific spokes).
-8. **13-week bench-spec cycle vs meet-driven SBD:** how the structure differs.
+8. **12-week bench-spec v2 cycle vs meet-driven SBD:** how the fixed 3/1/3/1/3/1
+   skill/deload/strength/deload/peak/deload-test structure differs.
 9. **CTA:** SBD track.
 
 **Guardrails:** match the macrocycle/block model (hypertrophy, strength, peak, taper/test).

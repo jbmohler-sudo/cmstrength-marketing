@@ -14,9 +14,11 @@ Center Mass Strength (CMS) is a **premium adaptive powerlifting programming app*
 content farm. Its SEO job is to rank for high-intent powerlifting/programming
 searches and convert serious lifters into beta/app users — not to chase volume.
 
-- **Product:** Adaptive programming driven by three engines — Macrocycle (13-week
-  wave: Foundation → Strength → Peak), Load (percentage-based, MEV→MRV corridor),
-  and Readiness (daily stress/sleep/fatigue + joint pivots).
+- **Product:** Adaptive programming driven by three engines — Macrocycle (Bench
+  Specialization v2 is a fixed 12-week 3/1/3/1/3/1 skill → deload → strength →
+  deload → peak → deload/test schedule; SBD is meet-date-driven), Load
+  (percentage-based, MEV→MRV corridor), and Readiness (daily
+  stress/sleep/fatigue + joint pivots).
 - **Audience:** Serious lifters and masters athletes (heavy skew 40+) who program
   deliberately and care about recovery, not gym-bro hype.
 - **Voice:** "Rugged Pro." Functional data over marketing fluff. The No-BS rule —
@@ -86,6 +88,11 @@ near-replica sibling sites).
   (/index#engines, /index#programs) + an app CTA.
 - FAQ + Article schema on posts where it fits.
 - Never reference sibling products.
+- **Word-count method (2026-08-16):** Python `html.parser` strip of the first
+  `<article>` element (tags removed, entities unescaped, whitespace collapsed,
+  split on whitespace = words). All CMS blog word counts use this measure; the
+  previously documented counts (e.g. macrocycle-explained 1,135) are not
+  reproducible under it.
 
 ### Conversion funnel (since 2026-08-15)
 - The homepage beta funnel was replaced with a subscription funnel:

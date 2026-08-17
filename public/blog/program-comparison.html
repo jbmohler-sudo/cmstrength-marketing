@@ -133,7 +133,7 @@
     <article class="prose">
       <hr>
       <h2>Ready to Pick Your Program?</h2>
-      <p>Each program is built on the same adaptive engine, but optimized for different goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/index#programs">CMS has a track tailored to you</a>. New to how the engine sequences a training cycle? Start with <a href="/blog/macrocycle-explained">How Macrocycles Work</a>. Training past 50? Read <a href="/blog/powerlifting-over-50-readiness">Powerlifting Over 50</a> first.</p>
+      <p>Each program is built on the same adaptive engine, but optimized for different goals. Whether you're chasing bench strength, building muscle and strength together, or preparing for a full powerlifting meet, <a href="/index#programs">CMS has a track tailored to you</a>. New to how the engine sequences a training cycle? Start with <a href="/blog/the-complete-guide-to-powerlifting-periodization">The Complete Guide to Powerlifting Periodization</a>. Training past 50? Read <a href="/blog/powerlifting-over-50-readiness">Powerlifting Over 50</a> first.</p>
     </article>
 
     <!-- CTA -->
@@ -148,9 +148,9 @@
     <div class="silo-next">
       <span class="section-label">KEEP READING</span>
       <div class="silo-grid">
-        <a class="silo-card" href="/blog/macrocycle-explained">
-          <h4>How Macrocycles Work</h4>
-          <p>Competition-date periodization — why working backward from meet day changes everything.</p>
+        <a class="silo-card" href="/blog/the-complete-guide-to-powerlifting-periodization">
+          <h4>The Complete Guide to Powerlifting Periodization</h4>
+          <p>Working backward from meet day — macrocycle, block, week, session — so every block serves the platform.</p>
         </a>
         <a class="silo-card" href="/blog/submaximal-training">
           <h4>Why You Don't Max Out All The Time</h4>
@@ -191,7 +191,7 @@
     const programs = [
       { id:'bench-spec', name:'Bench Specialization', subtitle:'Pressing strength focused',
         description:'For lifters who want pressing strength to move now.',
-        blockStructure:[{name:'Volume Block',weeks:5,focus:'Hypertrophy & technique'},{name:'Strength Block',weeks:4,focus:'Intensity & max effort'},{name:'Test Week',weeks:1,focus:'Competition lift'}],
+        blockStructure:[{name:'Skill',weeks:3,focus:'Technique & work capacity'},{name:'Deload',weeks:1,focus:'Recovery & adaptation'},{name:'Strength',weeks:3,focus:'Volume & load progression'},{name:'Deload',weeks:1,focus:'Recovery & adaptation'},{name:'Peak',weeks:3,focus:'Competition-specific intensity'},{name:'Deload + Test',weeks:1,focus:'Recover, then test on Day 3'}],
         features:['Lockout, mid-range, and off-chest weakness logic','Bench-centered block sequencing','Accessory selection that serves the main lift','Weak-point-aware exercise swaps','Productive weeks with deload timing'],
         ideal_for:'Competitive powerlifters, bench press specialists' },
       { id:'jacked-strong', name:'Jacked & Strong', subtitle:'Size + strength balance',

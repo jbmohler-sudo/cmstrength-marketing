@@ -76,6 +76,25 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
+### 2026-08-16 — Cornerstone review pass + publish (4 drafts)
+
+**Did:** Ran a full review pass on the first cornerstone draft set (01 Adaptive, 02 Masters
+Link-Hygiene, 03 Periodization, 04 Nutrition) — CORE-EEAT-style audit (dead links, em-dash
+budget, product claims vs engine ground truth). Fixed: IPF claim corrected to what the source
+supports (masters divisions extend into the 70-plus classes), Bench v2 canonicalized at 12 weeks
+(3/1/3/1/3/1) in Draft 03 + `program-comparison` + FAQ copy (builder-verified against
+`buildMacrocycle`/FAQ.jsx), all em-dash budgets brought under 2/400, dead spoke links deferred
+(not deleted — re-add at spoke publish), word-count figures corrected (02's 2,052 claim was not
+reproducible; true 1,319, floor waived by Jeff 2026-08-16). Review re-audit: blocker set empty.
+Published under Jeff approval: 01 → `/blog/what-is-adaptive-powerlifting-programming` (new),
+03 → `/blog/the-complete-guide-to-powerlifting-periodization` (new) + `macrocycle-explained`
+converted to redirect + 5 inbound links retargeted + sitemap updated, 04 → replaced
+`nutrition-is-a-skill` (same slug, expanded). Added blog cards + SEO.md word-count method log.
+**Decided:** word-count floor waived for established solid articles (never pad); 02's
+`powerlifting-over-50-readiness` stays at 1,319.
+**State after:** pushed to `origin/main` (Vercel deploys) — commit SHA on Content's report.
+**Next:** GSC recheck after deploy; GA4 wiring for CMS (Jeff, 2026-08-17).
+
 ### 2026-08-16 — Beta copy sweep + go-live push
 
 **Did:** Killed the remaining beta framing that Phase 5 missed — every page outside
