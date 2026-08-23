@@ -211,6 +211,10 @@ footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,
 .footer-row .brand-mini .name { font-family: var(--font-display); font-weight: 900; font-size: 15px; letter-spacing: 0.12em; }
 .footer-row .brand-mini .tagline { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
 .footer-row .meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--faint); }
+.footer-row .socials { display: flex; align-items: center; gap: 1rem; }
+.footer-row .social { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--faint); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-decoration: none; transition: color 0.2s; }
+.footer-row .social:hover { color: var(--accent); }
+.footer-row .social svg { flex-shrink: 0; }
 .footer-motto { font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
 
 
