@@ -11,22 +11,22 @@
 ---
 
 ## Current State
-> Updated: 2026-08-16
+> Updated: 2026-08-24
 
 - **Phase / Stage:** Live at www.cmstrength.fit (Vercel, static HTML, main = production).
   Subscription funnel GO-LIVE complete: homepage reads as a paid product (14-day
   trial + $20/mo · $200/yr), zero beta copy site-wide, all CTAs → app signup.
-  Blog is a real silo; SEO infra documented; GSC shows 11 indexed pages while the
-  old sitemap report remains stale.
+  Blog is a real silo; SEO infra documented; GSC shows 15 indexed pages while the
+  noncanonical apex-host sitemap submission remains stale.
 - **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, ember accent;
-  blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 8 posts organized
+  blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 11 posts organized
   as an editorial index (featured pillar + grouped sections: Masters / Programming / Fueling).
-  `docs/SEO.md` is the SEO source of truth. GSC fixed (Domain property). `robots.txt`
-  now points to canonical `sitemap.xml`; `sitemap-main.xml` is kept in sync for the
-  previously submitted GSC entry.
-- **What's in progress:** nothing blocking — funnel shipped, app billing live.
-- **What's next:** Re-check GSC after the homepage change settles. Optionally add
-  more "Fueling the Work" blog articles.
+  `docs/SEO.md` is the SEO source of truth. GSC uses the Domain property. `robots.txt`
+  points to canonical `sitemap.xml`.
+- **What's in progress:** Sitemap single-source cleanup is implemented locally and awaiting
+  commit/push so Vercel can deploy it.
+- **What's next:** Deploy the sitemap redirect, submit the direct-200
+  `https://www.cmstrength.fit/sitemap.xml` URL in GSC once, then let Google process it.
 - **Biggest open question:** none with teeth.
 
 ---
@@ -62,6 +62,7 @@ which also makes its content more credible on health-adjacent topics.
 | CMS-native blog taxonomy (Masters / Programming / Fueling) | Zero overlap with IAF's pillar names — another differentiation layer | 2026-06-15 | Locked |
 | www is the canonical host; bare domain 301s to www | Single canonical version; all sitemap `<loc>` + canonicals use www | 2026-06-15 | Locked |
 | GSC: use a DNS-verified **Domain** property, not bare URL-prefix | Site lives on www; a bare-domain URL-prefix property can't fetch/verify across the host mismatch | 2026-06-15 | Locked |
+| `sitemap.xml` is the sole physical sitemap; `/sitemap-main.xml` redirects to it | Prevents duplicate files from drifting while preserving the legacy URL | 2026-08-24 | Locked |
 
 ---
 
@@ -75,6 +76,18 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-08-24 — Eliminate duplicate sitemap drift
+
+**Did:** Removed the stale physical `public/sitemap-main.xml` duplicate and added a permanent
+Vercel redirect from `/sitemap-main.xml` to canonical `/sitemap.xml`. Confirmed the canonical
+sitemap remains the only robots-advertised source and the only file publishers must update.
+**Decided:** `sitemap.xml` is the sole physical sitemap; the legacy name is compatibility-only.
+**Killed:** Manual synchronization of two sitemap files.
+**Deferred:** Commit/push/deployment and the external GSC submission.
+**State after:** Local config has one sitemap source and one permanent legacy redirect.
+**Next:** Deploy, verify the live redirect lands on a direct-200 canonical sitemap, then submit
+`https://www.cmstrength.fit/sitemap.xml` once in the `cmstrength.fit` Domain property.
 
 ### 2026-08-16 — Cornerstone review pass + publish (4 drafts)
 
@@ -136,49 +149,7 @@ validated (parser, no unclosed tags).
 **Next:** Go-live phase — push marketing + app together; live Stripe flip; $1 smoke
 test.
 
-### 2026-07-14 - GSC sitemap cleanup and canonical sitemap alignment
-
-**Did:** Investigated GSC's stale "Sitemap could not be read" report for
-`https://www.cmstrength.fit/sitemap-main.xml`. Live Vercel headers/body verified
-healthy (`200 OK`, `application/xml`, 15 URL entries before cleanup), while GSC
-Page Indexing already showed 11 indexed pages, so the sitemap report was not blocking
-indexation. Updated `robots.txt` to advertise canonical `sitemap.xml`; added missing
-live crawlable URLs (`/blog/sled-drags`, `/tools/dot-score`, `/tools/1rm-calculator`);
-kept `sitemap-main.xml` byte-for-byte identical to `sitemap.xml` so the old submitted
-entry still resolves cleanly.
-**Decided:** Use `sitemap.xml` as the canonical sitemap name; keep `sitemap-main.xml`
-as a compatible duplicate until GSC no longer needs the old submitted entry.
-**Killed:** Duplicate sitemap naming as the primary robots signal.
-**Deferred:** Deploy/push and then submit/request fresh processing in GSC.
-**State after:** Both sitemap files validate as XML and contain 18 URLs; robots points
-to `https://www.cmstrength.fit/sitemap.xml`.
-**Next:** Deploy the change, then in GSC submit `https://www.cmstrength.fit/sitemap.xml`
-and optionally leave the old `sitemap-main.xml` entry alone until the new one reads
-successfully.
-
-### 2026-06-15 — Nutrition blog article, blog restructure, link-purity, GSC fix, SEO doc
-
-**Did:**
-- Wrote "Your Nutrition Is a Skill, Just Like Your Bench" (`public/blog/nutrition-is-a-skill.html`)
-  in the CMS template — nutrition framed as a trainable skill, engine refs, authority-cited
-  (Lally 2010 / Morton 2018 via PubMed/Wiley). Registered in `blog.html` + `sitemap.xml`,
-  inbound link from submaximal-training, hero image added.
-- Restructured `blog.html` from a flat card grid into an editorial layout (featured pillar +
-  3 labeled sections), deliberately distinct from IronAtForty's filter-chip blog.
-- Enforced link purity: removed a WizeMeals link that had slipped into the nutrition article
-  (CMS never links siblings); outbound now authority-only.
-- **Solved the ~2-week GSC "sitemap couldn't be read" problem.** Root cause was the GSC
-  property type, NOT the sitemap — a bare-domain `cmstrength.fit` URL-prefix property while
-  the site lives on `www.cmstrength.fit` (host mismatch). Fix = DNS-verified **Domain
-  property**. Verified healthy: live URL test "available / can be indexed", robots Fetched on
-  all 3 host variants, sitemap clean 200/valid XML.
-- Created `docs/SEO.md` (portfolio link model, content strategy, the GSC fix lesson).
-**Decided:** See Decisions Log — pure-product-site link rules, editorial blog layout,
-www-canonical, Domain property for GSC.
-**Learned:** For a www-canonical site, always use a GSC Domain property. "Sitemap couldn't
-be read" is often stale status — verify with URL Inspection → Test Live URL before touching
-anything. Don't spam-resubmit a sitemap (resets Google's queue).
-**Next:** Request-index key www pages; let the sitemap status catch up; add Fueling articles.
+> Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 
 ---
 

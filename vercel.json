@@ -1,4 +1,11 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/sitemap-main.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    }
+  ]
 }
