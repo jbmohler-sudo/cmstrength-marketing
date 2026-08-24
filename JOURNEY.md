@@ -23,10 +23,11 @@
   as an editorial index (featured pillar + grouped sections: Masters / Programming / Fueling).
   `docs/SEO.md` is the SEO source of truth. GSC uses the Domain property. `robots.txt`
   points to canonical `sitemap.xml`.
-- **What's in progress:** Sitemap single-source cleanup is implemented locally and awaiting
-  commit/push so Vercel can deploy it.
-- **What's next:** Deploy the sitemap redirect, submit the direct-200
-  `https://www.cmstrength.fit/sitemap.xml` URL in GSC once, then let Google process it.
+- **What's in progress:** The direct-200 `https://www.cmstrength.fit/sitemap.xml` URL is
+  submitted in GSC. Its Sitemaps report is still processing/failing, but URL Inspection's
+  live test confirms the canonical XML endpoint is currently available to Google.
+- **What's next:** Do not resubmit. Let Google process the existing sitemap entry, then
+  re-check its status after the reporting queue catches up.
 - **Biggest open question:** none with teeth.
 
 ---
@@ -84,10 +85,12 @@ Vercel redirect from `/sitemap-main.xml` to canonical `/sitemap.xml`. Confirmed 
 sitemap remains the only robots-advertised source and the only file publishers must update.
 **Decided:** `sitemap.xml` is the sole physical sitemap; the legacy name is compatibility-only.
 **Killed:** Manual synchronization of two sitemap files.
-**Deferred:** Commit/push/deployment and the external GSC submission.
-**State after:** Local config has one sitemap source and one permanent legacy redirect.
-**Next:** Deploy, verify the live redirect lands on a direct-200 canonical sitemap, then submit
-`https://www.cmstrength.fit/sitemap.xml` once in the `cmstrength.fit` Domain property.
+**Deferred:** Google-side sitemap processing; repeated submission would only reset the queue.
+**State after:** Commit `46a78f1` is on `origin/main` and deployed READY in Vercel. Production
+returns one `308` from `/sitemap-main.xml` to `/sitemap.xml`; the canonical endpoint returns
+the repository XML as `200 application/xml` to Googlebot. GSC already has the canonical URL
+submitted, and its Aug 24 live inspection reports "URL is available to Google."
+**Next:** Leave the existing GSC submission alone and monitor for the Sitemaps report to update.
 
 ### 2026-08-16 — Cornerstone review pass + publish (4 drafts)
 
