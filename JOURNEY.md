@@ -11,24 +11,30 @@
 ---
 
 ## Current State
-> Updated: 2026-08-24
+> Updated: 2026-08-28
 
 - **Phase / Stage:** Live at www.cmstrength.fit (Vercel, static HTML, main = production).
   Subscription funnel GO-LIVE complete: homepage reads as a paid product (14-day
   trial + $20/mo · $200/yr), zero beta copy site-wide, all CTAs → app signup.
-  Blog is a real silo; SEO infra documented; GSC shows 15 indexed pages while the
-  noncanonical apex-host sitemap submission remains stale.
+  Blog is a real silo; SEO infra documented; GSC shows 15 indexed pages.
 - **What's live:** Marketing site ("Rugged Pro" spec — true-black bg, ember accent;
   blog uses warmer charcoal/ember built on cms.css). Blog at `/blog` with 11 posts organized
   as an editorial index (featured pillar + grouped sections: Masters / Programming / Fueling).
   `docs/SEO.md` is the SEO source of truth. GSC uses the Domain property. `robots.txt`
-  points to canonical `sitemap.xml`.
-- **What's in progress:** The direct-200 `https://www.cmstrength.fit/sitemap.xml` URL is
-  submitted in GSC. Its Sitemaps report is still processing/failing, but URL Inspection's
-  live test confirms the canonical XML endpoint is currently available to Google.
-- **What's next:** Do not resubmit. Let Google process the existing sitemap entry, then
-  re-check its status after the reporting queue catches up.
-- **Biggest open question:** none with teeth.
+  points to fresh `sitemap-2026.xml` (new URL used to bypass GSC's cached per-URL failures).
+- **DNS (2026-08-28):** Migrated the domain OFF Vercel nameservers to Namecheap BasicDNS —
+  CMS was the only portfolio site on Vercel DNS and the only sitemap-fetch failure.
+  Full zone rebuilt and verified live: CNAME www + app → Vercel edge, apex A → 307 → www,
+  MX (ImprovMX @ + SES `send`), SPF, google-site-verification, Resend DKIM, CAA ×3.
+- **What's in progress:** GSC's Sitemaps report has NEVER downloaded any sitemap for this
+  host (lastDownloaded None since 7/30, every URL/property permutation). New theory: the
+  failure is host-keyed (WizeMeals' blog sitemap works because it lives on a separate host,
+  `blog.wizemeals.com`). Plan: serve the sitemap from fresh subdomain `sitemap.cmstrength.fit`
+  (already bound to the marketing project on Vercel) and submit that URL to the Domain property.
+- **What's next:** Add CNAME `sitemap` → `cname.vercel-dns-017.com.` at Namecheap; verify
+  `sitemap.cmstrength.fit/sitemap-2026.xml` serves 200; submit it in GSC; watch `lastDownloaded`.
+- **Biggest open question:** whether Google's sitemap-fetch pipeline is permanently poisoned
+  per-host for cmstrength.fit — the subdomain test is the last cheap experiment.
 
 ---
 
@@ -64,6 +70,10 @@ which also makes its content more credible on health-adjacent topics.
 | www is the canonical host; bare domain 301s to www | Single canonical version; all sitemap `<loc>` + canonicals use www | 2026-06-15 | Locked |
 | GSC: use a DNS-verified **Domain** property, not bare URL-prefix | Site lives on www; a bare-domain URL-prefix property can't fetch/verify across the host mismatch | 2026-06-15 | Locked |
 | `sitemap.xml` is the sole physical sitemap; `/sitemap-main.xml` redirects to it | Prevents duplicate files from drifting while preserving the legacy URL | 2026-08-24 | Locked |
+| Fresh sitemap URL `sitemap-2026.xml` replaces the poisoned `sitemap.xml` in robots.txt | GSC caches per-URL fetch failures; a new URL gets a clean slate | 2026-08-28 | Locked |
+| Migrate DNS from Vercel nameservers → Namecheap BasicDNS | CMS was the ONLY portfolio site on Vercel DNS and the ONLY sitemap-fetch failure (100% correlation); new URL-prefix property proved network-level "Couldn't fetch" | 2026-08-28 | Locked |
+| Serve the sitemap from fresh subdomain `sitemap.cmstrength.fit` | WizeMeals' blog sitemap works because it lives on a separate host; failure appears host-keyed, not file/config-keyed | 2026-08-28 | Testing |
+| Apex → www stays 307 (Vercel binding, survives DNS move) | Matches approved WizeMeals apex behavior; 301 was never the blocker | 2026-08-28 | Locked |
 
 ---
 
@@ -77,6 +87,32 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-08-28 — GSC sitemap fetch war: DNS migration + host-keyed theory
+
+**Did:** Exhausted the remaining fetch theories on the never-downloaded GSC sitemap
+(`lastDownloaded: None` since 7/30 on every URL/property): URL Inspection shows
+`pageFetchState: SUCCESSFUL` on the homepage (15 pages indexed) so Google CAN reach the
+site; every Google fetcher UA returns 200; IPv6 ruled out (approved sites have no AAAA
+either); new URL-prefix property showed "Couldn't fetch" (network-level). Migrated
+cmstrength.fit DNS from Vercel nameservers → Namecheap BasicDNS (only portfolio site on
+Vercel DNS; 100% correlation with the only sitemap-fetch failure). Rebuilt full zone at
+Namecheap and verified live: CNAME www + app → Vercel edge, apex A 216.198.79.65 → 307 →
+www (Vercel binding), MX ImprovMX @ + SES `send`, SPF @ + `send`, google-site-verification,
+Resend DKIM, CAA ×3, old efwd SPF auto-cleared by Custom MX switch. Sitemap serves
+`200 application/xml` end-to-end through the new apex chain.
+**Decided:** DNS migration locked (was the last testable differentiator). Sitemap served
+from fresh subdomain `sitemap.cmstrength.fit` to test host-keyed failure (WizeMeals' blog
+sitemap on `blog.wizemeals.com` proves separate hosts get clean slates).
+**Killed:** The "file/config/DNS is broken" theories — every one verified healthy.
+**Deferred:** Push commit `1301229` (sitemap-2026.xml + robots) — still local, will push
+with the next deploy. Hermes update (real-profile browsing) blocked on Windows .pyd locks.
+**State after:** Domain fully on Namecheap BasicDNS, zone verified live from outside;
+`sitemap.cmstrength.fit` bound to marketing project on Vercel; GSC still shows red
+"Couldn't fetch" on both properties (pre-DNS-move results).
+**Next:** Add CNAME `sitemap` → `cname.vercel-dns-017.com.` at Namecheap; verify the
+subdomain serves 200; submit `https://sitemap.cmstrength.fit/sitemap-2026.xml` to the
+Domain property; watch `lastDownloaded`.
 
 ### 2026-08-24 — Eliminate duplicate sitemap drift
 
@@ -125,32 +161,6 @@ Stripe trial → webhook → `trialing` → portal cancel sync).
 **Decided:** none new — executed locked Phase 5/7.
 **Killed:** last `#join-beta` anchors and beta wording site-wide.
 **State after:** www.cmstrength.fit reads as a subscription product end-to-end.
-
-### 2026-08-15 — Subscription funnel: beta framing → paid product
-
-**Did:** Replaced the beta funnel with a subscription funnel per the CMS Subscription
-Funnel plan (Phase 5, marketing side). Hero primary CTA `Claim Beta Slot` →
-`Start Free Trial` → app signup; all three track-card buttons → `Start Free Trial`;
-`#join-beta` section replaced with `#pricing` (Monthly $20/mo · Annual $200/yr with
-BEST VALUE highlight, "14-day free trial · No card required · Cancel anytime" line,
-feature strip, one lead CTA); deleted the Supabase beta-signup script block
-(no more `beta_signups` inserts from the marketing site); FAQ "free trial" answer
-rewritten + "Can I cancel anytime?" added; footer → "Start your 14-day trial" →
-`/index#pricing`; added mobile full-screen nav overlay (hamburger ≤1024px, active
-underline, Escape/scroll-lock/focus mgmt mirroring the INSIDE modal); signup.html
-reframed ("You're In", trial line, link-expired → app signup); terms.html updated
-(subscription pricing, 14-day trial, auto-renewal, cancel-anytime, no-refund-for-
-partial-periods, grandfathered-beta note, last-updated Aug 15 2026).
-**Decided:** (locked in plan Phase 0 by Jeff) D1 $20/mo · $200/yr, D2 no card during
-trial, D3 beta users grandfathered free-for-life, D4 single plan gates whole app,
-D5 past_due → 7-day grace → auto-lock.
-**Killed:** Beta signup form + Supabase JS on the homepage; all beta/join framing.
-**Deferred:** Push to origin/main (Vercel deploy) — held for go-live with the app.
-**State after:** Homepage reads as a subscription product; no user-facing "beta"
-copy remains (`grep -ri beta public/index.html` = CSS class reuse only); HTML
-validated (parser, no unclosed tags).
-**Next:** Go-live phase — push marketing + app together; live Stripe flip; $1 smoke
-test.
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 

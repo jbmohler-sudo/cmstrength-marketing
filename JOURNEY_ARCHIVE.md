@@ -2,6 +2,32 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-08-15 — Subscription funnel: beta framing → paid product
+
+**Did:** Replaced the beta funnel with a subscription funnel per the CMS Subscription
+Funnel plan (Phase 5, marketing side). Hero primary CTA `Claim Beta Slot` →
+`Start Free Trial` → app signup; all three track-card buttons → `Start Free Trial`;
+`#join-beta` section replaced with `#pricing` (Monthly $20/mo · Annual $200/yr with
+BEST VALUE highlight, "14-day free trial · No card required · Cancel anytime" line,
+feature strip, one lead CTA); deleted the Supabase beta-signup script block
+(no more `beta_signups` inserts from the marketing site); FAQ "free trial" answer
+rewritten + "Can I cancel anytime?" added; footer → "Start your 14-day trial" →
+`/index#pricing`; added mobile full-screen nav overlay (hamburger ≤1024px, active
+underline, Escape/scroll-lock/focus mgmt mirroring the INSIDE modal); signup.html
+reframed ("You're In", trial line, link-expired → app signup); terms.html updated
+(subscription pricing, 14-day trial, auto-renewal, cancel-anytime, no-refund-for-
+partial-periods, grandfathered-beta note, last-updated Aug 15 2026).
+**Decided:** (locked in plan Phase 0 by Jeff) D1 $20/mo · $200/yr, D2 no card during
+trial, D3 beta users grandfathered free-for-life, D4 single plan gates whole app,
+D5 past_due → 7-day grace → auto-lock.
+**Killed:** Beta signup form + Supabase JS on the homepage; all beta/join framing.
+**Deferred:** Push to origin/main (Vercel deploy) — held for go-live with the app.
+**State after:** Homepage reads as a subscription product; no user-facing "beta"
+copy remains (`grep -ri beta public/index.html` = CSS class reuse only); HTML
+validated (parser, no unclosed tags).
+**Next:** Go-live phase — push marketing + app together; live Stripe flip; $1 smoke
+test.
+
 ### 2026-07-14 - GSC sitemap cleanup and canonical sitemap alignment
 
 **Did:** Investigated GSC's stale "Sitemap could not be read" report for
