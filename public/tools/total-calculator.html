@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Powerlifting Total Calculator — Sum Your Meet Total | Center Mass Strength</title>
+  <meta name="description" content="Add your three attempts for squat, bench, and deadlift and get your powerlifting total in seconds. Includes the meet-day attempt strategy that earns it." />
+
+  <link rel="canonical" href="https://www.cmstrength.fit/tools/total-calculator" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Powerlifting Total Calculator — Sum Your Meet Total | Center Mass Strength" />
+  <meta property="og:description" content="Add your three attempts for squat, bench, and deadlift and get your powerlifting total in seconds. Includes the meet-day attempt strategy that earns it." />
+  <meta property="og:url" content="https://www.cmstrength.fit/tools/total-calculator" />
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Powerlifting Total Calculator — Sum Your Meet Total | Center Mass Strength" />
+  <meta name="twitter:description" content="Add your three attempts for squat, bench, and deadlift and get your powerlifting total in seconds. Includes the meet-day attempt strategy that earns it." />
+  <meta name="twitter:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===================================================================
+       Center Mass Strength — total-calculator.html (standalone draft)
+       Design tokens mirror /cms.css; page styles mirror /tools/1rm-calculator.html
+       =================================================================== */
+    :root {
+      --bg: #0A0A0C; --bg-elevated: #121216; --bg-card: rgba(18, 18, 22, 0.55);
+      --accent: #E2452A; --accent-bright: #F2502F; --bone: #ECE7DB;
+      --muted: #B6B1A6; --dim: #918C80; --faint: #7d7a72;
+      --border: rgba(236, 231, 219, 0.1); --border-strong: rgba(236, 231, 219, 0.22);
+      --text: #ECE7DB;
+      --font-display: 'Saira Condensed', system-ui, sans-serif;
+      --font-body: 'Saira', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --max: 1280px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { font-family: var(--font-body); color: var(--text); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
+
+    /* ===== KEYFRAMES ===== */
+    @keyframes cms-spin { to { transform: rotate(360deg); } }
+    @keyframes cms-spin-rev { to { transform: rotate(-360deg); } }
+    @keyframes cms-grain { 0% { transform: translate(0,0); } 20% { transform: translate(-3%,-2%); } 40% { transform: translate(2%,1%); } 60% { transform: translate(-1%,2%); } 80% { transform: translate(2%,-1%); } 100% { transform: translate(0,0); } }
+    @keyframes cms-pulse { 0%, 100% { opacity: .3; } 50% { opacity: .85; } }
+
+    /* ===== AMBIENT LAYERS ===== */
+    #cms-dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    #cms-glow { position: fixed; top: 0; left: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; background: radial-gradient(closest-side, rgba(226,69,42,0.16), rgba(226,69,42,0.05) 45%, transparent 70%); z-index: 2; pointer-events: none; opacity: 0; transition: opacity .6s ease; will-change: transform; }
+    .cms-vignette { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(120% 90% at 50% 30%, transparent 35%, rgba(10,10,12,0.55) 78%, rgba(10,10,12,0.9) 100%); }
+    .cms-grain { position: fixed; inset: -12%; width: 124%; height: 124%; z-index: 40; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay; animation: cms-grain 7s steps(6) infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* ===== SPROCKET LOGO ===== */
+    .sprocket { position: relative; flex: none; }
+    .sprocket .ring-out { position: absolute; inset: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, var(--bone) 0deg 1.4deg, transparent 1.4deg 9deg); -webkit-mask: radial-gradient(closest-side, transparent 68%, #000 71%); mask: radial-gradient(closest-side, transparent 68%, #000 71%); animation: cms-spin 16s linear infinite; opacity: .8; }
+    .sprocket .ring-in { position: absolute; inset: 13%; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(226,69,42,0.95) 0deg .9deg, transparent .9deg 7deg); -webkit-mask: radial-gradient(closest-side, transparent 74%, #000 77%); mask: radial-gradient(closest-side, transparent 74%, #000 77%); animation: cms-spin-rev 10s linear infinite; }
+    .sprocket .cross-v { position: absolute; left: 50%; top: 6%; bottom: 6%; width: 1.5px; background: rgba(236,231,219,0.45); transform: translateX(-50%); }
+    .sprocket .cross-h { position: absolute; top: 50%; left: 6%; right: 6%; height: 1.5px; background: rgba(236,231,219,0.45); transform: translateY(-50%); }
+    .sprocket .hub { position: absolute; inset: 32%; border-radius: 50%; border: 1.5px solid rgba(236,231,219,0.6); background: var(--bg); display: flex; align-items: center; justify-content: center; }
+    .sprocket .hub-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* ===== NAV ===== */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(10,10,12,0.82), rgba(10,10,12,0.0)); border-bottom: 1px solid rgba(236,231,219,0.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 4vw, 56px); }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand .sprocket { width: 38px; height: 38px; }
+    .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+    .nav-wordmark .name { font-family: var(--font-display); font-weight: 900; font-size: 18px; letter-spacing: 0.14em; white-space: nowrap; }
+    .nav-wordmark .sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.34em; color: var(--dim); margin-top: 3px; white-space: nowrap; }
+    .nav-actions { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+    .nav-actions .nav-link { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--muted); transition: color .2s; background: none; border: none; cursor: pointer; padding: 0; }
+    .nav-actions .nav-link:hover { color: var(--bone); }
+
+    /* ===== BUTTONS ===== */
+    .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all .2s cubic-bezier(0.4,0,0.2,1); }
+    .btn-primary { background: var(--accent); color: var(--bg); padding: 16px 30px; font-size: 17px; clip-path: polygon(0 0, 100% 0, 100% 68%, calc(100% - 13px) 100%, 0 100%); border: none; }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
+    .btn-secondary { border: 1px solid var(--border-strong); color: var(--bone); padding: 16px 30px; font-size: 17px; background: transparent; }
+    .btn-secondary:hover { border-color: var(--bone); background: rgba(236,231,219,0.06); }
+    .btn-nav { background: var(--accent); color: var(--bg); padding: 11px 20px; font-size: 13px; letter-spacing: 0.14em; clip-path: polygon(0 0, 100% 0, 100% 70%, calc(100% - 10px) 100%, 0 100%); }
+    .btn-nav:hover { background: var(--accent-bright); }
+
+    /* ===== PAGE HERO / PROSE / CTA ===== */
+    .page-hero { position: relative; z-index: 3; padding: clamp(130px, 18vw, 200px) clamp(20px, 5vw, 72px) clamp(40px, 6vw, 70px); max-width: 900px; margin: 0 auto; }
+    .back-link { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); transition: color .2s; }
+    .back-link:hover { color: var(--bone); }
+    .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); }
+    .page-hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(40px, 8vw, 92px); line-height: 0.88; letter-spacing: -0.01em; margin: 18px 0 0; text-transform: uppercase; }
+    .page-hero h1 .accent { color: var(--accent); }
+    .hero-sub { max-width: 640px; margin: 24px 0 0; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6; color: var(--muted); }
+
+    .prose { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: clamp(20px, 4vw, 40px) clamp(20px, 5vw, 72px) clamp(40px, 6vw, 60px); font-size: 1.05rem; line-height: 1.75; color: var(--muted); }
+    .prose > * + * { margin-top: 1.4em; }
+    .prose h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px, 4vw, 44px); line-height: 1.0; letter-spacing: -0.01em; text-transform: uppercase; color: var(--bone); margin-top: 2.2em; }
+    .prose h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(20px, 2.6vw, 28px); line-height: 1.1; text-transform: uppercase; color: var(--bone); margin-top: 1.8em; }
+    .prose p { color: var(--muted); }
+    .prose strong { color: var(--bone); font-weight: 600; }
+    .prose a { color: var(--accent); border-bottom: 1px solid rgba(226,69,42,0.4); transition: border-color .2s; }
+    .prose a:hover { border-bottom-color: var(--accent); }
+    .prose ul { padding-left: 1.4em; color: var(--muted); }
+    .prose li { margin-top: 0.5em; }
+    .prose ul li::marker { color: var(--accent); }
+    .callout { border-left: 2px solid var(--accent); background: rgba(226,69,42,0.06); padding: 1em 1.4em; margin: 1.6em 0; }
+    .callout p { margin: 0; color: var(--bone); }
+
+    .cta-block { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: clamp(50px, 8vw, 90px) clamp(20px, 5vw, 72px); text-align: center; }
+    .cta-block h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px, 4.5vw, 52px); line-height: 0.95; text-transform: uppercase; color: var(--bone); }
+    .cta-block p { color: var(--muted); margin: 18px 0 28px; font-size: 1.05rem; }
+    .hero-actions { position: relative; z-index: 4; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+    /* ===== TOOL SECTION ===== */
+    .tool-section { position: relative; z-index: 3; max-width: var(--max); margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px); }
+    .tool-shell { border: 1px solid var(--border); background: var(--bg-card); padding: clamp(28px, 4vw, 48px); }
+
+    /* --- Toggle pills --- */
+    .toggle-row { display: flex; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .toggle-group { display: flex; align-items: center; gap: 10px; }
+    .toggle-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; }
+    .toggle-pill { display: flex; border: 1px solid var(--border-strong); overflow: hidden; cursor: pointer; }
+    .toggle-pill button { background: transparent; border: none; color: var(--muted); cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; transition: all .2s; }
+    .toggle-pill button.active { background: var(--accent); color: var(--bg); }
+    .toggle-pill button:hover:not(.active) { background: rgba(236,231,219,0.06); color: var(--bone); }
+    .reset-btn { background: transparent; border: 1px solid var(--border-strong); color: var(--dim); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 14px; cursor: pointer; transition: all .2s; }
+    .reset-btn:hover { color: var(--bone); border-color: var(--bone); }
+    .unit-note { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); text-align: right; margin: -18px 0 0; }
+
+    /* --- Lift cards --- */
+    .total-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+    .lift-card { border: 1px solid var(--border); background: rgba(18,18,22,0.5); padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+    .lift-name { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .lift-name .accent { color: var(--accent); }
+    .attempt-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    .input-block { display: flex; flex-direction: column; gap: 8px; }
+    .input-block label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; }
+    .input-block input { background: rgba(18,18,22,0.72); border: 1px solid var(--border-strong); color: var(--bone); font-family: var(--font-display); font-weight: 800; font-size: 22px; padding: 12px 10px; text-align: center; width: 100%; min-width: 0; box-sizing: border-box; transition: border-color .2s; -moz-appearance: textfield; }
+    .input-block input::-webkit-outer-spin-button,
+    .input-block input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .input-block input:focus { outline: none; border-color: var(--accent); }
+
+    .lift-best { border-top: 1px solid var(--border); padding-top: 16px; text-align: center; min-height: 64px; opacity: .45; transition: opacity .3s ease; }
+    .lift-best.has-best { opacity: 1; }
+    .lift-best .best-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; display: block; }
+    .lift-best .best-value { font-family: var(--font-display); font-weight: 900; font-size: 34px; line-height: 1.1; color: var(--bone); margin-top: 2px; }
+    .lift-best .best-unit { font-size: 14px; color: var(--dim); font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.1em; }
+    .lift-best .best-attempt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--accent); display: block; margin-top: 2px; }
+
+    /* --- Total display --- */
+    .total-display { text-align: center; margin-top: 12px; }
+    .dot-score-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); text-transform: uppercase; }
+    .dot-score-value { font-family: var(--font-display); font-weight: 900; font-size: clamp(64px, 10vw, 96px); line-height: 1; color: var(--bone); margin-top: 4px; }
+    .dot-score-value .decimal { font-size: 0.35em; color: var(--dim); }
+    .dot-score-value .total-num { color: var(--bone); }
+    .dot-score-value .total-num.empty { color: var(--faint); }
+    .total-note { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--faint); margin-top: 14px; }
+
+    /* --- Cross-link grid --- */
+    .cross-link-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+    .cross-link-card { border: 1px solid var(--border); background: rgba(18,18,22,0.5); padding: 22px 24px; text-align: center; transition: all .25s ease; }
+    .cross-link-card:hover { border-color: rgba(226,69,42,0.55); transform: translateY(-3px); }
+    .cross-link-card .cl-kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; display: block; margin-bottom: 8px; }
+    .cross-link-card a { font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
+    .cross-link-card a:hover { color: var(--accent); }
+
+    /* ===== FOOTER ===== */
+    footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,0.08); padding: 80px 0 40px; }
+    .footer-vault { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(236,231,219,0.06); }
+    .footer-vault h4 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem; }
+    .footer-vault ul { list-style: none; }
+    .footer-vault li { margin-bottom: 0.7rem; }
+    .footer-vault a { color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-vault a:hover { color: var(--bone); }
+    .footer-vault p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem; }
+    .footer-vault .cta-link { color: var(--accent); font-weight: 600; display: inline-block; margin-top: 0.5rem; font-family: var(--font-display); letter-spacing: 0.05em; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; }
+    .footer-row .brand-mini { display: flex; align-items: center; gap: 13px; }
+    .footer-row .brand-mini .sprocket { width: 30px; height: 30px; }
+    .footer-row .brand-mini .name { font-family: var(--font-display); font-weight: 900; font-size: 15px; letter-spacing: 0.12em; }
+    .footer-row .brand-mini .tagline { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
+    .footer-row .meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--faint); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .nav-actions .nav-link { display: none; }
+      .footer-vault { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (max-width: 900px) {
+      .total-grid { grid-template-columns: 1fr; }
+      .cross-link-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .nav { padding: 14px 20px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .footer-vault { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-row { flex-direction: column; align-items: start; gap: 1.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+      #cms-dust, .cms-grain { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="https://app.cmstrength.fit/signup">START FREE TRIAL</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <a class="back-link" href="/tools" style="margin-bottom:26px;">&larr; Back to tools</a>
+      <p class="kicker">POWERLIFTING CALCULATOR</p>
+      <h1 style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        <span class="accent">TOTAL</span> CALCULATOR
+      </h1>
+      <p class="hero-sub">Nine attempts. Three lifts. One number that cannot be argued with. Your total is the only score that matters on a powerlifting platform.</p>
+    </div>
+
+    <div class="prose">
+      <h2>The scoreboard doesn't argue</h2>
+      <p>Powerlifting is a rare sport: the scoreboard cannot lie. The bar went up, or it didn't. Three judges, nine attempts, and the only number that survives the day is your total. That's your best successful squat, plus your best successful bench, plus your best successful deadlift, summed.</p>
+      <p>Everything else in training is a proxy. Estimated 1RMs, rep PRs, RPE charts, a great week in the gym. On meet day the proxies cash out, and your total is what they cash out to.</p>
+      <p>Every training block either moves one of those three numbers or it doesn't. A program that can't point to which attempt it's building is just a calendar with weights on it.</p>
+      <p>One detail most lifters get wrong: only your best lift in each movement counts. Misses don't subtract. Your total is not the sum of everything you touched; it is the sum of your three best successful single attempts.</p>
+    </div>
+
+    <section class="tool-section" id="calculator">
+      <div class="tool-shell">
+        <p style="color:var(--muted);margin-bottom:28px;max-width:640px;">Enter your three attempts for each lift in the unit you train in. Leave an attempt blank if you passed on it or it didn't count. The calculator takes the best of your three attempts per lift and adds them up. Pure addition, the same way the scoreboard does it.</p>
+
+        <div class="toggle-row">
+          <div class="toggle-group">
+            <span class="toggle-label">UNITS</span>
+            <div class="toggle-pill" id="total-unit-toggle">
+              <button class="active" data-val="lb">LB</button>
+              <button data-val="kg">KG</button>
+            </div>
+          </div>
+          <button type="button" class="reset-btn" id="total-reset">CLEAR ALL</button>
+        </div>
+
+        <div class="total-grid">
+          <!-- SQUAT -->
+          <div class="lift-card">
+            <div class="lift-name"><span class="accent">SQ</span> SQUAT</div>
+            <div class="attempt-row">
+              <div class="input-block">
+                <label for="tot-sq-1">ATTEMPT 1</label>
+                <input type="number" id="tot-sq-1" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-sq-2">ATTEMPT 2</label>
+                <input type="number" id="tot-sq-2" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-sq-3">ATTEMPT 3</label>
+                <input type="number" id="tot-sq-3" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+            </div>
+            <div class="lift-best" id="tot-sq-best" aria-live="polite">
+              <span class="best-label">BEST</span>
+              <span class="best-value" id="tot-sq-val">—</span> <span class="best-unit" id="tot-sq-unit">LB</span>
+              <span class="best-attempt" id="tot-sq-att"></span>
+            </div>
+          </div>
+
+          <!-- BENCH -->
+          <div class="lift-card">
+            <div class="lift-name"><span class="accent">BP</span> BENCH</div>
+            <div class="attempt-row">
+              <div class="input-block">
+                <label for="tot-bp-1">ATTEMPT 1</label>
+                <input type="number" id="tot-bp-1" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-bp-2">ATTEMPT 2</label>
+                <input type="number" id="tot-bp-2" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-bp-3">ATTEMPT 3</label>
+                <input type="number" id="tot-bp-3" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+            </div>
+            <div class="lift-best" id="tot-bp-best" aria-live="polite">
+              <span class="best-label">BEST</span>
+              <span class="best-value" id="tot-bp-val">—</span> <span class="best-unit" id="tot-bp-unit">LB</span>
+              <span class="best-attempt" id="tot-bp-att"></span>
+            </div>
+          </div>
+
+          <!-- DEADLIFT -->
+          <div class="lift-card">
+            <div class="lift-name"><span class="accent">DL</span> DEADLIFT</div>
+            <div class="attempt-row">
+              <div class="input-block">
+                <label for="tot-dl-1">ATTEMPT 1</label>
+                <input type="number" id="tot-dl-1" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-dl-2">ATTEMPT 2</label>
+                <input type="number" id="tot-dl-2" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+              <div class="input-block">
+                <label for="tot-dl-3">ATTEMPT 3</label>
+                <input type="number" id="tot-dl-3" placeholder="—" min="0" step="0.5" inputmode="decimal">
+              </div>
+            </div>
+            <div class="lift-best" id="tot-dl-best" aria-live="polite">
+              <span class="best-label">BEST</span>
+              <span class="best-value" id="tot-dl-val">—</span> <span class="best-unit" id="tot-dl-unit">LB</span>
+              <span class="best-attempt" id="tot-dl-att"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-display" role="status" aria-live="polite">
+          <div class="dot-score-label">YOUR TOTAL</div>
+          <div class="dot-score-value">
+            <span id="total-val" class="total-num">—</span>
+            <span class="decimal" id="total-unit">LB</span>
+          </div>
+          <div class="total-note">Best squat + best bench + best deadlift. Blank attempts are not counted.</div>
+        </div>
+      </div>
+
+      <!-- Tool family cross-links -->
+      <div class="cross-link-grid">
+        <div class="cross-link-card">
+          <span class="cl-kicker">ESTIMATE STRENGTH</span>
+          <a href="https://www.cmstrength.fit/tools/1rm-calculator">1RM Calculator</a>
+        </div>
+        <div class="cross-link-card">
+          <span class="cl-kicker">COMPARE ACROSS BODYWEIGHTS</span>
+          <a href="https://www.cmstrength.fit/tools/dot-score">DOT Score Calculator</a>
+        </div>
+        <div class="cross-link-card">
+          <span class="cl-kicker">CLASSIC RATIO</span>
+          <a href="https://www.cmstrength.fit/tools/wilks-calculator">Wilks Calculator</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="prose">
+      <h2>How to spend nine attempts</h2>
+      <p>Your total is decided before the first attempt is loaded. It's decided in the numbers you write on your card.</p>
+      <h3>Opener: a weight you could hit asleep</h3>
+      <p>It has to be a guarantee. A missed opener burns more than one attempt; it shakes the whole day. Plan for roughly 90 percent of your third, and don't get brave on the day.</p>
+      <h3>Second: your best recent training number</h3>
+      <p>The single you've hit clean in the last few weeks. Expect to make it. Be genuinely annoyed if you don't.</p>
+      <h3>Third: the PR you came for</h3>
+      <p>The number that got you up in the dark. This one is allowed to miss. That's what it's for.</p>
+      <p>Three rules keep the card honest. Never lower a planned attempt because the warm-up room felt heavy; the platform is different. Never raise a third because the crowd is loud; the plan was made on paper, in daylight. And if the first two attempts went exactly to plan, the third is exactly what you wrote. No hero math.</p>
+      <p>Attempt selection is intensity management, and it starts months out, not on the platform. If you want your training weights picked so the right number is waiting for you at the meet, read <a href="https://www.cmstrength.fit/blog/rpe-for-powerlifting">RPE for powerlifting</a>, then let the programming do the math.</p>
+    </div>
+
+    <div class="prose">
+      <h2>Read your total in context</h2>
+      <p>A total is only meaningful relative to your weight class and your federation. Same number, a 60 kg lifter versus a 120 kg lifter: different achievements entirely. That's why weight classes exist, and why the <a href="https://www.cmstrength.fit/tools/dot-score">DOT Score</a> and <a href="https://www.cmstrength.fit/tools/wilks-calculator">Wilks calculators</a> exist, to level the field across bodyweights. Compare on those terms, or don't compare.</p>
+      <p>The total is also the one number that can't be gamed. Your gym log can flatter you. Your 1RM estimate can drift. A total is three white lights, or it isn't. That's why it's the number worth training toward.</p>
+      <div class="callout">
+        <p><strong>And the raw number still has to be earned under your federation's rules.</strong> Depth, the pause, the command to rack: they all change the total. Train the lift your federation judges.</p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h2>Stop guessing your intensity.</h2>
+      <p>Your total is built in training. Center Mass Strength programs every weight and every rep off your readiness and your real numbers, not a template. Fourteen days, free. See what your total could be.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">START FREE TRIAL</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/index#programs">Bench Specialist</a></li>
+          <li><a href="/index#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/tools/1rm-calculator">1RM Calculator</a></li>
+          <li><a href="/tools/dot-score">DOT Score Calculator</a></li>
+          <li><a href="/tools/wilks-calculator">Wilks Calculator</a></li>
+          <li><a href="/tools/total-calculator" class="active-link" style="color:var(--accent);">Powerlifting Total Calculator</a></li>
+        </ul>
+        <p style="color:var(--dim);font-size:0.8rem;margin-top:0.8rem;">More tools coming soon.</p>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Start your 14-day trial.</p>
+        <a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a>
+      </div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Ambient layers (dust + glow), inline replacement for /cms-motion.js ===== */
+    (function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var cv = document.getElementById('cms-dust');
+      if (!cv || !cv.getContext) return;
+      var ctx = cv.getContext('2d');
+      var W = 0, H = 0, parts = [];
+      function size() { W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+      size();
+      window.addEventListener('resize', size);
+      for (var i = 0; i < 60; i++) {
+        parts.push({ x: Math.random() * 2000, y: Math.random() * 2000, r: Math.random() * 1.4 + 0.4, s: Math.random() * 0.25 + 0.06, o: Math.random() * 0.3 + 0.08 });
+      }
+      (function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i];
+          p.y -= p.s;
+          p.x += Math.sin((p.y + p.x) * 0.002) * 0.2;
+          if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
+          ctx.globalAlpha = p.o;
+          ctx.fillStyle = '#ECE7DB';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(draw);
+      })();
+
+      var glow = document.getElementById('cms-glow');
+      if (glow) {
+        var tx = window.innerWidth * 0.5, ty = window.innerHeight * 0.3, x = tx, y = ty, shown = false;
+        window.addEventListener('mousemove', function (e) {
+          tx = e.clientX; ty = e.clientY;
+          if (!shown) { shown = true; glow.style.opacity = 1; }
+        });
+        (function loop() {
+          x += (tx - x) * 0.08;
+          y += (ty - y) * 0.08;
+          glow.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+          requestAnimationFrame(loop);
+        })();
+      }
+    })();
+
+    /* ===== POWERLIFTING TOTAL CALCULATOR =====
+       Three lifts x three attempts. Auto-selects the best successful
+       attempt per lift (blank / invalid = not counted) and sums them. */
+    var LIFTS = [ { key: 'sq' }, { key: 'bp' }, { key: 'dl' } ];
+    var totalUnit = 'lb';
+
+    function fmt(v) {
+      if (!isFinite(v) || v <= 0) return null;
+      return Number.isInteger(v) ? String(v) : String(Math.round(v * 10) / 10);
+    }
+
+    function recalc() {
+      var total = 0;
+      var any = false;
+      LIFTS.forEach(function (l) {
+        var best = 0, bestAtt = 0;
+        for (var i = 1; i <= 3; i++) {
+          var v = parseFloat(document.getElementById('tot-' + l.key + '-' + i).value);
+          if (!isFinite(v) || v <= 0) continue;
+          if (v > best) { best = v; bestAtt = i; }
+        }
+        var valEl = document.getElementById('tot-' + l.key + '-val');
+        var attEl = document.getElementById('tot-' + l.key + '-att');
+        var cardEl = document.getElementById('tot-' + l.key + '-best');
+        if (best > 0) {
+          valEl.textContent = fmt(best);
+          attEl.textContent = '\u00B7 A' + bestAtt;
+          cardEl.classList.add('has-best');
+          total += best;
+          any = true;
+        } else {
+          valEl.textContent = '\u2014';
+          attEl.textContent = '';
+          cardEl.classList.remove('has-best');
+        }
+      });
+      var totalEl = document.getElementById('total-val');
+      if (any) {
+        totalEl.textContent = fmt(Math.round(total * 10) / 10);
+        totalEl.classList.remove('empty');
+      } else {
+        totalEl.textContent = '\u2014';
+        totalEl.classList.add('empty');
+      }
+    }
+
+    /* Unit toggle: relabels only; numbers are entered in the selected unit */
+    var toggle = document.getElementById('total-unit-toggle');
+    if (toggle) {
+      toggle.querySelectorAll('button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          toggle.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          totalUnit = btn.dataset.val;
+          var u = totalUnit.toUpperCase();
+          ['sq', 'bp', 'dl'].forEach(function (k) {
+            document.getElementById('tot-' + k + '-unit').textContent = u;
+          });
+          document.getElementById('total-unit').textContent = u;
+        });
+      });
+    }
+
+    /* Live recalc on input; Enter also recalculates */
+    var inputs = document.querySelectorAll('.lift-card input');
+    inputs.forEach(function (inp) {
+      inp.addEventListener('input', recalc);
+      inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') recalc(); });
+    });
+
+    /* Clear all */
+    var resetBtn = document.getElementById('total-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        inputs.forEach(function (inp) { inp.value = ''; });
+        recalc();
+      });
+    }
+  </script>
+</body>
+</html>

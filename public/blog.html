@@ -35,6 +35,9 @@
     .featured-card .featured-photo { aspect-ratio: 16/10; overflow: hidden; background: linear-gradient(135deg,#1a1410,#0a0a0c); }
     .featured-card .featured-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92) contrast(1.02); transition: transform .4s ease; }
     .featured-card:hover .featured-photo img { transform: scale(1.04); }
+    .featured-photo.placeholder { display: flex; align-items: center; justify-content: center; position: relative; }
+    .featured-photo.placeholder::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 90% at 30% 20%, rgba(226,69,42,0.22), transparent 60%); }
+    .featured-photo.placeholder span { position: relative; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--dim); text-transform: uppercase; }
     .featured-card .featured-body { padding: clamp(26px,4vw,48px); display: flex; flex-direction: column; justify-content: center; }
     .featured-card .featured-body h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px,4vw,46px); line-height: 0.95; text-transform: uppercase; color: var(--bone); margin: 14px 0 0; }
     .featured-card:hover .featured-body h2 { color: var(--accent); }
@@ -84,16 +87,116 @@
 
     <!-- FEATURED PILLAR -->
     <div class="blog-featured">
-      <a class="featured-card" href="/blog/powerlifting-over-50-readiness">
-        <div class="featured-photo"><img src="/images/blog/hero-masters.jpg" alt="Masters powerlifter chalked and set up over a barbell in a dark gym" loading="lazy"></div>
+      <a class="featured-card" href="/blog/how-to-powerlift-after-40">
+        <div class="featured-photo"><img src="/images/blog/how-to-powerlift-after-40.jpg" alt="Older lifter with graying hair deadlifting a heavy red-plated barbell in a dim industrial gym" loading="lazy"></div>
         <div class="featured-body">
-          <span class="section-label">START HERE · THE MASTERS PILLAR</span>
-          <h2>Powerlifting Over 50</h2>
-          <p>Why readiness changes everything. The complete guide to programming around recovery after 50 — and the anchor every other article on this page builds from.</p>
+          <span class="section-label">START HERE · THE AFTER-40 PILLAR</span>
+          <h2>How to Powerlift After 40</h2>
+          <p>Powerlifting after 40 isn't about doing less — it's about the right amount on the right day. What changes at 40, how to program around it, and a realistic timeline to your first meet.</p>
           <span class="card-link">Read the pillar &rarr;</span>
         </div>
       </a>
     </div>
+
+    <!-- GROUP: THE AFTER-40 TRACK -->
+    <section class="block blog-group">
+      <div class="group-head">
+        <span class="section-label">The After-40 Track</span>
+        <span class="group-count">10 ARTICLES</span>
+      </div>
+      <div class="grid-2">
+        <a class="card photo-card" href="/blog/is-powerlifting-after-40-safe">
+          <div class="card-photo"><img src="/images/blog/is-powerlifting-after-40-safe.jpg" alt="Muscular older man with a grey beard performing a heavy back squat in a gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">SAFETY</span>
+            <h3>Is Powerlifting After 40 Safe?</h3>
+            <p>Powerlifting after 40 is safe when the program manages the risk. What the research says about masters lifters, injury rates, and the precautions that actually matter.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/how-often-should-you-lift-heavy-after-40">
+          <div class="card-photo"><img src="/images/blog/how-often-should-you-lift-heavy-after-40.jpg" alt="Older lifter in a weight belt performing a heavy back squat in a gritty, dimly lit gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING</span>
+            <h3>How Often Should You Lift Heavy After 40?</h3>
+            <p>Heavy isn't the enemy after 40 — guessing when to do it is. How often heavy needs to show up, what recovery actually takes, and the split that makes it work.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/strength-training-expectations-after-40">
+          <div class="card-photo"><img src="/images/blog/strength-training-expectations-after-40.jpg" alt="Muscular older man with a grey beard kneeling on a gym floor, gripping a loaded barbell as he prepares to lift" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING</span>
+            <h3>Strength Training Expectations After 40</h3>
+            <p>The honest, evidence-based picture: what actually declines after 40, what doesn't, realistic progress versus your 20s, and how to measure strength beyond the bar.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/can-women-compete-in-powerlifting-at-40">
+          <div class="card-photo"><img src="/images/blog/can-women-compete-in-powerlifting-at-40.jpg" alt="Female powerlifter mid-deadlift, gripping a heavy barbell with chalk dust swirling in a dimly lit gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">MASTERS DIVISIONS</span>
+            <h3>Can Women Compete in Powerlifting at 40?</h3>
+            <p>Yes — and the divisions were built for you. How masters brackets work, what the research says about women over 40 lifting heavy, and the three-step on-ramp to your first meet.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/menopause-and-powerlifting">
+          <div class="card-photo"><img src="/images/blog/menopause-and-powerlifting.jpg" alt="Woman with grey hair squatting a heavy chalk-covered barbell in an industrial gym with concrete walls" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING SCIENCE</span>
+            <h3>Menopause and Powerlifting</h3>
+            <p>Menopause doesn't end strength training. What the research shows about strength, bone, muscle, and recovery through the transition — and how readiness-based programming keeps you on the platform.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/nutrition-for-female-powerlifters-over-40">
+          <div class="card-photo"><img src="/images/blog/nutrition-for-female-powerlifters-over-40.jpg" alt="Fit older woman holding a heavy barbell in a gym, with a meal prep container and gym bag on a bench nearby" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">NUTRITION</span>
+            <h3>Nutrition for Female Powerlifters Over 40</h3>
+            <p>The evidence-based nutrition picture for women 40+ who train powerlifting: protein targets, bone support, energy availability, and a food-first weekly template.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/nutrition-for-powerlifters-after-40">
+          <div class="card-photo"><img src="/images/blog/nutrition-for-powerlifters-after-40.jpg" alt="Barbell loaded with black plates resting beside a meal prep container with chicken, rice, and vegetables in a gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">NUTRITION</span>
+            <h3>Nutrition for Powerlifters After 40</h3>
+            <p>Evidence-based nutrition for lifters over 40: protein per day and per meal, creatine and vitamin D in perspective, carbs around training, and a food-first weekly template.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/low-bar-squat-with-stiff-shoulders">
+          <div class="card-photo"><img src="/images/blog/low-bar-squat-with-stiff-shoulders.jpg" alt="Muscular older man with graying hair performing a heavy barbell back squat inside a power rack" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TECHNIQUE</span>
+            <h3>Low Bar Squat with Stiff Shoulders</h3>
+            <p>Stiff shoulders don't have to end your low bar squat. The problem is usually the setup, not your age — wider grip, false grip, wrist wraps, and elbow position, in that order.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/powerlifting-form-for-older-lifters">
+          <div class="card-photo"><img src="/images/blog/powerlifting-form-for-older-lifters.jpg" alt="Muscular middle-aged man performing a heavy back squat while a camera on a tripod films the set" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TECHNIQUE</span>
+            <h3>Powerlifting Form for Older Lifters</h3>
+            <p>What actually changes for technique after 40: per-lift setup standards, bracing as the first skill, the honest sumo versus conventional call, and why form carries you to 60.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+        <a class="card photo-card" href="/blog/stop-lifting-at-first-sign-of-discomfort-after-40">
+          <div class="card-photo"><img src="/images/blog/stop-lifting-at-first-sign-of-discomfort-after-40.jpg" alt="Middle-aged lifter gripping a barbell with a gloved hand, standing focused in a dimly lit gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">INJURY PREVENTION</span>
+            <h3>Stop at the First Sign of Discomfort After 40</h3>
+            <p>Stop lifting when it hurts after 40? Only when the signal says so. Soreness is normal; sharp joint pain is data. The symptom-to-action rules that keep you training into your sixties.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
     <!-- GROUP: THE ADAPTIVE SYSTEM -->
     <section class="block blog-group">
@@ -118,9 +221,18 @@
     <section class="block blog-group">
       <div class="group-head">
         <span class="section-label">The Masters Track</span>
-        <span class="group-count">02 ARTICLES</span>
+        <span class="group-count">03 ARTICLES</span>
       </div>
       <div class="grid-2">
+        <a class="card photo-card" href="/blog/powerlifting-over-50-readiness">
+          <div class="card-photo"><img src="/images/blog/hero-masters.jpg" alt="Masters powerlifter chalked and set up over a barbell in a dark gym" loading="lazy"></div>
+          <div class="card-body">
+            <span class="tag">TRAINING AFTER 50</span>
+            <h3>Powerlifting Over 50</h3>
+            <p>Why readiness changes everything. The complete guide to programming around recovery after 50 — and the anchor of the masters track.</p>
+            <span class="card-link">Read Post &rarr;</span>
+          </div>
+        </a>
         <a class="card photo-card" href="/blog/heavy-lifting-after-50">
           <div class="card-photo"><img src="/images/blog/heavy-after-50.jpg" alt="Masters athlete mid-squat in a gritty garage gym" loading="lazy"></div>
           <div class="card-body">
@@ -231,7 +343,7 @@
         <li><a href="/privacy">Privacy</a></li>
         <li><a href="/terms">Terms</a></li>
       </ul></div>
-      <div><h4>Tools</h4><ul><li><a href="/tools/dot-score">DOT Score Calculator</a></li><li><a href="/tools/1rm-calculator">1RM Calculator</a></li></ul></div>
+      <div><h4>Tools</h4><ul><li><a href="/tools/dot-score">DOT Score Calculator</a></li><li><a href="/tools/1rm-calculator">1RM Calculator</a></li><li><a href="/tools/meet-day-checklist">Meet-Day Checklist</a></li><li><a href="/tools/total-calculator">Total Calculator</a></li><li><a href="/tools/readiness-scorecard">Readiness Scorecard</a></li></ul></div>
       <div><h4>Launch</h4><p>Ready to train smarter? Start your 14-day trial.</p><a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a></div>
     </div>
     <div class="shell footer-row">

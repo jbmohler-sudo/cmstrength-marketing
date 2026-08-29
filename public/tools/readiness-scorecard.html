@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Readiness Scorecard: Rate Today's Session | Center Mass Strength</title>
+  <meta name="description" content="Rate sleep, stress, fatigue, soreness, and drive on a 1-5 scale. Get today's readiness score and a training verdict: train as written, drop loads 5%, or rest.">
+  <link rel="canonical" href="https://www.cmstrength.fit/tools/readiness-scorecard" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Readiness Scorecard: Rate Today's Session" />
+  <meta property="og:description" content="Rate sleep, stress, fatigue, soreness, and drive on a 1-5 scale. Get today's readiness score and a training verdict: train as written, drop loads 5%, or rest." />
+  <meta property="og:url" content="https://www.cmstrength.fit/tools/readiness-scorecard" />
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Readiness Scorecard: Rate Today's Session" />
+  <meta name="twitter:description" content="Rate sleep, stress, fatigue, soreness, and drive on a 1-5 scale. Get today's readiness score and a training verdict." />
+  <meta name="twitter:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===================================================================
+       Center Mass Strength — shared design system (inlined for standalone draft)
+       Red/black, Saira + Space Mono. Source of truth: public/cms.css
+       =================================================================== */
+    :root {
+      --bg: #0A0A0C; --bg-elevated: #121216; --bg-card: rgba(18, 18, 22, 0.55);
+      --accent: #E2452A; --accent-bright: #F2502F; --bone: #ECE7DB;
+      --muted: #B6B1A6; --dim: #918C80; --faint: #7d7a72;
+      --border: rgba(236, 231, 219, 0.1); --border-strong: rgba(236, 231, 219, 0.22);
+      --text: #ECE7DB;
+      --font-display: 'Saira Condensed', system-ui, sans-serif;
+      --font-body: 'Saira', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --max: 1280px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { font-family: var(--font-body); color: var(--text); background-color: var(--bg); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
+
+    /* ===== KEYFRAMES ===== */
+    @keyframes cms-spin { to { transform: rotate(360deg); } }
+    @keyframes cms-spin-rev { to { transform: rotate(-360deg); } }
+    @keyframes cms-grain { 0% { transform: translate(0,0); } 20% { transform: translate(-3%,-2%); } 40% { transform: translate(2%,1%); } 60% { transform: translate(-1%,2%); } 80% { transform: translate(2%,-1%); } 100% { transform: translate(0,0); } }
+    @keyframes cms-pulse { 0%, 100% { opacity: .3; } 50% { opacity: .85; } }
+    @keyframes cms-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== AMBIENT LAYERS ===== */
+    #cms-dust { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    #cms-glow { position: fixed; top: 0; left: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; background: radial-gradient(closest-side, rgba(226,69,42,0.16), rgba(226,69,42,0.05) 45%, transparent 70%); z-index: 2; pointer-events: none; opacity: 0; transition: opacity .6s ease; will-change: transform; }
+    .cms-vignette { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(120% 90% at 50% 30%, transparent 35%, rgba(10,10,12,0.55) 78%, rgba(10,10,12,0.9) 100%); }
+    .cms-grain { position: fixed; inset: -12%; width: 124%; height: 124%; z-index: 40; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay; animation: cms-grain 7s steps(6) infinite; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* ===== SPROCKET LOGO ===== */
+    .sprocket { position: relative; flex: none; }
+    .sprocket .ring-out { position: absolute; inset: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, var(--bone) 0deg 1.4deg, transparent 1.4deg 9deg); -webkit-mask: radial-gradient(closest-side, transparent 68%, #000 71%); mask: radial-gradient(closest-side, transparent 68%, #000 71%); animation: cms-spin 16s linear infinite; opacity: .8; }
+    .sprocket .ring-in { position: absolute; inset: 13%; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(226,69,42,0.95) 0deg .9deg, transparent .9deg 7deg); -webkit-mask: radial-gradient(closest-side, transparent 74%, #000 77%); mask: radial-gradient(closest-side, transparent 74%, #000 77%); animation: cms-spin-rev 10s linear infinite; }
+    .sprocket .cross-v { position: absolute; left: 50%; top: 6%; bottom: 6%; width: 1.5px; background: rgba(236,231,219,0.45); transform: translateX(-50%); }
+    .sprocket .cross-h { position: absolute; top: 50%; left: 6%; right: 6%; height: 1.5px; background: rgba(236,231,219,0.45); transform: translateY(-50%); }
+    .sprocket .hub { position: absolute; inset: 32%; border-radius: 50%; border: 1.5px solid rgba(236,231,219,0.6); background: var(--bg); display: flex; align-items: center; justify-content: center; }
+    .sprocket .hub-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* ===== NAV ===== */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(10,10,12,0.82), rgba(10,10,12,0.0)); border-bottom: 1px solid rgba(236,231,219,0.06); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 4vw, 56px); }
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
+    .nav-brand .sprocket { width: 38px; height: 38px; }
+    .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+    .nav-wordmark .name { font-family: var(--font-display); font-weight: 900; font-size: 18px; letter-spacing: 0.14em; white-space: nowrap; }
+    .nav-wordmark .sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.34em; color: var(--dim); margin-top: 3px; white-space: nowrap; }
+    .nav-actions { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+    .nav-actions .nav-link { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--muted); transition: color .2s; background: none; border: none; cursor: pointer; padding: 0; }
+    .nav-actions .nav-link:hover { color: var(--bone); }
+
+    /* ===== BUTTONS ===== */
+    .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all .2s cubic-bezier(0.4,0,0.2,1); }
+    .btn-primary { background: var(--accent); color: var(--bg); padding: 16px 30px; font-size: 17px; clip-path: polygon(0 0, 100% 0, 100% 68%, calc(100% - 13px) 100%, 0 100%); border: none; }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
+    .btn-secondary { border: 1px solid var(--border-strong); color: var(--bone); padding: 16px 30px; font-size: 17px; background: transparent; }
+    .btn-secondary:hover { border-color: var(--bone); background: rgba(236,231,219,0.06); }
+    .btn-nav { background: var(--accent); color: var(--bg); padding: 11px 20px; font-size: 13px; letter-spacing: 0.14em; clip-path: polygon(0 0, 100% 0, 100% 70%, calc(100% - 10px) 100%, 0 100%); }
+    .btn-nav:hover { background: var(--accent-bright); }
+    .hero-actions { position: relative; z-index: 4; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+    /* ===== HERO ===== */
+    .page-hero { position: relative; z-index: 3; padding: clamp(130px, 18vw, 200px) clamp(20px, 5vw, 72px) clamp(40px, 6vw, 70px); max-width: 900px; margin: 0 auto; }
+    .page-hero .eyebrow, .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); text-transform: uppercase; }
+    .page-hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(40px, 8vw, 92px); line-height: 0.88; letter-spacing: -0.01em; margin: 18px 0 0; text-transform: uppercase; }
+    .page-hero h1 .accent { color: var(--accent); }
+    .page-hero .hero-sub { max-width: 640px; margin: 24px 0 0; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6; color: var(--muted); }
+    .back-link { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); transition: color .2s; }
+    .back-link:hover { color: var(--bone); }
+
+    /* ===== TOOL SECTION ===== */
+    .tool-section { position: relative; z-index: 3; max-width: var(--max); margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px); }
+    .tool-card { border: 1px solid var(--border); background: var(--bg-card); padding: clamp(28px, 4vw, 48px); }
+
+    /* ===== LONG-FORM COPY BLOCKS ===== */
+    .copy-block { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px) clamp(24px, 4vw, 40px); font-size: 1.05rem; line-height: 1.75; color: var(--muted); }
+    .copy-block > * + * { margin-top: 1.4em; }
+    .copy-block h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px, 4vw, 44px); line-height: 1.0; letter-spacing: -0.01em; text-transform: uppercase; color: var(--bone); margin-top: 2em; }
+    .copy-block h2 .accent { color: var(--accent); }
+    .copy-block p { color: var(--muted); }
+    .copy-block strong { color: var(--bone); font-weight: 600; }
+    .copy-block a { color: var(--accent); border-bottom: 1px solid rgba(226,69,42,0.4); transition: border-color .2s; }
+    .copy-block a:hover { border-bottom-color: var(--accent); }
+
+    /* ===== SCORECARD ===== */
+    .score-intro { text-align: center; max-width: 560px; margin: 0 auto 36px; color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+    .score-intro strong { color: var(--bone); }
+
+    .scale-hint { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; color: var(--dim); text-transform: uppercase; padding: 0 2px 14px; }
+    .scale-hint .lo { color: var(--accent); }
+    .scale-hint .hi { color: var(--bone); }
+
+    .factor-row { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; padding: 20px 0; border-top: 1px solid var(--border); }
+    .factor-row:last-of-type { border-bottom: 1px solid var(--border); }
+    .factor-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .factor-name { font-family: var(--font-display); font-weight: 900; font-size: clamp(18px, 2vw, 22px); letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone); }
+    .factor-name .fnum { color: var(--accent); margin-right: 4px; }
+    .factor-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; flex-basis: 100%; }
+
+    .factor-pills { display: flex; gap: 6px; }
+    .factor-pills .pill { position: relative; }
+    .factor-pills .pill input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .factor-pills .pill span {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border: 1px solid var(--border-strong);
+      font-family: var(--font-display); font-weight: 800; font-size: 18px;
+      color: var(--muted); cursor: pointer; transition: all .18s;
+      -webkit-user-select: none; user-select: none;
+    }
+    .factor-pills .pill input:checked + span { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .factor-pills .pill span:hover { border-color: var(--accent); color: var(--bone); }
+    .factor-pills .pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ===== RESULT ===== */
+    .score-wrap { text-align: center; padding: 44px 20px 12px; }
+    .score-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em; color: var(--accent); text-transform: uppercase; }
+    .score-value { font-family: var(--font-display); font-weight: 900; font-size: clamp(64px, 10vw, 96px); line-height: 1; color: var(--bone); margin-top: 4px; }
+    .score-value .of { font-size: 0.32em; color: var(--dim); font-family: var(--font-mono); font-weight: 400; letter-spacing: 0.14em; }
+    .score-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.28em; color: var(--dim); text-transform: uppercase; margin-top: 8px; }
+
+    /* Meter */
+    .band-meter { position: relative; max-width: 560px; margin: 28px auto 0; }
+    .band-meter .zones { display: flex; gap: 4px; height: 10px; }
+    .band-meter .zone { flex: 1; background: rgba(236,231,219,0.08); transition: background .3s; }
+    .band-meter .zone.active { background: var(--accent); }
+    .band-meter .marker { position: absolute; top: -6px; width: 3px; height: 22px; background: var(--bone); transform: translateX(-50%); transition: left .35s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 0 10px rgba(236,231,219,0.5); }
+    .band-meter .zone-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; color: var(--faint); text-transform: uppercase; margin-top: 8px; }
+
+    /* Band card */
+    .band-card { border: 1px solid var(--border); border-left: 3px solid var(--accent); background: rgba(18,18,22,0.5); padding: 26px 30px; margin: 28px auto 0; max-width: 560px; text-align: left; }
+    .band-card .band-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em; color: var(--dim); text-transform: uppercase; }
+    .band-card .band-name { font-family: var(--font-display); font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); margin-top: 6px; line-height: 1.05; }
+    .band-card .band-msg { color: var(--muted); margin-top: 10px; font-size: 15.5px; line-height: 1.65; }
+    .band-card .band-msg strong { color: var(--bone); }
+
+    /* ===== BAND LIST ===== */
+    .band-list { display: grid; gap: 10px; margin-top: 48px; }
+    .band-row { display: grid; grid-template-columns: 72px 1fr; gap: 18px; padding: 16px 20px; border: 1px solid var(--border); background: rgba(18,18,22,0.35); align-items: baseline; }
+    .band-row .band-range { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; color: var(--accent); }
+    .band-row .band-title { font-family: var(--font-display); font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--bone); }
+    .band-row .band-blurb { color: var(--muted); font-size: 14px; line-height: 1.55; grid-column: 2; margin-top: 2px; }
+
+    /* ===== CTA BOX ===== */
+    .cta-box { position: relative; text-align: center; margin-top: 72px; padding: clamp(50px, 8vw, 90px) 40px; overflow: hidden; border: 1px solid var(--border); }
+    .cta-box .glow { position: absolute; top: 50%; left: 50%; width: min(80vw, 760px); height: min(80vw, 760px); transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(226,69,42,0.14), transparent 70%); pointer-events: none; animation: cms-pulse 6s ease-in-out infinite; }
+    .cta-box h2 { position: relative; font-family: var(--font-display); font-weight: 900; font-size: clamp(30px, 5vw, 56px); line-height: 0.95; text-transform: uppercase; color: var(--bone); }
+    .cta-box h2 .accent { color: var(--accent); }
+    .cta-box p { position: relative; color: var(--muted); max-width: 600px; margin: 24px auto 32px; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; }
+
+    /* ===== CROSS-LINKS ===== */
+    .cross-links { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; text-align: center; }
+    .cross-links a { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .cross-links a:hover { color: var(--accent); }
+
+    /* ===== FOOTER ===== */
+    footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,0.08); padding: 80px 0 40px; }
+    .footer-vault { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(236,231,219,0.06); }
+    .footer-vault h4 { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem; }
+    .footer-vault ul { list-style: none; }
+    .footer-vault li { margin-bottom: 0.7rem; }
+    .footer-vault a { color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+    .footer-vault a:hover { color: var(--bone); }
+    .footer-vault a.active-link { color: var(--accent); }
+    .footer-vault p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem; }
+    .footer-vault .cta-link { color: var(--accent); font-weight: 600; display: inline-block; margin-top: 0.5rem; font-family: var(--font-display); letter-spacing: 0.05em; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1.5rem; }
+    .footer-row .brand-mini { display: flex; align-items: center; gap: 13px; }
+    .footer-row .brand-mini .sprocket { width: 30px; height: 30px; }
+    .footer-row .brand-mini .name { font-family: var(--font-display); font-weight: 900; font-size: 15px; letter-spacing: 0.12em; }
+    .footer-row .brand-mini .tagline { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
+    .footer-row .meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--faint); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .footer-vault { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .nav-actions .nav-link { display: none; }
+    }
+    @media (max-width: 760px) {
+      .factor-row { grid-template-columns: 1fr; gap: 14px; }
+      .factor-pills { justify-content: flex-start; }
+    }
+    @media (max-width: 720px) {
+      .footer-vault { grid-template-columns: 1fr; gap: 1.5rem; }
+      .nav { padding: 14px 20px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .footer-row { flex-direction: column; align-items: start; gap: 1.5rem; }
+      .cross-links { gap: 20px; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; }
+      #cms-dust, .cms-grain { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="btn btn-nav" href="https://app.cmstrength.fit/signup">START FREE TRIAL</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero" style="padding-top: 140px;">
+      <a class="back-link" href="/tools" style="margin-bottom:26px;">&larr; Back to tools</a>
+      <p class="kicker">READINESS TOOL</p>
+      <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        <span class="accent">READINESS</span> SCORECARD
+      </h1>
+      <p class="lede" style="max-width:600px;margin-top:20px;">Rate five factors, get one number, and a coaching call on what today's session should look like. The same math the Center Mass Adaptive System runs before every workout.</p>
+    </div>
+
+    <section class="copy-block" style="padding-top:0;">
+      <h2>The Bar Doesn't Care How You Slept</h2>
+      <p>You woke up at 3:17, stared at the ceiling, and now you're standing in front of the bar with a plan written for a different man. The bar doesn't care how you slept — but today's plan should.</p>
+      <p>The same 80% that moved like a warm-up on Tuesday can sit like a max on Thursday, and you won't know which until the bar is in your hands. This scorecard takes that guess off the table in under a minute.</p>
+
+      <h2>Why Readiness Is the Whole Game After 40</h2>
+      <p>At 25 you could ignore the signals and the work still got done. After 40, recovery stops being predictable. Sleep debt, work stress, a hard block, a nagging shoulder: the same program on two different days produces a PR or a setback.</p>
+      <p>Run the same plan with a 25-year-old and a 46-year-old. One recovers like it's a job. The other's recovery is a weather system, and the forecast changes daily. The young one can ignore all of it and still hit the numbers. You can't, and pretending otherwise is how promising blocks turn into physio appointments.</p>
+      <p>The cost of guessing wrong isn't one bad session. It's a deadlift you had no business taking, a week of grinding on a stale nervous system, a shoulder that quietly stops the block. Readiness is the <a href="https://www.cmstrength.fit/blog/powerlifting-over-50-readiness">readiness after 50</a> problem: the input that decides whether today's intensity builds you or buries you.</p>
+    </section>
+
+    <section class="tool-section" style="padding-top:0;">
+      <div class="tool-card">
+
+        <p class="score-intro">Rate how you feel <strong>right now</strong>, not last week, not after the first set. Honest answers only: this isn't a grade, it's input. Five factors, 1 to 5, under a minute.</p>
+
+        <div class="scale-hint"><span class="lo">1 &middot; TERRIBLE</span><span class="hi">5 &middot; GREAT</span></div>
+
+        <!-- SLEEP -->
+        <div class="factor-row">
+          <div class="factor-head">
+            <div class="factor-name"><span class="fnum">01</span>SLEEP</div>
+            <div class="factor-desc">Hours, and how deep they felt. Duration alone lies.</div>
+          </div>
+          <div class="factor-pills" role="radiogroup" aria-label="Sleep rating">
+            <label class="pill"><input type="radio" name="r-sleep" value="1"><span>1</span></label>
+            <label class="pill"><input type="radio" name="r-sleep" value="2"><span>2</span></label>
+            <label class="pill"><input type="radio" name="r-sleep" value="3" checked><span>3</span></label>
+            <label class="pill"><input type="radio" name="r-sleep" value="4"><span>4</span></label>
+            <label class="pill"><input type="radio" name="r-sleep" value="5"><span>5</span></label>
+          </div>
+        </div>
+
+        <!-- STRESS -->
+        <div class="factor-row">
+          <div class="factor-head">
+            <div class="factor-name"><span class="fnum">02</span>STRESS</div>
+            <div class="factor-desc">Work, family, the stuff outside the gym. It all counts.</div>
+          </div>
+          <div class="factor-pills" role="radiogroup" aria-label="Stress rating">
+            <label class="pill"><input type="radio" name="r-stress" value="1"><span>1</span></label>
+            <label class="pill"><input type="radio" name="r-stress" value="2"><span>2</span></label>
+            <label class="pill"><input type="radio" name="r-stress" value="3" checked><span>3</span></label>
+            <label class="pill"><input type="radio" name="r-stress" value="4"><span>4</span></label>
+            <label class="pill"><input type="radio" name="r-stress" value="5"><span>5</span></label>
+          </div>
+        </div>
+
+        <!-- FATIGUE -->
+        <div class="factor-row">
+          <div class="factor-head">
+            <div class="factor-name"><span class="fnum">03</span>FATIGUE</div>
+            <div class="factor-desc">Whole-body tiredness. How heavy the day feels before it starts.</div>
+          </div>
+          <div class="factor-pills" role="radiogroup" aria-label="Fatigue rating">
+            <label class="pill"><input type="radio" name="r-fatigue" value="1"><span>1</span></label>
+            <label class="pill"><input type="radio" name="r-fatigue" value="2"><span>2</span></label>
+            <label class="pill"><input type="radio" name="r-fatigue" value="3" checked><span>3</span></label>
+            <label class="pill"><input type="radio" name="r-fatigue" value="4"><span>4</span></label>
+            <label class="pill"><input type="radio" name="r-fatigue" value="5"><span>5</span></label>
+          </div>
+        </div>
+
+        <!-- SORENESS -->
+        <div class="factor-row">
+          <div class="factor-head">
+            <div class="factor-name"><span class="fnum">04</span>SORENESS</div>
+            <div class="factor-desc">Muscle and joint. Sharp pain and honest ache are not the same.</div>
+          </div>
+          <div class="factor-pills" role="radiogroup" aria-label="Soreness rating">
+            <label class="pill"><input type="radio" name="r-soreness" value="1"><span>1</span></label>
+            <label class="pill"><input type="radio" name="r-soreness" value="2"><span>2</span></label>
+            <label class="pill"><input type="radio" name="r-soreness" value="3" checked><span>3</span></label>
+            <label class="pill"><input type="radio" name="r-soreness" value="4"><span>4</span></label>
+            <label class="pill"><input type="radio" name="r-soreness" value="5"><span>5</span></label>
+          </div>
+        </div>
+
+        <!-- DRIVE -->
+        <div class="factor-row">
+          <div class="factor-head">
+            <div class="factor-name"><span class="fnum">05</span>DRIVE</div>
+            <div class="factor-desc">Want to train. Motivation is data, not weakness.</div>
+          </div>
+          <div class="factor-pills" role="radiogroup" aria-label="Drive rating">
+            <label class="pill"><input type="radio" name="r-drive" value="1"><span>1</span></label>
+            <label class="pill"><input type="radio" name="r-drive" value="2"><span>2</span></label>
+            <label class="pill"><input type="radio" name="r-drive" value="3" checked><span>3</span></label>
+            <label class="pill"><input type="radio" name="r-drive" value="4"><span>4</span></label>
+            <label class="pill"><input type="radio" name="r-drive" value="5"><span>5</span></label>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="score-wrap">
+          <div class="score-label">READINESS SCORE</div>
+          <div class="score-value"><span id="rs-score">15</span><span class="of"> / 25</span></div>
+          <div class="score-sub">COMPOSITE &middot; 5&ndash;25 SCALE</div>
+
+          <div class="band-meter" aria-hidden="true">
+            <div class="marker" id="rs-marker" style="left:50%;"></div>
+            <div class="zones">
+              <div class="zone" data-zone="rest"></div>
+              <div class="zone" data-zone="submax"></div>
+              <div class="zone" data-zone="keep"></div>
+              <div class="zone" data-zone="train"></div>
+            </div>
+            <div class="zone-labels"><span>5-11</span><span>12-16</span><span>17-20</span><span>21-25</span></div>
+          </div>
+        </div>
+
+        <div class="band-card" id="rs-band" aria-live="polite">
+          <div class="band-tag" id="rs-band-tag">SCORE 12&ndash;16</div>
+          <div class="band-name" id="rs-band-name">SUBMAXIMAL / TECHNIQUE DAY</div>
+          <p class="band-msg" id="rs-band-msg">Technique day. Keep the bar moving between 50 and 65 percent, crisp reps, zero grinders. You're recovering, not detraining. A light session done well keeps tomorrow honest.</p>
+        </div>
+
+      </div>
+
+      <!-- What the bands mean -->
+      <section class="copy-block" style="padding-top:56px;">
+        <h2>What the Number Means</h2>
+        <p>Five is a body that needs the day off. Twenty-five is a body ready to hunt. Everything between is a dial, not a verdict. Here's the coaching call for each range:</p>
+      </section>
+
+      <div class="band-list">
+        <div class="band-row">
+          <span class="band-range">21&ndash;25</span>
+          <span class="band-title">TRAIN AS PRESCRIBED</span>
+          <span class="band-blurb">Run the top sets. The plan was written for today's you.</span>
+        </div>
+        <div class="band-row">
+          <span class="band-range">17&ndash;20</span>
+          <span class="band-title">KEEP THE SESSION, DROP LOADS ~5%</span>
+          <span class="band-blurb">Same work, slightly less steel. The stimulus still lands.</span>
+        </div>
+        <div class="band-row">
+          <span class="band-range">12&ndash;16</span>
+          <span class="band-title">SUBMAXIMAL / TECHNIQUE DAY</span>
+          <span class="band-blurb">50&ndash;65%, crisp reps, zero grinders. Recover without detraining.</span>
+        </div>
+        <div class="band-row">
+          <span class="band-range">5&ndash;11</span>
+          <span class="band-title">REST OR MOBILITY</span>
+          <span class="band-blurb">Walk, mobilize, eat, sleep. Tomorrow is a training day.</span>
+        </div>
+      </div>
+
+      <section class="copy-block" style="padding-top:56px;">
+        <h2>What the Number Is <span class="accent">Not</span></h2>
+        <p>It's not a personality test, it's not permission to skip the gym, and it's not a substitute for a warm-up. It's a load adjustment. A low score doesn't mean you're weak. It means the tissue isn't recovered enough to make today's prescribed weight productive, and forcing it buys a setback at full price.</p>
+
+        <h2>This Is the Manual Version</h2>
+        <p>One honest note: this scorecard is the manual version of the morning check-in inside Center Mass Strength. Same five factors, same scale, same verdicts. In the app it takes twenty seconds, and the <a href="https://www.cmstrength.fit/blog/what-is-adaptive-powerlifting-programming">Adaptive System</a> takes it from there: working loads adjust &plusmn;5% on the days your body isn't where the calendar thought it would be, and deloads get scheduled before your body demands them.</p>
+        <p>Your call today, automated tomorrow. Outlast, out-program, out-recover: that's the whole system.</p>
+      </section>
+
+      <div class="cta-box">
+        <div class="glow" aria-hidden="true"></div>
+        <h2>Stop Guessing <span class="accent">Your Intensity.</span></h2>
+        <p>Start your 14-day free trial. The readiness engine, autoregulated training days, and scheduled deloads go to work on your next block. No magic. Just a program that reads the room.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">START FREE TRIAL</a>
+          <a class="btn btn-secondary" href="https://www.cmstrength.fit/blog/what-is-adaptive-powerlifting-programming">HOW THE ADAPTIVE SYSTEM WORKS</a>
+        </div>
+      </div>
+
+      <div class="cross-links">
+        <a href="https://www.cmstrength.fit/tools/1rm-calculator">Also check out our 1RM Calculator &rarr;</a>
+        <a href="https://www.cmstrength.fit/tools/wilks-calculator">And the Wilks Calculator &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/index#programs">Bench Specialist</a></li>
+          <li><a href="/index#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/index#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/tools/readiness-scorecard" class="active-link">Readiness Scorecard</a></li>
+          <li><a href="/tools/dot-score">DOT Score Calculator</a></li>
+          <li><a href="/tools/wilks-calculator">Wilks Calculator</a></li>
+          <li><a href="/tools/1rm-calculator">1RM Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Start your 14-day trial.</p>
+        <a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a>
+      </div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Ambient motion (dust + cursor glow) ===== */
+    (function () {
+      if (window.__cmsMotion) return;
+      window.__cmsMotion = true;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var dust = { ok: false, parts: [], w: 0, h: 0, dpr: 1, ctx: null, c: null };
+      function resizeDust() {
+        var c = dust.c; if (!c) return;
+        dust.dpr = Math.min(2, window.devicePixelRatio || 1);
+        dust.w = c.width = window.innerWidth * dust.dpr;
+        dust.h = c.height = window.innerHeight * dust.dpr;
+        var n = Math.round((window.innerWidth * window.innerHeight) / 13000);
+        var P = [];
+        for (var i = 0; i < n; i++) {
+          P.push({
+            x: Math.random() * dust.w, y: Math.random() * dust.h,
+            r: (Math.random() * 1.7 + 0.3) * dust.dpr,
+            vy: -(Math.random() * 0.28 + 0.05) * dust.dpr,
+            vx: (Math.random() - 0.5) * 0.12 * dust.dpr,
+            a: Math.random() * 0.38 + 0.05,
+            ph: Math.random() * Math.PI * 2,
+            sp: Math.random() * 0.018 + 0.004,
+            em: Math.random() < 0.08
+          });
+        }
+        dust.parts = P;
+      }
+      function initDust() {
+        var c = document.getElementById('cms-dust'); if (!c) return false;
+        dust.c = c; dust.ctx = c.getContext('2d'); resizeDust();
+        window.addEventListener('resize', resizeDust, { passive: true });
+        dust.ok = true; return true;
+      }
+      function drawDust() {
+        if (!dust.ok) return;
+        var ctx = dust.ctx, w = dust.w, h = dust.h, dpr = dust.dpr, P = dust.parts;
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < P.length; i++) {
+          var p = P[i];
+          p.ph += p.sp;
+          p.x += p.vx + Math.sin(p.ph) * 0.18 * dpr;
+          p.y += p.vy;
+          if (p.y < -12) { p.y = h + 12; p.x = Math.random() * w; }
+          if (p.x < -12) p.x = w + 12; else if (p.x > w + 12) p.x = -12;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+          ctx.fillStyle = p.em ? 'rgba(226,69,42,' + p.a + ')' : 'rgba(236,231,219,' + p.a + ')';
+          ctx.fill();
+        }
+      }
+      window.addEventListener('mousemove', function (e) {
+        var g = document.getElementById('cms-glow'); if (!g) return;
+        g.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+        if (g.style.opacity !== '1') g.style.opacity = '1';
+      }, { passive: true });
+      if (!reduce) {
+        setInterval(function () {
+          try {
+            if (!dust.ok) initDust();
+            drawDust();
+          } catch (e) {}
+        }, 33);
+      }
+    })();
+
+    /* ===== Readiness Scorecard ===== */
+    (function () {
+      var FACTORS = ['sleep', 'stress', 'fatigue', 'soreness', 'drive'];
+
+      var BANDS = [
+        { min: 21, zone: 'train', range: '21\u201325', name: 'TRAIN AS PRESCRIBED',
+          msg: "You're a loaded spring. Run today exactly as written: top sets, working loads, no charity reps. Don't add weight. The program already priced in who you are this morning." },
+        { min: 17, zone: 'keep', range: '17\u201320', name: 'KEEP THE SESSION, DROP LOADS ~5%',
+          msg: "Keep the session, drop working loads about 5%. Same sets, same reps, a little less steel. You're good enough to train hard today, just not good enough to be careless. The stimulus still lands." },
+        { min: 12, zone: 'submax', range: '12\u201316', name: 'SUBMAXIMAL / TECHNIQUE DAY',
+          msg: "Technique day. Keep the bar moving between 50 and 65 percent, crisp reps, zero grinders. You're recovering, not detraining. A light session done well keeps tomorrow honest." },
+        { min: 5, zone: 'rest', range: '5\u201311', name: 'REST OR MOBILITY',
+          msg: "The scoreboard says rest. That's not weakness, it's data. Walk, mobilize, eat, sleep. Training from a hole is how working weight turns into an injury. The program survives one day off. It won't survive the one you train anyway." }
+      ];
+
+      var scoreEl = document.getElementById('rs-score');
+      var bandTag = document.getElementById('rs-band-tag');
+      var bandName = document.getElementById('rs-band-name');
+      var bandMsg = document.getElementById('rs-band-msg');
+      var marker = document.getElementById('rs-marker');
+
+      function readValues() {
+        return FACTORS.map(function (f) {
+          var checked = document.querySelector('input[name="r-' + f + '"]:checked');
+          return checked ? parseInt(checked.value, 10) : 0;
+        });
+      }
+
+      function animateValue(el, end) {
+        var start = parseInt(el.textContent, 10) || 0;
+        if (start === end) return;
+        var startTime = null, dur = 500;
+        function setFinal() { el.textContent = end; }
+        setTimeout(setFinal, dur + 50);
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / dur, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(start + (end - start) * eased);
+          if (progress < 1) requestAnimationFrame(step); else setFinal();
+        }
+        requestAnimationFrame(step);
+      }
+
+      function update() {
+        var vals = readValues();
+        var total = vals.reduce(function (a, b) { return a + b; }, 0);
+        var band = BANDS[BANDS.length - 1];
+        for (var i = 0; i < BANDS.length; i++) {
+          if (total >= BANDS[i].min) { band = BANDS[i]; break; }
+        }
+        animateValue(scoreEl, total);
+        bandTag.textContent = 'SCORE ' + band.range;
+        bandName.textContent = band.name;
+        bandMsg.textContent = band.msg;
+
+        marker.style.left = (((total - 5) / 20) * 100) + '%';
+        var zones = document.querySelectorAll('.band-meter .zone');
+        for (var z = 0; z < zones.length; z++) {
+          zones[z].classList.toggle('active', zones[z].dataset.zone === band.zone);
+        }
+      }
+
+      var inputs = document.querySelectorAll('.factor-pills input');
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('change', update);
+      }
+      update();
+    })();
+  </script>
+</body>
+</html>
