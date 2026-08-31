@@ -6,3 +6,5 @@
 
 _(No project-specific rules yet — add them below as the project develops. The ironatforty
 JOURNEY.md was the original source of the truncation/git findings if you want history.)_
+
+Blog drafting voice lives in [`voice.md`](voice.md).
