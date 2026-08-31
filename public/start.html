@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Training — Center Mass Strength</title>
+  <meta name="description" content="14-day free trial. Adaptive powerlifting programming: Bench Specialization, Jacked &amp; Strong, and SBD. Real programming engines, not recycled templates.">
+  <link rel="canonical" href="https://www.cmstrength.fit/start">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Center Mass Strength">
+  <meta property="og:title" content="Stop Running Recycled Templates">
+  <meta property="og:description" content="CMS adapts your program every week — real powerlifting programming engines. 14-day free trial.">
+  <meta property="og:url" content="https://www.cmstrength.fit/start">
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+
+  <!-- Meta Pixel (CMS ad account) — base code + PageView + ViewContent.
+       PIXEL_ID placeholder: fill with the CMS Events Manager pixel id before deploy. -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.load=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+  </script>
+
+  <style>
+    /* ===== START LANDING (single message, single CTA) ===== */
+    .start-wrap { position: relative; z-index: 3; min-height: 100vh; display: flex; flex-direction: column; }
+    .start-hero {
+      flex: 1; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 4vw, 64px);
+      align-items: center; max-width: var(--max); margin: 0 auto; width: 100%;
+      padding: clamp(90px, 10vh, 140px) clamp(20px, 5vw, 72px) 60px;
+    }
+    .start-kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; }
+    .start-h1 {
+      font-family: var(--font-display); font-weight: 900; font-size: clamp(44px, 6.5vw, 92px);
+      line-height: 0.88; letter-spacing: -0.01em; text-transform: uppercase; margin: 20px 0 0;
+    }
+    .start-h1 .accent { color: var(--accent); }
+    .start-lede { max-width: 470px; margin: 24px 0 0; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.6; color: var(--muted); }
+    .start-benefits { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; }
+    .start-benefits li { display: flex; gap: 12px; font-size: 15px; line-height: 1.5; color: var(--bone); }
+    .start-benefits .tick { color: var(--accent); font-family: var(--font-mono); font-weight: 700; }
+    .start-cta-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 34px; }
+    .start-trust { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-top: 16px; }
+    .start-visual { position: relative; }
+    .start-visual img { width: 100%; border: 1px solid rgba(236,231,219,0.12); box-shadow: 0 40px 90px rgba(0,0,0,0.5); display: block; }
+    .start-foot {
+      border-top: 1px solid rgba(236,231,219,0.08); padding: 22px clamp(20px, 5vw, 72px);
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim);
+    }
+    .start-foot a { color: var(--dim); text-decoration: none; border-bottom: 1px solid transparent; }
+    .start-foot a:hover { color: var(--bone); border-bottom-color: var(--accent); }
+    @media (max-width: 860px) {
+      .start-hero { grid-template-columns: 1fr; padding-top: 70px; }
+      .start-visual { order: -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <canvas id="cms-dust"></canvas>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <div class="start-wrap">
+    <section class="start-hero">
+      <div>
+        <span class="start-kicker">14-Day Free Trial · No Card Required</span>
+        <h1 class="start-h1">Stop Running<br>Recycled<br><span class="accent">Templates.</span></h1>
+        <p class="start-lede">
+          CMS adapts your program every single week — real powerlifting programming
+          engines (Bench Specialization, Jacked &amp; Strong, SBD), not a spreadsheet
+          you bought in 2019. Your training maxes, volume, and intensity respond to
+          how you actually feel.
+        </p>
+        <ul class="start-benefits">
+          <li><span class="tick">/</span> Program adapts weekly — no more forcing a cookie-cutter plan</li>
+          <li><span class="tick">/</span> Percentage-based, RPE-aware sets built by lifters, for lifters</li>
+          <li><span class="tick">/</span> Film room — check your form against your own history</li>
+        </ul>
+        <div class="start-cta-row">
+          <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Your Free Trial &rarr;</a>
+        </div>
+        <p class="start-trust">14 days free · Keep your program forever</p>
+      </div>
+      <div class="start-visual">
+        <img src="/ig/20260820-002644-hero-deadlift.webp" alt="Deadlift at Center Mass Strength" width="1024" height="1024">
+      </div>
+    </section>
+
+    <footer class="start-foot">
+      <span>Center Mass Strength</span>
+      <span><a href="/">Home</a> · <a href="/blog.html">Blog</a> · <a href="/tools.html">Tools</a></span>
+    </footer>
+  </div>
+
+  <script src="./cms-motion.js"></script>
+</body>
+</html>
