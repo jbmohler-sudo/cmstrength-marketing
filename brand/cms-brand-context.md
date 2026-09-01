@@ -42,7 +42,8 @@
 - **Avoid macho-grit spectacle:** big dudes, dust and smoke, dramatic grinds, raging faces, rah-rah energy. Jeff's words: *"we have a lot of sensational ra ra ra big old dudes with dust n smoke... here i'd like a human connection."*
 - Dark industrial gym backdrop stays — it's the backdrop, not the subject.
 - Everyday lifter realism: plain singlet, fitted tee, worn-in gear. Not airbrushed fitness-model lighting.
-- **NEVER use fabricated people in photos.** Reuse REAL assets only:
+- **People policy (Jeff, 2026-09-01):** marketing may use AI/fabricated people for DEMONSTRATIVE scenes — an actor logging a session, checking readiness, setting up a lift; anything the app really does. NEVER have a fabricated person make claims: no testimonials, no results ("this app fixed my X"), no "I love it" statements. Real assets stay preferred when they fit the scene.
+- Real asset library (prefer when fitting):
   - Carousel: `C:/Umbrella/cmstrength-marketing/public/images/carousel/` (dashboard.webp, film-detail.webp, film-room.webp, joint-load.webp, joint-status.webp, readiness-volume.webp)
   - Other: `public/images/` (filmroom1.png, hero-deadlift.webp, bigweight.png, logo.png), `public/instagram.png`
   - Vary across posts; avoid repeating an image from the prior week's posts.
