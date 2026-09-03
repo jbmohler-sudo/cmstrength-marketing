@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1280px; height:720px; overflow:hidden; }
+  body { display:flex; background:#0b0a0c; font-family:'Saira', sans-serif; }
+
+  /* LEFT 40% PANEL */
+  .left {
+    width:512px; height:720px; flex:0 0 512px;
+    background:
+      radial-gradient(ellipse at 18% -5%, #171217 0%, rgba(23,18,23,0) 55%),
+      radial-gradient(ellipse at 90% 110%, #14101a 0%, rgba(20,16,26,0) 45%),
+      #0b0a0c;
+    padding:42px 38px 26px 38px;
+    display:flex; flex-direction:column; position:relative;
+  }
+  .left::after {
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  /* HEADLINE */
+  .head-1 {
+    font-family:'Saira Condensed', sans-serif; font-weight:800;
+    font-size:38px; line-height:1; letter-spacing:0.01em;
+    color:#EDE9E0; text-transform:uppercase;
+  }
+  .head-2 {
+    font-family:'Saira Condensed', sans-serif; font-weight:900;
+    font-size:74px; line-height:1; letter-spacing:0.01em;
+    color:#E2452A; text-transform:uppercase; margin-top:2px;
+  }
+
+  /* DIVIDER WITH NOTCH */
+  .divider { position:relative; height:14px; margin:14px 0 18px 0; }
+  .divider::before { content:''; position:absolute; top:6px; left:0; right:0; height:2px; background:#E2452A; }
+  .divider::after {
+    content:''; position:absolute; top:8px; left:50%; transform:translateX(-50%);
+    border:5px solid transparent; border-top:7px solid #E2452A; border-bottom:0;
+  }
+
+  /* COPY */
+  .copy { font-size:13.5px; font-weight:500; color:#EDE9E0; line-height:1.5; max-width:350px; }
+  .copy .red { color:#E2452A; font-weight:600; }
+
+  /* CHECKLIST */
+  .checklist { margin-top:26px; display:flex; flex-direction:column; gap:20px; }
+  .check-row { display:flex; }
+  .check-cell { flex:1; text-align:center; position:relative; padding:0 2px; }
+  .check-cell + .check-cell::before {
+    content:''; position:absolute; left:0; top:2px; bottom:2px; width:1px; background:rgba(226,69,42,0.65);
+  }
+  .check-cell svg { display:block; margin:0 auto 7px auto; }
+  .check-label {
+    font-family:'Saira Condensed', sans-serif; font-weight:700;
+    font-size:10.5px; letter-spacing:0.06em; color:#EDE9E0; text-transform:uppercase;
+  }
+
+  /* CTA STRIP */
+  .cta-strip {
+    margin-top:auto; border-top:2px solid #E2452A; border-bottom:2px solid #E2452A;
+    padding:13px 0 12px 0; display:flex; align-items:center; gap:14px;
+  }
+  .cta-text { line-height:1.15; }
+  .cta-1 {
+    font-family:'Saira Condensed', sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:0.18em; color:#EDE9E0; text-transform:uppercase;
+  }
+  .cta-2 {
+    font-family:'Saira Condensed', sans-serif; font-weight:900; font-size:20px;
+    letter-spacing:0.01em; color:#E2452A; text-transform:uppercase;
+  }
+
+  /* RIGHT 60% PHOTO */
+  .right { width:768px; height:720px; position:relative; overflow:hidden; }
+  .right img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:right center; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="head-1">Forgot Your</div>
+    <div class="head-2">Singlet?</div>
+
+    <div class="divider"></div>
+
+    <p class="copy">Here is what to pack for your first powerlifting meet, from <span class="red">gear to snacks</span>, so you step on the platform ready.</p>
+
+    <div class="checklist">
+      <div class="check-row">
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 8 L3 4.5 L8.5 2.8 L12 5 L15.5 2.8 L21 4.5 L19 8 L17.2 7.4 L17.2 21 L6.8 21 L6.8 7.4 Z"/>
+          </svg>
+          <div class="check-label">Singlet</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round">
+            <rect x="2.5" y="6.5" width="19" height="11" rx="2.5"/>
+            <path d="M9 10.5 L9 13.5"/>
+          </svg>
+          <div class="check-label">Lifting Belt</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round">
+            <rect x="5" y="3" width="5" height="18" rx="2"/>
+            <rect x="14" y="3" width="5" height="18" rx="2"/>
+          </svg>
+          <div class="check-label">Wrist Wraps</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round">
+            <path d="M8 3 C8 8 5 10 5 14 C5 18 7 21 12 21 C17 21 19 18 19 14 C19 10 16 8 16 3"/>
+          </svg>
+          <div class="check-label">Knee Sleeves</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3 L15 3 L15 12 L18 16 L18 21 L6 21 L6 16 L9 12 Z"/>
+            <path d="M9 15 L15 15"/>
+          </svg>
+          <div class="check-label">Long Socks</div>
+        </div>
+      </div>
+      <div class="check-row">
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 9 C7 6 9 3.5 12 3.5 C15 3.5 17 6 17 9 C17 12 15 13 15 15 L15 21 L9 21 L9 15 C9 13 7 12 7 9 Z"/>
+          </svg>
+          <div class="check-label">Lifting Shoes</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="10" width="14" height="9" rx="2"/>
+            <path d="M8 10 L8 8 C8 5.8 9.8 4 12 4 C14.2 4 16 5.8 16 8 L16 10"/>
+            <path d="M12 13.5 L12 16.5"/>
+          </svg>
+          <div class="check-label">Snacks</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 3 L14 3 L15.5 8 L16 8 L16 21 L8 21 L8 8 L8.5 8 Z"/>
+            <path d="M10 3 C10 5 8.5 6.5 8.5 8"/>
+            <path d="M14 3 C14 5 15.5 6.5 15.5 8"/>
+          </svg>
+          <div class="check-label">Water Bottle</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="8" width="8" height="10" rx="1.5"/>
+            <path d="M10 8 L10 5 L14 5 L14 8"/>
+            <path d="M9 13 L15 13"/>
+          </svg>
+          <div class="check-label">Chalk</div>
+        </div>
+        <div class="check-cell">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDE9E0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="3" width="16" height="18" rx="2"/>
+            <path d="M8.5 7.5 L15.5 7.5"/>
+            <path d="M8.5 11.5 L15.5 11.5"/>
+            <path d="M8.5 15.5 L12.5 15.5"/>
+          </svg>
+          <div class="check-label">ID &amp; Docs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-strip">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" stroke="#EDE9E0" stroke-width="2.2"/>
+        <circle cx="24" cy="24" r="15" stroke="#E2452A" stroke-width="2.2"/>
+        <circle cx="24" cy="24" r="5" fill="#EDE9E0"/>
+      </svg>
+      <div class="cta-text">
+        <div class="cta-1">Train With</div>
+        <div class="cta-2">Center Mass Strength.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="meet-day-checklist.jpg" alt="Lifter packing meet-day gear">
+  </div>
+</body>
+</html>
