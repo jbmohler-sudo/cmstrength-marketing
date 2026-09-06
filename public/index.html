@@ -220,36 +220,6 @@
     .pricing-features li::before { content: "\2713"; color: var(--accent); margin-right: 10px; font-family: var(--font-mono); }
     .pricing-trial { margin-top: 26px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
 
-/* ===== MOBILE NAV OVERLAY ===== */
-    .nav-hamburger { display: none; background: none; border: 1px solid var(--border-strong); color: var(--bone); width: 44px; height: 44px; font-size: 18px; cursor: pointer; align-items: center; justify-content: center; }
-    .nav-overlay {
-      position: fixed; inset: 0; z-index: 200; background: #000;
-      display: none; flex-direction: column; padding: 24px clamp(20px, 6vw, 40px);
-      opacity: 0; transition: opacity .25s ease;
-    }
-    .nav-overlay.open { display: flex; opacity: 1; }
-    .nav-overlay-close {
-      position: absolute; top: 22px; right: clamp(20px, 6vw, 40px);
-      width: 44px; height: 44px; border: 1px solid var(--border-strong); background: rgba(18,18,22,0.7);
-      color: var(--bone); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
-    .nav-overlay-links { display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 8px; }
-    .nav-overlay-links a, .nav-overlay-links button {
-      font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 9vw, 56px);
-      text-transform: uppercase; color: var(--bone); text-decoration: none; padding: 10px 0;
-      background: none; border: none; text-align: left; cursor: pointer;
-    }
-    .nav-overlay-links a:hover, .nav-overlay-links a.active, .nav-overlay-links button:hover { color: var(--accent); }
-    .nav-overlay-links a.active::after, .nav-overlay-links button.active::after {
-      content: ""; display: block; width: 44px; height: 3px; background: var(--accent); margin-top: 6px;
-    }
-    .nav-overlay-actions { display: flex; gap: 12px; padding-bottom: 28px; }
-    .nav-overlay-actions .btn { flex: 1; justify-content: center; }
-    @media (max-width: 1024px) {
-      .nav-actions .nav-link, .nav-actions .btn-nav { display: none; }
-      .nav-hamburger { display: flex; }
-    }
-
 /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; }
@@ -362,24 +332,24 @@
         <button class="nav-hamburger" type="button" id="nav-hamburger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">&#9776;</button>
       </div>
     </nav>
-
-    <!-- Mobile nav overlay -->
-    <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
-      <button class="nav-overlay-close" type="button" id="nav-overlay-close" aria-label="Close menu">&times;</button>
-      <div class="nav-overlay-links">
-        <a href="#top">Home</a>
-        <a href="#system">The System</a>
-        <a href="#programs">Tracks</a>
-        <a href="#pricing">Pricing</a>
-        <button type="button" data-inside-open>Inside</button>
-        <a href="/blog">Blog</a>
-      </div>
-      <div class="nav-overlay-actions">
-        <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
-        <a class="btn btn-secondary" href="https://app.cmstrength.fit/login">Log In</a>
-      </div>
-    </div>
   </header>
+
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
+    <button class="nav-overlay-close" type="button" id="nav-overlay-close" aria-label="Close menu">&times;</button>
+    <div class="nav-overlay-links">
+      <a href="#top">Home</a>
+      <a href="#system">The System</a>
+      <a href="#programs">Tracks</a>
+      <a href="#pricing">Pricing</a>
+      <button type="button" data-inside-open>Inside</button>
+      <a href="#proof">Proof</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div class="nav-overlay-actions">
+      <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start Free Trial</a>
+      <a class="btn btn-secondary" href="https://app.cmstrength.fit/login">Log In</a>
+    </div>
+  </div>
 
   <main id="top">
 
@@ -835,48 +805,15 @@
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && overlay.classList.contains('open')) close();
       });
+      function maybeOpenFromHash() {
+        if (location.hash === '#inside') open();
+      }
+      maybeOpenFromHash();
+      window.addEventListener('hashchange', maybeOpenFromHash);
     })();
   </script>
 
-  <!-- MOBILE NAV OVERLAY -->
-  <script>
-    (function () {
-      var overlay = document.getElementById('nav-overlay');
-      var hamburger = document.getElementById('nav-hamburger');
-      var closeBtn = document.getElementById('nav-overlay-close');
-      if (!overlay || !hamburger) return;
-
-      function open() {
-        overlay.classList.add('open');
-        overlay.setAttribute('aria-hidden', 'false');
-        hamburger.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-        if (closeBtn) closeBtn.focus();
-      }
-      function close() {
-        overlay.classList.remove('open');
-        overlay.setAttribute('aria-hidden', 'true');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-        hamburger.focus();
-      }
-
-      hamburger.addEventListener('click', open);
-      if (closeBtn) closeBtn.addEventListener('click', close);
-
-      // Link clicks close the overlay (anchor links + inside modal)
-      overlay.querySelectorAll('a[href], button[data-inside-open]').forEach(function (el) {
-        el.addEventListener('click', function () {
-          close();
-          // let the anchor/inside-open handler run after the overlay hides
-        });
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
-      });
-    })();
-  </script>
+  <script src="/cms-nav.js"></script>
 
   <!-- BETA SIGNUP (removed — funnel moved to app signup + Stripe checkout) -->
 </body>

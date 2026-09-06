@@ -55,6 +55,8 @@ a { color: inherit; text-decoration: none; }
 .sprocket .hub-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
 /* ===== NAV ===== */
+/* backdrop-filter makes <header> a containing block for position:fixed children.
+   The mobile menu overlay MUST live outside <header> (see cms-nav.js). */
 header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(10,10,12,0.82), rgba(10,10,12,0.0)); border-bottom: 1px solid rgba(236,231,219,0.06); }
 .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px clamp(20px, 4vw, 56px); }
 .nav-brand { display: flex; align-items: center; gap: 14px; }
@@ -65,6 +67,43 @@ header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; backdrop-filte
 .nav-actions { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
 .nav-actions .nav-link { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.2em; color: var(--muted); transition: color .2s; background: none; border: none; cursor: pointer; padding: 0; }
 .nav-actions .nav-link:hover { color: var(--bone); }
+.nav-inside { background: none; border: none; cursor: pointer; font: inherit; padding: 0; }
+
+/* ===== MOBILE NAV OVERLAY ===== */
+.nav-hamburger {
+  display: none; background: none; border: 1px solid var(--border-strong); color: var(--bone);
+  width: 44px; height: 44px; font-size: 18px; cursor: pointer; align-items: center; justify-content: center;
+}
+.nav-overlay {
+  position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+  width: 100%; height: 100%; min-height: 100vh; min-height: 100dvh;
+  z-index: 200; isolation: isolate;
+  background: #0A0A0C;
+  display: flex; flex-direction: column;
+  padding: 24px clamp(20px, 6vw, 40px);
+  overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  visibility: hidden; opacity: 0; pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.nav-overlay.open { visibility: visible; opacity: 1; pointer-events: auto; }
+.nav-overlay-close {
+  position: sticky; top: 0; align-self: flex-end; margin-left: auto;
+  width: 44px; height: 44px; border: 1px solid var(--border-strong); background: rgba(18,18,22,0.95);
+  color: var(--bone); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.nav-overlay-links { display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 4px; min-height: min-content; }
+.nav-overlay-links a, .nav-overlay-links button {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 7vw, 48px);
+  text-transform: uppercase; color: var(--bone); text-decoration: none; padding: 8px 0;
+  background: none; border: none; text-align: left; cursor: pointer;
+}
+.nav-overlay-links a:hover, .nav-overlay-links a.active, .nav-overlay-links button:hover { color: var(--accent); }
+.nav-overlay-links a.active::after, .nav-overlay-links button.active::after {
+  content: ""; display: block; width: 44px; height: 3px; background: var(--accent); margin-top: 6px;
+}
+.nav-overlay-actions { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 12px; flex: none; }
+.nav-overlay-actions .btn { width: 100%; justify-content: center; white-space: nowrap; }
 
 /* ===== BUTTONS ===== */
 .btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: all .2s cubic-bezier(0.4,0,0.2,1); }
@@ -232,7 +271,9 @@ footer { position: relative; z-index: 3; border-top: 1px solid rgba(236,231,219,
 @media (max-width: 1024px) {
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .footer-vault { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  .nav-actions .nav-link { display: none; }
+  .nav-actions .nav-link,
+  .nav-actions .btn-nav { display: none; }
+  .nav-hamburger { display: flex; }
 }
 @media (max-width: 760px) {
   .cap-row { grid-template-columns: 1fr; gap: 8px; }
