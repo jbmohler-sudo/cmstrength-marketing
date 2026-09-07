@@ -7,7 +7,7 @@
 
 ## Carousel topics (bread-and-butter)
 1. **What your Readiness Score actually means** — DONE (published 2026-09-01, permalink https://www.instagram.com/p/DcwbP7Gj1I4/). Reference deck in `cms-carousel-v2` temp; reuse template structure.
-2. **The Film Room, explained** — joint load block-vs-ceiling analysis: what the coach read shows, why it matters for the next block. Slides: hook → what it measures → how to read the chart → what changes in your plan → payoff → CTA.
+2. **The Film Room, explained** — DONE (scheduled 2026-09-20 carousel; deck source in `carousel-templates/film-room-deck/`, slides hosted as cms-carousel-20260920-01..06. Permalink reported by the cms-ig-publish-2026-09-20 fire report).
 3. **Foundation → Strength → Peak** — what each block does, why the order, what a week looks like (real sessions from the app).
 4. **The Readiness + Target Focus pairing** — how the daily score sets your target (strength/mid-range/peak), real dashboard visuals.
 5. **Meet day week** — how the app walks you into a meet: taper/peak block, session-by-session, film room review after.
@@ -16,7 +16,7 @@
 
 ## Reel topics (AI-actor demo scenes — 1/week)
 1. **Logging a session** — DONE (published 2026-09-01, https://www.instagram.com/reel/DcwWNN2DVJ2/). Reference pipeline in cms-instagram-auto skill.
-2. **Checking readiness before training** — actor opens the app, sees the score + target, sets up for the session.
+2. **Checking readiness before training** — DONE (scheduled 2026-09-17 reel; hosted as cms-reel-20260917.mp4. Permalink reported by the cms-ig-publish-2026-09-17 fire report).
 3. **Film room review after a set** — actor reviews the coach read, nods, adjusts the next set.
 4. **Packing the meet bag** — relatable pre-meet moment (human connection register), app in hand.
 5. **First session of a new block** — actor starts Foundation/Strength/Peak, app prescribes the work.
