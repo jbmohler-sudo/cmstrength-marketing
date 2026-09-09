@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DOT Score Calculator — Center Mass Strength</title>
+  <title>Free DOT Score Calculator | Center Mass Strength</title>
   <meta name="description" content="Free DOT score calculator for powerlifters. Enter your squat, bench, deadlift, and bodyweight to calculate your DOT coefficient and see how you rank. Male and female supported.">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
   <link rel="manifest" href="/site.webmanifest">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "What is a good DOT score?", "acceptedAnswer": {"@type": "Answer", "text": "300 is solid intermediate territory, 400 is advanced, and 500+ is national-level. For most lifters, breaking 300 is the first meaningful goal."}},
+      {"@type": "Question", "name": "What is the difference between DOT and Wilks?", "acceptedAnswer": {"@type": "Answer", "text": "Wilks was the old standard; DOT replaced it as the IPF's official formula. Both level the playing field across bodyweights, but DOT uses more current data with separate male and female coefficients."}},
+      {"@type": "Question", "name": "How is a DOT score calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Your powerlifting total (squat + bench + deadlift) multiplied by 500, divided by a polynomial based on your bodyweight, using different coefficients for men and women."}},
+      {"@type": "Question", "name": "Does age affect my DOT score?", "acceptedAnswer": {"@type": "Answer", "text": "No. DOT only accounts for bodyweight and sex \u2014 masters lifters are on the same scale as everyone else, which is why programming that respects recovery matters more after 40."}},
+      {"@type": "Question", "name": "What DOT score should a lifter over 40 aim for?", "acceptedAnswer": {"@type": "Answer", "text": "300 is a strong, realistic milestone for a trained lifter at any age. 350+ is genuinely strong, and 400+ puts you in advanced territory regardless of age."}}
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -187,6 +200,60 @@
     @media (max-width: 480px) {
       .dot-inputs { grid-template-columns: 1fr; }
     }
+
+    /* --- Guide sections --- */
+    .dot-guide {
+      margin-top: 56px; max-width: 720px; margin-left: auto; margin-right: auto;
+    }
+    .dot-guide h2 {
+      font-family: var(--font-display); font-weight: 900; font-size: 24px;
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 20px;
+    }
+    .dot-guide h2 .accent { color: var(--accent); }
+    .dot-guide p {
+      color: var(--muted); font-size: 15px; line-height: 1.65; margin-bottom: 12px;
+    }
+    .dot-guide p a { color: var(--accent); }
+    .bench-table { border: 1px solid var(--border); background: var(--bg-card); }
+    .bench-row {
+      display: flex; justify-content: space-between; gap: 16px;
+      padding: 12px 18px; border-top: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .bench-row:first-child { border-top: none; }
+    .bench-row.bench-head {
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      letter-spacing: 0.12em; color: var(--bone); text-transform: uppercase;
+    }
+    .bench-row span:first-child { color: var(--accent); font-weight: 700; white-space: nowrap; }
+    .dot-cta {
+      margin-top: 56px; border: 1px solid var(--border-strong); background: var(--bg-card);
+      padding: clamp(28px, 4vw, 44px); text-align: center;
+      max-width: 720px; margin-left: auto; margin-right: auto;
+    }
+    .dot-cta h2 {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(24px, 4vw, 36px); text-transform: uppercase;
+      letter-spacing: 0.03em; margin-bottom: 14px;
+    }
+    .dot-cta h2 .accent { color: var(--accent); }
+    .dot-cta p { color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 560px; margin: 0 auto 22px; }
+    .dot-cta .cta-fine {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
+      color: var(--dim); margin: 14px 0 0;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      border: 1px solid var(--border); background: var(--bg-card);
+      padding: 18px 20px;
+    }
+    .faq-item h3 {
+      font-family: var(--font-display); font-weight: 700; font-size: 16px;
+      text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;
+      color: var(--bone);
+    }
+    .faq-item p { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0; }
   </style>
 </head>
 <body>
@@ -342,6 +409,70 @@
           Above <span class="accent">400</span> puts you in advanced/elite range.
           Above <span class="accent">500</span>? You're competing at a national level.
         </p>
+      </div>
+
+      <!-- Benchmark table -->
+      <div class="dot-guide">
+        <h2>WHERE DO YOU <span class="accent">STAND?</span></h2>
+        <div class="bench-table">
+          <div class="bench-row bench-head"><span>DOT SCORE</span><span>LEVEL</span></div>
+          <div class="bench-row"><span>500+</span><span>Elite &mdash; national-level competitor</span></div>
+          <div class="bench-row"><span>400+</span><span>Advanced</span></div>
+          <div class="bench-row"><span>350+</span><span>Proficient</span></div>
+          <div class="bench-row"><span>300+</span><span>Intermediate &mdash; solid</span></div>
+          <div class="bench-row"><span>200+</span><span>Novice</span></div>
+          <div class="bench-row"><span>Below 200</span><span>Beginner</span></div>
+        </div>
+      </div>
+
+      <!-- DOT vs Wilks -->
+      <div class="dot-guide">
+        <h2>DOT <span class="accent">VS</span> WILKS</h2>
+        <p>
+          Wilks was the old standard; DOT replaced it as the IPF&rsquo;s official formula.
+          Both level the playing field across bodyweights, but DOT uses more current data
+          with separate male and female coefficients. Still curious about the classic?
+          Run your numbers through our <a href="/tools/wilks-calculator">Wilks calculator</a>.
+        </p>
+      </div>
+
+      <!-- Trial CTA -->
+      <div class="dot-cta">
+        <h2>KNOW YOUR SCORE. <span class="accent">NOW RAISE IT.</span></h2>
+        <p>
+          Your DOT score tells you where you stand. Center Mass Strength moves the number
+          &mdash; adaptive powerlifting programming built off your maxes, adjusting as you
+          get stronger.
+        </p>
+        <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">START YOUR 14-DAY FREE TRIAL</a>
+        <p class="cta-fine">NO CARD REQUIRED</p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="dot-guide">
+        <h2>QUESTIONS <span class="accent">LIFTERS</span> ASK</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>What is a good DOT score?</h3>
+            <p>300 is solid intermediate territory, 400 is advanced, and 500+ is national-level. For most lifters, breaking 300 is the first meaningful goal.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What is the difference between DOT and Wilks?</h3>
+            <p>Wilks was the old standard; DOT replaced it as the IPF&rsquo;s official formula. Both level the playing field across bodyweights, but DOT uses more current data with separate male and female coefficients.</p>
+          </div>
+          <div class="faq-item">
+            <h3>How is a DOT score calculated?</h3>
+            <p>Your powerlifting total (squat + bench + deadlift) multiplied by 500, divided by a polynomial based on your bodyweight, using different coefficients for men and women.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Does age affect my DOT score?</h3>
+            <p>No. DOT only accounts for bodyweight and sex &mdash; masters lifters are on the same scale as everyone else, which is why programming that respects recovery matters more after 40.</p>
+          </div>
+          <div class="faq-item">
+            <h3>What DOT score should a lifter over 40 aim for?</h3>
+            <p>300 is a strong, realistic milestone for a trained lifter at any age. 350+ is genuinely strong, and 400+ puts you in advanced territory regardless of age.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Cross-link -->
