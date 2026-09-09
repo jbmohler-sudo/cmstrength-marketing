@@ -3,13 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1RM Calculator — Estimate Your One Rep Max | Center Mass Strength</title>
+  <title>Free 1RM Calculator — Estimate Your One Rep Max | Center Mass Strength</title>
   <meta name="description" content="Free one rep max calculator for squat, bench press, and deadlift. Enter your weight and reps to estimate your 1RM using the Epley formula. Calculate your estimated powerlifting total.">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
   <link rel="manifest" href="/site.webmanifest">
+
+  <!-- JSON-LD FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is a 1RM calculator?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Within a few percent, if the input set was genuinely challenging — 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy." }
+      },
+      {
+        "@type": "Question",
+        "name": "What rep range gives the best 1RM estimate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Two to six reps taken close to failure. The formulas agree closely in that range. Past about 10 reps the estimate drifts, because you're testing endurance more than maximal strength." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I test my true 1RM instead of estimating it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For programming purposes, no need. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which formula does this 1RM calculator use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Epley formula: 1RM = weight × (1 + reps ÷ 30). It is the most widely used estimator in powerlifting programming." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -161,6 +192,84 @@
     @media (max-width: 760px) {
       .orm-grid { grid-template-columns: 1fr; }
     }
+
+    /* --- Guide content below the calculator --- */
+    .guide { max-width: 720px; margin: 0 auto; }
+    .guide-sec { margin-top: clamp(56px, 7vw, 88px); }
+    .guide-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .guide-h {
+      font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+      font-size: clamp(26px, 4vw, 40px); line-height: 1; color: var(--bone);
+      letter-spacing: 0.02em;
+    }
+    .guide-intro { color: var(--muted); margin-top: 16px; font-size: 16px; max-width: 56ch; }
+    .guide-body { color: var(--muted); margin-top: 18px; font-size: 16px; line-height: 1.65; }
+    .guide-body p + p { margin-top: 14px; }
+    .guide-body strong { color: var(--bone); font-weight: 600; }
+
+    .formula-card {
+      border: 1px solid var(--border); background: var(--bg-card);
+      padding: 20px 22px; margin-top: 20px; text-align: center;
+    }
+    .formula-card .formula {
+      font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.08em;
+      color: var(--bone); text-transform: uppercase;
+    }
+
+    .zone-card {
+      border: 1px solid var(--border); background: var(--bg-card);
+      margin-top: 24px; overflow-x: auto;
+    }
+    .zone-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+    .zone-table th {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--dim); text-transform: uppercase; text-align: left; font-weight: 400;
+      padding: 16px 24px 12px; border-bottom: 1px solid var(--border-strong);
+      white-space: nowrap;
+    }
+    .zone-table td {
+      padding: 15px 24px; border-bottom: 1px solid var(--border);
+      font-size: 15px; color: var(--muted);
+    }
+    .zone-table tbody tr:last-child td { border-bottom: none; }
+    .zone-table .zone-pct {
+      font-family: var(--font-mono); font-weight: 700; font-size: 13px;
+      color: var(--accent); white-space: nowrap;
+    }
+    .zone-table .zone-name {
+      font-family: var(--font-display); font-weight: 800; font-size: 17px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+      white-space: nowrap;
+    }
+
+    .cta-band {
+      border: 1px solid var(--border-strong); background: var(--bg-card);
+      margin-top: clamp(56px, 7vw, 88px);
+      padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      text-align: center;
+    }
+    .cta-band .guide-h { font-size: clamp(28px, 4.5vw, 44px); }
+    .cta-copy { color: var(--muted); max-width: 560px; margin: 18px auto 28px; font-size: 16px; line-height: 1.6; }
+    .cta-small {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--faint); text-transform: uppercase; margin-top: 18px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 14px; margin-top: 26px; }
+    .faq-item { border: 1px solid var(--border); background: var(--bg-card); padding: 22px 24px; }
+    .faq-q {
+      font-family: var(--font-display); font-weight: 800; font-size: 18px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+      line-height: 1.2;
+    }
+    .faq-q .q-num {
+      font-family: var(--font-mono); font-weight: 700; color: var(--accent);
+      margin-right: 10px;
+    }
+    .faq-a { color: var(--muted); font-size: 15px; line-height: 1.65; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -299,6 +408,84 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Tool guide content -->
+      <div class="guide">
+
+        <!-- How the estimate works -->
+        <section class="guide-sec">
+          <p class="guide-label">The method</p>
+          <h2 class="guide-h">How the estimate works</h2>
+          <div class="guide-body">
+            <p>A one rep max is the heaviest weight you can lift for one clean rep. Testing it directly is slow — every near-max attempt needs full recovery between tries — and past 40 it is often not worth the injury risk.</p>
+            <p>So this page estimates it instead. The Epley formula is the most widely used estimator in powerlifting programming:</p>
+          </div>
+          <div class="formula-card">
+            <span class="formula">1RM = WEIGHT &times; (1 + REPS &divide; 30)</span>
+          </div>
+          <div class="guide-body">
+            <p>For the tightest estimate, log a <strong>challenging set of 2–6 reps taken close to failure</strong>. Past about 10 reps the number goes loose — at that point the set is testing endurance more than maximal strength.</p>
+          </div>
+        </section>
+
+        <!-- What to do with your numbers -->
+        <section class="guide-sec">
+          <p class="guide-label">Training zones</p>
+          <h2 class="guide-h">What to do with your numbers</h2>
+          <p class="guide-intro">Your estimated max anchors every working weight. Run your sets inside the zone that matches your goal:</p>
+          <div class="zone-card">
+            <table class="zone-table">
+              <thead>
+                <tr>
+                  <th scope="col">% of 1RM</th>
+                  <th scope="col">Zone</th>
+                  <th scope="col">What to run</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="zone-pct">90–95%</td><td class="zone-name">Peaking</td><td>Singles &amp; doubles — meet prep</td></tr>
+                <tr><td class="zone-pct">80–90%</td><td class="zone-name">Heavy strength</td><td>Sets of 2–5</td></tr>
+                <tr><td class="zone-pct">70–80%</td><td class="zone-name">Strength volume</td><td>Sets of 4–8</td></tr>
+                <tr><td class="zone-pct">60–70%</td><td class="zone-name">Hypertrophy</td><td>Sets of 6–10</td></tr>
+                <tr><td class="zone-pct">50–60%</td><td class="zone-name">Warm-up &amp; technique</td><td>Fast, clean reps</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- CTA band -->
+        <section class="cta-band" aria-label="Start your free trial">
+          <h2 class="guide-h">Put your numbers to work</h2>
+          <p class="cta-copy">A 1RM is only useful if your programming actually uses it. Every Center Mass Strength track is built off your maxes — the app takes your numbers and sets every working weight for you, adjusting as you get stronger.</p>
+          <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start your 14-day free trial</a>
+          <p class="cta-small">No card required.</p>
+        </section>
+
+        <!-- Questions lifters ask -->
+        <section class="guide-sec">
+          <p class="guide-label">FAQ</p>
+          <h2 class="guide-h">Questions lifters ask</h2>
+          <div class="faq-list">
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">01</span>How accurate is a 1RM calculator?</h3>
+              <p class="faq-a">Within a few percent, if the input set was genuinely challenging — 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">02</span>What rep range gives the best 1RM estimate?</h3>
+              <p class="faq-a">Two to six reps taken close to failure. The formulas agree closely in that range. Past about 10 reps the estimate drifts, because you're testing endurance more than maximal strength.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">03</span>Should I test my true 1RM instead of estimating it?</h3>
+              <p class="faq-a">For programming purposes, no need. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">04</span>Which formula does this 1RM calculator use?</h3>
+              <p class="faq-a">The Epley formula: 1RM = weight × (1 + reps ÷ 30). It is the most widely used estimator in powerlifting programming.</p>
+            </article>
+          </div>
+        </section>
+
       </div>
 
       <!-- Cross-link -->
