@@ -1,6 +1,6 @@
 # Powerlifting Autoregulation: A Practical Guide to RPE, Readiness, and Load Adjustments.
 
-**Dek:** Autoregulation isn't lowering the weight when it feels hard. It's a structured decision system: RPE, readiness, and joint signals choosing today's load before the bar does.
+**Dek:** Autoregulation isn't lowering the weight when it feels hard. It's a disciplined adjustment system: RPE, readiness, and joint estimates keeping today's session inside the program's intent.
 
 **SEO:** title `Powerlifting Autoregulation | Center Mass Strength` · target keyword: powerlifting autoregulation · slug: `powerlifting-autoregulation` · silo: The Adaptive System.
 
@@ -12,27 +12,27 @@ Both rooms are wrong about the same word. And if you're past 40, the misundersta
 
 Here is the fear underneath it: you ran fixed percentages for a decade and they worked, until one Tuesday they didn't. The bar said 335 on the spreadsheet. Your body said something else. You took the 335 anyway, because the program said so, and it turned into a grinder, and the grinder turned into a week of fried shoulders, and the fried week turned into a month where nothing moved. Somewhere in there you started wondering whether the program broke or you did.
 
-Neither broke. The program just assumed something that stopped being true: that the same load is appropriate on every day you show up. Autoregulation is the fix for that assumption. Not the absence of a plan. The part of the plan that reads the day.
+Neither broke. The program just assumed something that stopped being true: that the same load is appropriate on every day you show up. Autoregulation is the fix for that assumption. Not the absence of a plan. The part of the plan that reads the day — and adjusts within it, instead of around it.
 
 ---
 
 ## What Autoregulation Actually Is
 
-Autoregulation is a decision system with three inputs and one governor.
+Autoregulation is a decision system with three inputs and one anchor.
 
-The inputs: **RPE** (what the set actually cost), **readiness** (what you brought into the session), and **joint signals** (what the connective tissue is reporting). The governor: a **training max that moves slowly**, so the whole system can't be hijacked by one great day or one terrible one.
+The inputs: **RPE** (what the set actually cost), **readiness** (what you brought into the session), and **joint estimates** (what the accumulated load model says about your connective tissue). The anchor: a **training number that updates from accumulated evidence**, so the whole system can't be hijacked by one great day or one terrible one.
 
-That's it. Every session, the system takes those three readings and produces a load adjustment, usually within a narrow band. The CMS engine uses ±5%: readiness comes in, the day's top set shifts up or down by no more than five percent, and the reps stay the same. The plan still exists. It just stops pretending today is a blank slate.
+Every session, the system takes those readings and produces an adjustment — and the adjustment's job is to preserve the session's purpose, not to rewrite it.
 
-RPE is the honest output. RPE isn't a feeling — it's reps in reserve. Researchers built a resistance-training-specific RPE scale so lifters could report exactly that: RPE 10 means zero reps left, RPE 9 means one rep left, RPE 8 means two left [1][2]. Reviewers of that scale describe it as a legitimate autoregulation tool, a way to adjust today's load to today's readiness and to control fatigue across a training cycle [2][3].
+RPE is the session's output. RPE isn't a feeling — it's reps in reserve: RPE 10 means zero reps left, RPE 9 means one left, RPE 8 means two left [1][2]. It's still a subjective estimate, but it's anchored to something countable, and lifters get better at it with practice [1]. That's what makes it usable as a training input instead of a mood ring.
 
-Readiness is the honest input. Sleep, stress, soreness, motivation, yesterday's session. These are the things that move your actual strength around on any given day, and after 40 they move it more. Research on aging lifters notes that skeletal muscle recovery slows and gets less predictable with age, which is why the same program feels different at 45 than it did at 30 [5]. Neuromuscular fatigue from heavy resistance training also takes real time to clear, which is why back-to-back heavy exposures stack cost even when motivation is high [6].
+Readiness is the session's input. Sleep, stress, soreness, motivation, yesterday's session. These are the things that move your actual strength around on any given day, and research on aging lifters suggests recovery gets less predictable with age — though the literature is careful that it's hard to separate aging itself from changes in activity levels [5]. Neuromuscular fatigue from heavy resistance training also takes real time to clear, which is why back-to-back heavy exposures stack cost even when motivation is high [6].
 
-Joint signals are the constraint. Muscle tells you when it's tired. Connective tissue doesn't, at least not in the same language. Tendons adapt to mechanical loading more slowly than muscle does [7], so the joint line in the system is simple: sharp or localized joint pain is a stop signal, not a number to negotiate with. The CMS engine tracks this as per-joint load (MRJV) and rotates movements when a joint is carrying too much. That's not being cautious. That's accounting.
+Joint estimates are the constraint. Muscle tells you when it's tired. Connective tissue doesn't speak the same language — tendons adapt to mechanical loading more slowly than muscle does [7]. So CMS models accumulated joint burden against a modeled ceiling (MRJV) and treats it as an estimate, not a measurement. Nobody's measuring your tendons. The model is accounting for load the way a budget accounts for spending: approximately, conservatively, and before you're overdrawn. Sharp or localized joint pain is a stop signal, not a number to negotiate with.
 
-The governor is the training max. Your training max is not your best-ever lift. It's a slowly updating working number, estimated from submaximal work (Epley is the standard estimator) and moved only when the evidence supports it. When one great day can't inflate it and one bad day can't deflate it, the percentages derived from it stay trustworthy. The system can't be hijacked by the weather.
+The anchor is the training number. Three things people blur together: your estimated strength (what a formula like Epley says your submaximal work implies), your tested max (what you actually lifted on the platform), and the number your prescriptions are built from. CMS uses Epley estimation from submaximal performance to inform the working number, and that number moves on accumulated evidence — not on one session. The point isn't that a great day "can't" move it. The point is that one day, good or bad, is a thin evidence base, and the system is built to wait for more.
 
-Notice what this leaves no room for: lowering the weight because the set looked scary. Raising it because the gym was watching. Those are feelings wearing the costume of a system. Autoregulation has no feelings. It has readings.
+Notice what this leaves no room for: lowering the weight because the set looked scary, or raising it because the gym was watching. The strongest version of this story isn't "add weight on good days, remove it on bad ones." It's disciplined adjustment inside the program's intent.
 
 ---
 
@@ -40,12 +40,12 @@ Notice what this leaves no room for: lowering the weight because the set looked 
 
 | Myth | Reality |
 |---|---|
-| Autoregulation means going light whenever training feels hard. | It means adjusting load by rule: a readiness reading moves the top set ±5%, and the reps stay the same. |
-| Autoregulation is program hopping with better branding. | Program hopping changes the plan when it's inconvenient. Autoregulation keeps the plan and changes the load by decision rule. |
-| Percentages are objective; autoregulation is just vibes. | A percentage from a stale max is a guess about last month. RPE is a real-time report from this session [2]. |
-| You should autoregulate only on bad days. | Good days get adjustments too. The band works both directions. That's how great days stay productive instead of reckless. |
-| Autoregulation is for advanced lifters only. | The RIR-based RPE scale was built to be usable and learnable; accuracy improves with practice, which is exactly what a structured system gives you [1]. |
-| Joint pain is just another input to push through. | Sharp, localized joint pain is a constraint, not a data point. Connective tissue adapts slower than muscle; ignoring it is how chronic issues start [7]. |
+| Autoregulation means going light whenever training feels hard. | It means adjusting by rule: a readiness reading shifts the load along a fixed tier (−5/−3/−1/0/+2/+4%), with joint penalties on top — and the session's purpose stays intact. |
+| Autoregulation is program hopping with better branding. | Program hopping changes the plan when it's inconvenient. Autoregulation keeps the plan and adjusts today's variables by decision rule. |
+| Percentages are objective; autoregulation is just vibes. | A percentage from a stale max is a guess about last month. RPE is a same-session report anchored to reps in reserve [2]. |
+| You should autoregulate only on bad days. | Good days get adjustments too — within the program's protections. That's how great days stay productive instead of reckless. |
+| Autoregulation is for advanced lifters only. | The RIR-based RPE scale was developed and tested with trained lifters, and accuracy improves with practice — which is exactly what a structured system gives you [1]. |
+| Joint pain is just another input to push through. | Sharp, localized joint pain is a constraint, not a data point. Connective tissue adapts slower than muscle; the joint estimate exists to respect that before it becomes a problem [7]. |
 
 ---
 
@@ -53,47 +53,47 @@ Notice what this leaves no room for: lowering the weight because the set looked 
 
 Concrete beats abstract. Here's the loop.
 
-You open the app and answer the readiness check-in: sleep, stress, soreness, motivation, plus how yesterday felt. The engine reads it and sets the band for today's top set. Say the planned top set is 315 for 3 at RPE 8. Readiness comes back green: the set stays at 315. Yellow: it drops 5% to 300. Red: the session reframes around submaximal volume, not a top set at all.
+You open the app and answer the readiness check-in: sleep, stress, soreness, motivation, plus how yesterday felt. The engine maps that reading to a load tier — −5, −3, −1, 0, +2, or +4 percent — and layers joint penalties on top if a joint is near its modeled ceiling. Say the planned top set is 315 for 3 at RPE 8. Readiness comes back two tiers down: the top set moves to about 305. The adjustment can reach beyond the top set too, depending on what's eligible. This is a rule, not a mood.
 
 You warm up and watch the bar. Your last warm-up is the reference point: it should move like RPE 6 or easier. If 275 for a triple looks like RPE 7 instead, you already know the day is heavier than planned before you've committed to anything.
 
-You take the first working set at the adjusted weight. After the bar is back on the rack, you ask the only question that matters: how many clean reps did I have left? If the answer is two and the bar moved fast, the next set can climb. If the last rep was a grind and the answer is zero, the weight comes down. Decide after the set, never during it. The body and the logbook are both more honest with the bar racked.
+You take the first working set at the adjusted weight. After the bar is back on the rack, you ask the only question that matters: how many clean reps did I have left? Here's the part people get backwards. If the prescription was RPE 8 and the answer is two, you hit the target. You hold. An RPE ceiling means "do not exceed this effort" — it is not an invitation to add weight until you reach it. That distinction matters most on the days the bar feels light: easy ceiling work stays easy, and readiness adjustments don't raise protected peak, taper, or deload work. The program's intent outranks the day's energy.
 
-You keep the reps. This is the part people miss. When the load drops 5%, the set doesn't become 315 for an easy 3. It becomes 300 for 3 at the target RPE. Same training intent, honest intensity. The percentage set the plan; RPE adjusted the plan to the body you actually have today.
+You preserve the session's purpose. When the load drops, the set doesn't become a different workout. It becomes the same session at an honest intensity — the load, the sets, the reps, even the session configuration can move, but the training intent doesn't. The percentage set the plan; RPE and readiness adjusted the plan to the body you actually have today. The aim is to preserve the intended stimulus, not to reproduce a number.
 
-You log four numbers: weight, reps, RPE, one line on the joints. That line is the cheapest injury-prevention tool you own, and it's the dataset the slowly-updating training max feeds on. A TM that moves on evidence instead of ego is why the system compounds instead of oscillating.
+You log four numbers: weight, reps, RPE, one line on the joints. That line is the raw material the joint estimate and the training number both feed on. A training number that moves on evidence instead of ego is why the system compounds instead of oscillating.
 
-The scheduled week-four deload is the backstop. Autoregulation handles the daily weather. The deload handles the climate: fatigue you can't feel accumulating, the kind that shows up as three flat weeks. A deload you schedule beats a deload your body schedules for you.
+Recovery is built into the block, not bolted on. Where the deload lands depends on the block: a four-week hypertrophy block ends with one, a three-week block carries none, a five-week block deloads in week five, and peak and taper follow their own structure. Autoregulation handles the daily weather. The block structure handles the climate — including the fatigue you can't feel accumulating, the kind that shows up as three flat weeks.
 
 ---
 
-## Six Principles of Honest Autoregulation
+## Seven Principles of Honest Autoregulation
 
-**1. The percentage sets the plan; RPE adjusts it.** They do different jobs. Never throw out the structure just because you learned to read the day. Structure without adjustment is brittle. Adjustment without structure is chaos.
+**1. The percentage sets the plan; RPE and readiness adjust it.** They do different jobs. Never throw out the structure just because you learned to read the day. Structure without adjustment is brittle. Adjustment without structure is chaos.
 
-**2. Readiness is an input, not an excuse.** A yellow reading moves the top set 5%, it doesn't cancel the session. The day you feel worst is still a training day. It's just a different training day.
+**2. Readiness is an input, not an excuse.** A down tier moves the load by rule; it doesn't cancel the session. The day you feel worst is still a training day. It's just a different training day — and an up tier doesn't override the program's protections.
 
-**3. Bar speed tells the truth about the first working set.** Feelings lie in both directions: dread makes warm-ups feel heavy, adrenaline makes them feel light. The bar's speed on your last warm-up doesn't have an agenda. Trust it over the mood.
+**3. A ceiling is a ceiling.** "Do not exceed this effort" is not "add weight until you reach it." Hitting your RPE target means holding, not climbing. Protected work — peak, taper, deload — stays protected no matter how good the day feels.
 
-**4. Adjust the load, keep the reps.** Dropping weight and cutting reps is two changes, and two changes teach you nothing. One variable moves so the system can learn what worked.
+**4. Preserve the session's purpose.** Load, sets, reps, or session configuration can all move. What doesn't move is the intent: the stimulus the session was built to deliver. Change the variables; keep the purpose.
 
-**5. Joint pain is a constraint, not a negotiation.** Muscle soreness is information. Sharp, localized joint pain is a stop sign. Tendons adapt slower than muscle [7], so the joint line gets the strictest rule in the system. Swap the movement, preserve the intent.
+**5. Joint estimates are estimates — treat them as constraints anyway.** The model tracks accumulated burden against a modeled ceiling; it doesn't measure tissue condition. Rotation has eligibility limits, and competition lifts are protected from it. When the estimate says a joint is carrying too much, the disciplined move is to respect it early, while it's still cheap.
 
-**6. The training max moves slowly on purpose.** One great day doesn't raise it. One terrible day doesn't lower it. A TM that only moves on sustained evidence is what keeps the percentages honest month after month. Protect it like the asset it is.
+**6. Fatigue is allowed to accumulate.** Productive training raises fatigue. That's the job. The objective is manageable fatigue across the block, not feeling fresh after every session. Autoregulation keeps the fatigue account balanced; it doesn't try to close it daily.
 
-> **One rule you can act on tonight:** Before your next session, rate your readiness green, yellow, or red (sleep, stress, soreness, motivation, yesterday's training). Green: run the top set as planned. Yellow: take 5% off the top set and keep every rep. Red: no top set today, submaximal volume only. Then log four numbers after the session: weight, reps, RPE, one line on the joints. Do it for two weeks and you'll have the beginnings of a personal readiness map no spreadsheet ever gave you.
+**7. The training number moves on evidence.** Estimated strength, tested maxes, and the prescription number are three different things. The working number updates from accumulated submaximal performance — Epley estimation is the tool — so a single session, great or terrible, is never the whole story.
+
+> **One rule you can act on tonight:** Here's a simplified coaching heuristic you can run by hand (the engine's actual rule uses finer tiers). Before your next session, rate your readiness green, yellow, or red — sleep, stress, soreness, motivation, yesterday's training. Green: run the session as planned. Yellow: take a small amount off the top work and keep the session's purpose. Red: train submaximally and protect the joints. Then log four numbers after every session: weight, reps, RPE, one line on the joints. Do it for two weeks and you'll have the beginnings of a personal readiness map no spreadsheet ever gave you.
 
 ---
 
 ## What This Isn't
 
-Three distinctions, because the category is crowded and most of it is slop.
+It isn't **program hopping**. Hopping changes the program when progress stalls or boredom hits. Autoregulation keeps the same program and adjusts today's variables by rule. The plan survives the bad day. That's the whole point.
 
-It isn't **program hopping**. Hopping changes the program when progress stalls or boredom hits. Autoregulation keeps the same program and changes today's load by rule. The plan survives the bad day. That's the whole point.
+It isn't **instinctive training**. Instinctive training is "I'll know it when I feel it," which works exactly as well as your self-awareness on your worst day. Autoregulation is "the check-in moved the load two tiers, so the top set is 305." One of those is a system. The other is a mood.
 
-It isn't **instinctive training**. Instinctive training is "I'll know it when I feel it," which works exactly as well as your self-awareness on your worst day. Autoregulation is "the check-in said yellow, so the top set is 300." One of those is a system. The other is a mood.
-
-It isn't **maximalism with a permission slip**. Training to failure on every set has no meaningful strength advantage over stopping with reps in reserve, and it leaves measurably more fatigue behind [4]. Autoregulation uses that finding as a design constraint: the reserve is the point, not the compromise.
+Training to failure on every set, for the record, has no meaningful strength advantage over stopping with reps in reserve — and it leaves measurably more fatigue behind [4]. The reserve is the point, not the compromise.
 
 ---
 
@@ -101,27 +101,27 @@ It isn't **maximalism with a permission slip**. Training to failure on every set
 
 **Isn't autoregulation just an excuse to go light?**
 
-Only if you let it be, and a real system doesn't let it be. The adjustment is a rule, not a feeling: a readiness reading moves the load ±5% and the reps stay the same. Sandbagging breaks the rule visibly: your RPEs come in low, your bar speed is fine, and the log shows it. The system polices excuses better than willpower does.
+Only without a system. With one, the adjustment is bounded, bidirectional, and fenced by the program's intent: down tiers on rough days, up tiers on great ones, ceilings that stay ceilings, protected work that stays protected. The discipline is the product.
 
 **How is this different from program hopping?**
 
-Program hopping changes what you do. Autoregulation changes how heavy you do it today, by rule, inside the same program. The macrocycle, the block, the session structure all survive. Only the load flexes, and only within the band.
+Program hopping changes what you do. Autoregulation adjusts today's variables by rule, inside the same program. The macrocycle, the block, the session's purpose all survive. The numbers flex; the intent doesn't.
 
 **Do I have to give up percentages?**
 
-No. Percentages and autoregulation are a pair, not a rivalry. The percentage sets the starting plan from a slowly-updating training max; RPE and readiness adjust that plan to the day. Methods reviews of resistance-training regulation describe exactly this combined approach: planned loading with autoregulated adjustment [3].
+No. Percentages and autoregulation are a pair, not a rivalry. The percentage sets the starting plan from an evidence-updated training number; RPE and readiness adjust that plan to the day. Methods reviews of resistance-training regulation describe exactly this combined approach: planned loading with autoregulated adjustment [3].
 
 **What if my readiness is always red?**
 
-Then readiness is telling you something the program can't fix. Persistent red readings mean the recovery side needs attention: sleep, life stress, total weekly volume, or a medical issue that belongs with a clinician, not a spreadsheet. The check-in is a dashboard, not a treatment. If red lasts weeks, talk to your doctor and audit the program's total load before blaming the day.
+Then readiness is telling you something the program can't fix. Persistent low readings mean the recovery side needs attention: sleep, life stress, total weekly volume, or a medical issue that belongs with a clinician, not a spreadsheet. The check-in is a dashboard, not a treatment. If it lasts weeks, talk to your doctor and audit the program's total load before blaming the day.
 
 **Does RPE-based autoregulation work for masters lifters?**
 
-It's arguably built for them. Recovery gets more variable with age [5], which is exactly the problem a fixed-percentage program can't solve. The RIR-based scale was validated on trained lifters and accuracy improves with practice [1][2], so the masters lifter with fifteen years under the bar is the ideal user, not the exception.
+The honest answer: the research base on aging and recovery carries real uncertainty — it's genuinely hard to separate aging from changes in activity levels [5]. What's well supported is that the RIR scale is learnable and that experienced lifters calibrate it well [1][2]. A lifter with fifteen years under the bar brings the one thing the system needs most: an honest read of their own effort.
 
-**Where does the training max fit in?**
+**Where does the training number fit in?**
 
-The TM is the anchor the whole system hangs from. It updates slowly from submaximal performance (Epley estimation), so one great day can't inflate it and one bad day can't deflate it. Daily autoregulation handles the weather; the slow-moving TM handles the climate. Together they keep intensity honest across months, not just sessions.
+It's the anchor the whole system hangs from — and it's worth keeping three numbers straight. Your estimated strength (what Epley says your submaximal work implies), your tested max (what you actually lifted), and the number your prescriptions are built from. The working number updates from accumulated submaximal evidence, so daily autoregulation handles the weather while the slow-moving anchor handles the climate. Together they keep intensity honest across months, not just sessions.
 
 ---
 
@@ -129,7 +129,7 @@ The TM is the anchor the whole system hangs from. It updates slowly from submaxi
 
 Load against readiness, not against the calendar. That's the entire thesis in one line.
 
-The lifter who runs 315 because the spreadsheet said 315, on a day his body had 300 in it, didn't train harder. He trained more expensively: more fatigue, more joint cost, less to show for it. The lifter who took 300 at the same RPE got the same training effect and showed up fresh Thursday. Multiply that by a year and you don't get a lifter who went lighter. You get a lifter who never had to stop.
+The lifter who runs 315 because the spreadsheet said 315, on a day his body had 300 in it, didn't train harder. He trained more expensively: more fatigue, more joint cost, less to show for it. The lifter who took 305 at the same RPE aimed to preserve the intended stimulus — and showed up able to train Thursday. Multiply that discipline by a year and you don't get a lifter who went lighter. You get a lifter who stayed in the program.
 
 If a program expects you to guess, it's expecting too much of you. Stop asking how heavy can I go today. Start asking what can I recover from and repeat.
 
@@ -139,7 +139,7 @@ If a program expects you to guess, it's expecting too much of you. Stop asking h
 
 ## Stop guessing your intensity.
 
-The CMS Adaptive System runs this exact loop for you: the readiness check-in, the ±5% load band, RPE tracked as reps in reserve on every working set, per-joint load tracking, a training max that updates slowly on evidence, and a scheduled deload every fourth week. The plan adjusts when life happens, so you don't have to choose between the spreadsheet and your body.
+The CMS Adaptive System runs this loop for you: a readiness check-in with tiered load adjustments, RPE tracked as reps in reserve on every working set, joint-load estimates against a modeled ceiling, a training number updated from submaximal evidence, and recovery built into the block structure. The plan adjusts when life happens, so you don't have to choose between the spreadsheet and your body.
 
 Start your 14-day free trial. No card required. Then $20/mo or $200/yr. [Start Free Trial →](https://app.cmstrength.fit/signup)
 
@@ -155,7 +155,7 @@ Start your 14-day free trial. No card required. Then $20/mo or $200/yr. [Start F
 ## References
 
 1. Zourdos, M. C., Klemp, A., Dolan, C., Quiles, J. M., Schau, K. A., Jo, E., Helms, E., Esgro, B., Duncan, S., García Merino, S., & Blanco, A. (2016). Novel Resistance Training-Specific Rating of Perceived Exertion Scale Measuring Repetitions in Reserve. *Journal of Strength and Conditioning Research*, 30(1), 267–275. https://doi.org/10.1519/JSC.0000000000001049
-2. Helms, E. R., Cronin, J., Storey, A., & Zourdos, M. C. (2016). Application of the Repetitions in Reserve-Based Rating of Perceived Exertion Scale for Resistance Training. *Sports Medicine*, 46(3), 389–396.
+2. Helms, E. R., Cronin, J., Storey, A., & Zourdos, M. C. (2016). Application of the Repetitions in Reserve-Based Rating of Perceived Exertion Scale for Resistance Training. *Strength and Conditioning Journal*, 38(4), 42–49. https://doi.org/10.1519/SSC.0000000000000218
 3. Helms, E. R., Kwan, K., Sousa, C. A., Cronin, J. B., Storey, A. G., & Zourdos, M. C. (2020). Methods for Regulating and Monitoring Resistance Training. *Journal of Human Kinetics*, 74, 23–42. https://doi.org/10.2478/hukin-2020-0011
 4. Davies, T., Orr, R., Halaki, M., & Hackett, D. (2016). Effect of Training Leading to Repetition Failure on Muscular Strength: A Systematic Review and Meta-Analysis. *Sports Medicine*, 46(4), 487–502. https://doi.org/10.1007/s40279-015-0451-3
 5. Fell, J., & Williams, A. D. (2008). The Effect of Aging on Skeletal-Muscle Recovery From Exercise: Possible Implications for Aging Athletes. *Journal of Aging and Physical Activity*, 16(1), 97–115. https://pubmed.ncbi.nlm.nih.gov/18268815/
