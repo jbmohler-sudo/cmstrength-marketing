@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TDEE for Lifters: What It Is and How to Set Your Calories | CMS</title>
+  <meta name="description" content="TDEE is the number that takes the guesswork out of eating for lifters. What it is, how to estimate it without a formula, and how to set your surplus and deficit calories from it." />
+  <meta name="keywords" content="tdee for lifters, total daily energy expenditure, how to estimate tdee, tdee calculator for powerlifters, calorie surplus muscle gain, calorie deficit fat loss lifters" />
+
+  <link rel="canonical" href="https://www.cmstrength.fit/blog/tdee-for-lifters" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="TDEE for Lifters: What It Is and How to Set Your Calories" />
+  <meta property="og:description" content="TDEE is the number that takes the guesswork out of eating for lifters. What it is, how to estimate it, and how to set surplus and deficit calories from it." />
+  <meta property="og:url" content="https://www.cmstrength.fit/blog/tdee-for-lifters" />
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/tdee-for-lifters.jpg" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta property="article:author" content="Center Mass Strength" />
+  <meta property="article:section" content="Fueling the Work" />
+  <meta property="article:tag" content="tdee" />
+  <meta property="article:tag" content="nutrition" />
+  <meta property="article:tag" content="calories" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "TDEE for Lifters: What It Is, How to Estimate It, and How to Set Your Calories",
+    "description": "TDEE is the number that takes the guesswork out of eating for lifters. What it is, how to estimate it without a formula, and how to set your surplus and deficit calories from it.",
+    "author": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://www.cmstrength.fit" },
+    "publisher": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://www.cmstrength.fit" },
+    "datePublished": "2026-09-15",
+    "dateModified": "2026-09-15",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.cmstrength.fit/blog/tdee-for-lifters" },
+    "image": "https://www.cmstrength.fit/images/blog/tdee-for-lifters.jpg"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is TDEE?",
+        "acceptedAnswer": { "@type": "Answer", "text": "TDEE (Total Daily Energy Expenditure) is the total number of calories your body burns in a full day: basal metabolic rate plus non-exercise activity, the thermic effect of food, and exercise. It is the calorie number where your weight stays put." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I estimate my TDEE as a lifter?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The most reliable method is track and respond: weigh yourself daily and log calories honestly for 2-3 weeks. A flat trend means your intake equals your TDEE. For a starting estimate, multiply bodyweight in pounds by 14-16 (moderately active) or 16-18 (training hard 4-6 days plus an active job), then let the scale correct you over two weeks." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many calories above TDEE should I eat to build muscle?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A surplus of 200-300 calories over TDEE supports muscle growth while keeping gains mostly lean: roughly 0.25-0.5% of bodyweight per week on the scale." }
+      },
+      {
+        "@type": "Question",
+        "name": "How big should my calorie deficit be to lose fat without losing strength?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A deficit of 300-500 calories below TDEE drops roughly 0.5-1 lb per week (about 0.3-0.5% of bodyweight for most lifters): enough to lose fat without tanking your training." }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+
+  <style>
+    /* Page-local helpers: built ON cms.css tokens, no overrides */
+    .post-meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-top: 22px; display: flex; gap: 14px; }
+    .silo-next { position: relative; z-index: 3; max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px) clamp(50px, 7vw, 80px); }
+    .silo-next .silo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; }
+    @media (max-width: 600px) { .silo-next .silo-grid { grid-template-columns: 1fr; } }
+    .silo-next .silo-card { border: 1px solid var(--border); background: var(--bg-card); padding: 24px; transition: border-color .2s, transform .2s; }
+    .silo-next .silo-card:hover { border-color: rgba(226,69,42,0.55); transform: translateY(-3px); }
+    .silo-next .silo-card h4 { font-family: var(--font-display); font-weight: 900; font-size: 20px; text-transform: uppercase; color: var(--bone); line-height: 1.05; }
+    .silo-next .silo-card:hover h4 { color: var(--accent); }
+    .silo-next .silo-card p { color: var(--muted); font-size: 0.92rem; margin-top: 10px; line-height: 1.55; }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/index" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div><div class="ring-in"></div>
+          <div class="cross-v"></div><div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark"><span class="name">CENTER MASS</span><span class="sub">S T R E N G T H</span></div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/index#system">THE SYSTEM</a>
+        <a class="nav-link" href="/index#programs">TRACKS</a>
+        <a class="nav-link" href="/index#pricing">PRICING</a>
+        <a class="nav-link" href="/index#inside">INSIDE</a>
+        <a class="nav-link" href="/index#proof">PROOF</a>
+        <a class="nav-link" href="/blog">BLOG</a>
+        <a class="btn btn-nav" href="https://app.cmstrength.fit">OPEN APP &rarr;</a>
+        <button class="nav-hamburger" type="button" id="nav-hamburger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">&#9776;</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="page-hero">
+      <a class="back-link" href="/blog" style="margin-bottom:26px;">&larr; The Strength Blog</a>
+      <span class="eyebrow">FUELING THE WORK &middot; NUTRITION GUIDE</span>
+      <h1>TDEE for <span class="accent">Lifters</span>.</h1>
+      <p class="hero-sub">What it is, how to estimate it without a formula, and how to turn it into calorie targets that actually move the scale.</p>
+      <div class="post-meta"><span>Center Mass Strength</span></div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div style="max-width:720px; margin:0 auto; padding:0 clamp(20px,5vw,72px);">
+      <div style="aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border); background:linear-gradient(135deg,#1a1410,#0a0a0c); margin-bottom:2.5em;">
+        <img src="/images/blog/tdee-for-lifters.jpg" alt="Meal-prep container of chicken and rice on a food scale with a notebook tracking calories and macros" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.92) contrast(1.02);">
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <article class="prose">
+
+      <p>You can&rsquo;t manage what you don&rsquo;t measure. Lifters will track every set, rep, and RPE in their program, then guess their food by vibes &mdash; and wonder why bodyweight does whatever it wants. TDEE (Total Daily Energy Expenditure) is the number that takes the guesswork out. It&rsquo;s how much energy your body burns in a full day, and it&rsquo;s the anchor every nutrition decision hangs on.</p>
+
+      <h2>What TDEE Actually Means</h2>
+
+      <p>Your daily energy burn breaks into four pieces:</p>
+
+      <ol>
+        <li><strong>BMR &mdash; Basal Metabolic Rate.</strong> The cost of keeping you alive: breathing, brain, organs. About 60&ndash;70% of the total for most people.</li>
+        <li><strong>NEAT &mdash; Non-Exercise Activity Thermogenesis.</strong> Everything that isn&rsquo;t formal exercise: walking to the truck, standing at work, fidgeting. This varies enormously between people and is the biggest hidden lever in TDEE.</li>
+        <li><strong>TEF &mdash; Thermic Effect of Food.</strong> The energy cost of digesting what you eat, roughly 10% of intake.</li>
+        <li><strong>EAT &mdash; Exercise Activity Thermogenesis.</strong> Your actual training. For a powerlifter, this is a few hard hours a week &mdash; meaningful, but smaller than most lifters think. Heavy training burns less than people estimate and a lot less than the cardio apps tell you.</li>
+      </ol>
+
+      <p>Add them up and you get TDEE: the number of calories where your weight stays put. Eat above it, you gain. Eat below it, you lose. Everything in fueling the work starts here.</p>
+
+      <hr>
+
+      <h2>How to Estimate It</h2>
+
+      <p>The best method is also the simplest: <strong>track and respond.</strong> Weigh yourself daily for 2&ndash;3 weeks, track your calories honestly over the same period, and see which way the scale trends. If weight is flat, your intake equals your TDEE. If it&rsquo;s dropping, your intake is below TDEE by however much the drop implies. That&rsquo;s the real number for your body, your job, and your training &mdash; no formula needed.</p>
+
+      <p>If you want a starting estimate before you have data, multiply your bodyweight in pounds by <strong>14&ndash;16 for a moderately active lifter</strong> and <strong>16&ndash;18 if you&rsquo;re training hard 4&ndash;6 days a week plus an active job.</strong> A 220-lb lifter training 4 days a week lands around 3,080&ndash;3,520 calories. That&rsquo;s a starting point, not a prescription &mdash; run it for two weeks and let the scale correct you.</p>
+
+      <p>Activity trackers and their calorie burn numbers aren&rsquo;t the tool for this. Watches routinely overestimate lifting calories by wide margins, and they don&rsquo;t measure the biggest variable &mdash; NEAT. A desk worker and a contractor can lift identical programs and have TDEEs a thousand calories apart because one of them is on their feet all day. The scale and your food log beat the algorithm every time.</p>
+
+      <hr>
+
+      <h2>Using TDEE to Set Your Calories</h2>
+
+      <p>Once you know (or have a working estimate of) your TDEE, the decision is simple:</p>
+
+      <ul>
+        <li><strong>Building muscle (surplus):</strong> TDEE + 200&ndash;300 calories. Enough to support growth, small enough that the gains are mostly muscle. The scale should creep up roughly 0.25&ndash;0.5% of bodyweight per week.</li>
+        <li><strong>Losing fat (deficit):</strong> TDEE &minus; 300&ndash;500 calories. That&rsquo;s roughly 0.5&ndash;1 lb per week &mdash; about 0.3&ndash;0.5% of bodyweight for most lifters &mdash; without tanking your training.</li>
+        <li><strong>Recomposition (maintenance):</strong> eat at TDEE and let training drive the change. Slowest route, but real for lifters who qualify for it &mdash; newer lifters, lifters returning from a layoff, and lifters with plenty of fat to lose.</li>
+      </ul>
+
+      <p>TDEE isn&rsquo;t a fixed number. As you gain weight, it drifts up. As you diet down, it drifts down &mdash; and NEAT quietly drops when you&rsquo;re in a deficit, which is why fat loss stalls around week 6&ndash;8 even when &ldquo;nothing changed.&rdquo; Your TDEE moved. Recalculate every 2&ndash;4 weeks against your actual trend and adjust the target. This is autoregulation for your diet, the same principle that drives smart programming: run the plan, collect the data, adjust.</p>
+
+      <hr>
+
+      <h2>The Mistakes That Cost Lifters</h2>
+
+      <h3>Setting calories off a formula and never checking.</h3>
+      <p>A formula is a guess. If your weight trend doesn&rsquo;t match the plan after two weeks, the formula was wrong, not your body.</p>
+
+      <h3>Eating back workout calories.</h3>
+      <p>The watch said you burned 600 in the gym, so you added a 600-calorie dessert. The watch was wrong, and you just erased your deficit. Set calories from TDEE and the scale trend; ignore the exercise calorie number entirely.</p>
+
+      <h3>Changing the target every three days.</h3>
+      <p>TDEE-based eating needs 2&ndash;3 weeks of data to read a real trend. Water, sodium, and one big meal can swing the scale 2&ndash;3 pounds overnight. Judge the trend, not the morning.</p>
+
+      <h3>Treating a stall as a crisis.</h3>
+      <p>A two-week flat spot after six weeks of a deficit usually means TDEE dropped as NEAT declined &mdash; drop intake by 100&ndash;200 or add some daily steps, give it two more weeks. A two-week flat spot in a surplus usually means you&rsquo;re not eating as much as you think. Same fix, opposite direction: weigh the food.</p>
+
+      <hr>
+
+      <h2>The Takeaway</h2>
+
+      <p>TDEE is the one number that turns eating from a guess into a program variable. Estimate it with bodyweight and activity, confirm it with two weeks of tracking, set your target from the goal, and re-check it the way you&rsquo;d re-check a training max &mdash; regularly, honestly, and without drama. Lifters who know their number stop fighting their bodyweight and start using it.</p>
+
+    </article>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <span class="section-label" style="margin-bottom:16px;">FUEL THE WORK</span>
+      <h2>Stop guessing your food. Program it.</h2>
+      <p>CMS pairs adaptive programming with fueling guidance that treats nutrition like a training variable &mdash; measured, adjusted, honest. Start with the Bench Specialization or SBD track, free for 14 days.</p>
+      <a href="https://app.cmstrength.fit/signup" class="btn btn-primary">Start Free Trial &rarr;</a>
+    </div>
+
+    <!-- IN-SILO NAVIGATION -->
+    <div class="silo-next">
+      <span class="section-label">KEEP READING</span>
+      <div class="silo-grid">
+        <a class="silo-card" href="/blog/nutrition-is-a-skill">
+          <h4>Your Nutrition Is a Skill</h4>
+          <p>You don&rsquo;t have a discipline problem &mdash; you have an untrained skill. The principles that built your bench build the eating that fuels it.</p>
+        </a>
+        <a class="silo-card" href="/blog/carbs-for-powerlifting">
+          <h4>Carbs for Powerlifting</h4>
+          <p>Heavy sessions run on glycogen, not motivation. Daily amounts, peri-workout fueling, and recovery &mdash; with numbers you can follow.</p>
+        </a>
+        <a class="silo-card" href="/blog/nutrition-for-powerlifters-after-40">
+          <h4>Nutrition After 40</h4>
+          <p>Protein, recovery, and body composition when your metabolism stops cooperating &mdash; the masters nutrition playbook.</p>
+        </a>
+        <a class="silo-card" href="/blog/nutrition-for-female-powerlifters-over-40">
+          <h4>Female Powerlifters Over 40</h4>
+          <p>Hormones, recovery, and fueling when the old playbook stops working &mdash; nutrition for the masters lifter.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div><h4>Product</h4><ul>
+        <li><a href="/index#programs">Programs</a></li>
+        <li><a href="/index#engines">Engines</a></li>
+        <li><a href="/methodology/index">Methodology</a></li>
+        <li><a href="https://app.cmstrength.fit">Launch App</a></li>
+      </ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul></div>
+      <div><h4>Tools</h4><ul><li><a href="/tools/dot-score">DOT Score Calculator</a></li><li><a href="/tools/1rm-calculator">1RM Calculator</a></li></ul></div>
+      <div><h4>Launch</h4><p>Ready to train smarter? Start your 14-day trial.</p><a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a></div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket"><div class="ring-out"></div><div class="hub"><div class="hub-dot"></div></div></div>
+        <div><div class="name">CENTER MASS STRENGTH</div><div class="tagline">Adaptive powerlifting programming.</div></div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script src="/cms-nav.js"></script>
+  <script src="/cms-motion.js"></script>
+</body>
+</html>
