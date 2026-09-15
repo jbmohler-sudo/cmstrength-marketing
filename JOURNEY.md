@@ -176,3 +176,21 @@ Stripe trial → webhook → `trialing` → portal cancel sync).
 - **GSC = Domain property** for `cmstrength.fit` (not bare URL-prefix).
 - **Blog stays distinct from IronAtForty's structure** — no near-replica layouts.
 - **This repo ≠ the app.** App engine decisions live in `cms-completenew/JOURNEY.md`.
+
+## 2026-09-15 — Published "TDEE for Lifters" (F2, Fueling the Work)
+
+- New post: `public/blog/tdee-for-lifters.html` (27th blog post), live at
+  https://www.cmstrength.fit/blog/tdee-for-lifters
+- New hero/card image: `public/images/blog/tdee-for-lifters.jpg` (AI-generated,
+  dark food-scale + meal-prep shot matching site aesthetic)
+- Blog index (`public/blog.html`): added FUELING card, group count 02 -> 03 ARTICLES
+- Sitemap updated with the new URL (lastmod 2026-09-15)
+- Pre-publish fix (Jeff's call): deficit line corrected — the draft claimed a
+  300-500 kcal deficit yields 0.5-1%/week, which the math doesn't support.
+  Published as "roughly 0.5-1 lb per week, about 0.3-0.5% of bodyweight for most
+  lifters." Lesson: percentages are relative to bodyweight; don't print a blanket
+  % claim without tying it to pounds.
+- Silo-next cards link to existing fueling posts only (nutrition-is-a-skill,
+  carbs-for-powerlifting, nutrition-for-powerlifters-after-40,
+  nutrition-for-female-powerlifters-over-40). Protein post (F1) still a draft —
+  add the cross-link when it publishes.
