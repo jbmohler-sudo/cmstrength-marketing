@@ -201,3 +201,34 @@ Stripe trial → webhook → `trialing` → portal cancel sync).
   to `public/index.html` head, so Jeff can claim cmstrength.fit on the new
   separate Center Mass Strength Pinterest business account. Tag was not present
   before; verified by grep.
+
+## 2026-09-16 — Published F1/F3/F4 (Fueling the Work) under new publish-direct policy
+
+- Jeff gave standing approval: the blog writer now publishes directly on its
+  Mon/Wed/Fri runs and notifies him in chat; no more pre-approval, 5 PM review
+  job retired. This is the first publish under that policy.
+- New posts (all live, verified 200 on www.cmstrength.fit):
+  - `public/blog/protein-for-powerlifters.html` (F1) — daily targets, per-meal
+    distribution, training-day timing. https://www.cmstrength.fit/blog/protein-for-powerlifters
+  - `public/blog/smart-surplus-for-lifters.html` (F4) — how to run a smart
+    surplus. https://www.cmstrength.fit/blog/smart-surplus-for-lifters
+  - `public/blog/recomposition-for-powerlifters.html` (F3) — who recomp works
+    for, how to run it, when to pick a direction. https://www.cmstrength.fit/blog/recomposition-for-powerlifters
+- New hero/card images: `public/images/blog/{protein,smart-surplus,recomposition}-for-powerlifters.jpg`
+  (AI-generated, matching site aesthetic)
+- Blog index (`public/blog.html`): added 3 FUELING cards, group count 03 -> 06 ARTICLES
+- Sitemap updated with the 3 new URLs (lastmod 2026-09-16)
+- Silo-next cards cross-link the four fueling posts (tdee, protein, smart-surplus,
+  recomposition) + carbs-for-powerlifting / nutrition-for-powerlifters-after-40 —
+  fulfilling the "add the cross-link when it publishes" note from Sept 15
+- Pre-publish fixes (from review): protein post 250-lb low-end corrected
+  182 -> 181 g/day (113.4 kg x 1.6 = 181.4); surplus range standardized to
+  200-300 cal to match the live TDEE post (draft said 200-400)
+- Slugs: `smart-surplus-for-lifters` chosen over the longer
+  `eating-to-build-muscle` variant, consistent with short existing slugs
+- Stale TDEE draft archived out of the drafts folder (it was already live);
+  all four published draft files now in the content-outreach-engine goal's
+  hidden_files/ so they can't be republished
+- Push went through the GitHub REST API (git-database) because this shell has
+  no git HTTPS credential; local main reset to origin/main afterwards. Vercel
+  auto-deployed commit ab286fd — deployment READY, all three URLs verified live.
