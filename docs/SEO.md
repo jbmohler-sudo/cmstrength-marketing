@@ -33,9 +33,9 @@ authority site), which links DOWN to CMS. See §4.
 
 ---
 
-## 2. The Portfolio Link Model (CRITICAL — has teeth)
+## 2. The Portfolio Link Model (relaxed Sept 16, 2026)
 
-Three properties, one hub. Memorize this:
+Three properties, one hub:
 
 ```
         IronAtForty (HUB · ironatforty.com)
@@ -45,27 +45,31 @@ Three properties, one hub. Memorize this:
               ▼                    ▼
    Center Mass Strength      WizeMeals
    (pure product)            (pure product)
-        ✕ —— never link each other —— ✕
 ```
 
-- **IAF → CMS:** yes. IAF is the hub; it sends contextual editorial links + link
-  equity to CMS.
-- **CMS → IAF:** ❌ NEVER. Reciprocal links are detectable and undermine the whole
-  equity strategy. Link flow is one-directional.
-- **CMS ↔ WizeMeals:** ❌ NEVER, either direction. They are sibling products that
-  must look unrelated. Do not mention or link WizeMeals anywhere on CMS (this rule
-  caught a violation Jun 15: a WizeMeals link in the nutrition-is-a-skill blog post
-  was removed).
-- **CMS outbound (external):** **authority only** — PubMed, .gov, .edu, peer-reviewed
-  journals, recognized expert orgs. Never competitors, never sibling products, never
-  commercial. Authority citations make the product site *more* credible (see the
-  Lally 2010 / Morton 2018 citations added to the nutrition-is-a-skill post).
+**History:** the old strict-isolation rule ("products stay walled, never link each
+other") was a precaution for IronAtForty's automated publishing run (Sept 2026) —
+Jeff worried automation might dirty its link profile. The profile came back clean,
+so the restriction is **lifted** as of Sept 16, 2026. It was IronAtForty-specific,
+not a standing portfolio law.
+
+- **Cross-linking between portfolio properties is now allowed** where editorially
+  natural. A CMS post referencing a WizeMeals tool, or a masonry footer crediting
+  Doghouse Web, is fine.
+- **Credit/boilerplate footer links stay nofollow** (e.g. "Built by Doghouse Web"
+  → doghouseweb.com). Nofollow on boilerplate; follow is fine on genuine
+  editorial links.
+- **CMS outbound (external):** **authority-first** — PubMed, .gov, .edu,
+  peer-reviewed journals, recognized expert orgs. Sibling products are fine where
+  relevant; never competitors, never commercial link schemes. Authority citations
+  make the product site *more* credible (see the Lally 2010 / Morton 2018
+  citations added to the nutrition-is-a-skill post).
 - **CMS internal:** link freely to its own pages (/blog, /index#engines, /methodology,
   app.cmstrength.fit).
 
-> The footprint risk isn't any single link — it's two of Jeff's "independent"
-> properties publicly associating. The hub (IAF) does the connecting. The products
-> stay walled.
+> Sept 16, 2026: the two "violations" flagged in the portfolio audit (CMS
+> carbs-for-powerlifting post → WizeMeals ×2; masonry footer → Doghouse Web) are
+> compliant under this relaxed rule. Do not strip them; do not re-flag.
 
 ---
 
