@@ -53,9 +53,12 @@ Jeff worried automation might dirty its link profile. The profile came back clea
 so the restriction is **lifted** as of Sept 16, 2026. It was IronAtForty-specific,
 not a standing portfolio law.
 
-- **Cross-linking between portfolio properties is now allowed** where editorially
-  natural. A CMS post referencing a WizeMeals tool, or a masonry footer crediting
-  Doghouse Web, is fine.
+- **IronAtForty is link-out only:** IAF may link down to CMS, WizeMeals, etc. But no
+  portfolio property links TO ironatforty.com — Jeff doesn't want inbound links
+  pointing at it.
+- **Cross-linking between the other properties is now allowed** where editorially
+  natural (CMS ↔ WizeMeals, masonry → Doghouse, etc.). A CMS post referencing a
+  WizeMeals tool, or a masonry footer crediting Doghouse Web, is fine.
 - **Credit/boilerplate footer links stay nofollow** (e.g. "Built by Doghouse Web"
   → doghouseweb.com). Nofollow on boilerplate; follow is fine on genuine
   editorial links.
