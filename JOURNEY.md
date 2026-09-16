@@ -194,3 +194,10 @@ Stripe trial → webhook → `trialing` → portal cancel sync).
   carbs-for-powerlifting, nutrition-for-powerlifters-after-40,
   nutrition-for-female-powerlifters-over-40). Protein post (F1) still a draft —
   add the cross-link when it publishes.
+
+## 2026-09-16 — Pinterest domain verification tag added
+
+- Added `<meta name="p:domain_verify" content="9f2ad6bd4961c7503fddda9d989c4eec"/>`
+  to `public/index.html` head, so Jeff can claim cmstrength.fit on the new
+  separate Center Mass Strength Pinterest business account. Tag was not present
+  before; verified by grep.
