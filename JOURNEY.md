@@ -290,3 +290,14 @@ Stripe trial → webhook → `trialing` → portal cancel sync).
 - Push through the GitHub REST API (this shell has no git HTTPS credential);
   local main reset to origin/main afterwards. Vercel auto-deploy verified READY,
   both URLs returned 200 on www.cmstrength.fit.
+
+## 2026-09-23 — Published K1 (Meet Prep & The Big Three: the S4 cornerstone)
+
+- First post of the keyword-driven SEO cluster (K1–K10) under the publish-direct policy; writer runs ONE post per run; fueling backlog F1–F8 complete.
+- New post (35th blog post): `public/blog/meet-prep-guide.html` (K1, S4 cornerstone) — "The Complete Guide to Powerlifting Meet Prep." Target 2,000+ words: 2,773 body words (stripped). Targets `powerlifting meet prep` / `how to peak for a powerlifting meet` / `powerlifting taper` — the largest high-intent search space the site did not own (per silo-4 brief). Sections: competition as its own skill, pick-the-meet backward calendar (60-day floor), peak without maxing, taper (cut volume / keep intensity), weigh-in and weight management, attempt-selection math, meet-day execution. Myth-vs-reality diff table, one-rule-you-can-act-on-tonight callout, 5-question FAQ + JSON-LD (Article + FAQPage), 3 numbered references (Bosquet 2007 taper meta-analysis; Pritchard et al. 2016 NZ elite powerlifters taper; 2020 Sports tapering/peaking review PMC7552788 — all verified real, no invented studies).
+- New hero/card image: `public/images/blog/meet-prep-guide.jpg` (AI-generated, dark platform/spotlight/chalk shot matching site aesthetic, no text or logos)
+- Blog index (`public/blog.html`): NEW group "Meet Prep & The Big Three" created with the pillar card, group count 01 ARTICLE (silo-architecture S4 now exists on the index; future K-spokes: squat programming, bench specialization, deadlift programming, peak/taper spoke)
+- Sitemap updated with the new URL (lastmod 2026-09-23)
+- Silo-next cards cross-link the periodization pillar + meet-day-nutrition (cross-silo by design: S4 sits between S2 and S3)
+- No-orphan gate: added contextual inbound link to meet-prep-guide from the periodization cornerstone (fixes the previously dangling "week-by-week protocol is its own guide" forward reference)
+- Push through the GitHub REST API (git-database; this shell has no git HTTPS credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
