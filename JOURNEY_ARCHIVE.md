@@ -2,6 +2,136 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-09-16 — Published F1/F3/F4 (Fueling the Work) under new publish-direct policy
+
+- Jeff gave standing approval: the blog writer now publishes directly on its
+  Mon/Wed/Fri runs and notifies him in chat; no more pre-approval, 5 PM review
+  job retired. This is the first publish under that policy.
+- New posts (all live, verified 200 on www.cmstrength.fit):
+  - `public/blog/protein-for-powerlifters.html` (F1) — daily targets, per-meal
+    distribution, training-day timing. https://www.cmstrength.fit/blog/protein-for-powerlifters
+  - `public/blog/smart-surplus-for-lifters.html` (F4) — how to run a smart
+    surplus. https://www.cmstrength.fit/blog/smart-surplus-for-lifters
+  - `public/blog/recomposition-for-powerlifters.html` (F3) — who recomp works
+    for, how to run it, when to pick a direction. https://www.cmstrength.fit/blog/recomposition-for-powerlifters
+- New hero/card images: `public/images/blog/{protein,smart-surplus,recomposition}-for-powerlifters.jpg`
+  (AI-generated, matching site aesthetic)
+- Blog index (`public/blog.html`): added 3 FUELING cards, group count 03 -> 06 ARTICLES
+- Sitemap updated with the 3 new URLs (lastmod 2026-09-16)
+- Silo-next cards cross-link the four fueling posts (tdee, protein, smart-surplus,
+  recomposition) + carbs-for-powerlifting / nutrition-for-powerlifters-after-40 —
+  fulfilling the "add the cross-link when it publishes" note from Sept 15
+- Pre-publish fixes (from review): protein post 250-lb low-end corrected
+  182 -> 181 g/day (113.4 kg x 1.6 = 181.4); surplus range standardized to
+  200-300 cal to match the live TDEE post (draft said 200-400)
+- Slugs: `smart-surplus-for-lifters` chosen over the longer
+  `eating-to-build-muscle` variant, consistent with short existing slugs
+- Stale TDEE draft archived out of the drafts folder (it was already live);
+  all four published draft files now in the content-outreach-engine goal's
+  hidden_files/ so they can't be republished
+- Push went through the GitHub REST API (git-database) because this shell has
+  no git HTTPS credential; local main reset to origin/main afterwards. Vercel
+  auto-deployed commit ab286fd — deployment READY, all three URLs verified live.
+
+### 2026-09-16 — Pinterest domain verification tag added
+
+- Added `<meta name="p:domain_verify" content="9f2ad6bd4961c7503fddda9d989c4eec"/>`
+  to `public/index.html` head, so Jeff can claim cmstrength.fit on the new
+  separate Center Mass Strength Pinterest business account. Tag was not present
+  before; verified by grep.
+
+### 2026-09-15 — Published "TDEE for Lifters" (F2, Fueling the Work)
+
+- New post: `public/blog/tdee-for-lifters.html` (27th blog post), live at
+  https://www.cmstrength.fit/blog/tdee-for-lifters
+- New hero/card image: `public/images/blog/tdee-for-lifters.jpg` (AI-generated,
+  dark food-scale + meal-prep shot matching site aesthetic)
+- Blog index (`public/blog.html`): added FUELING card, group count 02 -> 03 ARTICLES
+- Sitemap updated with the new URL (lastmod 2026-09-15)
+- Pre-publish fix (Jeff's call): deficit line corrected — the draft claimed a
+  300-500 kcal deficit yields 0.5-1%/week, which the math doesn't support.
+  Published as "roughly 0.5-1 lb per week, about 0.3-0.5% of bodyweight for most
+  lifters." Lesson: percentages are relative to bodyweight; don't print a blanket
+  % claim without tying it to pounds.
+- Silo-next cards link to existing fueling posts only (nutrition-is-a-skill,
+  carbs-for-powerlifting, nutrition-for-powerlifters-after-40,
+  nutrition-for-female-powerlifters-over-40). Protein post (F1) still a draft —
+  add the cross-link when it publishes.
+
+### 2026-08-28 — GSC sitemap fetch war: DNS migration + host-keyed theory
+
+**Did:** Exhausted the remaining fetch theories on the never-downloaded GSC sitemap
+(`lastDownloaded: None` since 7/30 on every URL/property): URL Inspection shows
+`pageFetchState: SUCCESSFUL` on the homepage (15 pages indexed) so Google CAN reach the
+site; every Google fetcher UA returns 200; IPv6 ruled out (approved sites have no AAAA
+either); new URL-prefix property showed "Couldn't fetch" (network-level). Migrated
+cmstrength.fit DNS from Vercel nameservers → Namecheap BasicDNS (only portfolio site on
+Vercel DNS; 100% correlation with the only sitemap-fetch failure). Rebuilt full zone at
+Namecheap and verified live: CNAME www + app → Vercel edge, apex A 216.198.79.65 → 307 →
+www (Vercel binding), MX ImprovMX @ + SES `send`, SPF @ + `send`, google-site-verification,
+Resend DKIM, CAA ×3, old efwd SPF auto-cleared by Custom MX switch. Sitemap serves
+`200 application/xml` end-to-end through the new apex chain.
+**Decided:** DNS migration locked (was the last testable differentiator). Sitemap served
+from fresh subdomain `sitemap.cmstrength.fit` to test host-keyed failure (WizeMeals' blog
+sitemap on `blog.wizemeals.com` proves separate hosts get clean slates).
+**Killed:** The "file/config/DNS is broken" theories — every one verified healthy.
+**Deferred:** Push commit `1301229` (sitemap-2026.xml + robots) — still local, will push
+with the next deploy. Hermes update (real-profile browsing) blocked on Windows .pyd locks.
+**State after:** Domain fully on Namecheap BasicDNS, zone verified live from outside;
+`sitemap.cmstrength.fit` bound to marketing project on Vercel; GSC still shows red
+"Couldn't fetch" on both properties (pre-DNS-move results).
+**Next:** Add CNAME `sitemap` → `cname.vercel-dns-017.com.` at Namecheap; verify the
+subdomain serves 200; submit `https://sitemap.cmstrength.fit/sitemap-2026.xml` to the
+Domain property; watch `lastDownloaded`.
+
+### 2026-08-24 — Eliminate duplicate sitemap drift
+
+**Did:** Removed the stale physical `public/sitemap-main.xml` duplicate and added a permanent
+Vercel redirect from `/sitemap-main.xml` to canonical `/sitemap.xml`. Confirmed the canonical
+sitemap remains the only robots-advertised source and the only file publishers must update.
+**Decided:** `sitemap.xml` is the sole physical sitemap; the legacy name is compatibility-only.
+**Killed:** Manual synchronization of two sitemap files.
+**Deferred:** Google-side sitemap processing; repeated submission would only reset the queue.
+**State after:** Commit `46a78f1` is on `origin/main` and deployed READY in Vercel. Production
+returns one `308` from `/sitemap-main.xml` to `/sitemap.xml`; the canonical endpoint returns
+the repository XML as `200 application/xml` to Googlebot. GSC already has the canonical URL
+submitted, and its Aug 24 live inspection reports "URL is available to Google."
+**Next:** Leave the existing GSC submission alone and monitor for the Sitemaps report to update.
+
+### 2026-08-16 — Cornerstone review pass + publish (4 drafts)
+
+**Did:** Ran a full review pass on the first cornerstone draft set (01 Adaptive, 02 Masters
+Link-Hygiene, 03 Periodization, 04 Nutrition) — CORE-EEAT-style audit (dead links, em-dash
+budget, product claims vs engine ground truth). Fixed: IPF claim corrected to what the source
+supports (masters divisions extend into the 70-plus classes), Bench v2 canonicalized at 12 weeks
+(3/1/3/1/3/1) in Draft 03 + `program-comparison` + FAQ copy (builder-verified against
+`buildMacrocycle`/FAQ.jsx), all em-dash budgets brought under 2/400, dead spoke links deferred
+(not deleted — re-add at spoke publish), word-count figures corrected (02's 2,052 claim was not
+reproducible; true 1,319, floor waived by Jeff 2026-08-16). Review re-audit: blocker set empty.
+Published under Jeff approval: 01 → `/blog/what-is-adaptive-powerlifting-programming` (new),
+03 → `/blog/the-complete-guide-to-powerlifting-periodization` (new) + `macrocycle-explained`
+converted to redirect + 5 inbound links retargeted + sitemap updated, 04 → replaced
+`nutrition-is-a-skill` (same slug, expanded). Added blog cards + SEO.md word-count method log.
+**Decided:** word-count floor waived for established solid articles (never pad); 02's
+`powerlifting-over-50-readiness` stays at 1,319.
+**State after:** pushed to `origin/main` (Vercel deploys) — commit SHA on Content's report.
+**Next:** GSC recheck after deploy; GA4 wiring for CMS (Jeff, 2026-08-17).
+
+### 2026-08-16 — Beta copy sweep + go-live push
+
+**Did:** Killed the remaining beta framing that Phase 5 missed — every page outside
+`index.html` still carried `CLAIM BETA SLOT` nav buttons, `#join-beta` footer links,
+and beta CTA copy (16 files: blog posts, contact, privacy, tools, methodology
+subpages). Global exact-string sweep + targeted patches → all CTAs now
+`Start Free Trial` → `https://app.cmstrength.fit/signup`, footer copy → 14-day
+trial. Verified `grep -ri beta public/` = clean on live pages (backup files
+excluded). Pushed 3 unpushed funnel commits + sweep (9f2bef5 → origin/main);
+Vercel deployed. Live smoke test confirmed the whole funnel (app checkout →
+Stripe trial → webhook → `trialing` → portal cancel sync).
+**Decided:** none new — executed locked Phase 5/7.
+**Killed:** last `#join-beta` anchors and beta wording site-wide.
+**State after:** www.cmstrength.fit reads as a subscription product end-to-end.
+
 ### 2026-08-15 — Subscription funnel: beta framing → paid product
 
 **Did:** Replaced the beta funnel with a subscription funnel per the CMS Subscription
