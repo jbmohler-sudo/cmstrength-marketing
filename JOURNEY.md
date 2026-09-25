@@ -92,6 +92,17 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
+### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
+
+- Second keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `front squat` from the OpenSEO saved-keyword queue: 33,100 vol, KD 0 — the highest-volume unused keyword, fully uncovered on the site. All 10 saved keywords were still unused, so no refill research was needed.
+- New post (36th blog post): `public/blog/front-squat-guide.html` — "Front Squat: The Complete Technique and Programming Guide." Sections: why it belongs in a powerlifting program (quad drive, torso audit, Gullett 2009 joint data), three rack positions (clean grip / cross-arm / straps, honest pros-cons), the rep step by step, the five mistakes everyone makes with fixes, front-vs-back head-to-head diff table, programming (75–85% of back squat, 3–6 reps at RPE ≤ 8.5, 4-week starter block, peak/taper placement), front squats after 40. 6-question FAQ + JSON-LD (Article + FAQPage), 2 verified references (Gullett et al. 2009, PubMed 19002072; Schoenfeld 2010, PubMed 20182386 — no invented studies).
+- New hero/card image: `public/images/blog/front-squat-guide.jpg` (AI-generated, dark garage-gym front squat, ember rim light matching site aesthetic, no text/logos)
+- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 01 → 02 ARTICLES); no re-indenting, per checklist
+- Sitemap updated with the new URL (lastmod 2026-09-25)
+- Silo-next cards cross-link low-bar-squat-with-stiff-shoulders + the-complete-guide-to-powerlifting-periodization
+- No-orphan gate: inbound link to front-squat-guide added from the front-squat bullet in low-bar-squat-with-stiff-shoulders
+- Push through the GitHub REST API git-database flow (no shell git credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
+
 ### 2026-09-25 — Agent rules in-repo (new AGENTS.md); journal repaired (Claude)
 **Did:** Cross-repo audit. Muse (the blog writer, `jbmohler-sudo`) publishes here as intended, but its six session entries (9/15–9/23) were appended at the end of this file below Hard Rules, and Current State was still dated 8/28. Muse also made non-post changes that the publish-direct approval doesn't cover: GA4 site-wide tag `G-5V676F7J2E` (b5d4d67, 9/23), Pinterest verification tag (e28e3d4, 9/16), and `docs/SEO.md` link-policy edits (76a93ba relaxed, then 0cc2cb9 re-tightened, both 9/16 — the Hard Rules still hold). One publish commit re-indented all of `public/blog.html` (a71d8eb). Fix: new AGENTS.md (shared rules + publishing checklist: post + blog.html card + sitemap `<loc>`, no re-indenting; publish-direct covers posts only) and CLAUDE.md imports it; strays folded into this Session Log newest-first (headings demoted only); cap applied; Current State updated; answered Open Question removed.
 **Decided:** One shipping rule in every repo (AGENTS.md). Jeff's 9/16 publish-direct approval covers blog posts only; tracking tags, site-wide code, and SEO/link-policy docs need his OK.
