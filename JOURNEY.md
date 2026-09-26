@@ -13,7 +13,7 @@
 ## Current State
 > Updated: 2026-09-25
 
-- **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs) and DOTS retitle live. Next: the calculator build-out in the Session Log.
+- **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
   cornerstone are live; GA4 `G-5V676F7J2E` site-wide (9/23); Pinterest verification + pin images. Agent rules
   now live in [AGENTS.md](AGENTS.md). _Bullets below are from 8/28 and may be dated (post counts, pillar sizes)._
@@ -80,6 +80,7 @@ which also makes its content more credible on health-adjacent topics.
 | Serve the sitemap from fresh subdomain `sitemap.cmstrength.fit` | WizeMeals' blog sitemap works because it lives on a separate host; failure appears host-keyed, not file/config-keyed | 2026-08-28 | Testing |
 | Apex → www stays 307 (Vercel binding, survives DNS move) | Matches approved WizeMeals apex behavior; 301 was never the blocker | 2026-08-28 | Locked |
 | One shipping rule across all repos (AGENTS.md); publish-direct approval covers posts only | Cloud agents (Muse) couldn't see rules kept in CLAUDE.md / `../` files; the local backup pushes any commit on `main`, so "commit but don't push" rules silently shipped | 2026-09-25 | Locked |
+| Every publish adds its `<loc>` to BOTH `sitemap.xml` and `sitemap-2026.xml` | robots.txt serves sitemap-2026; checklist naming only sitemap.xml left 14 URLs out of the served sitemap | 2026-09-26 | Locked |
 
 ---
 
@@ -93,13 +94,14 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
-### 2026-09-26 — SEO audit; sitemaps synced; DOT retitled to DOTS (dda1d1f, bf598eb)
+### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
 **Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
-**Decided:** —
+**Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
 **Killed:** —
-**Deferred:** AGENTS.md publishing checklist still names only `sitemap.xml`; needs Jeff's OK to add `sitemap-2026.xml` (or make one file serve both URLs).
+**Also did:** AGENTS.md dual-sitemap rule (a8e9fe3, Jeff approved). Expanded `/tools/1rm-calculator` (4477f5a): optional RPE per lift (reps in reserve added back before Epley), Brzycki alongside, per-lift plate-rounded % chart and rep max table, new guide sections (RPE to %1RM, reps to %1RM, 3RM/5RM conversion, Epley vs Brzycki, input rules), FAQ 4 to 7, 2 PubMed refs, canonical/OG, WebApplication + FAQPage JSON-LD, links out to RPE/submaximal/meet-prep/after-40. Tested in headless Chromium (desktop + 390px, no JS errors, no horizontal scroll).
+**Deferred:** Single physical sitemap serving both URLs (would end drift for good) left for later.
 **State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
-**Next:** Expand 1RM page (90.5k/mo, KD 15, at #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
+**Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
 
 ### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
 
