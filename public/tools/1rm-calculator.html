@@ -11,39 +11,79 @@
     gtag('js', new Date());
     gtag('config', 'G-5V676F7J2E');
   </script>
-  <title>Free 1RM Calculator — Estimate Your One Rep Max | Center Mass Strength</title>
-  <meta name="description" content="Free one rep max calculator for squat, bench press, and deadlift. Enter your weight and reps to estimate your 1RM using the Epley formula. Calculate your estimated powerlifting total.">
+  <title>1RM Calculator: Estimate Your One Rep Max (With RPE) | CMS</title>
+  <meta name="description" content="Free 1RM calculator with RPE. Estimate your one rep max from any set, then get a percentage chart and rep max table for squat, bench and deadlift.">
+  <link rel="canonical" href="https://www.cmstrength.fit/tools/1rm-calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta property="og:title" content="1RM Calculator: Estimate Your One Rep Max (With RPE)" />
+  <meta property="og:description" content="Estimate your one rep max from any set, adjust for RPE, and get a full percentage chart and rep max table." />
+  <meta property="og:url" content="https://www.cmstrength.fit/tools/1rm-calculator" />
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="1RM Calculator: Estimate Your One Rep Max (With RPE)" />
+  <meta name="twitter:description" content="Estimate your one rep max from any set, adjust for RPE, and get a full percentage chart and rep max table." />
+  <meta name="twitter:image" content="https://www.cmstrength.fit/images/blog/hero-masters.jpg" />
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- JSON-LD FAQ Schema -->
+  <!-- JSON-LD: WebApplication + FAQ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "How accurate is a 1RM calculator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Within a few percent, if the input set was genuinely challenging — 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy." }
+        "@type": "WebApplication",
+        "name": "1RM Calculator",
+        "url": "https://www.cmstrength.fit/tools/1rm-calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "description": "Estimate your one rep max from weight, reps and RPE, with a percentage chart and rep max table.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": { "@type": "Organization", "name": "Center Mass Strength", "url": "https://www.cmstrength.fit/" }
       },
       {
-        "@type": "Question",
-        "name": "What rep range gives the best 1RM estimate?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Two to six reps taken close to failure. The formulas agree closely in that range. Past about 10 reps the estimate drifts, because you're testing endurance more than maximal strength." }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I test my true 1RM instead of estimating it?",
-        "acceptedAnswer": { "@type": "Answer", "text": "For programming purposes, no need. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform." }
-      },
-      {
-        "@type": "Question",
-        "name": "Which formula does this 1RM calculator use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The Epley formula: 1RM = weight × (1 + reps ÷ 30). It is the most widely used estimator in powerlifting programming." }
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How accurate is a 1RM calculator?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Within a few percent, if the input set was genuinely hard: 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy, which is why this calculator lets you enter RPE." }
+          },
+          {
+            "@type": "Question",
+            "name": "What rep range gives the best 1RM estimate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Two to six reps taken close to failure. That set is close enough to a true max effort that the formula has little to extrapolate. Past about 10 reps the estimate drifts, because you are testing endurance more than maximal strength." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I convert a 3RM or 5RM to a 1RM?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Multiply the weight by (1 + reps / 30). A 3RM of 275 lb works out to about 303 lb. A 5RM of 225 lb works out to about 263 lb. Or enter the set above and the calculator does it for you." }
+          },
+          {
+            "@type": "Question",
+            "name": "How does RPE change the 1RM estimate?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RPE tells the calculator how many reps you left in the tank. RPE 10 means none, RPE 9 means one, RPE 8 means two. The calculator adds those reps back before running the formula, so 5 reps at RPE 8 is treated like a 7-rep max." }
+          },
+          {
+            "@type": "Question",
+            "name": "What percentage of my 1RM is 5 reps?",
+            "acceptedAnswer": { "@type": "Answer", "text": "About 86% by the Epley formula, if the set is taken to failure. At RPE 8, 5 reps lands closer to 81%." }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I test my true 1RM instead of estimating it?",
+            "acceptedAnswer": { "@type": "Answer", "text": "For programming, no. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which formula does this 1RM calculator use?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Epley, 1RM = weight x (1 + reps / 30), as the main number, with Brzycki, 1RM = weight x 36 / (37 - reps), shown alongside. Brzycki reads a few percent lower from low-rep sets, and the two meet at 10 reps." }
+          }
+        ]
       }
     ]
   }
@@ -278,6 +318,37 @@
       margin-right: 10px;
     }
     .faq-a { color: var(--muted); font-size: 15px; line-height: 1.65; margin-top: 10px; }
+    /* --- Expanded 1RM: RPE input, results, charts --- */
+    .orm-input-row.has-rpe { grid-template-columns: 1.3fr 0.6fr 0.6fr; }
+    .orm-alt {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      color: var(--faint); text-transform: uppercase; margin-top: 8px;
+    }
+    .orm-note {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      color: var(--dim); text-transform: uppercase; text-align: center; margin: -24px 0 36px;
+    }
+    .orm-charts { display: none; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .orm-charts.visible { display: block; }
+    .orm-charts .toggle-row { justify-content: center; margin-bottom: 24px; }
+    .orm-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .orm-chart-grid .zone-card { margin-top: 0; }
+    .orm-chart-grid .zone-table { min-width: 0; }
+    .orm-chart-grid .zone-table td, .orm-chart-grid .zone-table th { padding: 10px 18px; }
+    .orm-chart-cap {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase; padding: 16px 18px 0;
+    }
+    .zone-table td.num { font-family: var(--font-mono); color: var(--bone); }
+    .rule-list { margin: 18px 0 0 20px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .rule-list li + li { margin-top: 10px; }
+    .rule-list strong { color: var(--bone); font-weight: 600; }
+    .guide-body a, .rule-list a, .references a { color: var(--accent); }
+    .references { margin: 18px 0 0 20px; color: var(--dim); font-size: 14px; line-height: 1.6; }
+    .references li + li { margin-top: 8px; }
+    @media (max-width: 760px) {
+      .orm-chart-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -322,7 +393,7 @@
       <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
         <span class="accent">1RM</span> CALCULATOR
       </h1>
-      <p class="lede" style="max-width:560px;margin-top:20px;">Estimate your one rep max for squat, bench, and deadlift from any working set. Powered by the Epley formula.</p>
+      <p class="lede" style="max-width:560px;margin-top:20px;">Estimate your one rep max from any working set. Add RPE if you left reps in the tank, then get your full percentage chart and rep maxes.</p>
     </div>
 
     <section class="tool-section">
@@ -341,10 +412,9 @@
 
         <!-- Three lift cards -->
         <div class="orm-grid">
-          <!-- SQUAT -->
           <div class="orm-lift-card">
             <div class="lift-name"><span class="accent">SQ</span> SQUAT</div>
-            <div class="orm-input-row">
+            <div class="orm-input-row has-rpe">
               <div class="input-block">
                 <label for="orm-sq-wt">WEIGHT</label>
                 <input type="number" id="orm-sq-wt" placeholder="—" min="0" step="0.1">
@@ -353,17 +423,21 @@
                 <label for="orm-sq-reps">REPS</label>
                 <input type="number" id="orm-sq-reps" placeholder="—" min="1" max="30" step="1">
               </div>
+              <div class="input-block">
+                <label for="orm-sq-rpe">RPE</label>
+                <input type="number" id="orm-sq-rpe" placeholder="10" min="6" max="10" step="0.5">
+              </div>
             </div>
             <div class="orm-result-card" id="orm-sq-result">
               <div class="orm-label">ESTIMATED 1RM</div>
               <div class="orm-value"><span id="orm-sq-val">—</span> <span class="orm-unit" id="orm-sq-unit">LB</span></div>
+              <div class="orm-alt" id="orm-sq-alt"></div>
             </div>
           </div>
 
-          <!-- BENCH -->
           <div class="orm-lift-card">
             <div class="lift-name"><span class="accent">BP</span> BENCH</div>
-            <div class="orm-input-row">
+            <div class="orm-input-row has-rpe">
               <div class="input-block">
                 <label for="orm-bp-wt">WEIGHT</label>
                 <input type="number" id="orm-bp-wt" placeholder="—" min="0" step="0.1">
@@ -372,17 +446,21 @@
                 <label for="orm-bp-reps">REPS</label>
                 <input type="number" id="orm-bp-reps" placeholder="—" min="1" max="30" step="1">
               </div>
+              <div class="input-block">
+                <label for="orm-bp-rpe">RPE</label>
+                <input type="number" id="orm-bp-rpe" placeholder="10" min="6" max="10" step="0.5">
+              </div>
             </div>
             <div class="orm-result-card" id="orm-bp-result">
               <div class="orm-label">ESTIMATED 1RM</div>
               <div class="orm-value"><span id="orm-bp-val">—</span> <span class="orm-unit" id="orm-bp-unit">LB</span></div>
+              <div class="orm-alt" id="orm-bp-alt"></div>
             </div>
           </div>
 
-          <!-- DEADLIFT -->
           <div class="orm-lift-card">
             <div class="lift-name"><span class="accent">DL</span> DEADLIFT</div>
-            <div class="orm-input-row">
+            <div class="orm-input-row has-rpe">
               <div class="input-block">
                 <label for="orm-dl-wt">WEIGHT</label>
                 <input type="number" id="orm-dl-wt" placeholder="—" min="0" step="0.1">
@@ -391,13 +469,19 @@
                 <label for="orm-dl-reps">REPS</label>
                 <input type="number" id="orm-dl-reps" placeholder="—" min="1" max="30" step="1">
               </div>
+              <div class="input-block">
+                <label for="orm-dl-rpe">RPE</label>
+                <input type="number" id="orm-dl-rpe" placeholder="10" min="6" max="10" step="0.5">
+              </div>
             </div>
             <div class="orm-result-card" id="orm-dl-result">
               <div class="orm-label">ESTIMATED 1RM</div>
               <div class="orm-value"><span id="orm-dl-val">—</span> <span class="orm-unit" id="orm-dl-unit">LB</span></div>
+              <div class="orm-alt" id="orm-dl-alt"></div>
             </div>
           </div>
         </div>
+        <p class="orm-note">RPE is optional. Leave it blank for a set taken to failure. Any lift works in any slot.</p>
 
         <!-- Calculate -->
         <div class="calc-row">
@@ -416,6 +500,33 @@
             </div>
           </div>
         </div>
+
+        <!-- Personal charts -->
+        <div class="orm-charts" id="orm-charts" aria-live="polite">
+          <div class="toggle-row">
+            <div class="toggle-group">
+              <span class="toggle-label">CHART FOR</span>
+              <div class="toggle-pill" id="orm-chart-toggle"></div>
+            </div>
+          </div>
+          <div class="orm-chart-grid">
+            <div class="zone-card">
+              <p class="orm-chart-cap">Percentage chart</p>
+              <table class="zone-table">
+                <thead><tr><th scope="col">% of 1RM</th><th scope="col">Weight</th></tr></thead>
+                <tbody id="orm-pct-body"></tbody>
+              </table>
+            </div>
+            <div class="zone-card">
+              <p class="orm-chart-cap">Rep maxes</p>
+              <table class="zone-table">
+                <thead><tr><th scope="col">Reps</th><th scope="col">Weight</th></tr></thead>
+                <tbody id="orm-rm-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <p class="orm-note" id="orm-round-note" style="margin:18px 0 0;"></p>
+        </div>
       </div>
 
       <!-- Tool guide content -->
@@ -426,14 +537,69 @@
           <p class="guide-label">The method</p>
           <h2 class="guide-h">How the estimate works</h2>
           <div class="guide-body">
-            <p>A one rep max is the heaviest weight you can lift for one clean rep. Testing it directly is slow — every near-max attempt needs full recovery between tries — and past 40 it is often not worth the injury risk.</p>
-            <p>So this page estimates it instead. The Epley formula is the most widely used estimator in powerlifting programming:</p>
+            <p>A one rep max is the heaviest weight you can lift for one clean rep. Testing it directly is slow, because every near-max attempt needs full recovery, and past 40 it is often not worth the injury risk.</p>
+            <p>So this page estimates it from a set you already did. The main number uses the Epley formula, the most common estimator in powerlifting programming:</p>
           </div>
           <div class="formula-card">
             <span class="formula">1RM = WEIGHT &times; (1 + REPS &divide; 30)</span>
           </div>
           <div class="guide-body">
-            <p>For the tightest estimate, log a <strong>challenging set of 2–6 reps taken close to failure</strong>. Past about 10 reps the number goes loose — at that point the set is testing endurance more than maximal strength.</p>
+            <p>For the tightest estimate, log a <strong>hard set of 2 to 6 reps taken close to failure</strong>. That set is already near a max effort, so the formula has little to guess. Past about 10 reps the number goes loose, because the set is testing endurance more than maximal strength.</p>
+            <p>Under each result you will also see the Brzycki estimate. More on why below.</p>
+          </div>
+        </section>
+
+        <!-- RPE -->
+        <section class="guide-sec">
+          <p class="guide-label">Reps in reserve</p>
+          <h2 class="guide-h">Why this calculator asks for RPE</h2>
+          <div class="guide-body">
+            <p>Most 1RM calculators assume every set went to failure. Yours probably did not. A set of 5 that had two more reps in it is not a 5-rep max, and plugging it in as one underestimates you.</p>
+            <p>RPE fixes that. On the reps-in-reserve scale used in powerlifting, <strong>RPE 10 means nothing left, RPE 9 means one rep left, RPE 8 means two</strong> [1]. The calculator adds the reps you left back before it runs the formula, so 5 reps at RPE 8 is treated like a 7-rep max. Lifters rate this scale reasonably well, and they get better at it with practice [1][2].</p>
+            <p>New to RPE? Start with <a href="/blog/rpe-for-powerlifting">RPE for powerlifting</a>, then come back.</p>
+          </div>
+          <div class="zone-card">
+            <table class="zone-table">
+              <thead><tr><th scope="col">Reps</th><th scope="col">RPE 10</th><th scope="col">RPE 9</th><th scope="col">RPE 8</th><th scope="col">RPE 7</th></tr></thead>
+              <tbody><tr><td class="zone-pct">1</td><td class="num">100%</td><td class="num">94%</td><td class="num">91%</td><td class="num">88%</td></tr><tr><td class="zone-pct">2</td><td class="num">94%</td><td class="num">91%</td><td class="num">88%</td><td class="num">86%</td></tr><tr><td class="zone-pct">3</td><td class="num">91%</td><td class="num">88%</td><td class="num">86%</td><td class="num">83%</td></tr><tr><td class="zone-pct">4</td><td class="num">88%</td><td class="num">86%</td><td class="num">83%</td><td class="num">81%</td></tr><tr><td class="zone-pct">5</td><td class="num">86%</td><td class="num">83%</td><td class="num">81%</td><td class="num">79%</td></tr><tr><td class="zone-pct">6</td><td class="num">83%</td><td class="num">81%</td><td class="num">79%</td><td class="num">77%</td></tr></tbody>
+            </table>
+          </div>
+          <div class="guide-body">
+            <p>Read it as "% of 1RM." Three reps at RPE 8 sits around 86%. These values come straight from the Epley formula, so treat them as a starting point, not a law. Your own chart will drift a few points depending on the lift and how you are built.</p>
+          </div>
+        </section>
+
+        <!-- Percentage chart -->
+        <section class="guide-sec">
+          <p class="guide-label">1RM chart</p>
+          <h2 class="guide-h">Reps to percentage of 1RM</h2>
+          <p class="guide-intro">How much of your max each rep count uses, for a set taken to failure:</p>
+          <div class="zone-card">
+            <table class="zone-table">
+              <thead><tr><th scope="col">Reps to failure</th><th scope="col">% of 1RM</th></tr></thead>
+              <tbody><tr><td class="zone-pct">1 rep</td><td class="num">100%</td></tr><tr><td class="zone-pct">2 reps</td><td class="num">94%</td></tr><tr><td class="zone-pct">3 reps</td><td class="num">91%</td></tr><tr><td class="zone-pct">4 reps</td><td class="num">88%</td></tr><tr><td class="zone-pct">5 reps</td><td class="num">86%</td></tr><tr><td class="zone-pct">6 reps</td><td class="num">83%</td></tr><tr><td class="zone-pct">7 reps</td><td class="num">81%</td></tr><tr><td class="zone-pct">8 reps</td><td class="num">79%</td></tr><tr><td class="zone-pct">9 reps</td><td class="num">77%</td></tr><tr><td class="zone-pct">10 reps</td><td class="num">75%</td></tr><tr><td class="zone-pct">12 reps</td><td class="num">71%</td></tr></tbody>
+            </table>
+          </div>
+          <div class="guide-body">
+            <p><strong>Converting a 3RM or 5RM:</strong> multiply the weight by (1 + reps &divide; 30). A 3RM of 275 lb is about a 303 lb max. A 5RM of 225 lb is about 263 lb. Going the other way, divide your max by the same number to find a rep target: a 315 lb squatter should expect around 270 lb for 5.</p>
+          </div>
+        </section>
+
+        <!-- Formulas -->
+        <section class="guide-sec">
+          <p class="guide-label">Formulas</p>
+          <h2 class="guide-h">Epley vs Brzycki</h2>
+          <div class="zone-card">
+            <table class="zone-table">
+              <thead><tr><th scope="col">Formula</th><th scope="col">Equation</th><th scope="col">Behavior</th></tr></thead>
+              <tbody>
+                <tr><td class="zone-name">Epley</td><td class="num">w &times; (1 + r/30)</td><td>The powerlifting default. Slightly more generous from low-rep sets.</td></tr>
+                <tr><td class="zone-name">Brzycki</td><td class="num">w &times; 36 / (37 &minus; r)</td><td>About 4% lower from a 3 to 5 rep set. Meets Epley at 10 reps.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="guide-body">
+            <p>Neither is "right." They bracket the answer. If you are coming back from a layoff or a bad week, program off the lower number. If the input set was a clean, honest top set, Epley is fine.</p>
           </div>
         </section>
 
@@ -452,7 +618,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td class="zone-pct">90–95%</td><td class="zone-name">Peaking</td><td>Singles &amp; doubles — meet prep</td></tr>
+                <tr><td class="zone-pct">90–95%</td><td class="zone-name">Peaking</td><td>Singles &amp; doubles for meet prep</td></tr>
                 <tr><td class="zone-pct">80–90%</td><td class="zone-name">Heavy strength</td><td>Sets of 2–5</td></tr>
                 <tr><td class="zone-pct">70–80%</td><td class="zone-name">Strength volume</td><td>Sets of 4–8</td></tr>
                 <tr><td class="zone-pct">60–70%</td><td class="zone-name">Hypertrophy</td><td>Sets of 6–10</td></tr>
@@ -460,12 +626,31 @@
               </tbody>
             </table>
           </div>
+          <div class="guide-body">
+            <p>Most of your training should live in the 70 to 85% band. That is where strength gets built without the recovery bill of constant heavy singles. <a href="/blog/submaximal-training">Why you don't max out all the time</a> covers the reasoning.</p>
+          </div>
+        </section>
+
+        <!-- Input rules -->
+        <section class="guide-sec">
+          <p class="guide-label">Garbage in, garbage out</p>
+          <h2 class="guide-h">How to get an honest estimate</h2>
+          <ol class="rule-list">
+            <li><strong>Use a top set, not a back-off set.</strong> The first hard set after warm-ups, not set five of the day.</li>
+            <li><strong>Hold meet standards.</strong> Depth on the squat, a pause on the bench, a full lockout on the pull. A high squat inflates the number and the program built on it.</li>
+            <li><strong>Rate RPE right after the set,</strong> before the story you tell yourself gets better.</li>
+            <li><strong>Recalculate every 3 to 4 weeks,</strong> or whenever a top set moves clearly faster than it should.</li>
+            <li><strong>Save the true max for the platform.</strong> Peaking is its own skill. The <a href="/blog/meet-prep-guide">meet prep guide</a> walks through it.</li>
+          </ol>
+          <div class="guide-body">
+            <p>Lifting after 40? Estimating instead of testing matters even more, because recovery is the constraint, not strength. <a href="/blog/how-to-powerlift-after-40">How to powerlift after 40</a> lays out the whole approach.</p>
+          </div>
         </section>
 
         <!-- CTA band -->
         <section class="cta-band" aria-label="Start your free trial">
-          <h2 class="guide-h">Put your numbers to work</h2>
-          <p class="cta-copy">A 1RM is only useful if your programming actually uses it. Every Center Mass Strength track is built off your maxes — the app takes your numbers and sets every working weight for you, adjusting as you get stronger.</p>
+          <h2 class="guide-h">Stop guessing your intensity</h2>
+          <p class="cta-copy">A 1RM is only useful if your programming actually uses it. Every Center Mass Strength track is built off your maxes. The app logs weight, reps and RPE, sets every working weight for you, and moves your training max as you get stronger.</p>
           <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start your 14-day free trial</a>
           <p class="cta-small">No card required.</p>
         </section>
@@ -477,28 +662,50 @@
           <div class="faq-list">
             <article class="faq-item">
               <h3 class="faq-q"><span class="q-num" aria-hidden="true">01</span>How accurate is a 1RM calculator?</h3>
-              <p class="faq-a">Within a few percent, if the input set was genuinely challenging — 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy.</p>
+              <p class="faq-a">Within a few percent, if the input set was genuinely hard: 2 to 6 reps taken close to failure. Easy sets understate your max by exactly as much as they were easy, which is why this calculator lets you enter RPE.</p>
             </article>
             <article class="faq-item">
               <h3 class="faq-q"><span class="q-num" aria-hidden="true">02</span>What rep range gives the best 1RM estimate?</h3>
-              <p class="faq-a">Two to six reps taken close to failure. The formulas agree closely in that range. Past about 10 reps the estimate drifts, because you're testing endurance more than maximal strength.</p>
+              <p class="faq-a">Two to six reps taken close to failure. That set is close enough to a true max effort that the formula has little to extrapolate. Past about 10 reps the estimate drifts, because you are testing endurance more than maximal strength.</p>
             </article>
             <article class="faq-item">
-              <h3 class="faq-q"><span class="q-num" aria-hidden="true">03</span>Should I test my true 1RM instead of estimating it?</h3>
-              <p class="faq-a">For programming purposes, no need. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform.</p>
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">03</span>How do I convert a 3RM or 5RM to a 1RM?</h3>
+              <p class="faq-a">Multiply the weight by (1 + reps / 30). A 3RM of 275 lb works out to about 303 lb. A 5RM of 225 lb works out to about 263 lb. Or enter the set above and the calculator does it for you.</p>
             </article>
             <article class="faq-item">
-              <h3 class="faq-q"><span class="q-num" aria-hidden="true">04</span>Which formula does this 1RM calculator use?</h3>
-              <p class="faq-a">The Epley formula: 1RM = weight × (1 + reps ÷ 30). It is the most widely used estimator in powerlifting programming.</p>
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">04</span>How does RPE change the 1RM estimate?</h3>
+              <p class="faq-a">RPE tells the calculator how many reps you left in the tank. RPE 10 means none, RPE 9 means one, RPE 8 means two. The calculator adds those reps back before running the formula, so 5 reps at RPE 8 is treated like a 7-rep max.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">05</span>What percentage of my 1RM is 5 reps?</h3>
+              <p class="faq-a">About 86% by the Epley formula, if the set is taken to failure. At RPE 8, 5 reps lands closer to 81%.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">06</span>Should I test my true 1RM instead of estimating it?</h3>
+              <p class="faq-a">For programming, no. An estimate drives training percentages just fine, and you skip the fatigue and injury risk of maxing out. Save true maxes for the platform.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">07</span>Which formula does this 1RM calculator use?</h3>
+              <p class="faq-a">Epley, 1RM = weight x (1 + reps / 30), as the main number, with Brzycki, 1RM = weight x 36 / (37 - reps), shown alongside. Brzycki reads a few percent lower from low-rep sets, and the two meet at 10 reps.</p>
             </article>
           </div>
+        </section>
+
+        <!-- References -->
+        <section class="guide-sec">
+          <p class="guide-label">Sources</p>
+          <h2 class="guide-h" style="font-size:clamp(22px,3vw,30px);">References</h2>
+          <ol class="references">
+            <li>Zourdos MC, Klemp A, Dolan C, et al. Novel resistance training-specific rating of perceived exertion scale measuring repetitions in reserve. <em>J Strength Cond Res.</em> 2016;30(1):267-275. <a href="https://pubmed.ncbi.nlm.nih.gov/26049792/" rel="noopener" target="_blank">PubMed</a></li>
+            <li>Helms ER, Cronin J, Storey A, Zourdos MC. Application of the repetitions in reserve-based rating of perceived exertion scale for resistance training. <em>Strength Cond J.</em> 2016;38(4):42-49. <a href="https://pubmed.ncbi.nlm.nih.gov/27531969/" rel="noopener" target="_blank">PubMed</a></li>
+          </ol>
         </section>
 
       </div>
 
       <!-- Cross-link -->
       <div class="cross-link">
-        <a href="/tools/dot-score">Also check out our DOTS Calculator &rarr;</a>
+        <a href="/tools/dot-score">Turn your total into a DOTS score &rarr;</a>
       </div>
     </section>
   </main>
@@ -556,6 +763,13 @@
   <script>
     /* ===== 1RM CALCULATOR ===== */
     var ormUnit = 'lb';
+    var ormLifts = [
+      { key: 'sq', name: 'SQUAT' },
+      { key: 'bp', name: 'BENCH' },
+      { key: 'dl', name: 'DEADLIFT' }
+    ];
+    var ormMaxes = {};
+    var ormChartKey = null;
 
     /* Unit toggle */
     var ormToggle = document.getElementById('orm-unit-toggle');
@@ -566,9 +780,8 @@
           btn.classList.add('active');
           ormUnit = btn.dataset.val;
           var u = ormUnit.toUpperCase();
-          document.getElementById('orm-sq-unit').textContent = u;
-          document.getElementById('orm-bp-unit').textContent = u;
-          document.getElementById('orm-dl-unit').textContent = u;
+          ormLifts.forEach(function(l) { document.getElementById('orm-' + l.key + '-unit').textContent = u; });
+          if (Object.keys(ormMaxes).length) calculate1RM();
         });
       });
     }
@@ -601,47 +814,115 @@
       requestAnimationFrame(step);
     }
 
-    /* Epley: 1RM = w * (1 + r/30) — if reps=1, 1RM = weight */
-    function epley(weight, reps) {
-      if (!weight || weight <= 0 || !reps || reps <= 0) return 0;
-      if (reps === 1) return weight;
-      return weight * (1 + reps / 30);
+    /* Effective reps = reps done + reps left in the tank (10 - RPE) */
+    function effReps(reps, rpe) {
+      if (!rpe || isNaN(rpe)) rpe = 10;
+      rpe = Math.min(10, Math.max(6, rpe));
+      return reps + (10 - rpe);
+    }
+
+    /* Epley: 1RM = w * (1 + n/30); a true single (n = 1) is the max itself */
+    function epley(weight, n) {
+      if (!weight || weight <= 0 || !n || n <= 0) return 0;
+      if (n <= 1) return weight;
+      return weight * (1 + n / 30);
+    }
+
+    /* Brzycki: 1RM = w * 36 / (37 - n) */
+    function brzycki(weight, n) {
+      if (!weight || weight <= 0 || !n || n <= 0 || n >= 37) return 0;
+      if (n <= 1) return weight;
+      return weight * 36 / (37 - n);
+    }
+
+    /* Round to loadable plates: 5 lb or 2.5 kg */
+    function plate(x) {
+      var step = ormUnit === 'kg' ? 2.5 : 5;
+      return Math.round(x / step) * step;
+    }
+
+    function renderCharts() {
+      var max = ormMaxes[ormChartKey];
+      if (!max) return;
+      var u = ormUnit.toUpperCase();
+      var pct = '';
+      for (var p = 100; p >= 50; p -= 5) {
+        pct += '<tr><td class="zone-pct">' + p + '%</td><td class="num">' + plate(max * p / 100) + ' ' + u + '</td></tr>';
+      }
+      var rm = '';
+      for (var r = 1; r <= 10; r++) {
+        var w = r === 1 ? max : max / (1 + r / 30);
+        rm += '<tr><td class="zone-pct">' + r + ' rep' + (r > 1 ? 's' : '') + '</td><td class="num">' + plate(w) + ' ' + u + '</td></tr>';
+      }
+      document.getElementById('orm-pct-body').innerHTML = pct;
+      document.getElementById('orm-rm-body').innerHTML = rm;
+      document.getElementById('orm-round-note').textContent =
+        'Rounded to the nearest ' + (ormUnit === 'kg' ? '2.5 kg' : '5 lb') + ' from an estimated 1RM of ' + Math.round(max) + ' ' + u + '.';
+    }
+
+    function buildChartToggle() {
+      var wrap = document.getElementById('orm-chart-toggle');
+      wrap.innerHTML = '';
+      ormLifts.forEach(function(l) {
+        if (!ormMaxes[l.key]) return;
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = l.name;
+        if (l.key === ormChartKey) b.className = 'active';
+        b.addEventListener('click', function() {
+          ormChartKey = l.key;
+          wrap.querySelectorAll('button').forEach(function(x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          renderCharts();
+        });
+        wrap.appendChild(b);
+      });
     }
 
     function calculate1RM() {
-      var lifts = [
-        { wt: 'orm-sq-wt', reps: 'orm-sq-reps', val: 'orm-sq-val', result: 'orm-sq-result' },
-        { wt: 'orm-bp-wt', reps: 'orm-bp-reps', val: 'orm-bp-val', result: 'orm-bp-result' },
-        { wt: 'orm-dl-wt', reps: 'orm-dl-reps', val: 'orm-dl-val', result: 'orm-dl-result' }
-      ];
-
       var total = 0;
       var anyResult = false;
+      ormMaxes = {};
 
-      lifts.forEach(function(lift) {
-        var w = parseFloat(document.getElementById(lift.wt).value) || 0;
-        var r = parseInt(document.getElementById(lift.reps).value) || 0;
-        var orm = Math.round(epley(w, r));
-        var resultCard = document.getElementById(lift.result);
-        var valEl = document.getElementById(lift.val);
+      ormLifts.forEach(function(lift) {
+        var w = parseFloat(document.getElementById('orm-' + lift.key + '-wt').value) || 0;
+        var r = parseInt(document.getElementById('orm-' + lift.key + '-reps').value, 10) || 0;
+        var rpe = parseFloat(document.getElementById('orm-' + lift.key + '-rpe').value);
+        var n = r > 0 ? effReps(r, rpe) : 0;
+        var e = epley(w, n);
+        var orm = Math.round(e);
+        var resultCard = document.getElementById('orm-' + lift.key + '-result');
+        var valEl = document.getElementById('orm-' + lift.key + '-val');
+        var altEl = document.getElementById('orm-' + lift.key + '-alt');
 
         if (orm > 0) {
           valEl.textContent = orm;
+          var b = Math.round(brzycki(w, n));
+          altEl.textContent = (b && b !== orm) ? 'Brzycki: ' + b + ' ' + ormUnit.toUpperCase() : '';
           resultCard.classList.add('visible');
+          ormMaxes[lift.key] = e;
           total += orm;
           anyResult = true;
         } else {
           valEl.textContent = '—';
+          altEl.textContent = '';
           resultCard.classList.remove('visible');
         }
       });
 
       /* Show total */
       var totalResult = document.getElementById('orm-total-result');
+      var charts = document.getElementById('orm-charts');
       if (anyResult) {
         totalResult.classList.add('visible');
         animateValue(document.getElementById('orm-total-val'), 0, total, 800, false);
         document.getElementById('orm-total-unit').textContent = ' ' + ormUnit.toUpperCase();
+        if (!ormMaxes[ormChartKey]) ormChartKey = Object.keys(ormMaxes)[0];
+        buildChartToggle();
+        renderCharts();
+        charts.classList.add('visible');
+      } else {
+        charts.classList.remove('visible');
       }
     }
 
