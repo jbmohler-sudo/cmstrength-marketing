@@ -2,6 +2,64 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-09-21 — Published F7/F8 (Fueling the Work: hydration/electrolytes, simple food systems)
+
+- Third publish under the publish-direct policy; the Fueling the Work expansion
+  is now COMPLETE — all eight F-topics (F1–F8) published. Writer drops back to
+  ONE post per run; next up is the keyword-driven SEO cluster (K1–K10).
+- New posts (33rd and 34th blog posts):
+  - `public/blog/hydration-electrolytes-for-lifters.html` (F7) — the full
+    hydration/electrolyte guide promised by the meet-day post: how much water a
+    lifter actually needs, the pale-yellow rule, sodium as the electrolyte that
+    matters, when electrolytes earn their spot (90+ min sessions, hot gyms,
+    meet days, post-cut rehydration), the heavy-training-day protocol,
+    caffeine as a mild diuretic, and the five mistakes that dry lifters out.
+    https://www.cmstrength.fit/blog/hydration-electrolytes-for-lifters
+  - `public/blog/simple-food-systems-for-lifters.html` (F8) — meal prep without
+    the misery: protein-first anchoring, the four-meal rotation, the convenience
+    stack (rotisserie chicken, microwave rice, frozen vegetables), eating the
+    same things on purpose, and the mistakes that break the system.
+    https://www.cmstrength.fit/blog/simple-food-systems-for-lifters
+- New hero/card images: `public/images/blog/hydration-electrolytes-for-lifters.jpg`,
+  `public/images/blog/simple-food-systems-for-lifters.jpg` (AI-generated, site aesthetic)
+- Blog index (`public/blog.html`): added 2 FUELING cards, group count 08 -> 10 ARTICLES
+- Sitemap updated with the 2 new URLs (lastmod 2026-09-21)
+- Both posts carry BlogPosting + FAQPage JSON-LD and References citing the Academy
+  of Nutrition and Dietetics sports nutrition position and the ACSM fluid-replacement
+  position stand — health claims kept modest per plan
+- Silo-next cards cross-link the full fueling set, both new posts included
+- Push through the GitHub REST API (this shell has no git HTTPS credential);
+  local main reset to origin/main afterwards. Vercel auto-deploy verified READY,
+  both URLs returned 200 on www.cmstrength.fit.
+
+### 2026-09-18 — Published F5/F6 (Fueling the Work: peri-workout fueling, meet-day nutrition)
+
+- Second Friday publish under the publish-direct policy; fueling backlog now
+  stands at F1–F6 published, F7/F8 remaining.
+- New posts (31st and 32nd blog posts):
+  - `public/blog/peri-workout-fueling.html` (F5) — the operations manual behind
+    `carbs-for-powerlifting.html`: pre-training windows (3–4h / 1–2h), intra-workout
+    carbs for 90+ min sessions, post-training carbs + protein, plus fixes for 5 AM,
+    lunch-hour, and evening schedules. Deliberately practical (gram targets, real
+    food) so it complements rather than duplicates the conceptual carbs post.
+    https://www.cmstrength.fit/blog/peri-workout-fueling
+  - `public/blog/meet-day-nutrition.html` (F6) — what to eat (and avoid) across an
+    8–10 hour meet: graze-don't-feast between attempts, the nothing-new-on-meet-day
+    rule, early-dosed caffeine, steady hydration, the five mistakes that cost
+    lifters their deadlift, and a pack-the-cooler checklist.
+    https://www.cmstrength.fit/blog/meet-day-nutrition
+- New hero/card images: `public/images/blog/peri-workout-fueling.jpg`,
+  `public/images/blog/meet-day-nutrition.jpg` (AI-generated, site aesthetic)
+- Blog index (`public/blog.html`): added 2 FUELING cards, group count 06 -> 08 ARTICLES
+- Sitemap updated with the 2 new URLs (lastmod 2026-09-18)
+- Both posts carry BlogPosting + FAQPage JSON-LD and a References section citing
+  the ISSN nutrient-timing position stand and the Academy of Nutrition and
+  Dietetics sports nutrition position — health claims kept modest per plan
+- Silo-next cards cross-link all six fueling posts
+- Push through the GitHub REST API (this shell has no git HTTPS credential);
+  local main reset to origin/main afterwards. Vercel auto-deploy verified READY,
+  both URLs returned 200 on www.cmstrength.fit.
+
 ### 2026-09-16 — Published F1/F3/F4 (Fueling the Work) under new publish-direct policy
 
 - Jeff gave standing approval: the blog writer now publishes directly on its

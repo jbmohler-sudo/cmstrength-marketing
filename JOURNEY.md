@@ -13,6 +13,7 @@
 ## Current State
 > Updated: 2026-09-25
 
+- **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs) and DOTS retitle live. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
   cornerstone are live; GA4 `G-5V676F7J2E` site-wide (9/23); Pinterest verification + pin images. Agent rules
   now live in [AGENTS.md](AGENTS.md). _Bullets below are from 8/28 and may be dated (post counts, pillar sizes)._
@@ -92,6 +93,14 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
+### 2026-09-26 — SEO audit; sitemaps synced; DOT retitled to DOTS (dda1d1f, bf598eb)
+**Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
+**Decided:** —
+**Killed:** —
+**Deferred:** AGENTS.md publishing checklist still names only `sitemap.xml`; needs Jeff's OK to add `sitemap-2026.xml` (or make one file serve both URLs).
+**State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
+**Next:** Expand 1RM page (90.5k/mo, KD 15, at #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
+
 ### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
 
 - Second keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `front squat` from the OpenSEO saved-keyword queue: 33,100 vol, KD 0 — the highest-volume unused keyword, fully uncovered on the site. All 10 saved keywords were still unused, so no refill research was needed.
@@ -121,64 +130,6 @@ which also makes its content more credible on health-adjacent topics.
 - Silo-next cards cross-link the periodization pillar + meet-day-nutrition (cross-silo by design: S4 sits between S2 and S3)
 - No-orphan gate: added contextual inbound link to meet-prep-guide from the periodization cornerstone (fixes the previously dangling "week-by-week protocol is its own guide" forward reference)
 - Push through the GitHub REST API (git-database; this shell has no git HTTPS credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
-
-### 2026-09-21 — Published F7/F8 (Fueling the Work: hydration/electrolytes, simple food systems)
-
-- Third publish under the publish-direct policy; the Fueling the Work expansion
-  is now COMPLETE — all eight F-topics (F1–F8) published. Writer drops back to
-  ONE post per run; next up is the keyword-driven SEO cluster (K1–K10).
-- New posts (33rd and 34th blog posts):
-  - `public/blog/hydration-electrolytes-for-lifters.html` (F7) — the full
-    hydration/electrolyte guide promised by the meet-day post: how much water a
-    lifter actually needs, the pale-yellow rule, sodium as the electrolyte that
-    matters, when electrolytes earn their spot (90+ min sessions, hot gyms,
-    meet days, post-cut rehydration), the heavy-training-day protocol,
-    caffeine as a mild diuretic, and the five mistakes that dry lifters out.
-    https://www.cmstrength.fit/blog/hydration-electrolytes-for-lifters
-  - `public/blog/simple-food-systems-for-lifters.html` (F8) — meal prep without
-    the misery: protein-first anchoring, the four-meal rotation, the convenience
-    stack (rotisserie chicken, microwave rice, frozen vegetables), eating the
-    same things on purpose, and the mistakes that break the system.
-    https://www.cmstrength.fit/blog/simple-food-systems-for-lifters
-- New hero/card images: `public/images/blog/hydration-electrolytes-for-lifters.jpg`,
-  `public/images/blog/simple-food-systems-for-lifters.jpg` (AI-generated, site aesthetic)
-- Blog index (`public/blog.html`): added 2 FUELING cards, group count 08 -> 10 ARTICLES
-- Sitemap updated with the 2 new URLs (lastmod 2026-09-21)
-- Both posts carry BlogPosting + FAQPage JSON-LD and References citing the Academy
-  of Nutrition and Dietetics sports nutrition position and the ACSM fluid-replacement
-  position stand — health claims kept modest per plan
-- Silo-next cards cross-link the full fueling set, both new posts included
-- Push through the GitHub REST API (this shell has no git HTTPS credential);
-  local main reset to origin/main afterwards. Vercel auto-deploy verified READY,
-  both URLs returned 200 on www.cmstrength.fit.
-
-### 2026-09-18 — Published F5/F6 (Fueling the Work: peri-workout fueling, meet-day nutrition)
-
-- Second Friday publish under the publish-direct policy; fueling backlog now
-  stands at F1–F6 published, F7/F8 remaining.
-- New posts (31st and 32nd blog posts):
-  - `public/blog/peri-workout-fueling.html` (F5) — the operations manual behind
-    `carbs-for-powerlifting.html`: pre-training windows (3–4h / 1–2h), intra-workout
-    carbs for 90+ min sessions, post-training carbs + protein, plus fixes for 5 AM,
-    lunch-hour, and evening schedules. Deliberately practical (gram targets, real
-    food) so it complements rather than duplicates the conceptual carbs post.
-    https://www.cmstrength.fit/blog/peri-workout-fueling
-  - `public/blog/meet-day-nutrition.html` (F6) — what to eat (and avoid) across an
-    8–10 hour meet: graze-don't-feast between attempts, the nothing-new-on-meet-day
-    rule, early-dosed caffeine, steady hydration, the five mistakes that cost
-    lifters their deadlift, and a pack-the-cooler checklist.
-    https://www.cmstrength.fit/blog/meet-day-nutrition
-- New hero/card images: `public/images/blog/peri-workout-fueling.jpg`,
-  `public/images/blog/meet-day-nutrition.jpg` (AI-generated, site aesthetic)
-- Blog index (`public/blog.html`): added 2 FUELING cards, group count 06 -> 08 ARTICLES
-- Sitemap updated with the 2 new URLs (lastmod 2026-09-18)
-- Both posts carry BlogPosting + FAQPage JSON-LD and a References section citing
-  the ISSN nutrient-timing position stand and the Academy of Nutrition and
-  Dietetics sports nutrition position — health claims kept modest per plan
-- Silo-next cards cross-link all six fueling posts
-- Push through the GitHub REST API (this shell has no git HTTPS credential);
-  local main reset to origin/main afterwards. Vercel auto-deploy verified READY,
-  both URLs returned 200 on www.cmstrength.fit.
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 
