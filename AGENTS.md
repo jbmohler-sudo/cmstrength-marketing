@@ -98,10 +98,12 @@ There's no build step; it's a static site. For every change:
 - **Publishing a post** means all three of these, in **one commit** if you can:
   1. `public/blog/<slug>.html`
   2. its card in `public/blog.html`
-  3. its `<loc>` in `public/sitemap.xml`
+  3. its `<loc>` in **both** `public/sitemap.xml` and `public/sitemap-2026.xml`. robots.txt
+     serves `sitemap-2026.xml`, so a URL missing there never reaches Google through the sitemap. The two files
+     must list the same URLs.
 
   Add only the new card and the new `<loc>`; never re-indent those files. Check there are no
-  duplicate `<loc>` entries.
+  duplicate `<loc>` entries, and that both sitemaps list the same URL set.
 - After pushing, confirm the post returns 200 at `https://www.cmstrength.fit/blog/<slug>`.
 
 ## Project rules
