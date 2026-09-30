@@ -103,6 +103,15 @@ which also makes its content more credible on health-adjacent topics.
 **State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
 **Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
 
+### 2026-09-30 — Published keyword post (Barbell Squat: form + programming guide)
+
+- Fourth keyword-driven post of the SEO cluster under the publish-direct policy; one post per run. Chose `barbell squat` from the OpenSEO saved-keyword queue: 22,200 vol, KD 0 — the highest-volume unused keyword (front squat taken Sept 25; deadlift form / proper deadlift form covered Sept 28). 8 keywords still unused, so no refill research was needed.
+- New post (38th blog post): `public/blog/barbell-squat-guide.html` — "Barbell Squat: The Complete Form and Programming Guide." Sections: why the squat is a balance problem, high bar vs. low bar honestly compared (diff table, geometry not religion), the rep from unrack to rerack (12-step checklist), the six mistakes everyone makes with mechanical fixes, programming (2x/week, 1–5 rep strength work, RPE 8–9 ceiling, variation matched to failure point: hole / above-parallel / chest dump / lockout / depth), squats after 40 (real warmup, honest depth, variations earning their keep). 6-question FAQ + JSON-LD (Article + FAQPage), 2 verified references (Schoenfeld 2010, PubMed 20182386; Gullett et al. 2009, PubMed 19002072 — no invented studies).
+- New hero/card image: `public/images/blog/barbell-squat-guide.jpg` (AI-generated, dark garage-gym back squat, ember rim light matching site aesthetic, no text/logos)
+- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 03 → 04 ARTICLES); no re-indenting.
+- Sitemap: `public/sitemap.xml` gained the barbell-squat-guide entry (lastmod 2026-09-30). Backfilled the missing deadlift-form-guide entry into `public/sitemap-2026.xml` (the Sept 28 run had only updated sitemap.xml — drift again); both sitemaps now list the same 51 URLs, XML-valid, no dupes, per the dual-sitemap rule.
+- CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
+
 ### 2026-09-28 — Published keyword post (Deadlift Form: technique + programming guide)
 
 - Third keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `deadlift form` from the OpenSEO saved-keyword queue: 33,100 vol, KD 11 — the highest-volume unused keyword (front squat taken Sept 25), fully uncovered on the site. 9 keywords still unused, so no refill research was needed.
