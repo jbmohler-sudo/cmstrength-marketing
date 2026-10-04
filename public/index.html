@@ -245,6 +245,17 @@
       .loop-steps { grid-template-columns: repeat(2, 1fr); }
       .marquee-banner .mqv-inner { font-size: 28px; }
     }
+    /* Latest guides: photo cards, same treatment as the blog hub */
+    #guides .card.photo-card { padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+    #guides .card.photo-card .card-photo { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--border); background: linear-gradient(135deg,#1a1410,#0a0a0c); }
+    #guides .card.photo-card .card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.92) contrast(1.02); transition: transform .4s ease; }
+    #guides .card.photo-card:hover .card-photo img { transform: scale(1.04); }
+    #guides .card.photo-card .card-body { padding: clamp(22px,3vw,30px); display: flex; flex-direction: column; flex: 1; }
+    #guides .card.photo-card .card-body .tag { margin-bottom: 14px; }
+    #guides .card.photo-card .card-body .card-link { margin-top: auto; padding-top: 16px; }
+    #guides .guides-more { margin-top: clamp(24px,3vw,36px); text-align: center; }
+    #guides .guides-more .card-link { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-size: 15px; }
+    #guides .guides-more .card-link:hover { color: var(--accent-bright); }
   </style>
   <script type="application/ld+json">
   {
@@ -639,6 +650,71 @@
           </article>
         </div>
       </div>
+    </section>
+
+    <!-- ===== LATEST GUIDES (update when a post publishes: newest 6, newest first) ===== -->
+    <section class="block" id="guides">
+      <div class="reveal">
+        <span class="kicker">FROM THE BLOG</span>
+        <h2 class="display">Latest training guides.</h2>
+      </div>
+      <div class="grid-3">
+          <a class="card photo-card reveal" href="/blog/belt-squat-guide">
+            <div class="card-photo"><img src="/images/blog/belt-squat-guide.jpg" alt="Lifter in a dark garage gym at the bottom of a heavy belt squat, leather belt around the hips with a chain hanging to loaded weight plates, upright torso, chalk dust in the air" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">SQUAT</span>
+              <h3>Belt Squat: The Complete Technique and Programming Guide</h3>
+              <p>All the leg work with zero load on the spine: the setup, the chain-length rule, the mistakes everyone makes, and programming from rehab to heavy volume.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+          <a class="card photo-card reveal" href="/blog/barbell-squat-guide">
+            <div class="card-photo"><img src="/images/blog/barbell-squat-guide.jpg" alt="Lifter in a dark garage gym at the bottom of a heavy barbell back squat, chest up, knees tracking over toes, barbell loaded with plates, chalk dust in the air" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">SQUAT</span>
+              <h3>Barbell Squat: The Complete Form and Programming Guide</h3>
+              <p>The rep from unrack to rerack, high bar vs. low bar honestly compared, the mistakes everyone makes, and programming that builds a lifetime squat. It's a balance problem.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+          <a class="card photo-card reveal" href="/blog/deadlift-form-guide">
+            <div class="card-photo"><img src="/images/blog/deadlift-form-guide.jpg" alt="Lifter in a dark garage gym hinged over a loaded barbell, flat back, gripping the bar just off the floor, chalk dust in the air" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">DEADLIFT</span>
+              <h3>Deadlift Form: The Complete Technique and Programming Guide</h3>
+              <p>The five-step setup, conventional vs. sumo honestly compared, the five mistakes everyone makes, and how to program it for decades of heavy pulls. The setup is the rep.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+          <a class="card photo-card reveal" href="/blog/front-squat-guide">
+            <div class="card-photo"><img src="/images/blog/front-squat-guide.jpg" alt="Lifter mid front squat in a dark garage gym, barbell resting across the front delts with elbows high, chalk dust in the air" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">SQUAT</span>
+              <h3>Front Squat: The Complete Technique and Programming Guide</h3>
+              <p>Rack options, the rep step by step, the five mistakes everyone makes, and how to program it behind your back squat. The bar that keeps you honest.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+          <a class="card photo-card reveal" href="/blog/meet-prep-guide">
+            <div class="card-photo"><img src="/images/blog/meet-prep-guide.jpg" alt="Loaded competition barbell with red plates on a platform under a single spotlight, chalk dust in the air" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">MEET PREP</span>
+              <h3>The Complete Guide to Powerlifting Meet Prep</h3>
+              <p>Peak without maxing, taper on purpose, choose attempts like math, and execute on the platform. The full system: peak, taper, weigh-in, attempts, meet day.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+          <a class="card photo-card reveal" href="/blog/powerlifting-autoregulation">
+            <div class="card-photo"><img src="/images/blog/powerlifting-autoregulation.jpg" alt="Lifter in a bright daylight garage gym reviewing his training log beside a loaded barbell" loading="lazy"></div>
+            <div class="card-body">
+              <span class="tag">AUTOREGULATION</span>
+              <h3>Powerlifting Autoregulation</h3>
+              <p>RPE, readiness, and joint estimates keeping today&apos;s session inside the program&apos;s intent. The disciplined version of autoregulation: a practical guide.</p>
+              <span class="card-link">Read Post &rarr;</span>
+            </div>
+          </a>
+      </div>
+      <p class="guides-more reveal"><a class="card-link" href="/blog">Every guide on the Strength Blog &rarr;</a></p>
     </section>
 
     <!-- ===== PRICING ===== -->
