@@ -11,8 +11,9 @@
 ---
 
 ## Current State
-> Updated: 2026-10-03
+> Updated: 2026-10-04
 
+- **2026-10-04 TDEE calculator:** `/tools/tdee-calculator` built (own code) and linked from every footer, the tools index, both sitemaps and the TDEE post. Squat-guide JSON-LD comma fixed (GSC structured-data email); Validate fix pending in GSC.
 - **2026-10-03 follow-up:** WizeMeals links removed (Hard Rule wins), 30 titles cut to 60 chars, homepage `#guides` block lists the 6 newest posts (AGENTS.md publish step 4).
 - **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (PR #4, live).
 - **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
@@ -97,6 +98,14 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
+### 2026-10-04 — TDEE calculator built and linked site-wide; squat-guide JSON-LD fixed (34b3be8, 05a0bdb) (Claude)
+**Did:** GSC emailed "Unparsable structured data" for cmstrength.fit. Cause: a missing comma after `"keywords"` in the Article JSON-LD of `barbell-squat-guide` and `belt-squat-guide`; fixed in 34b3be8 and every JSON-LD block on the site (96 now) parses. Jeff asked for a TDEE calculator in the footer's Tools list, so built `/tools/tdee-calculator` (05a0bdb): Mifflin-St Jeor, Katch-McArdle when body fat is entered, five activity levels, lb/in and kg/cm, maintenance plus 300-500 deficit and 200-300 surplus targets matching the TDEE post, WebApplication + FAQ JSON-LD, three PubMed references. Linked from the Tools footer on all 53 pages, the `/tools` index, both sitemaps (same 54 URLs), and twice from `blog/tdee-for-lifters` (which now has a newer lastmod). Math checked by hand and in the browser; no WizeMeals code or links used.
+**Decided:** Nothing new. The calculator is our own build, so the 2026-10-03 no-sibling-links rule holds.
+**Killed:** The idea of copying the WizeMeals calculator; it was rebuilt from the 1RM tool template instead.
+**Deferred:** A JSON-LD check in the publish checklist so a bad comma cannot ship again; internal links to the calculator from the other fueling posts.
+**State after:** Committed locally; push pending Jeff's go-ahead. In GSC, click Validate fix on the structured data issue once the squat-guide fix is live.
+**Next:** Push, confirm Vercel READY and `/tools/tdee-calculator` returns 200, request indexing for it, then check DataForSEO for "tdee calculator" volume against the next tool to build.
+
 ### 2026-10-03 — WizeMeals links out, 30 titles fixed, homepage Latest Guides (a8e5721, b7152da, c6ce6bc) (Claude)
 **Did:** Removed both WizeMeals links from `carbs-for-powerlifting` (now internal links to tdee-for-lifters and simple-food-systems-for-lifters); no sibling-product links remain site-wide. `docs/SEO.md` §2 re-tightened to match the Hard Rule. Cut 30 titles (27 posts, 3 tools) from 62 to 110 characters down to 60 or less, keyword first, `| CMS` at the end; H1s, URLs, OG and schema unchanged. New homepage section `#guides` ("Latest training guides"): 6 newest posts as photo cards between the FAQ and pricing, plus a link to `/blog`. Rendered at 1280px and 390px, no JS errors, no horizontal scroll; zero broken internal links.
 **Decided:** CMS never links to sibling products; the Hard Rule wins over the Sept 16 SEO.md relaxation (Jeff, 2026-10-03). Every publish also updates the homepage `#guides` block (AGENTS.md checklist step 4, Jeff approved).
@@ -120,14 +129,6 @@ which also makes its content more credible on health-adjacent topics.
 - New hero/card image: `public/images/blog/barbell-squat-guide.jpg` (AI-generated, dark garage-gym back squat, ember rim light matching site aesthetic, no text/logos)
 - Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 03 → 04 ARTICLES); no re-indenting.
 - Sitemap: `public/sitemap.xml` gained the barbell-squat-guide entry (lastmod 2026-09-30). Backfilled the missing deadlift-form-guide entry into `public/sitemap-2026.xml` (the Sept 28 run had only updated sitemap.xml — drift again); both sitemaps now list the same 51 URLs, XML-valid, no dupes, per the dual-sitemap rule.
-- CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
-
-### 2026-09-28 — Published keyword post (Deadlift Form: technique + programming guide)
-
-- Third keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `deadlift form` from the OpenSEO saved-keyword queue: 33,100 vol, KD 11 — the highest-volume unused keyword (front squat taken Sept 25), fully uncovered on the site. 9 keywords still unused, so no refill research was needed.
-- New post (37th blog post): `public/blog/deadlift-form-guide.html` — "Deadlift Form: The Complete Technique and Programming Guide." Sections: why the setup is the rep (no eccentric to think through, bar-path physics), conventional vs. sumo honestly compared (geometry, not religion; trap bar noted as a valid masters/main-lift alternative), the five-step setup checklist (mid-foot bar, shins to bar, pull the slack, brace-and-wedge, push the floor away), the five mistakes everyone makes with fixes (back rounds off floor, hips shoot up, bar drifts, yanking, hyperextended lockout), grip choices (double overhand / mixed with bicep-tear caution / hook), programming (1 heavy day/wk, 1–6 reps at RPE 7–9, variation matching the failure point: deficit/paused/block/RDL), deadlift form after 40 (10–14 day heavy frequency, RPE 8 cap, trap bar legitimacy). 6-question FAQ + JSON-LD (Article + FAQPage). No invented studies cited — this one ships without a references block rather than a padded one.
-- New hero/card image: `public/images/blog/deadlift-form-guide.jpg` (AI-generated, dark garage-gym deadlift setup, ember rim light matching site aesthetic, no text/logos)
-- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 02 → 03 ARTICLES); no re-indenting. Sitemap: `public/sitemap.xml` gained the deadlift-form-guide entry (lastmod 2026-09-28), per the sitemap rule.
 - CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).

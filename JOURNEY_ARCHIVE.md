@@ -2,6 +2,14 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-09-28 — Published keyword post (Deadlift Form: technique + programming guide)
+
+- Third keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `deadlift form` from the OpenSEO saved-keyword queue: 33,100 vol, KD 11 — the highest-volume unused keyword (front squat taken Sept 25), fully uncovered on the site. 9 keywords still unused, so no refill research was needed.
+- New post (37th blog post): `public/blog/deadlift-form-guide.html` — "Deadlift Form: The Complete Technique and Programming Guide." Sections: why the setup is the rep (no eccentric to think through, bar-path physics), conventional vs. sumo honestly compared (geometry, not religion; trap bar noted as a valid masters/main-lift alternative), the five-step setup checklist (mid-foot bar, shins to bar, pull the slack, brace-and-wedge, push the floor away), the five mistakes everyone makes with fixes (back rounds off floor, hips shoot up, bar drifts, yanking, hyperextended lockout), grip choices (double overhand / mixed with bicep-tear caution / hook), programming (1 heavy day/wk, 1–6 reps at RPE 7–9, variation matching the failure point: deficit/paused/block/RDL), deadlift form after 40 (10–14 day heavy frequency, RPE 8 cap, trap bar legitimacy). 6-question FAQ + JSON-LD (Article + FAQPage). No invented studies cited — this one ships without a references block rather than a padded one.
+- New hero/card image: `public/images/blog/deadlift-form-guide.jpg` (AI-generated, dark garage-gym deadlift setup, ember rim light matching site aesthetic, no text/logos)
+- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 02 → 03 ARTICLES); no re-indenting. Sitemap: `public/sitemap.xml` gained the deadlift-form-guide entry (lastmod 2026-09-28), per the sitemap rule.
+- CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
+
 ### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
 **Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
 **Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
