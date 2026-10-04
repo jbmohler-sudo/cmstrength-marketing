@@ -2,6 +2,36 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
+
+- Second keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `front squat` from the OpenSEO saved-keyword queue: 33,100 vol, KD 0 — the highest-volume unused keyword, fully uncovered on the site. All 10 saved keywords were still unused, so no refill research was needed.
+- New post (36th blog post): `public/blog/front-squat-guide.html` — "Front Squat: The Complete Technique and Programming Guide." Sections: why it belongs in a powerlifting program (quad drive, torso audit, Gullett 2009 joint data), three rack positions (clean grip / cross-arm / straps, honest pros-cons), the rep step by step, the five mistakes everyone makes with fixes, front-vs-back head-to-head diff table, programming (75–85% of back squat, 3–6 reps at RPE ≤ 8.5, 4-week starter block, peak/taper placement), front squats after 40. 6-question FAQ + JSON-LD (Article + FAQPage), 2 verified references (Gullett et al. 2009, PubMed 19002072; Schoenfeld 2010, PubMed 20182386 — no invented studies).
+- New hero/card image: `public/images/blog/front-squat-guide.jpg` (AI-generated, dark garage-gym front squat, ember rim light matching site aesthetic, no text/logos)
+- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 01 → 02 ARTICLES); no re-indenting, per checklist
+- Sitemap updated with the new URL (lastmod 2026-09-25)
+- Silo-next cards cross-link low-bar-squat-with-stiff-shoulders + the-complete-guide-to-powerlifting-periodization
+- No-orphan gate: inbound link to front-squat-guide added from the front-squat bullet in low-bar-squat-with-stiff-shoulders
+- Push through the GitHub REST API git-database flow (no shell git credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
+
+### 2026-09-25 — Agent rules in-repo (new AGENTS.md); journal repaired (Claude)
+**Did:** Cross-repo audit. Muse (the blog writer, `jbmohler-sudo`) publishes here as intended, but its six session entries (9/15–9/23) were appended at the end of this file below Hard Rules, and Current State was still dated 8/28. Muse also made non-post changes that the publish-direct approval doesn't cover: GA4 site-wide tag `G-5V676F7J2E` (b5d4d67, 9/23), Pinterest verification tag (e28e3d4, 9/16), and `docs/SEO.md` link-policy edits (76a93ba relaxed, then 0cc2cb9 re-tightened, both 9/16 — the Hard Rules still hold). One publish commit re-indented all of `public/blog.html` (a71d8eb). Fix: new AGENTS.md (shared rules + publishing checklist: post + blog.html card + sitemap `<loc>`, no re-indenting; publish-direct covers posts only) and CLAUDE.md imports it; strays folded into this Session Log newest-first (headings demoted only); cap applied; Current State updated; answered Open Question removed.
+**Decided:** One shipping rule in every repo (AGENTS.md). Jeff's 9/16 publish-direct approval covers blog posts only; tracking tags, site-wide code, and SEO/link-policy docs need his OK.
+**Killed:** —
+**Deferred:** Jeff to confirm the GA4 tag and the 9/16 SEO.md policy edits were wanted.
+**State after:** Site unchanged; rules readable by every agent.
+**Next:** Point Muse at AGENTS.md in its project instructions.
+
+### 2026-09-23 — Published K1 (Meet Prep & The Big Three: the S4 cornerstone)
+
+- First post of the keyword-driven SEO cluster (K1–K10) under the publish-direct policy; writer runs ONE post per run; fueling backlog F1–F8 complete.
+- New post (35th blog post): `public/blog/meet-prep-guide.html` (K1, S4 cornerstone) — "The Complete Guide to Powerlifting Meet Prep." Target 2,000+ words: 2,773 body words (stripped). Targets `powerlifting meet prep` / `how to peak for a powerlifting meet` / `powerlifting taper` — the largest high-intent search space the site did not own (per silo-4 brief). Sections: competition as its own skill, pick-the-meet backward calendar (60-day floor), peak without maxing, taper (cut volume / keep intensity), weigh-in and weight management, attempt-selection math, meet-day execution. Myth-vs-reality diff table, one-rule-you-can-act-on-tonight callout, 5-question FAQ + JSON-LD (Article + FAQPage), 3 numbered references (Bosquet 2007 taper meta-analysis; Pritchard et al. 2016 NZ elite powerlifters taper; 2020 Sports tapering/peaking review PMC7552788 — all verified real, no invented studies).
+- New hero/card image: `public/images/blog/meet-prep-guide.jpg` (AI-generated, dark platform/spotlight/chalk shot matching site aesthetic, no text or logos)
+- Blog index (`public/blog.html`): NEW group "Meet Prep & The Big Three" created with the pillar card, group count 01 ARTICLE (silo-architecture S4 now exists on the index; future K-spokes: squat programming, bench specialization, deadlift programming, peak/taper spoke)
+- Sitemap updated with the new URL (lastmod 2026-09-23)
+- Silo-next cards cross-link the periodization pillar + meet-day-nutrition (cross-silo by design: S4 sits between S2 and S3)
+- No-orphan gate: added contextual inbound link to meet-prep-guide from the periodization cornerstone (fixes the previously dangling "week-by-week protocol is its own guide" forward reference)
+- Push through the GitHub REST API (git-database; this shell has no git HTTPS credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
+
 ### 2026-09-21 — Published F7/F8 (Fueling the Work: hydration/electrolytes, simple food systems)
 
 - Third publish under the publish-direct policy; the Fueling the Work expansion

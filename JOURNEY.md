@@ -11,8 +11,9 @@
 ---
 
 ## Current State
-> Updated: 2026-09-25
+> Updated: 2026-10-03
 
+- **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (branch `seo/silo-interlinking`, pending merge).
 - **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
   cornerstone are live; GA4 `G-5V676F7J2E` site-wide (9/23); Pinterest verification + pin images. Agent rules
@@ -94,14 +95,13 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
-### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
-**Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
-**Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
-**Killed:** —
-**Also did:** AGENTS.md dual-sitemap rule (a8e9fe3, Jeff approved). Expanded `/tools/1rm-calculator` (4477f5a): optional RPE per lift (reps in reserve added back before Epley), Brzycki alongside, per-lift plate-rounded % chart and rep max table, new guide sections (RPE to %1RM, reps to %1RM, 3RM/5RM conversion, Epley vs Brzycki, input rules), FAQ 4 to 7, 2 PubMed refs, canonical/OG, WebApplication + FAQPage JSON-LD, links out to RPE/submaximal/meet-prep/after-40. Tested in headless Chromium (desktop + 390px, no JS errors, no horizontal scroll).
-**Deferred:** Single physical sitemap serving both URLs (would end drift for good) left for later.
-**State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
-**Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
+### 2026-10-03 — Silo interlinking pass + internal-URL hygiene (c1139ac, 3be83c9) (Claude)
+**Did:** Link-graph audit of every page. Found 498 internal links pointing at 308 redirects (`/index`, `/index#x`, `/methodology/index`, `/blog.html`, `/tools.html`), the source of GSC's "Page with redirect" rows; all now clean URLs, `cms-nav.js` too. Self-canonicals on the 9 indexable pages without one; `noindex` on `/signup` (magic-link page, was indexed empty; also dropped from `sitemap.xml`, where 4a0da87 had added it); footer Tools column lists all 6 tools + `/tools` on every page; `/tools` added to both sitemaps (53 URLs, identical sets); 301 for `/blog/macrocycle-explained`. Silos: pillars of After-40, Adaptive, Meet Prep and Fueling linked to none or almost none of their spokes, 21 spokes had no in-article link from their own silo, and 4 posts were orphans (menopause, stop-at-discomfort, sled drags, deadlift form). Now every spoke links up to its pillar and to at least one sibling in the body, every pillar links down to all spokes, and KEEP READING cards stay in-silo. RPE moved to The Adaptive System group on `/blog` per `docs/silo-architecture.md`. Verified: zero broken internal links, zero links to redirects, zero orphans, tag balance unchanged, pages render (headless Chromium).
+**Decided:** —
+**Killed:** The "in progress" Fueling list on nutrition-is-a-skill (replaced with links to all 9 shipped spokes).
+**Deferred:** Titles over 60 chars on ~30 posts and descriptions over 160; ~57 pre-existing short anchors under the 40-char rule; homepage "Latest guides" block; After-40 vs Masters Track overlap; `carbs-for-powerlifting` links WizeMeals twice (Hard Rules forbid it, `docs/SEO.md` §2 allows it, Jeff to decide).
+**State after:** On branch `seo/silo-interlinking`, awaiting Jeff's OK to merge (site-wide code).
+**Next:** Merge, confirm Vercel READY, then request indexing on the unindexed September posts.
 
 ### 2026-09-30 — Published keyword post (Barbell Squat: form + programming guide)
 
@@ -120,35 +120,14 @@ which also makes its content more credible on health-adjacent topics.
 - Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 02 → 03 ARTICLES); no re-indenting. Sitemap: `public/sitemap.xml` gained the deadlift-form-guide entry (lastmod 2026-09-28), per the sitemap rule.
 - CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
 
-### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
-
-- Second keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `front squat` from the OpenSEO saved-keyword queue: 33,100 vol, KD 0 — the highest-volume unused keyword, fully uncovered on the site. All 10 saved keywords were still unused, so no refill research was needed.
-- New post (36th blog post): `public/blog/front-squat-guide.html` — "Front Squat: The Complete Technique and Programming Guide." Sections: why it belongs in a powerlifting program (quad drive, torso audit, Gullett 2009 joint data), three rack positions (clean grip / cross-arm / straps, honest pros-cons), the rep step by step, the five mistakes everyone makes with fixes, front-vs-back head-to-head diff table, programming (75–85% of back squat, 3–6 reps at RPE ≤ 8.5, 4-week starter block, peak/taper placement), front squats after 40. 6-question FAQ + JSON-LD (Article + FAQPage), 2 verified references (Gullett et al. 2009, PubMed 19002072; Schoenfeld 2010, PubMed 20182386 — no invented studies).
-- New hero/card image: `public/images/blog/front-squat-guide.jpg` (AI-generated, dark garage-gym front squat, ember rim light matching site aesthetic, no text/logos)
-- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 01 → 02 ARTICLES); no re-indenting, per checklist
-- Sitemap updated with the new URL (lastmod 2026-09-25)
-- Silo-next cards cross-link low-bar-squat-with-stiff-shoulders + the-complete-guide-to-powerlifting-periodization
-- No-orphan gate: inbound link to front-squat-guide added from the front-squat bullet in low-bar-squat-with-stiff-shoulders
-- Push through the GitHub REST API git-database flow (no shell git credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
-
-### 2026-09-25 — Agent rules in-repo (new AGENTS.md); journal repaired (Claude)
-**Did:** Cross-repo audit. Muse (the blog writer, `jbmohler-sudo`) publishes here as intended, but its six session entries (9/15–9/23) were appended at the end of this file below Hard Rules, and Current State was still dated 8/28. Muse also made non-post changes that the publish-direct approval doesn't cover: GA4 site-wide tag `G-5V676F7J2E` (b5d4d67, 9/23), Pinterest verification tag (e28e3d4, 9/16), and `docs/SEO.md` link-policy edits (76a93ba relaxed, then 0cc2cb9 re-tightened, both 9/16 — the Hard Rules still hold). One publish commit re-indented all of `public/blog.html` (a71d8eb). Fix: new AGENTS.md (shared rules + publishing checklist: post + blog.html card + sitemap `<loc>`, no re-indenting; publish-direct covers posts only) and CLAUDE.md imports it; strays folded into this Session Log newest-first (headings demoted only); cap applied; Current State updated; answered Open Question removed.
-**Decided:** One shipping rule in every repo (AGENTS.md). Jeff's 9/16 publish-direct approval covers blog posts only; tracking tags, site-wide code, and SEO/link-policy docs need his OK.
+### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
+**Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
+**Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
 **Killed:** —
-**Deferred:** Jeff to confirm the GA4 tag and the 9/16 SEO.md policy edits were wanted.
-**State after:** Site unchanged; rules readable by every agent.
-**Next:** Point Muse at AGENTS.md in its project instructions.
-
-### 2026-09-23 — Published K1 (Meet Prep & The Big Three: the S4 cornerstone)
-
-- First post of the keyword-driven SEO cluster (K1–K10) under the publish-direct policy; writer runs ONE post per run; fueling backlog F1–F8 complete.
-- New post (35th blog post): `public/blog/meet-prep-guide.html` (K1, S4 cornerstone) — "The Complete Guide to Powerlifting Meet Prep." Target 2,000+ words: 2,773 body words (stripped). Targets `powerlifting meet prep` / `how to peak for a powerlifting meet` / `powerlifting taper` — the largest high-intent search space the site did not own (per silo-4 brief). Sections: competition as its own skill, pick-the-meet backward calendar (60-day floor), peak without maxing, taper (cut volume / keep intensity), weigh-in and weight management, attempt-selection math, meet-day execution. Myth-vs-reality diff table, one-rule-you-can-act-on-tonight callout, 5-question FAQ + JSON-LD (Article + FAQPage), 3 numbered references (Bosquet 2007 taper meta-analysis; Pritchard et al. 2016 NZ elite powerlifters taper; 2020 Sports tapering/peaking review PMC7552788 — all verified real, no invented studies).
-- New hero/card image: `public/images/blog/meet-prep-guide.jpg` (AI-generated, dark platform/spotlight/chalk shot matching site aesthetic, no text or logos)
-- Blog index (`public/blog.html`): NEW group "Meet Prep & The Big Three" created with the pillar card, group count 01 ARTICLE (silo-architecture S4 now exists on the index; future K-spokes: squat programming, bench specialization, deadlift programming, peak/taper spoke)
-- Sitemap updated with the new URL (lastmod 2026-09-23)
-- Silo-next cards cross-link the periodization pillar + meet-day-nutrition (cross-silo by design: S4 sits between S2 and S3)
-- No-orphan gate: added contextual inbound link to meet-prep-guide from the periodization cornerstone (fixes the previously dangling "week-by-week protocol is its own guide" forward reference)
-- Push through the GitHub REST API (git-database; this shell has no git HTTPS credential); Vercel auto-deploy verified READY, URL verified 200 on www.cmstrength.fit.
+**Also did:** AGENTS.md dual-sitemap rule (a8e9fe3, Jeff approved). Expanded `/tools/1rm-calculator` (4477f5a): optional RPE per lift (reps in reserve added back before Epley), Brzycki alongside, per-lift plate-rounded % chart and rep max table, new guide sections (RPE to %1RM, reps to %1RM, 3RM/5RM conversion, Epley vs Brzycki, input rules), FAQ 4 to 7, 2 PubMed refs, canonical/OG, WebApplication + FAQPage JSON-LD, links out to RPE/submaximal/meet-prep/after-40. Tested in headless Chromium (desktop + 390px, no JS errors, no horizontal scroll).
+**Deferred:** Single physical sitemap serving both URLs (would end drift for good) left for later.
+**State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
+**Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 
