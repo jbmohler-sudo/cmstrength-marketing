@@ -2,6 +2,15 @@
 
 > Older session history from [JOURNEY.md](JOURNEY.md), newest first.
 
+### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
+**Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
+**Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
+**Killed:** —
+**Also did:** AGENTS.md dual-sitemap rule (a8e9fe3, Jeff approved). Expanded `/tools/1rm-calculator` (4477f5a): optional RPE per lift (reps in reserve added back before Epley), Brzycki alongside, per-lift plate-rounded % chart and rep max table, new guide sections (RPE to %1RM, reps to %1RM, 3RM/5RM conversion, Epley vs Brzycki, input rules), FAQ 4 to 7, 2 PubMed refs, canonical/OG, WebApplication + FAQPage JSON-LD, links out to RPE/submaximal/meet-prep/after-40. Tested in headless Chromium (desktop + 390px, no JS errors, no horizontal scroll).
+**Deferred:** Single physical sitemap serving both URLs (would end drift for good) left for later.
+**State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
+**Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
+
 ### 2026-09-25 — Published keyword post (Front Squat: technique + programming guide)
 
 - Second keyword-driven post of the SEO cluster (K1–K10) under the publish-direct policy; one post per run. Chose `front squat` from the OpenSEO saved-keyword queue: 33,100 vol, KD 0 — the highest-volume unused keyword, fully uncovered on the site. All 10 saved keywords were still unused, so no refill research was needed.

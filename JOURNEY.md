@@ -13,6 +13,7 @@
 ## Current State
 > Updated: 2026-10-03
 
+- **2026-10-03 follow-up:** WizeMeals links removed (Hard Rule wins), 30 titles cut to 60 chars, homepage `#guides` block lists the 6 newest posts (update it on each publish).
 - **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (PR #4, live).
 - **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
@@ -82,6 +83,7 @@ which also makes its content more credible on health-adjacent topics.
 | Apex → www stays 307 (Vercel binding, survives DNS move) | Matches approved WizeMeals apex behavior; 301 was never the blocker | 2026-08-28 | Locked |
 | One shipping rule across all repos (AGENTS.md); publish-direct approval covers posts only | Cloud agents (Muse) couldn't see rules kept in CLAUDE.md / `../` files; the local backup pushes any commit on `main`, so "commit but don't push" rules silently shipped | 2026-09-25 | Locked |
 | Every publish adds its `<loc>` to BOTH `sitemap.xml` and `sitemap-2026.xml` | robots.txt serves sitemap-2026; checklist naming only sitemap.xml left 14 URLs out of the served sitemap | 2026-09-26 | Locked |
+| CMS never links to sibling products; SEO.md §2 re-tightened to match the Hard Rule | The Sept 16 relaxation in SEO.md contradicted the Hard Rules; one rule, CMS stays a pure product site | 2026-10-03 | Locked |
 
 ---
 
@@ -94,6 +96,14 @@ which also makes its content more credible on health-adjacent topics.
 
 ## Session Log
 > Appended after every working session. Most recent first.
+
+### 2026-10-03 — WizeMeals links out, 30 titles fixed, homepage Latest Guides (a8e5721, b7152da, c6ce6bc) (Claude)
+**Did:** Removed both WizeMeals links from `carbs-for-powerlifting` (now internal links to tdee-for-lifters and simple-food-systems-for-lifters); no sibling-product links remain site-wide. `docs/SEO.md` §2 re-tightened to match the Hard Rule. Cut 30 titles (27 posts, 3 tools) from 62 to 110 characters down to 60 or less, keyword first, `| CMS` at the end; H1s, URLs, OG and schema unchanged. New homepage section `#guides` ("Latest training guides"): 6 newest posts as photo cards between the FAQ and pricing, plus a link to `/blog`. Rendered at 1280px and 390px, no JS errors, no horizontal scroll; zero broken internal links.
+**Decided:** CMS never links to sibling products; the Hard Rule wins over the Sept 16 SEO.md relaxation (Jeff, 2026-10-03).
+**Killed:** The WizeMeals TDEE-calculator and meal-planner links.
+**Deferred:** Meta descriptions over 160 characters; ~57 short anchors. The `#guides` block is hand-maintained: whether to add "update the homepage Latest Guides block" to the AGENTS.md publish checklist is Jeff's call (rules change).
+**State after:** Live on main.
+**Next:** Request indexing on the September posts; keep `#guides` current when posts publish.
 
 ### 2026-10-03 — Silo interlinking pass + internal-URL hygiene (03cd92f, 4549542) (Claude)
 **Did:** Link-graph audit of every page. Found 498 internal links pointing at 308 redirects (`/index`, `/index#x`, `/methodology/index`, `/blog.html`, `/tools.html`), the source of GSC's "Page with redirect" rows; all now clean URLs, `cms-nav.js` too. Self-canonicals on the 9 indexable pages without one; `noindex` on `/signup` (magic-link page, was indexed empty; also dropped from `sitemap.xml`, where 4a0da87 had added it); footer Tools column lists all 6 tools + `/tools` on every page; `/tools` added to both sitemaps (53 URLs, identical sets); 301 for `/blog/macrocycle-explained`. Silos: pillars of After-40, Adaptive, Meet Prep and Fueling linked to none or almost none of their spokes, 21 spokes had no in-article link from their own silo, and 4 posts were orphans (menopause, stop-at-discomfort, sled drags, deadlift form). Now every spoke links up to its pillar and to at least one sibling in the body, every pillar links down to all spokes, and KEEP READING cards stay in-silo. RPE moved to The Adaptive System group on `/blog` per `docs/silo-architecture.md`. Verified: zero broken internal links, zero links to redirects, zero orphans, tag balance unchanged, pages render (headless Chromium).
@@ -119,15 +129,6 @@ which also makes its content more credible on health-adjacent topics.
 - New hero/card image: `public/images/blog/deadlift-form-guide.jpg` (AI-generated, dark garage-gym deadlift setup, ember rim light matching site aesthetic, no text/logos)
 - Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 02 → 03 ARTICLES); no re-indenting. Sitemap: `public/sitemap.xml` gained the deadlift-form-guide entry (lastmod 2026-09-28), per the sitemap rule.
 - CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
-
-### 2026-09-26 — SEO audit; sitemaps synced; DOTS retitle; dual-sitemap rule; 1RM page expanded (dda1d1f, bf598eb, a8e9fe3, 4477f5a)
-**Did:** On-page + DataForSEO audit. Found `sitemap-2026.xml` (the one robots.txt serves) missing 14 URLs incl. all F1–F8, K1 and front-squat, because publishes were going to `sitemap.xml` only; `sitemap.xml` itself lacked 4 posts. Both now list the same 49 URLs, XML-valid, no dupes, live 200. Retitled the DOT page to DOTS ("dots calculator" 6,600/mo vs 480 for "dot score calculator"): title, H1, meta, FAQ + JSON-LD, site-wide anchor text; added canonical + OG/Twitter; corrected the claim that DOTS is the IPF's formula (IPF uses GL Points). URL unchanged. Verified live.
-**Decided:** Every publish adds its `<loc>` to both sitemaps (AGENTS.md, Decisions Log).
-**Killed:** —
-**Also did:** AGENTS.md dual-sitemap rule (a8e9fe3, Jeff approved). Expanded `/tools/1rm-calculator` (4477f5a): optional RPE per lift (reps in reserve added back before Epley), Brzycki alongside, per-lift plate-rounded % chart and rep max table, new guide sections (RPE to %1RM, reps to %1RM, 3RM/5RM conversion, Epley vs Brzycki, input rules), FAQ 4 to 7, 2 PubMed refs, canonical/OG, WebApplication + FAQPage JSON-LD, links out to RPE/submaximal/meet-prep/after-40. Tested in headless Chromium (desktop + 390px, no JS errors, no horizontal scroll).
-**Deferred:** Single physical sitemap serving both URLs (would end drift for good) left for later.
-**State after:** DataForSEO: 38 ranking keywords, none top 25, nearly all on the 1RM and DOTS tools; blog ranks only for RPE. Most silo/K-series targets are 10–40 searches/mo.
-**Next:** Watch 1RM rank in DataForSEO (baseline #88); build RPE calculator (6.6k), bench press calculator (60.5k, KD 10), powerlifting weight classes page (2.9k, KD 1); reprioritize K2–K10 by volume (DUP 18.1k, deload week 3.6k, how to increase bench 2.4k).
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 
