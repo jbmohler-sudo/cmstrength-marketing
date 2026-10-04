@@ -75,9 +75,15 @@ sections), deliberately NOT mirroring IAF's pillar-chip filter layout (avoid
 near-replica sibling sites).
 
 ### CMS-native taxonomy (no overlap with IAF's pillars)
-- **The Masters Track** — powerlifting-over-50-readiness (pillar), heavy-lifting-after-50, joint-load-management
-- **Programming & Periodization** — submaximal-training, macrocycle-explained, program-comparison
-- **Fueling the Work** — nutrition-is-a-skill
+Live groups on /blog, each with its pillar page:
+- **The After-40 Track** — pillar: how-to-powerlift-after-40
+- **The Masters Track** — pillar: powerlifting-over-50-readiness
+- **Meet Prep & The Big Three** — pillar: meet-prep-guide
+- **Fueling the Work** — pillar: nutrition-is-a-skill
+- **The Adaptive System** — pillar: what-is-adaptive-powerlifting-programming
+- **Programming & Periodization** — pillar: the-complete-guide-to-powerlifting-periodization
+
+Linking rules (pillar ↔ spokes and the rest) live in INTERNAL_LINKING.md — that's the single source of truth, don't duplicate them here.
 
 ### Content rules
 - Every post earns its place against the No-BS rule.
