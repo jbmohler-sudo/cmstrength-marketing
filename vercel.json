@@ -6,6 +6,11 @@
       "source": "/sitemap-main.xml",
       "destination": "/sitemap.xml",
       "permanent": true
+    },
+    {
+      "source": "/blog/macrocycle-explained",
+      "destination": "/blog/the-complete-guide-to-powerlifting-periodization",
+      "permanent": true
     }
   ]
 }

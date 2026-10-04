@@ -14,11 +14,11 @@
   }
 
   var INNER_LINKS = [
-    { href: '/index#system', label: 'THE SYSTEM' },
-    { href: '/index#programs', label: 'TRACKS' },
-    { href: '/index#pricing', label: 'PRICING' },
-    { href: '/index#inside', label: 'INSIDE' },
-    { href: '/index#proof', label: 'PROOF' },
+    { href: '/#system', label: 'THE SYSTEM' },
+    { href: '/#programs', label: 'TRACKS' },
+    { href: '/#pricing', label: 'PRICING' },
+    { href: '/#inside', label: 'INSIDE' },
+    { href: '/#proof', label: 'PROOF' },
     { href: '/blog', label: 'BLOG' }
   ];
 
@@ -62,12 +62,12 @@
   function overlayMarkup(home) {
     var inside = home
       ? '<button type="button" data-inside-open>Inside</button>'
-      : '<a href="/index#inside">Inside</a>';
-    var homeHref = home ? '#top' : '/index#top';
-    var sys = home ? '#system' : '/index#system';
-    var tracks = home ? '#programs' : '/index#programs';
-    var pricing = home ? '#pricing' : '/index#pricing';
-    var proof = home ? '#proof' : '/index#proof';
+      : '<a href="/#inside">Inside</a>';
+    var homeHref = home ? '#top' : '/#top';
+    var sys = home ? '#system' : '/#system';
+    var tracks = home ? '#programs' : '/#programs';
+    var pricing = home ? '#pricing' : '/#pricing';
+    var proof = home ? '#proof' : '/#proof';
     return (
       '<button class="nav-overlay-close" type="button" id="nav-overlay-close" aria-label="Close menu">&times;</button>' +
       '<div class="nav-overlay-links">' +
@@ -96,7 +96,7 @@
         var links = existing.querySelector('.nav-overlay-links');
         if (links) {
           var proof = document.createElement('a');
-          proof.href = home ? '#proof' : '/index#proof';
+          proof.href = home ? '#proof' : '/#proof';
           proof.textContent = 'Proof';
           var blog = links.querySelector('a[href="/blog"]');
           links.insertBefore(proof, blog || null);
