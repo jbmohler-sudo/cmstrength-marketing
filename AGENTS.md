@@ -95,12 +95,16 @@ after the work it describes.
 There's no build step; it's a static site. For every change:
 
 - The page opens locally and its links resolve.
-- **Publishing a post** means all three of these, in **one commit** if you can:
+- **Publishing a post** means all four of these, in **one commit** if you can:
   1. `public/blog/<slug>.html`
   2. its card in `public/blog.html`
   3. its `<loc>` in **both** `public/sitemap.xml` and `public/sitemap-2026.xml`. robots.txt
      serves `sitemap-2026.xml`, so a URL missing there never reaches Google through the sitemap. The two files
      must list the same URLs.
+  4. its card at the front of the homepage **Latest training guides** block (`#guides` in
+     `public/index.html`), with the oldest of the six cards removed so it always shows the 6 newest
+     posts, newest first. Copy the card from `public/blog.html`, add `reveal` to its class, and
+     write its description without em dashes.
 
   Add only the new card and the new `<loc>`; never re-indent those files. Check there are no
   duplicate `<loc>` entries, and that both sitemaps list the same URL set.

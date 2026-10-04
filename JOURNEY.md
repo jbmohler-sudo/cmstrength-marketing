@@ -13,7 +13,7 @@
 ## Current State
 > Updated: 2026-10-03
 
-- **2026-10-03 follow-up:** WizeMeals links removed (Hard Rule wins), 30 titles cut to 60 chars, homepage `#guides` block lists the 6 newest posts (update it on each publish).
+- **2026-10-03 follow-up:** WizeMeals links removed (Hard Rule wins), 30 titles cut to 60 chars, homepage `#guides` block lists the 6 newest posts (AGENTS.md publish step 4).
 - **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (PR #4, live).
 - **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
@@ -99,9 +99,9 @@ which also makes its content more credible on health-adjacent topics.
 
 ### 2026-10-03 — WizeMeals links out, 30 titles fixed, homepage Latest Guides (a8e5721, b7152da, c6ce6bc) (Claude)
 **Did:** Removed both WizeMeals links from `carbs-for-powerlifting` (now internal links to tdee-for-lifters and simple-food-systems-for-lifters); no sibling-product links remain site-wide. `docs/SEO.md` §2 re-tightened to match the Hard Rule. Cut 30 titles (27 posts, 3 tools) from 62 to 110 characters down to 60 or less, keyword first, `| CMS` at the end; H1s, URLs, OG and schema unchanged. New homepage section `#guides` ("Latest training guides"): 6 newest posts as photo cards between the FAQ and pricing, plus a link to `/blog`. Rendered at 1280px and 390px, no JS errors, no horizontal scroll; zero broken internal links.
-**Decided:** CMS never links to sibling products; the Hard Rule wins over the Sept 16 SEO.md relaxation (Jeff, 2026-10-03).
+**Decided:** CMS never links to sibling products; the Hard Rule wins over the Sept 16 SEO.md relaxation (Jeff, 2026-10-03). Every publish also updates the homepage `#guides` block (AGENTS.md checklist step 4, Jeff approved).
 **Killed:** The WizeMeals TDEE-calculator and meal-planner links.
-**Deferred:** Meta descriptions over 160 characters; ~57 short anchors. The `#guides` block is hand-maintained: whether to add "update the homepage Latest Guides block" to the AGENTS.md publish checklist is Jeff's call (rules change).
+**Deferred:** Meta descriptions over 160 characters; ~57 short anchors.
 **State after:** Live on main.
 **Next:** Request indexing on the September posts; keep `#guides` current when posts publish.
 
