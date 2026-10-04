@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5V676F7J2E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5V676F7J2E');
+  </script>
+  <title>TDEE Calculator for Lifters: Find Your Daily Calories | CMS</title>
+  <meta name="description" content="Free TDEE calculator for lifters. Estimate your maintenance calories, then get surplus and deficit targets to build muscle or lose fat.">
+  <link rel="canonical" href="https://www.cmstrength.fit/tools/tdee-calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Center Mass Strength" />
+  <meta property="og:title" content="TDEE Calculator for Lifters: Find Your Daily Calories" />
+  <meta property="og:description" content="Estimate your TDEE from age, bodyweight, height and activity, then get maintenance, surplus and deficit calorie targets." />
+  <meta property="og:url" content="https://www.cmstrength.fit/tools/tdee-calculator" />
+  <meta property="og:image" content="https://www.cmstrength.fit/images/blog/tdee-for-lifters.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TDEE Calculator for Lifters: Find Your Daily Calories" />
+  <meta name="twitter:description" content="Estimate your TDEE from age, bodyweight, height and activity, then get maintenance, surplus and deficit calorie targets." />
+  <meta name="twitter:image" content="https://www.cmstrength.fit/images/blog/tdee-for-lifters.jpg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- JSON-LD: WebApplication + FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "TDEE Calculator",
+        "url": "https://www.cmstrength.fit/tools/tdee-calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "description": "Estimate total daily energy expenditure from age, bodyweight, height and activity, with maintenance, surplus and deficit calorie targets for lifters.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Center Mass Strength",
+          "url": "https://www.cmstrength.fit/"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a TDEE calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It estimates the calories you burn in a full day: your basal metabolic rate plus daily movement and training. Eat at that number and your weight holds. Eat above it and you gain, below it and you lose."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is a TDEE calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is a starting estimate, typically within about 10 percent. Two lifters of the same size can differ by several hundred calories a day, mostly from non-exercise activity. Confirm it by tracking calories and bodyweight for two to three weeks and adjusting from the scale trend."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which formula does this TDEE calculator use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mifflin-St Jeor for resting calories, which has held up well in validation studies, multiplied by an activity factor. If you enter a body fat percentage it switches to Katch-McArdle, which is built on lean mass and suits lifters with more muscle than average."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which activity level should a lifter pick?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pick for your whole week, not just the gym. A desk worker who lifts four days a week is usually Moderate. Lifting four to six days plus an active job is Very active. When you are between two levels, choose the lower one and let the scale correct you."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many calories above TDEE should I eat to build muscle?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About 200 to 300 calories above TDEE. That supports growth while keeping most of the gain lean, and the scale should climb roughly 0.25 to 0.5 percent of bodyweight per week."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many calories below TDEE should I eat to lose fat?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "About 300 to 500 below TDEE, which is roughly 0.5 to 1 pound per week for most lifters. A bigger cut costs training quality and muscle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why did my weight stop changing when the calculator says I should be losing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "TDEE drops as you lose weight, and daily movement quietly falls in a deficit. A two-week stall after six or more weeks of dieting usually means the real number moved. Trim intake by 100 to 200 calories or add daily steps, then give it two more weeks."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=Saira:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cms.css">
+  <style>
+    /* ===== TDEE CALCULATOR PAGE ===== */
+    .tool-section {
+      position: relative; z-index: 3;
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    }
+
+    /* --- Toggle pills --- */
+    .toggle-row {
+      display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; align-items: center;
+    }
+    .toggle-group {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toggle-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .toggle-pill {
+      display: flex; border: 1px solid var(--border-strong); overflow: hidden; cursor: pointer;
+    }
+    .toggle-pill button {
+      background: transparent; border: none; color: var(--muted); cursor: pointer;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 18px; transition: all .2s;
+    }
+    .toggle-pill button.active {
+      background: var(--accent); color: var(--bg);
+    }
+    .toggle-pill button:hover:not(.active) {
+      background: rgba(236,231,219,0.06); color: var(--bone);
+    }
+
+    /* --- Input block --- */
+    .input-block { display: flex; flex-direction: column; gap: 8px; }
+    .input-block label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .input-block input {
+      background: rgba(18,18,22,0.72); border: 1px solid var(--border-strong);
+      color: var(--bone); font-family: var(--font-display); font-weight: 800;
+      font-size: 28px; padding: 14px 16px; text-align: center;
+      width: 100%; min-width: 0; box-sizing: border-box;
+      transition: border-color .2s;
+      -moz-appearance: textfield;
+    }
+    .input-block input::-webkit-outer-spin-button,
+    .input-block input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .input-block input:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .input-block .unit-hint {
+      font-family: var(--font-mono); font-size: 10px; color: var(--faint);
+      text-align: center; letter-spacing: 0.1em;
+    }
+
+    /* --- Calculate button --- */
+    .calc-row { text-align: center; margin-bottom: 48px; }
+
+    /* --- Result area --- */
+    .dot-result {
+      display: flex; flex-direction: column; align-items: center;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .dot-result.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* --- Score display --- */
+    .dot-score-display {
+      text-align: center; margin-top: 12px;
+    }
+    .dot-score-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.42em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .dot-score-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: clamp(64px, 10vw, 96px); line-height: 1;
+      color: var(--bone); margin-top: 4px;
+    }
+    .dot-score-value .decimal {
+      font-size: 0.5em; color: var(--dim);
+    }
+
+    /* --- 1RM grid --- */
+    .orm-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-bottom: 40px;
+    }
+    .orm-lift-card {
+      border: 1px solid var(--border); background: rgba(18,18,22,0.5);
+      padding: 24px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .orm-lift-card .lift-name {
+      font-family: var(--font-display); font-weight: 900; font-size: 20px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .orm-lift-card .lift-name .accent { color: var(--accent); }
+    .orm-input-row {
+      display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 10px;
+    }
+    .orm-input-row .input-block input {
+      font-size: 22px; padding: 12px 10px;
+    }
+    .orm-result-card {
+      border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px;
+      text-align: center; min-height: 80px;
+      opacity: 0; transition: opacity .4s ease;
+    }
+    .orm-result-card.visible { opacity: 1; }
+    .orm-result-card .orm-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--dim); text-transform: uppercase;
+    }
+    .orm-result-card .orm-value {
+      font-family: var(--font-display); font-weight: 900;
+      font-size: 44px; line-height: 1.1; color: var(--bone); margin-top: 4px;
+    }
+    .orm-result-card .orm-value .orm-unit {
+      font-size: 16px; color: var(--dim); font-family: var(--font-mono);
+      font-weight: 400; letter-spacing: 0.1em;
+    }
+
+    /* --- Cross-link card --- */
+    .cross-link {
+      margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cross-link a {
+      font-family: var(--font-display); font-weight: 700; font-size: 15px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .cross-link a:hover {
+      color: var(--accent);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 760px) {
+      .orm-grid { grid-template-columns: 1fr; }
+    }
+
+    /* --- Guide content below the calculator --- */
+    .guide { max-width: 720px; margin: 0 auto; }
+    .guide-sec { margin-top: clamp(56px, 7vw, 88px); }
+    .guide-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .guide-h {
+      font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+      font-size: clamp(26px, 4vw, 40px); line-height: 1; color: var(--bone);
+      letter-spacing: 0.02em;
+    }
+    .guide-intro { color: var(--muted); margin-top: 16px; font-size: 16px; max-width: 56ch; }
+    .guide-body { color: var(--muted); margin-top: 18px; font-size: 16px; line-height: 1.65; }
+    .guide-body p + p { margin-top: 14px; }
+    .guide-body strong { color: var(--bone); font-weight: 600; }
+
+    .formula-card {
+      border: 1px solid var(--border); background: var(--bg-card);
+      padding: 20px 22px; margin-top: 20px; text-align: center;
+    }
+    .formula-card .formula {
+      font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.08em;
+      color: var(--bone); text-transform: uppercase;
+    }
+
+    .zone-card {
+      border: 1px solid var(--border); background: var(--bg-card);
+      margin-top: 24px; overflow-x: auto;
+    }
+    .zone-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+    .zone-table th {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--dim); text-transform: uppercase; text-align: left; font-weight: 400;
+      padding: 16px 24px 12px; border-bottom: 1px solid var(--border-strong);
+      white-space: nowrap;
+    }
+    .zone-table td {
+      padding: 15px 24px; border-bottom: 1px solid var(--border);
+      font-size: 15px; color: var(--muted);
+    }
+    .zone-table tbody tr:last-child td { border-bottom: none; }
+    .zone-table .zone-pct {
+      font-family: var(--font-mono); font-weight: 700; font-size: 13px;
+      color: var(--accent); white-space: nowrap;
+    }
+    .zone-table .zone-name {
+      font-family: var(--font-display); font-weight: 800; font-size: 17px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone);
+      white-space: nowrap;
+    }
+
+    .cta-band {
+      border: 1px solid var(--border-strong); background: var(--bg-card);
+      margin-top: clamp(56px, 7vw, 88px);
+      padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      text-align: center;
+    }
+    .cta-band .guide-h { font-size: clamp(28px, 4.5vw, 44px); }
+    .cta-copy { color: var(--muted); max-width: 560px; margin: 18px auto 28px; font-size: 16px; line-height: 1.6; }
+    .cta-small {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--faint); text-transform: uppercase; margin-top: 18px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 14px; margin-top: 26px; }
+    .faq-item { border: 1px solid var(--border); background: var(--bg-card); padding: 22px 24px; }
+    .faq-q {
+      font-family: var(--font-display); font-weight: 800; font-size: 18px;
+      letter-spacing: 0.05em; text-transform: uppercase; color: var(--bone);
+      line-height: 1.2;
+    }
+    .faq-q .q-num {
+      font-family: var(--font-mono); font-weight: 700; color: var(--accent);
+      margin-right: 10px;
+    }
+    .faq-a { color: var(--muted); font-size: 15px; line-height: 1.65; margin-top: 10px; }
+    /* --- Expanded 1RM: RPE input, results, charts --- */
+    .orm-input-row.has-rpe { grid-template-columns: 1.3fr 0.6fr 0.6fr; }
+    .orm-alt {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      color: var(--faint); text-transform: uppercase; margin-top: 8px;
+    }
+    .orm-note {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      color: var(--dim); text-transform: uppercase; text-align: center; margin: -24px 0 36px;
+    }
+    .orm-charts { display: none; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px; }
+    .orm-charts.visible { display: block; }
+    .orm-charts .toggle-row { justify-content: center; margin-bottom: 24px; }
+    .orm-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .orm-chart-grid .zone-card { margin-top: 0; }
+    .orm-chart-grid .zone-table { min-width: 0; }
+    .orm-chart-grid .zone-table td, .orm-chart-grid .zone-table th { padding: 10px 18px; }
+    .orm-chart-cap {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase; padding: 16px 18px 0;
+    }
+    .zone-table td.num { font-family: var(--font-mono); color: var(--bone); }
+    .rule-list { margin: 18px 0 0 20px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .rule-list li + li { margin-top: 10px; }
+    .rule-list strong { color: var(--bone); font-weight: 600; }
+    .guide-body a, .rule-list a, .references a { color: var(--accent); }
+    .references { margin: 18px 0 0 20px; color: var(--dim); font-size: 14px; line-height: 1.6; }
+    .references li + li { margin-top: 8px; }
+    @media (max-width: 760px) {
+      .orm-chart-grid { grid-template-columns: 1fr; }
+    }
+
+    /* --- TDEE calculator --- */
+    .tdee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+    .tdee-grid .input-block input { font-size: 24px; }
+    .input-block select {
+      background: rgba(18,18,22,0.72); border: 1px solid var(--border-strong);
+      color: var(--bone); font-family: var(--font-display); font-weight: 800;
+      font-size: 20px; padding: 14px 12px; width: 100%; min-width: 0; box-sizing: border-box;
+      transition: border-color .2s;
+    }
+    .input-block select:focus { outline: none; border-color: var(--accent); }
+    .input-block select option { background: #121216; color: #ECE7DB; }
+    .input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tdee-wide { grid-column: span 2; }
+    .tdee-error {
+      display: none; color: var(--accent-bright); font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin: -8px 0 24px;
+    }
+    .tdee-error.visible { display: block; }
+    .tdee-split { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; width: 100%; }
+    .tdee-card { border: 1px solid var(--border); background: rgba(18,18,22,0.5); padding: 22px 20px; text-align: center; }
+    .tdee-card.maint { border-color: var(--accent); }
+    .tdee-card .tc-label {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em;
+      color: var(--accent); text-transform: uppercase;
+    }
+    .tdee-card .tc-val {
+      font-family: var(--font-display); font-weight: 900; font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.05; color: var(--bone); margin-top: 8px;
+    }
+    .tdee-card .tc-sub {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+      color: var(--faint); text-transform: uppercase; margin-top: 8px;
+    }
+    .tdee-bmr { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--dim); text-transform: uppercase; margin-top: 22px; text-align: center; }
+    .tdee-next { color: var(--muted); font-size: 15px; line-height: 1.6; text-align: center; max-width: 560px; margin: 20px auto 0; }
+    .tdee-next a { color: var(--accent); }
+    @media (max-width: 760px) {
+      .tdee-grid { grid-template-columns: 1fr; }
+      .tdee-wide { grid-column: auto; }
+      .tdee-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cms-dust"></canvas>
+  <div id="cms-glow"></div>
+  <div class="cms-vignette" aria-hidden="true"></div>
+  <div class="cms-grain" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="nav-brand" href="/" aria-label="Center Mass Strength home">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="ring-in"></div>
+          <div class="cross-v"></div>
+          <div class="cross-h"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div class="nav-wordmark">
+          <span class="name">CENTER MASS</span>
+          <span class="sub">S T R E N G T H</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="/#system">THE SYSTEM</a>
+        <a class="nav-link" href="/#programs">TRACKS</a>
+        <a class="nav-link" href="/#pricing">PRICING</a>
+        <a class="nav-link" href="/#inside">INSIDE</a>
+        <a class="nav-link" href="/#proof">PROOF</a>
+        <a class="nav-link" href="/blog">BLOG</a>
+        <a class="btn btn-nav" href="https://app.cmstrength.fit">OPEN APP &rarr;</a>
+        <button class="nav-hamburger" type="button" id="nav-hamburger" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">&#9776;</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero" style="padding-top: 140px;">
+      <a class="back-link" href="/tools" style="margin-bottom:26px;">&larr; Back to tools</a>
+      <p class="kicker">NUTRITION CALCULATOR</p>
+      <h1 class="display" style="font-family:var(--font-display);font-weight:900;font-size:clamp(38px,6vw,72px);line-height:0.9;text-transform:uppercase;margin-top:16px;">
+        <span class="accent">TDEE</span> CALCULATOR
+      </h1>
+      <p class="lede" style="max-width:560px;margin-top:20px;">Estimate the calories you burn in a day, then get maintenance, surplus and deficit targets for how you train.</p>
+    </div>
+
+    <section class="tool-section">
+      <div style="border:1px solid var(--border);background:var(--bg-card);padding:clamp(28px,4vw,48px);">
+
+        <div class="toggle-row" style="margin-bottom:28px;">
+          <div class="toggle-group">
+            <span class="toggle-label">UNITS</span>
+            <div class="toggle-pill" id="tdee-unit-toggle">
+              <button class="active" data-val="lb">LB / IN</button>
+              <button data-val="kg">KG / CM</button>
+            </div>
+          </div>
+          <div class="toggle-group">
+            <span class="toggle-label">SEX</span>
+            <div class="toggle-pill" id="tdee-sex-toggle">
+              <button class="active" data-val="m">MALE</button>
+              <button data-val="f">FEMALE</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tdee-grid">
+          <div class="input-block">
+            <label for="tdee-age">AGE</label>
+            <input type="number" id="tdee-age" placeholder="&mdash;" min="14" max="100" step="1" inputmode="numeric">
+            <span class="unit-hint">YEARS</span>
+          </div>
+          <div class="input-block">
+            <label for="tdee-wt">BODYWEIGHT</label>
+            <input type="number" id="tdee-wt" placeholder="&mdash;" min="0" step="0.1" inputmode="decimal">
+            <span class="unit-hint" id="tdee-wt-unit">LB</span>
+          </div>
+          <div class="input-block">
+            <label for="tdee-ft">HEIGHT</label>
+            <div class="input-pair" id="tdee-ht-imp">
+              <input type="number" id="tdee-ft" placeholder="ft" min="3" max="8" step="1" inputmode="numeric" aria-label="Height, feet">
+              <input type="number" id="tdee-in" placeholder="in" min="0" max="11.5" step="0.5" inputmode="decimal" aria-label="Height, inches">
+            </div>
+            <input type="number" id="tdee-cm" placeholder="&mdash;" min="0" step="0.5" inputmode="decimal" style="display:none;" aria-label="Height, centimeters">
+            <span class="unit-hint" id="tdee-ht-unit">FT / IN</span>
+          </div>
+          <div class="input-block tdee-wide">
+            <label for="tdee-act">ACTIVITY LEVEL</label>
+            <select id="tdee-act">
+              <option value="1.2">Sedentary: desk job, little or no training</option>
+              <option value="1.375">Light: lifting 1 to 3 days a week</option>
+              <option value="1.55" selected>Moderate: lifting 3 to 5 days a week</option>
+              <option value="1.725">Very active: lifting 4 to 6 days plus an active job</option>
+              <option value="1.9">Extreme: heavy labor plus daily hard training</option>
+            </select>
+          </div>
+          <div class="input-block">
+            <label for="tdee-bf">BODY FAT % (OPTIONAL)</label>
+            <input type="number" id="tdee-bf" placeholder="&mdash;" min="5" max="60" step="0.5" inputmode="decimal">
+            <span class="unit-hint">USES KATCH-McARDLE</span>
+          </div>
+        </div>
+
+        <div class="tdee-error" id="tdee-error" role="alert"></div>
+
+        <div class="calc-row">
+          <button class="btn btn-primary" id="tdee-calc-btn" onclick="calculateTDEE()">
+            CALCULATE TDEE
+          </button>
+        </div>
+
+        <div class="dot-result" id="tdee-result" aria-live="polite">
+          <div class="dot-score-display">
+            <div class="dot-score-label">ESTIMATED TDEE</div>
+            <div class="dot-score-value">
+              <span id="tdee-val">0</span>
+              <span class="decimal" style="font-size:0.35em;"> KCAL / DAY</span>
+            </div>
+          </div>
+          <div class="tdee-bmr" id="tdee-bmr"></div>
+          <div class="tdee-split">
+            <div class="tdee-card">
+              <div class="tc-label">Lose fat</div>
+              <div class="tc-val" id="tdee-cut">&mdash;</div>
+              <div class="tc-sub">300 to 500 below</div>
+            </div>
+            <div class="tdee-card maint">
+              <div class="tc-label">Maintain</div>
+              <div class="tc-val" id="tdee-maint">&mdash;</div>
+              <div class="tc-sub">Recomposition</div>
+            </div>
+            <div class="tdee-card">
+              <div class="tc-label">Build muscle</div>
+              <div class="tc-val" id="tdee-build">&mdash;</div>
+              <div class="tc-sub">200 to 300 above</div>
+            </div>
+          </div>
+          <p class="tdee-next">This is a starting estimate, not a verdict. Track your calories and weigh in daily for two to three weeks, then adjust from the scale trend. <a href="/blog/tdee-for-lifters">TDEE for lifters</a> shows how.</p>
+        </div>
+      </div>
+
+      <div class="guide">
+
+        <section class="guide-sec">
+          <p class="guide-label">The method</p>
+          <h2 class="guide-h">How the estimate works</h2>
+          <div class="guide-body">
+            <p>TDEE, total daily energy expenditure, is the calories you burn in a full day. It is the sum of four parts: resting metabolism (BMR), the calories spent digesting food, the calories burned in training, and everything else you do that is not formal exercise.</p>
+            <p>This calculator estimates resting calories with the Mifflin-St Jeor equation, then multiplies by an activity factor from 1.2 to 1.9 to cover the rest. If you enter a body fat percentage, it uses Katch-McArdle instead, which works from lean mass and fits muscular lifters better than a formula built on total weight.</p>
+          </div>
+        </section>
+
+        <section class="guide-sec">
+          <p class="guide-label">Reading the result</p>
+          <h2 class="guide-h">What to do with your number</h2>
+          <ol class="rule-list">
+            <li><strong>Building muscle:</strong> eat 200 to 300 calories above TDEE. The scale should creep up about 0.25 to 0.5 percent of bodyweight per week.</li>
+            <li><strong>Losing fat:</strong> eat 300 to 500 below. That is roughly 0.5 to 1 pound a week without wrecking your training.</li>
+            <li><strong>Holding weight or recomposing:</strong> eat at TDEE and let training drive the change.</li>
+            <li><strong>Check it against the scale.</strong> After two to three weeks, a flat trend means your intake equals your real TDEE. If the trend disagrees with the plan, the formula was off, not your body.</li>
+            <li><strong>Recalculate when bodyweight moves 10 pounds or more,</strong> or when your training or job changes.</li>
+          </ol>
+          <div class="guide-body">
+            <p>Calories set the budget. The rest of the fueling picture decides how you spend it: lock in <a href="/blog/protein-for-powerlifters">protein first</a>, then see <a href="/blog/smart-surplus-for-lifters">how to run a clean surplus</a> or <a href="/blog/recomposition-for-powerlifters">a recomposition</a>.</p>
+          </div>
+        </section>
+
+        <section class="guide-sec">
+          <p class="guide-label">Calibration</p>
+          <h2 class="guide-h">Why every calculator is a guess</h2>
+          <div class="guide-body">
+            <p>The biggest unknown is non-exercise activity: walking, standing, fidgeting, the physical demands of your job. It varies enormously between people and shrinks when you diet. That is why a desk worker and a contractor who lift the same program can differ by hundreds of calories a day.</p>
+            <p>Do not use a watch&rsquo;s calorie burn to correct the estimate. Wearables routinely overstate lifting calories. Use the scale trend. The full method is in <a href="/blog/tdee-for-lifters">TDEE for lifters</a>.</p>
+          </div>
+        </section>
+
+        <section class="cta-band" aria-label="Start your free trial">
+          <h2 class="guide-h">Fuel the work, then program it</h2>
+          <p class="cta-copy">Calories are one training variable. Center Mass Strength pairs adaptive programming with fueling guidance that treats nutrition like the rest of your training: measured, adjusted and honest.</p>
+          <a class="btn btn-primary" href="https://app.cmstrength.fit/signup">Start your 14-day free trial</a>
+          <p class="cta-small">No card required.</p>
+        </section>
+
+        <section class="guide-sec">
+          <p class="guide-label">FAQ</p>
+          <h2 class="guide-h">Questions lifters ask</h2>
+          <div class="faq-list">
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">01</span>What is a TDEE calculator?</h3>
+              <p class="faq-a">It estimates the calories you burn in a full day: your basal metabolic rate plus daily movement and training. Eat at that number and your weight holds. Eat above it and you gain, below it and you lose.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">02</span>How accurate is a TDEE calculator?</h3>
+              <p class="faq-a">It is a starting estimate, typically within about 10 percent. Two lifters of the same size can differ by several hundred calories a day, mostly from non-exercise activity. Confirm it by tracking calories and bodyweight for two to three weeks and adjusting from the scale trend.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">03</span>Which formula does this TDEE calculator use?</h3>
+              <p class="faq-a">Mifflin-St Jeor for resting calories, which has held up well in validation studies, multiplied by an activity factor. If you enter a body fat percentage it switches to Katch-McArdle, which is built on lean mass and suits lifters with more muscle than average.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">04</span>Which activity level should a lifter pick?</h3>
+              <p class="faq-a">Pick for your whole week, not just the gym. A desk worker who lifts four days a week is usually Moderate. Lifting four to six days plus an active job is Very active. When you are between two levels, choose the lower one and let the scale correct you.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">05</span>How many calories above TDEE should I eat to build muscle?</h3>
+              <p class="faq-a">About 200 to 300 calories above TDEE. That supports growth while keeping most of the gain lean, and the scale should climb roughly 0.25 to 0.5 percent of bodyweight per week.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">06</span>How many calories below TDEE should I eat to lose fat?</h3>
+              <p class="faq-a">About 300 to 500 below TDEE, which is roughly 0.5 to 1 pound per week for most lifters. A bigger cut costs training quality and muscle.</p>
+            </article>
+            <article class="faq-item">
+              <h3 class="faq-q"><span class="q-num" aria-hidden="true">07</span>Why did my weight stop changing when the calculator says I should be losing?</h3>
+              <p class="faq-a">TDEE drops as you lose weight, and daily movement quietly falls in a deficit. A two-week stall after six or more weeks of dieting usually means the real number moved. Trim intake by 100 to 200 calories or add daily steps, then give it two more weeks.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="guide-sec">
+          <p class="guide-label">Sources</p>
+          <h2 class="guide-h" style="font-size:clamp(22px,3vw,30px);">References</h2>
+          <ol class="references">
+            <li>Mifflin MD, St Jeor ST, Hill LA, Scott BJ, Daugherty SA, Koh YO. A new predictive equation for resting energy expenditure in healthy individuals. <em>Am J Clin Nutr.</em> 1990;51(2):241-247. <a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" rel="noopener" target="_blank">PubMed</a></li>
+            <li>Hall KD, Sacks G, Chandramohan D, et al. Quantification of the effect of energy imbalance on bodyweight. <em>Lancet.</em> 2011;378(9793):826-837. <a href="https://pubmed.ncbi.nlm.nih.gov/21872751/" rel="noopener" target="_blank">PubMed</a></li>
+            <li>Trexler ET, Smith-Ryan AE, Norton LE. Metabolic adaptation to weight loss: implications for the athlete. <em>J Int Soc Sports Nutr.</em> 2014;11(1):7. <a href="https://pubmed.ncbi.nlm.nih.gov/24571926/" rel="noopener" target="_blank">PubMed</a></li>
+          </ol>
+        </section>
+
+      </div>
+
+      <div class="cross-link">
+        <a href="/blog/tdee-for-lifters">Read how to set your calories from TDEE &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-vault">
+      <div>
+        <h4>Methodology</h4>
+        <ul>
+          <li><a href="/methodology/proactive-load-architecture">Proactive Load Architecture</a></li>
+          <li><a href="/methodology/the-experience">The Experience</a></li>
+          <li><a href="/blog">The Strength Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="/#programs">Bench Specialist</a></li>
+          <li><a href="/#programs">Jacked &amp; Strong</a></li>
+          <li><a href="/#programs">SBD Full Power</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/tools/dot-score">DOTS Calculator</a></li>
+          <li><a href="/tools/1rm-calculator">1RM Calculator</a></li>
+          <li><a href="/tools/wilks-calculator">Wilks Calculator</a></li>
+          <li><a href="/tools/total-calculator">Total Calculator</a></li>
+          <li><a href="/tools/readiness-scorecard">Readiness Scorecard</a></li>
+          <li><a href="/tools/meet-day-checklist">Meet-Day Checklist</a></li>
+          <li><a href="/tools/tdee-calculator" class="active-link">TDEE Calculator</a></li>
+          <li><a href="/tools">All Tools</a></li>
+        </ul>
+        <p style="color:var(--dim);font-size:0.8rem;margin-top:0.8rem;">More tools coming soon.</p>
+      </div>
+      <div>
+        <h4>Launch</h4>
+        <p>Ready to train smarter? Start your 14-day trial.</p>
+        <a href="https://app.cmstrength.fit/signup" class="cta-link">Start Free Trial &rarr;</a>
+      </div>
+    </div>
+    <div class="shell footer-row">
+      <div class="brand-mini">
+        <div class="sprocket">
+          <div class="ring-out"></div>
+          <div class="hub"><div class="hub-dot"></div></div>
+        </div>
+        <div>
+          <div class="name">CENTER MASS STRENGTH</div>
+          <div class="tagline">Adaptive powerlifting programming.</div>
+        </div>
+      </div>
+      <div class="meta">&copy; 2026 CMS &middot; app.cmstrength.fit</div>
+    </div>
+  </footer>
+
+  <script src="/cms-nav.js"></script>
+  <script src="/cms-motion.js"></script>
+  <script>
+    /* ===== TDEE CALCULATOR ===== */
+    var tdeeUnit = 'lb';
+    var tdeeSex = 'm';
+    var tdeeHasResult = false;
+    var LB_TO_KG = 0.45359237;
+    var IN_TO_CM = 2.54;
+
+    function tdeeBind(id, onChange) {
+      var group = document.getElementById(id);
+      if (!group) return;
+      group.querySelectorAll('button').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          group.querySelectorAll('button').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          onChange(btn.dataset.val);
+        });
+      });
+    }
+
+    tdeeBind('tdee-sex-toggle', function(v) {
+      tdeeSex = v;
+      if (tdeeHasResult) calculateTDEE();
+    });
+
+    tdeeBind('tdee-unit-toggle', function(v) {
+      var wt = document.getElementById('tdee-wt');
+      var w = parseFloat(wt.value);
+      var ft = parseFloat(document.getElementById('tdee-ft').value);
+      var inch = parseFloat(document.getElementById('tdee-in').value) || 0;
+      var cmEl = document.getElementById('tdee-cm');
+      var cm = parseFloat(cmEl.value);
+      /* Carry entered values across the unit switch */
+      if (v === 'kg' && tdeeUnit === 'lb') {
+        if (w > 0) wt.value = Math.round(w * LB_TO_KG * 10) / 10;
+        if (ft > 0) cmEl.value = Math.round((ft * 12 + inch) * IN_TO_CM * 2) / 2;
+      } else if (v === 'lb' && tdeeUnit === 'kg') {
+        if (w > 0) wt.value = Math.round(w / LB_TO_KG * 10) / 10;
+        if (cm > 0) {
+          var totalIn = Math.round(cm / IN_TO_CM * 2) / 2;
+          document.getElementById('tdee-ft').value = Math.floor(totalIn / 12);
+          document.getElementById('tdee-in').value = totalIn % 12;
+        }
+      }
+      tdeeUnit = v;
+      var metric = v === 'kg';
+      document.getElementById('tdee-ht-imp').style.display = metric ? 'none' : '';
+      cmEl.style.display = metric ? '' : 'none';
+      document.getElementById('tdee-wt-unit').textContent = metric ? 'KG' : 'LB';
+      document.getElementById('tdee-ht-unit').textContent = metric ? 'CM' : 'FT / IN';
+      if (tdeeHasResult) calculateTDEE();
+    });
+
+    function tdeeFail(msg) {
+      var el = document.getElementById('tdee-error');
+      el.textContent = msg;
+      el.classList.add('visible');
+      document.getElementById('tdee-result').classList.remove('visible');
+      tdeeHasResult = false;
+    }
+
+    function tdeeRound(n) { return Math.round(n / 10) * 10; }
+    function tdeeFmt(n) { return n.toLocaleString('en-US'); }
+
+    /* Count up to the result; guarantee the final value even if rAF is throttled */
+    function animateTdee(el, end, duration) {
+      var done = false;
+      function finish() { el.textContent = tdeeFmt(end); done = true; }
+      setTimeout(finish, duration + 50);
+      var start = null;
+      function step(ts) {
+        if (done) return;
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = tdeeFmt(Math.floor(end * eased));
+        if (p < 1) requestAnimationFrame(step); else finish();
+      }
+      requestAnimationFrame(step);
+    }
+
+    function calculateTDEE() {
+      document.getElementById('tdee-error').classList.remove('visible');
+
+      var age = parseFloat(document.getElementById('tdee-age').value);
+      var w = parseFloat(document.getElementById('tdee-wt').value);
+      var bf = parseFloat(document.getElementById('tdee-bf').value);
+      var mult = parseFloat(document.getElementById('tdee-act').value);
+      var kg, cm;
+
+      if (tdeeUnit === 'kg') {
+        kg = w;
+        cm = parseFloat(document.getElementById('tdee-cm').value);
+      } else {
+        kg = w * LB_TO_KG;
+        var ft = parseFloat(document.getElementById('tdee-ft').value);
+        var inch = parseFloat(document.getElementById('tdee-in').value) || 0;
+        cm = (ft * 12 + inch) * IN_TO_CM;
+      }
+
+      if (!(age >= 14 && age <= 100)) return tdeeFail('Enter an age between 14 and 100.');
+      if (!(kg >= 30 && kg <= 300)) return tdeeFail('Enter a realistic bodyweight.');
+      if (!(cm >= 120 && cm <= 250)) return tdeeFail('Enter a realistic height.');
+      if (!isNaN(bf) && !(bf >= 5 && bf <= 60)) return tdeeFail('Body fat should be 5 to 60 percent, or leave it blank.');
+
+      var bmr, method;
+      if (!isNaN(bf)) {
+        /* Katch-McArdle: BMR = 370 + 21.6 x lean mass (kg) */
+        bmr = 370 + 21.6 * (kg * (1 - bf / 100));
+        method = 'Katch-McArdle';
+      } else {
+        /* Mifflin-St Jeor: 10 x kg + 6.25 x cm - 5 x age + 5 (male) or - 161 (female) */
+        bmr = 10 * kg + 6.25 * cm - 5 * age + (tdeeSex === 'm' ? 5 : -161);
+        method = 'Mifflin-St Jeor';
+      }
+      var tdee = tdeeRound(bmr * mult);
+
+      document.getElementById('tdee-bmr').textContent = 'Resting calories (BMR): ' + tdeeFmt(tdeeRound(bmr)) + ' kcal · ' + method;
+      document.getElementById('tdee-cut').textContent = tdeeFmt(tdee - 500) + '–' + tdeeFmt(tdee - 300);
+      document.getElementById('tdee-maint').textContent = tdeeFmt(tdee);
+      document.getElementById('tdee-build').textContent = tdeeFmt(tdee + 200) + '–' + tdeeFmt(tdee + 300);
+
+      document.getElementById('tdee-result').classList.add('visible');
+      animateTdee(document.getElementById('tdee-val'), tdee, 900);
+      tdeeHasResult = true;
+    }
+
+    /* Enter key calculates */
+    document.querySelectorAll('.tdee-grid input').forEach(function(inp) {
+      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') calculateTDEE(); });
+    });
+  </script>
+</body>
+</html>
