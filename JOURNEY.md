@@ -13,7 +13,7 @@
 ## Current State
 > Updated: 2026-10-03
 
-- **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (branch `seo/silo-interlinking`, pending merge).
+- **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (PR #4, live).
 - **2026-09-26 SEO audit:** tools, not blog posts, carry all rankings. Sitemaps synced (both 49 URLs), DOTS retitle and 1RM expansion live; publishes now update both sitemaps. Next: the calculator build-out in the Session Log.
 - **Since 8/28 (Muse, publish-direct from 9/16):** the "Fueling the Work" series F1–F8 and the K1 meet-prep
   cornerstone are live; GA4 `G-5V676F7J2E` site-wide (9/23); Pinterest verification + pin images. Agent rules
@@ -95,12 +95,12 @@ which also makes its content more credible on health-adjacent topics.
 ## Session Log
 > Appended after every working session. Most recent first.
 
-### 2026-10-03 — Silo interlinking pass + internal-URL hygiene (c1139ac, 3be83c9) (Claude)
+### 2026-10-03 — Silo interlinking pass + internal-URL hygiene (03cd92f, 4549542) (Claude)
 **Did:** Link-graph audit of every page. Found 498 internal links pointing at 308 redirects (`/index`, `/index#x`, `/methodology/index`, `/blog.html`, `/tools.html`), the source of GSC's "Page with redirect" rows; all now clean URLs, `cms-nav.js` too. Self-canonicals on the 9 indexable pages without one; `noindex` on `/signup` (magic-link page, was indexed empty; also dropped from `sitemap.xml`, where 4a0da87 had added it); footer Tools column lists all 6 tools + `/tools` on every page; `/tools` added to both sitemaps (53 URLs, identical sets); 301 for `/blog/macrocycle-explained`. Silos: pillars of After-40, Adaptive, Meet Prep and Fueling linked to none or almost none of their spokes, 21 spokes had no in-article link from their own silo, and 4 posts were orphans (menopause, stop-at-discomfort, sled drags, deadlift form). Now every spoke links up to its pillar and to at least one sibling in the body, every pillar links down to all spokes, and KEEP READING cards stay in-silo. RPE moved to The Adaptive System group on `/blog` per `docs/silo-architecture.md`. Verified: zero broken internal links, zero links to redirects, zero orphans, tag balance unchanged, pages render (headless Chromium).
 **Decided:** —
 **Killed:** The "in progress" Fueling list on nutrition-is-a-skill (replaced with links to all 9 shipped spokes).
 **Deferred:** Titles over 60 chars on ~30 posts and descriptions over 160; ~57 pre-existing short anchors under the 40-char rule; homepage "Latest guides" block; After-40 vs Masters Track overlap; `carbs-for-powerlifting` links WizeMeals twice (Hard Rules forbid it, `docs/SEO.md` §2 allows it, Jeff to decide).
-**State after:** On branch `seo/silo-interlinking`, awaiting Jeff's OK to merge (site-wide code).
+**State after:** Shipped (PR #4, rebase-merged 2026-10-03). Live check: all 53 sitemap URLs return 200, zero internal links to redirects.
 **Next:** Merge, confirm Vercel READY, then request indexing on the unindexed September posts.
 
 ### 2026-09-30 — Published keyword post (Barbell Squat: form + programming guide)
