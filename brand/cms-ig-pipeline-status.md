@@ -89,3 +89,8 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
 5. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
    fleet-health digest from `default` that reads this profile's `hermes cron incidents`.
    Without it, the next outage is equally silent.
+
+## Run log
+
+- **2026-09-28** — found the one-shot publisher model already dead (15 grace-window retirements); built the recurring sweep. No content drafted (token dead).
+- **2026-10-05** — week 3 dark. Token re-verified live and **still dead** (`OAuthException 190`); `WorkBench/.env` mtime `Sep 1 10:08` (nothing written since). 20 unpublished nodes, all 8/29–9/23; 48h stale-skip → sweep eligible=0, so nothing is publishable and nothing was published. Sweep healthy (hourly, last run 10/05 08:00 `ok`). `cms-ig-token-refresh` fired 10/01 and recorded the dead token verbatim — deliver `local`, so unseen. Target week 10/12–10/18: 0 nodes created (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. `hermes cron doctor` still lists fire-watchdog, backup watchdog and GSC watchdog as *not delivered* — no alarm wire.
