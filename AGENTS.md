@@ -108,6 +108,11 @@ There's no build step; it's a static site. For every change:
 
   Add only the new card and the new `<loc>`; never re-indent those files. Check there are no
   duplicate `<loc>` entries, and that both sitemaps list the same URL set.
+- **Do not paste the brief CTA spec into the post.** The published CTA is only the styled
+  `.cta-block` (label, headline, sub, Start Free Trial). A leftover `---` rule, a `## CTA`
+  heading, or lines with `**Section-label:**`, `**Headline:**`, and `**Sub:**` render as raw
+  text above that block. Briefs under `docs/cornerstones/` keep their `## CTA` section; it
+  stays in the brief. Before committing a post, `sh scripts/check-blog-cta-leftovers.sh` must pass.
 - After pushing, confirm the post returns 200 at `https://www.cmstrength.fit/blog/<slug>`.
 
 ## Project rules

@@ -1,0 +1,20 @@
+name: Blog CTA leftover guard
+
+# Vercel deploys public/ with no build. This check is the only gate that can
+# fail a pull request when a brief-style CTA spec is pasted into a post.
+# It does not change the Vercel project, so a green run does not block deploy.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject brief CTA markers in public/blog HTML
+        run: sh scripts/check-blog-cta-leftovers.sh

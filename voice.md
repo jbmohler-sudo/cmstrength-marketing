@@ -130,6 +130,7 @@ Before a post is done:
 - [ ] Opens on the fear/myth, not the app.
 - [ ] Every factual claim has a PubMed / `.gov` / `.edu` citation, or it comes out.
 - [ ] CTA is after the argument. House line + 14-day trial + signup URL.
+- [ ] CTA in the HTML is only the styled `.cta-block`. Never paste the brief spec (`## CTA`, `**Section-label:**`, `**Headline:**`, `**Sub:**`) into the post. That markdown shows up as text on the page.
 - [ ] Two KEEP READING cards in-silo.
 - [ ] Filed in a CMS-native silo above — not an IAF pillar name.
 - [ ] Zero IronAtForty / WizeMeals mentions.
