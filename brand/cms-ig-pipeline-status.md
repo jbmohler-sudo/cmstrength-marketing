@@ -3,21 +3,26 @@
 > Human-readable state of the @centermassstrength auto-publish line.
 > Machine copy of the resume plan: `hermes cron notepad 287b41662faa get ig_pipeline_state`.
 > Procedure + failure modes: skill `cms-instagram-auto` (health gate section).
-> **Last updated: 2026-09-28 by the `cms-ig-weekly-batch` run.**
+> **Last updated: 2026-10-12 by the `cms-ig-weekly-batch` run.**
 
-## State: DOWN — Instagram token invalidated (21 days, no posts since 2026-09-07)
+## State: DOWN — Instagram token invalidated (35 days, no posts since 2026-09-07)
 
 `graph.instagram.com/v21.0/me` returns
 `OAuthException code 190 — "The session has been invalidated because the user changed their password
 or Facebook has changed the session for security reasons."`
-Re-verified live **2026-09-28**. `C:/Umbrella/WorkBench/.env` has not been modified since
+Re-verified live **2026-10-12** three independent ways (`graph.instagram.com/me` and
+`graph.facebook.com/<ig-id>` both return code 190, and the extraction was proven clean — 163 chars,
+unquoted, `IGAA` prefix — so it is not a shell-quoting artifact). The token is also **not** in the
+process env and `WorkBench/env.ts` has no Instagram reference, so `.env` is still the only source of
+truth — no secret manager has quietly taken over.
+`C:/Umbrella/WorkBench/.env` has not been modified since
 2026-09-01, so no new token has been written. `tools/instagram-token-refresh.ts` fails identically:
 the monthly `cms-ig-token-refresh` cron cannot self-heal this.
 
 - **Last post that actually published:** 2026-09-07 — https://www.instagram.com/p/Dc_tQYJFiEw/
 - **Unpublished `instagram` ContentNodes: 20** (2026-08-29 → 2026-09-23), all still `SCHEDULED`.
-- Only 11 of 31 Instagram nodes have ever published.
-- **Weeks with no content drafted at all:** 2026-09-28 → 2026-10-04 (health gate stopped the line;
+- Only 11 of 31 Instagram nodes have ever published (counts re-read from the DB 2026-10-12).
+- **Weeks with no content drafted at all:** 2026-09-28 → 2026-10-11 (health gate stopped the line;
   nothing can publish, so nothing was built and no Higgsfield credits were spent).
 
 ## Why those 20 never went out (verified from cron outputs, not guessed)
@@ -61,15 +66,28 @@ end-to-end probe node (unreachable asset URL, deleted afterwards) exercised the 
 → lock → Meta container call → `OAuthException 190` reported verbatim → node left `SCHEDULED`.
 Force-run via `hermes cron run a17f43e9f9dc` + `hermes cron tick` → `succeeded`, silent.
 
+## The publisher is fine — the host isn't (observed 2026-10-12)
+
+The desktop is sleeping through its windows. On 2026-10-11 the 13:57 sweep run **timed out after
+3600s** (incident recorded, since resolved) and the surrounding hourly fires are clustered
+18:29–22:25 — i.e. no hourly fire landed between roughly 13:00 and 18:29. This weekly batch
+itself fired at **17:00, 8h 59m late**, as a catch-up run.
+
+That is survivable *by design*: the sweep runs hourly with a 48h acceptance window, so a post whose
+14:00 slot is missed while the machine sleeps still goes out when the machine wakes — late, never
+lost. The retired one-shot model could not do this: it was **deleted** if the host slept through its
+120s grace window, which is exactly how 15 of the 20 backlog posts died. Do **not** read a late cron
+fire as a broken pipeline; read the sweep's own runs first.
+
 ## The other problem: nothing can reach Jeff
 
 The `zaino` profile has **no messaging platform configured** — `profiles/zaino/config.yaml` only sets
 `platforms: whatsapp: enabled: false`, and Slack lives on the `default` profile. Every cron job that
 targets `slack:`, `whatsapp` or `all` reports *"the result was not delivered"* and goes nowhere.
-`hermes cron doctor` on 2026-09-28 still reports delivery failures for the rank-collapse watchdog,
-fire watchdog, backup watchdog and others.
+`hermes cron doctor` on 2026-10-12 still reports delivery failures for the rank-collapse watchdog,
+fire watchdog, backup watchdog and the GSC watchdog.
 
-That is why a 21-day Instagram blackout ran unnoticed on a pipeline that has a watchdog.
+That is why a 35-day Instagram blackout ran unnoticed on a pipeline that has a watchdog.
 
 ## Backlog policy (recommended, not yet overridden by Jeff)
 
@@ -88,9 +106,12 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
    sweep publishes each post at its slot. No publish crons to schedule any more.
 5. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
    fleet-health digest from `default` that reads this profile's `hermes cron incidents`.
-   Without it, the next outage is equally silent.
+   Without it, the next outage is equally silent. A more basic mitigation is also available: stop the
+   desktop sleeping through the afternoon (this batch's own 08:00 Monday slot and the sweep's hourly
+   fires both skip while it is asleep).
 
 ## Run log
 
 - **2026-09-28** — found the one-shot publisher model already dead (15 grace-window retirements); built the recurring sweep. No content drafted (token dead).
 - **2026-10-05** — week 3 dark. Token re-verified live and **still dead** (`OAuthException 190`); `WorkBench/.env` mtime `Sep 1 10:08` (nothing written since). 20 unpublished nodes, all 8/29–9/23; 48h stale-skip → sweep eligible=0, so nothing is publishable and nothing was published. Sweep healthy (hourly, last run 10/05 08:00 `ok`). `cms-ig-token-refresh` fired 10/01 and recorded the dead token verbatim — deliver `local`, so unseen. Target week 10/12–10/18: 0 nodes created (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. `hermes cron doctor` still lists fire-watchdog, backup watchdog and GSC watchdog as *not delivered* — no alarm wire.
+- **2026-10-12** — week 4 dark. Token re-verified live and still dead (`OAuthException 190`, two endpoints); `.env` mtime still `Sep 1 10:08`, token not in the process env, `env.ts` has no Instagram reference (its Oct 7 edits are unrelated) — `.env` remains the only source. DB read live: 31 `instagram` nodes, **20 unpublished, all `SCHEDULED`, 8/29–9/23**, none dated ≥10/12; last publish 2026-09-07 (`Dc_tQYJFiEw`) = **35 days**. Target week 10/19–10/25 → 0 nodes (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. **New this week — the host sleeps:** sweep 10/11 13:57 timed out at 3600s (resolved), hourly fires gapped ~13:00–18:29, and this batch fired 17:00 (8h 59m late, catch-up). The sweep's hourly cadence + 48h window absorbs that (late, never lost); the one-shot model could not.
