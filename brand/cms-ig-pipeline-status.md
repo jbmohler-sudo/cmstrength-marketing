@@ -3,9 +3,9 @@
 > Human-readable state of the @centermassstrength auto-publish line.
 > Machine copy of the resume plan: `hermes cron notepad 287b41662faa get ig_pipeline_state`.
 > Procedure + failure modes: skill `cms-instagram-auto` (health gate section).
-> **Last updated: 2026-10-24 by the `cms-ig-weekly-batch` run.**
+> **Last updated: 2026-10-26 by the `cms-ig-weekly-batch` run.**
 
-## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (47 days, no posts since 2026-09-07)
+## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (49 days, no posts since 2026-09-07). The host-side blackout cause has now been found and fixed (see (c)).
 
 ### (a) 2026-10-24 — the database itself is gone (this outranks the token)
 
@@ -53,11 +53,33 @@ truth — no secret manager has quietly taken over.
 2026-09-01, so no new token has been written. `tools/instagram-token-refresh.ts` fails identically:
 the monthly `cms-ig-token-refresh` cron cannot self-heal this.
 
-- **Last post that actually published:** 2026-09-07 — https://www.instagram.com/p/Dc_tQYJFiEw/ (**47 days** as of 2026-10-24; confirmed from the local `data/instagram-published.jsonl`, since the DB can no longer be read)
+- **Last post that actually published:** 2026-09-07 — https://www.instagram.com/p/Dc_tQYJFiEw/ (**49 days** as of 2026-10-26; confirmed from the local `data/instagram-published.jsonl`, 17 records, since the DB can no longer be read)
 - **Unpublished `instagram` ContentNodes: 20** (2026-08-29 → 2026-09-23), all still `SCHEDULED` — *last known 2026-10-12; the DB has been unreadable since some point between 2026-10-14 and 2026-10-24.*
 - Only 11 of 31 Instagram nodes have ever published (counts re-read from the DB 2026-10-12).
-- **Weeks with no content drafted at all:** 2026-09-28 → 2026-10-24 (health gate stopped the line;
+- **Weeks with no content drafted at all:** 2026-09-28 → 2026-10-26 (health gate stopped the line;
   nothing can publish, so nothing was built and no Higgsfield credits were spent).
+
+### (c) 2026-10-26 — the blackout cause found and fixed: a 15-minute sleep timer
+
+The 10-day scheduler gap was not Hermes losing the schedule — the machine was asleep.
+`powercfg /q SCHEME_CURRENT SUB_SLEEP` reported **AC standby = 900s (15 min)** and
+**hibernate-after AC = 10800s (3 h)**: the box powers down 15 minutes after the last input, which
+puts every 14:00 publish slot and every hourly sweep at risk.
+
+Evidence in the sweep's own output files: it fired **hourly through 10/25 22:00**, then nothing
+until **10/26 09:03** (`doctor`: *"catch-up after missed fire, 10h 3m late"*) — one overnight sleep,
+11 hours with no scheduler. This is the same mechanism behind the 10/14→10/24 gap, just longer.
+
+**Fixed this run:** `powercfg /change standby-timeout-ac 0` + `powercfg /change hibernate-timeout-ac 0`
+→ AC sleep and hibernate both read back as `0x0` (never). Battery settings untouched (DC standby
+stays 600s). Reversible per-setting; wake timers were already enabled on AC.
+
+**Also fixed this run:** `profiles/zaino/scripts/cms-ig-publish-sweep.py` now preflights the **tenant
+ref** parsed from `DATABASE_URL` (`postgres.<ref>` → `<ref>.supabase.co`) and exits in **~0.15s** with
+the named fix when it is NXDOMAIN. A host-only check is useless here: the pooler host
+`aws-1-us-east-2.pooler.supabase.com` resolves fine while the tenant is gone — that mismatch is what
+made the outage look like a plain API error for a week. Before: 2.6s plus a 30-line Prisma stack every
+hour, and one cron-level 3600s kill (10/25 08:42) that held the worker slot for an hour.
 
 ## Why those 20 never went out (verified from cron outputs, not guessed)
 
@@ -155,9 +177,8 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
    sweep publishes each post at its slot. No publish crons to schedule any more.
 5. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
    fleet-health digest from `default` that reads this profile's `hermes cron incidents`.
-   Without it, the next outage is equally silent. A more basic mitigation is also available: keep the
-   desktop awake (a 10-day scheduler gap on 10/14–10/24 is what turned a token problem into a
-   total-coverage blackout).
+   Without it, the next outage is equally silent. ~~Keep the desktop awake~~ — **done 2026-10-26**:
+   AC sleep/hibernate timers are now 0, so no more overnight scheduler blackholes.
 
 ## Run log
 
@@ -165,3 +186,4 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
 - **2026-10-05** — week 3 dark. Token re-verified live and **still dead** (`OAuthException 190`); `WorkBench/.env` mtime `Sep 1 10:08` (nothing written since). 20 unpublished nodes, all 8/29–9/23; 48h stale-skip → sweep eligible=0, so nothing is publishable and nothing was published. Sweep healthy (hourly, last run 10/05 08:00 `ok`). `cms-ig-token-refresh` fired 10/01 and recorded the dead token verbatim — deliver `local`, so unseen. Target week 10/12–10/18: 0 nodes created (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. `hermes cron doctor` still lists fire-watchdog, backup watchdog and GSC watchdog as *not delivered* — no alarm wire.
 - **2026-10-12** — week 4 dark. Token re-verified live and still dead (`OAuthException 190`, two endpoints); `.env` mtime still `Sep 1 10:08`, token not in the process env, `env.ts` has no Instagram reference (its Oct 7 edits are unrelated) — `.env` remains the only source. DB read live: 31 `instagram` nodes, **20 unpublished, all `SCHEDULED`, 8/29–9/23**, none dated ≥10/12; last publish 2026-09-07 (`Dc_tQYJFiEw`) = **35 days**. Target week 10/19–10/25 → 0 nodes (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. **New this week — the host sleeps:** sweep 10/11 13:57 timed out at 3600s (resolved), hourly fires gapped ~13:00–18:29, and this batch fired 17:00 (8h 59m late, catch-up). The sweep's hourly cadence + 48h window absorbs that (late, never lost); the one-shot model could not.
 - **2026-10-24** — **week 5 dark, and a new, bigger failure: the database is unreachable.** This run was itself a catch-up (scheduled Mon 10/19 08:00, fired Sat 10/24 18:41 — 5d 10h late; the scheduler ran nothing at all between 10/14 19:00 and 10/24 18:40). Health gate step 1 (token) still fails: `OAuthException 190` on both `graph.instagram.com/me` and `graph.facebook.com/me`, `token_len=163`, prefix `IGAA`, `.env` mtime still `Sep 1 10:08`. **Gate step 2 failed harder: `prisma contentNode` → `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`**, and `futxwjdirtywkkkxqxhd.supabase.co` is **NXDOMAIN** on the local resolver *and* Google DoH — i.e. the project is gone from DNS, not paused. Consequence: queue unreadable, nodes uncreatable, watchdog (`instagram-verify.ts`) erroring on every fire. Last publish still **2026-09-07** (`Dc_tQYJFiEw`) = **47 days** (confirmed from `data/instagram-published.jsonl`, 17 records). 0 posts drafted, 0 nodes, 0 Higgsfield credits. `www.cmstrength.fit` still 200. Both `cms-ig-publish-sweep` and `cms-ig-fire-watchdog` now exit 1 with the DB error (new incidents recorded 10/24).
+- **2026-10-26** — week 6 dark, **49 days**. Regular Monday fire, on time (09:03) — no catch-up this time. Health gate fails at step 0 → **0 posts drafted, 0 nodes, 0 Higgsfield credits**. DB: same `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`; tenant host **NXDOMAIN** on the local resolver *and* Google DoH (Status 3), so the project is deleted, not paused — only Jeff can act. Token: `OAuthException 190`, `token_len=163`, `.env` mtime still `Sep 1 10:08`. **Scheduler is alive again:** the sweep fired 15× on 10/25 and hourly output files exist — but the overnight gap 10/25 22:00 → 10/26 09:03 exposed the real cause, an **AC standby timer of 900s + hibernate 10800s**. Fixed both to 0 (never sleep on AC) via `powercfg`; battery profile untouched. Also made the sweep wrapper fast-fail on a dead tenant ref (0.15s, named fix) instead of a 2.6s Prisma crash and the occasional 3600s stall. Resume order unchanged; alarm wire still absent (6 weeks).
