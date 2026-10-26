@@ -167,7 +167,13 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
    the retention window (a deleted project's data is otherwise unrecoverable; nothing local substitutes).
    Until this is answered, **nothing else in WorkBench matters** — no queue, no captions, no watcher.
    Then: fresh `pg_dump` **and** put `DATABASE_URL` in a place a rebuild can find it (today the .env is
-   gitignored and is the only copy).
+   gitignored and is the only copy). Paste-ready ticket text:
+
+   > Project ref `futxwjdirtywkkkxqxhd` disappeared: its API hostname
+   > `futxwjdirtywkkkxqxhd.supabase.co` now returns NXDOMAIN, and the pooler reports
+   > `tenant/user postgres.futxwjdirtywkkkxqxhd not found`. The project held production data for an
+   > app. If it was deleted, please restore it or tell me the retention window and what a restore
+   > costs; if it was paused, please restore it. I need to know either way.
 1. **Jeff, ~2 min:** Meta dashboard → CMS Social Manager app `879813191659439` → Instagram API setup
    → Generate access token → new `INSTAGRAM_ACCESS_TOKEN` in `C:/Umbrella/WorkBench/.env`
    (never paste it in chat — `credvault ::cred` flow).
