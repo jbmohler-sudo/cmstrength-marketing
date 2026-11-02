@@ -3,9 +3,9 @@
 > Human-readable state of the @centermassstrength auto-publish line.
 > Machine copy of the resume plan: `hermes cron notepad 287b41662faa get ig_pipeline_state`.
 > Procedure + failure modes: skill `cms-instagram-auto` (health gate section).
-> **Last updated: 2026-10-26 by the `cms-ig-weekly-batch` run.**
+> **Last updated: 2026-11-02 by the `cms-ig-weekly-batch` run.**
 
-## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (49 days, no posts since 2026-09-07). The host-side blackout cause has now been found and fixed (see (c)).
+## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (**56 days**, no posts since 2026-09-07; re-verified 2026-11-02). The host-side blackout cause has now been found and fixed (see (c), corrected in (d)); no `pg_dump` of this DB exists anywhere on disk.
 
 ### (a) 2026-10-24 — the database itself is gone (this outranks the token)
 
@@ -80,6 +80,38 @@ the named fix when it is NXDOMAIN. A host-only check is useless here: the pooler
 `aws-1-us-east-2.pooler.supabase.com` resolves fine while the tenant is gone — that mismatch is what
 made the outage look like a plain API error for a week. Before: 2.6s plus a 30-line Prisma stack every
 hour, and one cron-level 3600s kill (10/25 08:42) that held the worker slot for an hour.
+
+### (d) 2026-11-02 — week 7 dark; the idle-sleep fix held, the remaining gaps are a hardware sleep
+
+Both blockers are unchanged (`tenant NXDOMAIN`, `OAuthException 190`, `.env` mtime still
+**2026-09-01 10:08**). Facts that moved:
+
+- **Last post = 2026-09-07 (`Dc_tQYJFiEw`) → 56 days** dark as of this run.
+- **The 10/26 power fix held.** `powercfg` reads AC standby **0x0** and hibernate-after **0x0**
+  (battery profile still 600s, untouched). The 10-day blackout mechanism (idle power-down) is gone.
+- **The overnight gaps that remain are real hardware sleep, not the idle timer.** Every hole in the
+  sweep's hourly output now maps 1:1 onto a `Microsoft-Windows-Power-Troubleshooter` sleep/wake pair,
+  and the Kernel-Power 42 events all say `Sleep Reason: Button or Lid` (wake source: Intel USB 3.10
+  host controller — i.e. the lid/button, not a timer):
+
+  | Sleep (local) | Wake (local) | Gap in sweep output |
+  |---|---|---|
+  | 11/01 22:51 | 11/02 07:52 | 22:00 → 07:52 (9h 00m) |
+  | 10/31 22:51 | 11/01 08:16 | 22:00 → 08:23 (9h 25m) |
+  | 10/31 10:45 | 10/31 13:58 | 10:00 → 13:58 (3h 13m) |
+  | 10/30 23:03 | 10/31 07:45 | 23:00 → 07:46 (8h 42m) |
+  | 10/29 21:01 | 10/30 07:29 | 21:00 → 07:29 (10h 28m) |
+
+  Wake times and the catch-up `07:29` / `07:45` / `07:52` output files agree to the minute. So the
+  `powercfg` change fixed what it could fix, and the residual blackouts are somebody sleeping the
+  box by hand. **Nothing in policy can prevent that** — and it is survivable, because every publish
+  slot is 14:00 and the sweep is hourly with a 48h stale window: a night out costs nothing, a
+  weekend afternoon sleep (the 10/31 10:45 case) is the only pattern that could eat a 14:00 slot.
+- **Topic queue still has runway**, so restoring the DB is genuinely the only thing between here and
+  a full week of posts: carousel topics 3–7 unused (5 left), reel topics 3–6 unused (4 left).
+- **Alarm wire still missing (7th week).** Four watchdogs (`035dff881879` rank-collapse, fire,
+  backup, GSC) each end the run with *"the result was not delivered (platform 'slack' not
+  configured/enabled)"*. This weekly batch is `deliver: local` and is the only surface Jeff reads.
 
 ## Why those 20 never went out (verified from cron outputs, not guessed)
 
