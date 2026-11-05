@@ -11,6 +11,16 @@
       "source": "/blog/macrocycle-explained",
       "destination": "/blog/the-complete-guide-to-powerlifting-periodization",
       "permanent": true
+    },
+    {
+      "source": "/tools/dot-score",
+      "destination": "/tools/dots-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/tools/dot-score.html",
+      "destination": "/tools/dots-calculator",
+      "permanent": true
     }
   ]
 }
