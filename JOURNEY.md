@@ -11,8 +11,9 @@
 ---
 
 ## Current State
-> Updated: 2026-10-04
+> Updated: 2026-11-06
 
+- **2026-11-06 silo repair:** link audit of all 54 posts found the Oct 3 weave intact on pre-Oct-3 posts but drift on the 17 published since (5 orphans, 12 spokes missing their pillar link, 11 index cards appended to the wrong group). 36 in-body links added across 18 posts and the cards re-homed; back to 0 orphans, every spoke links its pillar, all 6 pillars link every spoke (32f0ae9).
 - **2026-10-04 TDEE calculator:** `/tools/tdee-calculator` built (own code) and linked from every footer, the tools index, both sitemaps and the TDEE post. Squat-guide JSON-LD comma fixed (GSC structured-data email); Validate fix pending in GSC.
 - **2026-10-03 follow-up:** WizeMeals links removed (Hard Rule wins), 30 titles cut to 60 chars, homepage `#guides` block lists the 6 newest posts (AGENTS.md publish step 4).
 - **2026-10-03 silo pass:** every pillar links all its spokes, every spoke links its pillar and a sibling, no orphans, no internal links to redirects (PR #4, live).
@@ -96,6 +97,15 @@ which also makes its content more credible on health-adjacent topics.
 ---
 
 ## Session Log
+
+### 2026-11-06 — Silo interlinking repair: 36 links, index regrouped (32f0ae9) (Muse)
+**Did:** Full link-graph audit of all 54 live posts (article body + KEEP READING silo block) against INTERNAL_LINKING.md. The Oct 3 weave still holds on the 37 pre-Oct-3 posts; all drift sits in the 17 posts published since: 5 orphans (deadlift-program, intermediate-powerlifting-program, over-40-strength-training, powerlifting-vs-weightlifting, smolov-squat-program), 12 spokes with no link to their pillar, the periodization pillar linking only 3 of 12 spokes and meet-prep 4 of 9, and 11 blog-index cards appended to Meet Prep & The Big Three regardless of topic (count label stuck at "05 ARTICLES" while holding 21 cards). Fix shipped in 32f0ae9: 36 in-body insertions across 18 posts (19 spoke pillar/lateral fixes, 1 orphan fix from deadlift-form-guide, 16 pillar back-links) with anchors meeting the ~40-char rule, and the 11 cards re-homed on public/blog.html (After-40 12 cards, Programming & Periodization 13, Meet Prep 10 with a corrected label). Verified on the merged link graph before pushing and live after: 0 orphans, 0 spokes missing a pillar link, 6 of 6 pillars linking every spoke, trial CTA still exactly one per post.
+**Decided:** Nothing new — INTERNAL_LINKING.md already specified all of it; the gap was execution at publish time, not policy.
+**Killed:** —
+**Deferred:** 160 of 260 pre-existing body anchors sit under the ~40-char aim (bare-title style); left untouched and flagged for a future pass. Home group for bodybuilding-vs-powerlifting and powerlifting-vs-weightlifting stays Programming & Periodization (the audit's tentative grouping) pending Jeff's call.
+**State after:** Live on main; the silo is whole again at 54 posts.
+**Next:** Publishes must put the index card in its home group and add the pillar + lateral links in the publish commit itself, so this drift cannot recur.
+
 > Appended after every working session. Most recent first.
 
 ### 2026-10-04 — TDEE calculator built and linked site-wide; squat-guide JSON-LD fixed (34b3be8, 05a0bdb) (Claude)
@@ -121,15 +131,6 @@ which also makes its content more credible on health-adjacent topics.
 **Deferred:** Titles over 60 chars on ~30 posts and descriptions over 160; ~57 pre-existing short anchors under the 40-char rule; homepage "Latest guides" block; After-40 vs Masters Track overlap; `carbs-for-powerlifting` links WizeMeals twice (Hard Rules forbid it, `docs/SEO.md` §2 allows it, Jeff to decide).
 **State after:** Shipped (PR #4, rebase-merged 2026-10-03). Live check: all 53 sitemap URLs return 200, zero internal links to redirects.
 **Next:** Merge, confirm Vercel READY, then request indexing on the unindexed September posts.
-
-### 2026-09-30 — Published keyword post (Barbell Squat: form + programming guide)
-
-- Fourth keyword-driven post of the SEO cluster under the publish-direct policy; one post per run. Chose `barbell squat` from the OpenSEO saved-keyword queue: 22,200 vol, KD 0 — the highest-volume unused keyword (front squat taken Sept 25; deadlift form / proper deadlift form covered Sept 28). 8 keywords still unused, so no refill research was needed.
-- New post (38th blog post): `public/blog/barbell-squat-guide.html` — "Barbell Squat: The Complete Form and Programming Guide." Sections: why the squat is a balance problem, high bar vs. low bar honestly compared (diff table, geometry not religion), the rep from unrack to rerack (12-step checklist), the six mistakes everyone makes with mechanical fixes, programming (2x/week, 1–5 rep strength work, RPE 8–9 ceiling, variation matched to failure point: hole / above-parallel / chest dump / lockout / depth), squats after 40 (real warmup, honest depth, variations earning their keep). 6-question FAQ + JSON-LD (Article + FAQPage), 2 verified references (Schoenfeld 2010, PubMed 20182386; Gullett et al. 2009, PubMed 19002072 — no invented studies).
-- New hero/card image: `public/images/blog/barbell-squat-guide.jpg` (AI-generated, dark garage-gym back squat, ember rim light matching site aesthetic, no text/logos)
-- Blog index (`public/blog.html`): card added to the "Meet Prep & The Big Three" group (count 03 → 04 ARTICLES); no re-indenting.
-- Sitemap: `public/sitemap.xml` gained the barbell-squat-guide entry (lastmod 2026-09-30). Backfilled the missing deadlift-form-guide entry into `public/sitemap-2026.xml` (the Sept 28 run had only updated sitemap.xml — drift again); both sitemaps now list the same 51 URLs, XML-valid, no dupes, per the dual-sitemap rule.
-- CTA-closer check (standing rule): the post's `cta-block` (contextual trial CTA → app.cmstrength.fit/signup, 14-day trial / $20-mo / $200-yr copy) is present exactly once in the published HTML — verified live after deploy. No second closer added.
 
 > Older sessions archived in [JOURNEY_ARCHIVE.md](JOURNEY_ARCHIVE.md).
 
