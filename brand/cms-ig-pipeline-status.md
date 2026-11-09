@@ -3,9 +3,9 @@
 > Human-readable state of the @centermassstrength auto-publish line.
 > Machine copy of the resume plan: `hermes cron notepad 287b41662faa get ig_pipeline_state`.
 > Procedure + failure modes: skill `cms-instagram-auto` (health gate section).
-> **Last updated: 2026-11-02 by the `cms-ig-weekly-batch` run.**
+> **Last updated: 2026-11-09 by the `cms-ig-weekly-batch` run.**
 
-## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (**56 days**, no posts since 2026-09-07; re-verified 2026-11-02). The host-side blackout cause has now been found and fixed (see (c), corrected in (d)); no `pg_dump` of this DB exists anywhere on disk.
+## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (**63 days**, no posts since 2026-09-07; re-verified 2026-11-09). The host-side blackout cause has now been found and fixed (see (c), corrected in (d)); no `pg_dump` of this DB exists anywhere on disk.
 
 ### (a) 2026-10-24 — the database itself is gone (this outranks the token)
 
@@ -112,6 +112,37 @@ Both blockers are unchanged (`tenant NXDOMAIN`, `OAuthException 190`, `.env` mti
 - **Alarm wire still missing (7th week).** Four watchdogs (`035dff881879` rank-collapse, fire,
   backup, GSC) each end the run with *"the result was not delivered (platform 'slack' not
   configured/enabled)"*. This weekly batch is `deliver: local` and is the only surface Jeff reads.
+
+### (e) 2026-11-09 — week 8 dark; nothing changed but the number
+
+Same two blockers, third week in a row, byte-identical evidence: the DB probe
+(`scripts/cms-ig-db-probe.py`) exits 1 with `TENANT DEAD — futxwjdirtywkkkxqxhd.supabase.co does
+not resolve`; `GET graph.facebook.com/v21.0/me` returns `OAuthException 190 — Cannot parse access
+token`, `token_len=163`, and `WorkBench/.env` is untouched since **2026-09-01 10:08**.
+
+- **Last post = 2026-09-07 (`Dc_tQYJFiEw`) → 63 days.** `data/instagram-published.jsonl` still has
+  exactly 17 records and has not been written since **Sep 7 14:02**.
+- **One sleep pair this week, and it cost nothing:** 11/08 20:10 → 11/09 09:01 local (12h 51m).
+  Wake source this time was a *timer* — `NT TASK\HP\HP Print Scan Doctor\Printer Health Monitor` —
+  not the lid. That is why this batch fired at 09:01 (1h 01m late) instead of 08:00, and why the
+  sweep and the Mnemosyne consolidation job both caught up at the same minute. Two short Sunday
+  sleeps (08:59→09:03, 09:22→11:27, USB-device wake) preceded it.
+- **No overnight gaps on the weekdays 11/02–11/07** (no Power-Troubleshooter events at all) — the
+  nightly pattern from the previous two weeks did not repeat. All publish slots are 14:00, so none
+  of this touches delivery.
+- **The fire watchdog is failing loudly, not silently:** `cms-ig-fire-watchdog` (11/06 15:30) exits 1
+  with `Invalid prisma.contentNode.findMany() … FATAL: (ENOTFOUND) tenant/user
+  postgres.futxwjdirtywkkkxqxhd not found`. Correct behaviour on a dead DB — but undocumented
+  nowhere, because its delivery target is unreachable (see below).
+- **Queue unchanged:** carousel topics 3–7 and reel topics 3–6 still unused, so the moment the DB
+  answers, a full week is buildable without new topic decisions.
+- **New host-side smell (not a blocker):** every `hermes` CLI call now prints *"a source update is
+  unfinished; run `hermes update` from a shell to finish it"*. Harmless so far (cron, doctor, list
+  all run), but it is the kind of half-applied update that turns into a broken binary mid-week.
+  Needs a real shell, so it is Jeff's 30 seconds, not something a cron run should attempt.
+- Alarm wire still missing (8th week). Four watchdogs end every run with *"the result was not
+  delivered (platform 'slack' not configured/enabled)"*; this batch is `deliver: local` and remains
+  the only surface.
 
 ## Why those 20 never went out (verified from cron outputs, not guessed)
 
@@ -225,3 +256,4 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
 - **2026-10-12** — week 4 dark. Token re-verified live and still dead (`OAuthException 190`, two endpoints); `.env` mtime still `Sep 1 10:08`, token not in the process env, `env.ts` has no Instagram reference (its Oct 7 edits are unrelated) — `.env` remains the only source. DB read live: 31 `instagram` nodes, **20 unpublished, all `SCHEDULED`, 8/29–9/23**, none dated ≥10/12; last publish 2026-09-07 (`Dc_tQYJFiEw`) = **35 days**. Target week 10/19–10/25 → 0 nodes (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. **New this week — the host sleeps:** sweep 10/11 13:57 timed out at 3600s (resolved), hourly fires gapped ~13:00–18:29, and this batch fired 17:00 (8h 59m late, catch-up). The sweep's hourly cadence + 48h window absorbs that (late, never lost); the one-shot model could not.
 - **2026-10-24** — **week 5 dark, and a new, bigger failure: the database is unreachable.** This run was itself a catch-up (scheduled Mon 10/19 08:00, fired Sat 10/24 18:41 — 5d 10h late; the scheduler ran nothing at all between 10/14 19:00 and 10/24 18:40). Health gate step 1 (token) still fails: `OAuthException 190` on both `graph.instagram.com/me` and `graph.facebook.com/me`, `token_len=163`, prefix `IGAA`, `.env` mtime still `Sep 1 10:08`. **Gate step 2 failed harder: `prisma contentNode` → `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`**, and `futxwjdirtywkkkxqxhd.supabase.co` is **NXDOMAIN** on the local resolver *and* Google DoH — i.e. the project is gone from DNS, not paused. Consequence: queue unreadable, nodes uncreatable, watchdog (`instagram-verify.ts`) erroring on every fire. Last publish still **2026-09-07** (`Dc_tQYJFiEw`) = **47 days** (confirmed from `data/instagram-published.jsonl`, 17 records). 0 posts drafted, 0 nodes, 0 Higgsfield credits. `www.cmstrength.fit` still 200. Both `cms-ig-publish-sweep` and `cms-ig-fire-watchdog` now exit 1 with the DB error (new incidents recorded 10/24).
 - **2026-10-26** — week 6 dark, **49 days**. Regular Monday fire, on time (09:03) — no catch-up this time. Health gate fails at step 0 → **0 posts drafted, 0 nodes, 0 Higgsfield credits**. DB: same `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`; tenant host **NXDOMAIN** on the local resolver *and* Google DoH (Status 3), so the project is deleted, not paused — only Jeff can act. Token: `OAuthException 190`, `token_len=163`, `.env` mtime still `Sep 1 10:08`. **Scheduler is alive again:** the sweep fired 15× on 10/25 and hourly output files exist — but the overnight gap 10/25 22:00 → 10/26 09:03 exposed the real cause, an **AC standby timer of 900s + hibernate 10800s**. Fixed both to 0 (never sleep on AC) via `powercfg`; battery profile untouched. Also made the sweep wrapper fast-fail on a dead tenant ref (0.15s, named fix) instead of a 2.6s Prisma crash and the occasional 3600s stall. Resume order unchanged; alarm wire still absent (6 weeks).
+- **2026-11-09** — week 8 dark, **63 days** (last publish 2026-09-07 `Dc_tQYJFiEw`; `instagram-published.jsonl` still 17 records, untouched since Sep 7 14:02). Health gate step 0 fails identically: probe `TENANT DEAD … NXDOMAIN`, token `OAuthException 190 Cannot parse access token` (`len=163`, `.env` mtime `Sep 1 10:08`). **0 nodes, 0 drafts, 0 Higgsfield credits, no publish crons scheduled** — drafting into a dead DB is not a shortcut, it is data loss with extra steps. This run itself was 1h 01m late: the box slept 11/08 20:10 → 11/09 09:01 and woke on an HP-printer timer task (Power-Troubleshooter evidence); weekdays 11/02–11/07 had **no** overnight gaps, and every publish slot is 14:00, so delivery is untouched. `cms-ig-fire-watchdog` errors 1 on the same ENOTFOUND — correct, but its report goes nowhere. Alarm wire missing for the 8th week. See section (e).
