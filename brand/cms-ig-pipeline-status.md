@@ -3,9 +3,9 @@
 > Human-readable state of the @centermassstrength auto-publish line.
 > Machine copy of the resume plan: `hermes cron notepad 287b41662faa get ig_pipeline_state`.
 > Procedure + failure modes: skill `cms-instagram-auto` (health gate section).
-> **Last updated: 2026-11-09 by the `cms-ig-weekly-batch` run.**
+> **Last updated: 2026-11-16 by the `cms-ig-weekly-batch` run.**
 
-## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (**63 days**, no posts since 2026-09-07; re-verified 2026-11-09). The host-side blackout cause has now been found and fixed (see (c), corrected in (d)); no `pg_dump` of this DB exists anywhere on disk.
+## State: DOWN — two blockers. (a) **WorkBench database is unreachable — the Supabase project no longer exists in DNS** (new, 2026-10-24) and (b) Instagram token still invalidated (**70 days**, no posts since 2026-09-07; re-verified 2026-11-16). The host-side blackout cause has now been found and fixed (see (c), corrected in (d)); no `pg_dump` of this DB exists anywhere on disk. **Week 9 changed strategy, not state:** the decoupling spec that removes the database from the publish path is written and committed (section (f)).
 
 ### (a) 2026-10-24 — the database itself is gone (this outranks the token)
 
@@ -144,6 +144,37 @@ token`, `token_len=163`, and `WorkBench/.env` is untouched since **2026-09-01 10
   delivered (platform 'slack' not configured/enabled)"*; this batch is `deliver: local` and remains
   the only surface.
 
+### (f) 2026-11-16 — week 9 dark; stopped re-proving the outage and killed the coupling instead
+
+**State, re-verified live at 08:0x (not copied from last week):** probe
+`scripts/cms-ig-db-probe.py` → exit 1, `TENANT DEAD — futxwjdirtywkkkxqxhd.supabase.co does not
+resolve`; `GET graph.instagram.com/v21.0/me` → `OAuthException 190 — The session has been invalidated
+because the user changed their password or Facebook has changed the session for security reasons`,
+`token_len=163`; `WorkBench/.env` mtime still **Sep 1 10:08**; `data/instagram-published.jsonl` still
+**17 records, last write Sep 7 14:02** → last post **70 days** ago (`Dc_tQYJFiEw`).
+
+- **0 nodes, 0 drafts, 0 Higgsfield credits, 0 publish crons.** Health gate hard-stopped at step 0 —
+  unchanged policy, unchanged reason.
+- **This run fired 08:02 (scheduled 08:00, 2 min late).** Cause is benign and expected: the box slept
+  11/15 23:41 → 11/16 08:01 local (single overnight pair, USB/timer wake, **no** Kernel-Power 42 /
+  lid events). Cost is 8 missed hourly sweep runs overnight; every publish slot is 14:00, so delivery
+  is untouched. Same pattern as weeks 7–8: overnight only, never a daytime slot.
+- **The sweep and fire watchdog are still failing *correctly* into a void:** sweep last error
+  11/16 08:02 (`SWEEP BLOCKED (fast-fail) — … does not resolve`), fire watchdog last error
+  11/13 15:30 (`Invalid prisma.contentNode.findMany() … ENOTFOUND`). 17 incidents total, 0 delivered.
+- **What actually shipped this week is the fix for the *class* of failure, not a post:**
+  `C:/Umbrella/WorkBench/docs/specs/ig-file-backed-queue.md` (commit `62f1e5b`) specifies
+  `data/ig-queue.jsonl` as the scheduling source of truth with Postgres as an **optional mirror** — the
+  sweep stops being able to fail on a dead DB, and a DB incident costs zero posts instead of a week.
+  Builder-ready: lazy `PrismaClient`, tolerant append-only queue, same 48 h stale-skip / cap 1 / lock
+  policy, 7 new tests including a forced DB-down publish, acceptance command that runs with no DB at
+  all, `IG_QUEUE_ENABLED` flag for rollback, ~1.5–2 h, $0 in credits.
+  **Verified while writing it:** `tools/instagram-image-host.ts` has **zero** Prisma references, so
+  hosting already works with a dead DB — only *scheduling* was coupled. That is why the fix is two
+  files, not a rewrite.
+- Queue runway still intact (carousel topics 3–7, reel topics 3–6 unused) — a full week is buildable
+  the moment the token answers.
+
 ## Why those 20 never went out (verified from cron outputs, not guessed)
 
 | Cause | Count | Evidence |
@@ -244,7 +275,11 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
 3. Archive the 20 stale nodes (they are permanently un-publishable by policy).
 4. Say **"re-run the IG batch"** → zaino rebuilds one week (5 singles + carousel + reel) and the
    sweep publishes each post at its slot. No publish crons to schedule any more.
-5. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
+5. **Optional but cheap, ~1.5–2 h of `builder`, $0 credits:** ship
+   `C:/Umbrella/WorkBench/docs/specs/ig-file-backed-queue.md` (written 2026-11-16). After it, a dead
+   database costs **zero posts** instead of a week, and this status doc stops being the only place
+   the outage is recorded. Do it before the next database incident, not after one.
+6. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
    fleet-health digest from `default` that reads this profile's `hermes cron incidents`.
    Without it, the next outage is equally silent. ~~Keep the desktop awake~~ — **done 2026-10-26**:
    AC sleep/hibernate timers are now 0, so no more overnight scheduler blackholes.
@@ -257,3 +292,4 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
 - **2026-10-24** — **week 5 dark, and a new, bigger failure: the database is unreachable.** This run was itself a catch-up (scheduled Mon 10/19 08:00, fired Sat 10/24 18:41 — 5d 10h late; the scheduler ran nothing at all between 10/14 19:00 and 10/24 18:40). Health gate step 1 (token) still fails: `OAuthException 190` on both `graph.instagram.com/me` and `graph.facebook.com/me`, `token_len=163`, prefix `IGAA`, `.env` mtime still `Sep 1 10:08`. **Gate step 2 failed harder: `prisma contentNode` → `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`**, and `futxwjdirtywkkkxqxhd.supabase.co` is **NXDOMAIN** on the local resolver *and* Google DoH — i.e. the project is gone from DNS, not paused. Consequence: queue unreadable, nodes uncreatable, watchdog (`instagram-verify.ts`) erroring on every fire. Last publish still **2026-09-07** (`Dc_tQYJFiEw`) = **47 days** (confirmed from `data/instagram-published.jsonl`, 17 records). 0 posts drafted, 0 nodes, 0 Higgsfield credits. `www.cmstrength.fit` still 200. Both `cms-ig-publish-sweep` and `cms-ig-fire-watchdog` now exit 1 with the DB error (new incidents recorded 10/24).
 - **2026-10-26** — week 6 dark, **49 days**. Regular Monday fire, on time (09:03) — no catch-up this time. Health gate fails at step 0 → **0 posts drafted, 0 nodes, 0 Higgsfield credits**. DB: same `FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not found`; tenant host **NXDOMAIN** on the local resolver *and* Google DoH (Status 3), so the project is deleted, not paused — only Jeff can act. Token: `OAuthException 190`, `token_len=163`, `.env` mtime still `Sep 1 10:08`. **Scheduler is alive again:** the sweep fired 15× on 10/25 and hourly output files exist — but the overnight gap 10/25 22:00 → 10/26 09:03 exposed the real cause, an **AC standby timer of 900s + hibernate 10800s**. Fixed both to 0 (never sleep on AC) via `powercfg`; battery profile untouched. Also made the sweep wrapper fast-fail on a dead tenant ref (0.15s, named fix) instead of a 2.6s Prisma crash and the occasional 3600s stall. Resume order unchanged; alarm wire still absent (6 weeks).
 - **2026-11-09** — week 8 dark, **63 days** (last publish 2026-09-07 `Dc_tQYJFiEw`; `instagram-published.jsonl` still 17 records, untouched since Sep 7 14:02). Health gate step 0 fails identically: probe `TENANT DEAD … NXDOMAIN`, token `OAuthException 190 Cannot parse access token` (`len=163`, `.env` mtime `Sep 1 10:08`). **0 nodes, 0 drafts, 0 Higgsfield credits, no publish crons scheduled** — drafting into a dead DB is not a shortcut, it is data loss with extra steps. This run itself was 1h 01m late: the box slept 11/08 20:10 → 11/09 09:01 and woke on an HP-printer timer task (Power-Troubleshooter evidence); weekdays 11/02–11/07 had **no** overnight gaps, and every publish slot is 14:00, so delivery is untouched. `cms-ig-fire-watchdog` errors 1 on the same ENOTFOUND — correct, but its report goes nowhere. Alarm wire missing for the 8th week. See section (e).
+- **2026-11-16** — week 9 dark, **70 days** (last publish 2026-09-07 `Dc_tQYJFiEw`; `instagram-published.jsonl` still 17 records, untouched since Sep 7 14:02). Health gate step 0 fails identically: probe `TENANT DEAD … does not resolve` (exit 1), token `OAuthException 190 session has been invalidated` (`len=163`), `.env` mtime still `Sep 1 10:08` → **0 nodes, 0 drafts, 0 Higgsfield credits, 0 publish crons**. Fired 08:02 (2 min late) after one overnight sleep pair 11/15 23:41 → 11/16 08:01, no lid/power-button events; publish slots (14:00) untouched. Per the commitment made in week 8, this run **stopped re-proving the outage and spent itself on the structural fix**: wrote and committed the builder-ready decoupling spec `WorkBench/docs/specs/ig-file-backed-queue.md` (`62f1e5b`) — `data/ig-queue.jsonl` becomes the scheduling source of truth, Postgres an optional mirror, so a dead DB can no longer stop a post; ~1.5–2 h, $0 credits, 7 tests incl. forced DB-down publish. Verified in passing that `instagram-image-host.ts` has no Prisma dependency, so only scheduling was coupled. Sweep + fire watchdog still erroring correctly with no alarm wire (17 incidents, 0 delivered — 9th week). See section (f).
