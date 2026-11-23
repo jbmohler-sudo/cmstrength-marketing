@@ -1,0 +1,44 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1350px; background:#0B0B0C; overflow:hidden; }
+.slide { position:relative; width:1080px; height:1350px; background:radial-gradient(1200px 800px at 50% 0%, #17171A 0%, #0B0B0C 62%); padding:90px 80px 70px; display:flex; flex-direction:column; }
+.kicker { font-family:'Bahnschrift','Arial Narrow',sans-serif; font-weight:600; font-size:36px; letter-spacing:11px; color:#E8232F; text-transform:uppercase; margin-bottom:42px; white-space:nowrap; }
+.head { font-family:'Bahnschrift','Arial Narrow',sans-serif; font-weight:700; font-size:112px; line-height:1.0; letter-spacing:-1px; color:#F4F4F5; text-transform:uppercase; }
+.head .red { color:#E8232F; }
+.head.small { font-size:92px; }
+.sub { font-family:'Segoe UI','Arial',sans-serif; font-weight:400; font-size:40px; line-height:1.38; color:#A9A9B0; margin-top:38px; max-width:900px; }
+.rule { width:130px; height:11px; background:#E8232F; margin-top:38px; }
+.spacer { flex:1; min-height:24px; }
+.foot { display:flex; align-items:center; gap:24px; margin-top:28px; flex-shrink:0; }
+.logo { width:86px; height:86px; background:#E8232F; color:#0B0B0C; font-family:'Bahnschrift',sans-serif; font-weight:700; font-size:34px; letter-spacing:0; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.foottext { font-family:'Bahnschrift','Arial Narrow',sans-serif; font-size:23px; letter-spacing:4px; color:#6E6E76; text-transform:uppercase; white-space:nowrap; }
+.wrap { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; margin-top:44px; }
+.shot { position:relative; border-radius:30px; overflow:hidden; border:2px solid #26262C; box-shadow:0 30px 90px rgba(0,0,0,.65); background:#0B0B0C; }
+.shot img { display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+.shot.portrait { width:560px; height:700px; }
+.shot.wide { width:900px; height:360px; }
+.shot.wide img { object-fit:contain; object-position:center center; }
+.shot .tag { white-space:nowrap; max-width:calc(100% - 52px); position:absolute; left:26px; bottom:22px; background:rgba(11,11,12,.86); border:1px solid #E8232F; color:#F4F4F5; font-family:'Bahnschrift',sans-serif; font-size:21px; letter-spacing:3px; padding:10px 18px; text-transform:uppercase; }
+.cta { margin-top:46px; }
+.cta .box { display:inline-block; border:6px solid #E8232F; color:#F4F4F5; font-family:'Bahnschrift',sans-serif; font-weight:700; font-size:52px; letter-spacing:2px; padding:26px 44px; text-transform:uppercase; }
+.cta .note { font-family:'Bahnschrift',sans-serif; font-size:25px; letter-spacing:5px; color:#6E6E76; text-transform:uppercase; margin-top:26px; }
+.row { display:flex; align-items:center; gap:28px; margin-top:30px; }
+.row .bar { width:12px; height:96px; background:#E8232F; flex-shrink:0; }
+.row .k { font-family:'Bahnschrift','Arial Narrow',sans-serif; font-weight:700; font-size:48px; color:#F4F4F5; text-transform:uppercase; line-height:1.1; }
+.row .v { font-family:'Segoe UI','Arial',sans-serif; font-size:31px; color:#A9A9B0; margin-top:8px; max-width:780px; }
+.blocks { display:flex; margin-top:40px; gap:16px; }
+.block { flex:1; border:2px solid #26262C; border-radius:20px; padding:24px 20px; }
+.block.on { border-color:#E8232F; }
+.block .n { font-family:'Bahnschrift',sans-serif; font-size:21px; letter-spacing:5px; color:#E8232F; text-transform:uppercase; }
+.block .t { font-family:'Bahnschrift','Arial Narrow',sans-serif; font-weight:700; font-size:35px; color:#F4F4F5; text-transform:uppercase; margin-top:8px; }
+</style></head><body><div class='slide'>
+<div class="kicker">The block sequence</div>
+<div class="head">Three blocks.<br><span class="red">One direction.</span></div>
+<div class="rule"></div>
+<div class="sub">Foundation &rarr; Strength &rarr; Peak. The order isn't a preference. It's what makes the load land instead of land on you.</div>
+<div class="blocks">
+  <div class="block on"><div class="n">01</div><div class="t">Foundation</div></div>
+  <div class="block"><div class="n">02</div><div class="t">Strength</div></div>
+  <div class="block"><div class="n">03</div><div class="t">Peak</div></div>
+</div>
+<div class="spacer"></div><div class="foot"><div class="logo">CMS</div><div class="foottext">Center Mass Strength &middot; Competition Powerlifting</div></div></div></body></html>
