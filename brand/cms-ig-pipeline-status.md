@@ -175,6 +175,73 @@ because the user changed their password or Facebook has changed the session for 
 - Queue runway still intact (carousel topics 3–7, reel topics 3–6 unused) — a full week is buildable
   the moment the token answers.
 
+### (g) 2026-11-23 — week 10: the coupling is gone, and the week is queued
+
+Both blockers were re-checked once, in ~20 s, and neither moved: tenant `futxwjdirtywkkkxqxhd`
+still answers `FATAL: (ENOTFOUND) tenant/user … not found` (the pooler host resolves; the *tenant*
+is gone), token still `OAuthException 190 session has been invalidated`, `WorkBench/.env` mtime
+still `Sep 1 10:08`. So this run spent nothing on diagnosis and finished the thing week 9 started.
+
+**Shipped — the spec is now code.** `WorkBench` commits `1754e31` (pushed to `origin/master`,
+`62f1e5b..1754e31`):
+
+- `tools/instagram-queue-core.ts` (new, pure): `parseQueue` (tolerant — a malformed line becomes a
+  `badLines` record, never a throw), `latestById`, `dueQueue`, `selectQueueBatch` mirroring
+  `selectSweep`'s partition and cap-after-sort.
+- `tools/instagram-publish-sweep.ts`: module-top `new PrismaClient()` **deleted**; lazy `getPrisma()`,
+  `findMany` in try/catch that logs one `DB UNAVAILABLE (…) — publishing from file queue only.` line
+  and carries on. Queue read first, DB nodes become `db:<id>` entries, dedupe by
+  `(scheduled date | shape | caption hash)`, write-back ordered queue → `published.jsonl` → best-effort
+  DB flip (`MIRROR-SKIPPED` never fails the run). `--source queue|db|both` added; cap 1, 48 h
+  stale-skip, lock and `--yes` gate untouched.
+- `.gitignore`: `data/ig-queue.jsonl` (runtime log, never committed).
+- `tests/instagram-sweep.test.ts`: 7 new tests, incl. forced-DB-down publish and mirror failure.
+
+**Verified by me, not by the builder's word:** `tests/instagram-sweep.test.ts` (18 checks) and
+`tests/instagram-tools.test.ts` pass; `tsc --noEmit` unchanged from baseline (2 pre-existing
+`tests/instagram-tools.test.ts` errors, untouched); and a real DB-down run against the **actual dead
+tenant** printed `DB UNAVAILABLE (… FATAL: (ENOTFOUND) tenant/user postgres.futxwjdirtywkkkxqxhd not
+found) — publishing from file queue only.` while still naming the due post, exit **0**.
+
+**One thing the builder could not have known:** `profiles/zaino/scripts/cms-ig-publish-sweep.py` had
+a DNS preflight that `sys.exit(1)`'d *before* invoking the sweep whenever the tenant didn't resolve —
+written 2026-10-26 to stop a 3600 s stall. That would have made the new queue completely inert. It
+now warns and continues; the stall risk it was guarding against is gone because the sweep catches the
+Prisma failure itself. Tested: wrapper against the dead DB → exit 0, silent on a no-op.
+
+**The week is queued (6 of 7 slots).** Drafting no longer needs Postgres, which was the whole point:
+
+| Date | Slot | Asset | Queue id |
+|---|---|---|---|
+| Mon 11-30 | single — readiness sets target focus | `20261123-132056-dashboard.webp` | `20261130-1400-e5d2b5` |
+| Tue 12-01 | single — per-joint load vs ceiling | `20261123-132112-film-detail.webp` | `20261201-1400-0732fa` |
+| Wed 12-02 | single — volume corridor | `20261123-132127-joint-load.webp` | `20261202-1400-db189b` |
+| Thu 12-03 | **reel — deliberately empty** (see below) | — | — |
+| Fri 12-04 | single — joint load has a ceiling | `20261123-132142-filmroom1.png` | `20261204-1400-096306` |
+| Sat 12-05 | single — film room keeps the week honest | `20261123-132158-film-room.webp` | `20261205-1400-8741cc` |
+| Sun 12-06 | carousel — Foundation / Strength / Peak | `cms-carousel-20261206-01..06.png` | `20261206-1400-eb97a0` |
+
+All 11 assets return **HTTP 200** from `www.cmstrength.fit`. Captions 186–245 chars, CTA + 2 hashtags
+each. Carousel deck source committed at `cmstrength-marketing` `brand/carousel-templates/blocks-deck/`
+(6 slides, 1080×1350, real screenshots, vision-checked slide by slide). Queue preview:
+
+```
+queue: file=6 db=0 due=0 eligible=0 stale-skipped=0 future=6 bad-lines=0
+```
+
+**The reel is deliberately not built, and that is a decision, not an omission.** It is the only slot
+that spends money (~12.5 cr) and it is the only asset that is worthless if it goes stale before the
+token returns. The moment a live token exists, the reel is a 15-minute job (Higgsfield balance 270).
+Spending credits on a video with no publish path is the exact waste this pipeline has been guilty of
+for ten weeks.
+
+**Consequence:** if the token is restored before 2026-11-30, six posts publish on their own with no
+further work from anybody. If it isn't, they pass 48 h and are stale-skipped — the queue cannot
+mass-post a backlog. What the queue does *not* fix is the token: no amount of code substitutes for a
+human regenerating it.
+
+
+
 ## Why those 20 never went out (verified from cron outputs, not guessed)
 
 | Cause | Count | Evidence |
@@ -273,19 +340,25 @@ of the 20 existing nodes. They should be reconciled (marked `ARCHIVED`) rather t
    (never paste it in chat — `credvault ::cred` flow).
 2. Verify: `curl -s "https://graph.instagram.com/v21.0/me?fields=id,username&access_token=$TOKEN"`.
 3. Archive the 20 stale nodes (they are permanently un-publishable by policy).
-4. Say **"re-run the IG batch"** → zaino rebuilds one week (5 singles + carousel + reel) and the
-   sweep publishes each post at its slot. No publish crons to schedule any more.
-5. **Optional but cheap, ~1.5–2 h of `builder`, $0 credits:** ship
-   `C:/Umbrella/WorkBench/docs/specs/ig-file-backed-queue.md` (written 2026-11-16). After it, a dead
-   database costs **zero posts** instead of a week, and this status doc stops being the only place
-   the outage is recorded. Do it before the next database incident, not after one.
-6. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
+4. **Since 2026-11-23 you don't have to say anything.** The week 2026-11-30 → 12-06 is already in
+   `WorkBench/data/ig-queue.jsonl` (6 of 7 slots; the reel waits for a live token, deliberately).
+   Restore the token and the hourly sweep publishes each post at its 14:00 slot by itself. Saying
+   **"re-run the IG batch"** now only matters to top up week 12-07 onwards, or to build the reel.
+5. ~~Ship the file-backed queue spec~~ — **DONE 2026-11-23**, `WorkBench 1754e31` on
+   `origin/master`. Publishing no longer reads Postgres before it reads a post. A dead database now
+   costs **zero posts**, and a live database is only needed to get the ContentNode mirror back.
+   Verified with the DB genuinely dead: sweep prints `DB UNAVAILABLE … publishing from file queue
+   only`, names the due post, exits 0.
+6. **Optional, only when you want the mirror:** restore/replace the Supabase project. Nothing on the
+   publish path depends on it any more.
+7. Still open (Jeff's call): **restore an alarm path** — enable Slack for this profile, or run a
    fleet-health digest from `default` that reads this profile's `hermes cron incidents`.
    Without it, the next outage is equally silent. ~~Keep the desktop awake~~ — **done 2026-10-26**:
    AC sleep/hibernate timers are now 0, so no more overnight scheduler blackholes.
 
 ## Run log
 
+- **2026-11-23** — week 10. Blockers identical (tenant `ENOTFOUND`, token `OAuthException 190`, `.env` mtime `Sep 1 10:08`) so diagnosis cost 20 s and the rest of the run went into shipping **`1754e31`** — the file-backed queue is code now, and `instagram-publish-sweep.ts` publishes with no database at all (proved against the real dead tenant: `DB UNAVAILABLE … publishing from file queue only`, names the due post, exit 0). Found and fixed a second, self-inflicted blocker the builder couldn't see: the cron wrapper's dead-DB preflight `sys.exit(1)`'d *before* the sweep ran, which would have made the queue inert — it now warns and continues. **First week since 2026-09-07 with content written**: 6 of 7 slots for 11-30 → 12-06 are in `data/ig-queue.jsonl` (5 singles + the Foundation/Strength/Peak carousel), 11 assets live at 200, 0 Higgsfield credits spent, reel held until a token exists. Preview: `file=6 … future=6 bad-lines=0`. Run log for the human: still 17 published records; nothing has gone out in **77 days**.
 - **2026-09-28** — found the one-shot publisher model already dead (15 grace-window retirements); built the recurring sweep. No content drafted (token dead).
 - **2026-10-05** — week 3 dark. Token re-verified live and **still dead** (`OAuthException 190`); `WorkBench/.env` mtime `Sep 1 10:08` (nothing written since). 20 unpublished nodes, all 8/29–9/23; 48h stale-skip → sweep eligible=0, so nothing is publishable and nothing was published. Sweep healthy (hourly, last run 10/05 08:00 `ok`). `cms-ig-token-refresh` fired 10/01 and recorded the dead token verbatim — deliver `local`, so unseen. Target week 10/12–10/18: 0 nodes created (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. `hermes cron doctor` still lists fire-watchdog, backup watchdog and GSC watchdog as *not delivered* — no alarm wire.
 - **2026-10-12** — week 4 dark. Token re-verified live and still dead (`OAuthException 190`, two endpoints); `.env` mtime still `Sep 1 10:08`, token not in the process env, `env.ts` has no Instagram reference (its Oct 7 edits are unrelated) — `.env` remains the only source. DB read live: 31 `instagram` nodes, **20 unpublished, all `SCHEDULED`, 8/29–9/23**, none dated ≥10/12; last publish 2026-09-07 (`Dc_tQYJFiEw`) = **35 days**. Target week 10/19–10/25 → 0 nodes (health gate: draft nothing while the token is dead). 0 Higgsfield credits spent. **New this week — the host sleeps:** sweep 10/11 13:57 timed out at 3600s (resolved), hourly fires gapped ~13:00–18:29, and this batch fired 17:00 (8h 59m late, catch-up). The sweep's hourly cadence + 48h window absorbs that (late, never lost); the one-shot model could not.
